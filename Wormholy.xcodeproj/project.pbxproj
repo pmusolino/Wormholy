@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */; };
+		455818C4207D61A100D2F954 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C2207D61A100D2F954 /* Storage.swift */; };
+		455818C9207D621200D2F954 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C8207D621200D2F954 /* RequestModel.swift */; };
+		455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */; };
+		455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */; };
+		455818D7207D64A900D2F954 /* Wormholy+Foo.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D1207D64A800D2F954 /* Wormholy+Foo.h */; };
+		455818D8207D64A900D2F954 /* Wormholy+Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D2207D64A800D2F954 /* Wormholy+Foo.m */; };
+		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; };
+		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; };
 		52D6D9871BEFF229002C0205 /* Wormholy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */; };
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
@@ -23,6 +32,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHTTPProtocol.swift; sourceTree = "<group>"; };
+		455818C2207D61A100D2F954 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		455818C8207D621200D2F954 /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
+		455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormholyMethodSwizzling.m; sourceTree = "<group>"; };
+		455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+Wormholy.m"; sourceTree = "<group>"; };
+		455818D1207D64A800D2F954 /* Wormholy+Foo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Wormholy+Foo.h"; sourceTree = "<group>"; };
+		455818D2207D64A800D2F954 /* Wormholy+Foo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Wormholy+Foo.m"; sourceTree = "<group>"; };
+		455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+Wormholy.h"; sourceTree = "<group>"; };
+		455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormholyMethodSwizzling.h; sourceTree = "<group>"; };
 		52D6D97C1BEFF229002C0205 /* Wormholy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Wormholy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D6D9861BEFF229002C0205 /* Wormholy-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wormholy-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8933C7841EB5B820000D00A4 /* Wormholy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wormholy.swift; sourceTree = "<group>"; };
@@ -50,6 +68,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		455818C7207D620900D2F954 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				455818C8207D621200D2F954 /* RequestModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		455818CA207D647900D2F954 /* Objc */ = {
+			isa = PBXGroup;
+			children = (
+				455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */,
+				455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */,
+				455818D1207D64A800D2F954 /* Wormholy+Foo.h */,
+				455818D2207D64A800D2F954 /* Wormholy+Foo.m */,
+				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
+				455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */,
+			);
+			path = Objc;
+			sourceTree = "<group>";
+		};
 		52D6D9721BEFF229002C0205 = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +121,10 @@
 			isa = PBXGroup;
 			children = (
 				8933C7841EB5B820000D00A4 /* Wormholy.swift */,
+				455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */,
+				455818C2207D61A100D2F954 /* Storage.swift */,
+				455818CA207D647900D2F954 /* Objc */,
+				455818C7207D620900D2F954 /* Models */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -118,6 +161,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */,
+				455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */,
+				455818D7207D64A900D2F954 /* Wormholy+Foo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,12 +213,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Wormholy;
 				TargetAttributes = {
 					52D6D97B1BEFF229002C0205 = {
 						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0930;
 					};
 					52D6D9851BEFF229002C0205 = {
 						CreatedOnToolsVersion = 7.1;
@@ -220,7 +266,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */,
+				455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */,
 				8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */,
+				455818C4207D61A100D2F954 /* Storage.swift in Sources */,
+				455818C9207D621200D2F954 /* RequestModel.swift in Sources */,
+				455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */,
+				455818D8207D64A900D2F954 /* Wormholy+Foo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,12 +307,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -312,12 +366,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
