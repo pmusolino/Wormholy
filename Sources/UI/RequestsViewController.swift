@@ -20,7 +20,9 @@ class RequestsViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
-            self?.collectionView.reloadData()
+            DispatchQueue.main.sync {
+                self?.collectionView.reloadData()
+            }
         }
     }
 
@@ -49,7 +51,7 @@ extension RequestsViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RequestCell", for: indexPath) as! RequestCell
         
-        cell.populate(request: Storage.shared.requests.reversed()[indexPath.item])
+        cell.populate(request: Storage.shared.requests[indexPath.item])
         return cell
     }
 }
