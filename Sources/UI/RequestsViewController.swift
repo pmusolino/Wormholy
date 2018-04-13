@@ -16,7 +16,7 @@ class RequestsViewController: BaseViewController {
         super.viewDidLoad()
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout{
-            flowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 76)
+            flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 76)
         }
         
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in

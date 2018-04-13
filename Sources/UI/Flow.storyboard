@@ -37,7 +37,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v4V-Us-h8K" customClass="WHCollectionView" customModule="Wormholy" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="o7G-P5-gW8">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="o7G-P5-gW8">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -52,10 +52,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="v4V-Us-h8K" firstAttribute="trailing" secondItem="9Dg-qw-sac" secondAttribute="trailing" id="8Kh-do-i68"/>
-                            <constraint firstItem="v4V-Us-h8K" firstAttribute="leading" secondItem="9Dg-qw-sac" secondAttribute="leading" id="Gjd-Y4-jjS"/>
-                            <constraint firstItem="v4V-Us-h8K" firstAttribute="bottom" secondItem="9Dg-qw-sac" secondAttribute="bottom" id="cB5-UK-kLP"/>
-                            <constraint firstItem="v4V-Us-h8K" firstAttribute="top" secondItem="9Dg-qw-sac" secondAttribute="top" id="rAw-0y-rso"/>
+                            <constraint firstItem="v4V-Us-h8K" firstAttribute="bottom" secondItem="9Dg-qw-sac" secondAttribute="bottom" id="Bfc-3a-gZU"/>
+                            <constraint firstItem="v4V-Us-h8K" firstAttribute="leading" secondItem="9Dg-qw-sac" secondAttribute="leading" id="BhY-Uv-5gP"/>
+                            <constraint firstItem="v4V-Us-h8K" firstAttribute="top" secondItem="9Dg-qw-sac" secondAttribute="top" id="Gmh-YD-YLf"/>
+                            <constraint firstItem="v4V-Us-h8K" firstAttribute="trailing" secondItem="9Dg-qw-sac" secondAttribute="trailing" id="vVH-ir-41b"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Dg-qw-sac"/>
                     </view>
