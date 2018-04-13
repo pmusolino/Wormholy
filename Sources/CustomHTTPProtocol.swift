@@ -45,6 +45,7 @@ public class CustomHTTPProtocol: URLProtocol {
         
         currentRequest = RequestModel(request: newRequest)
         Storage.shared.saveRequest(request: currentRequest)
+        NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
     
     override public func stopLoading() {
@@ -55,6 +56,7 @@ public class CustomHTTPProtocol: URLProtocol {
             currentRequest?.duration = fabs(startDate.timeIntervalSinceNow)
         }
         Storage.shared.saveRequest(request: currentRequest)
+        NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
     
 }

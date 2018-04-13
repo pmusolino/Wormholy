@@ -7,11 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 public class Wormholy: NSObject
 {
     @objc public static func swiftyLoad() {
         print("Rock 'n' roll!")
+        NotificationCenter.default.addObserver(forName: shakeNotification, object: nil, queue: nil) { (notification) in
+            Wormholy.presentWormholyFlow()
+        }
     }
     
     @objc public static func swiftyInitialize() {
@@ -60,4 +64,11 @@ public class Wormholy: NSObject
         }
     }
     
+    // MARK: - Navigation
+    static func presentWormholyFlow(){
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        if let initialVC = storyboard.instantiateInitialViewController(){
+            UIViewController.currentViewController()?.present(initialVC, animated: true, completion: nil)
+        }
+    }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Wormholy
 
 class ViewController: UIViewController {
 
@@ -17,7 +18,6 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
     
     //MARK: - Actions
     @IBAction func getPostsButtonPressed(_ sender: Any) {
