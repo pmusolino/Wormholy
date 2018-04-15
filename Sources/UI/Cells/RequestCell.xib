@@ -30,14 +30,25 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CODE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="day-sD-Vbl" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
-                        <rect key="frame" x="8" y="50" width="42" height="18"/>
+                        <rect key="frame" x="8" y="44" width="42" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="18" id="2lh-0L-3rf"/>
+                            <constraint firstAttribute="height" constant="24" id="2lh-0L-3rf"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" id="FSc-kA-LBc"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="url" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbY-eq-0R8" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
                         <rect key="frame" x="82.5" y="8" width="240.5" height="18"/>
@@ -50,9 +61,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lU-ct-Tf0" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
-                        <rect key="frame" x="266" y="50" width="57" height="18"/>
+                        <rect key="frame" x="266" y="44" width="57" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="18" id="A5w-pO-phC"/>
+                            <constraint firstAttribute="height" constant="24" id="A5w-pO-phC"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" id="d7H-UR-8Eg"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -66,11 +77,12 @@
                 <constraint firstItem="VbY-eq-0R8" firstAttribute="top" secondItem="NJY-gK-lmf" secondAttribute="top" constant="8" id="6dl-F5-iNX"/>
                 <constraint firstAttribute="trailing" secondItem="7lU-ct-Tf0" secondAttribute="trailing" constant="8" id="84Z-cA-OJa"/>
                 <constraint firstItem="9bI-e2-B4L" firstAttribute="leading" secondItem="NJY-gK-lmf" secondAttribute="leading" constant="8" id="Pyq-DE-lfF"/>
-                <constraint firstItem="day-sD-Vbl" firstAttribute="top" secondItem="9bI-e2-B4L" secondAttribute="bottom" constant="24" id="QEY-zb-Hiz"/>
                 <constraint firstItem="VbY-eq-0R8" firstAttribute="leading" secondItem="9bI-e2-B4L" secondAttribute="trailing" constant="8" id="RRI-j8-1DU"/>
-                <constraint firstItem="7lU-ct-Tf0" firstAttribute="top" secondItem="VbY-eq-0R8" secondAttribute="bottom" constant="24" id="STc-Qe-BkR"/>
+                <constraint firstAttribute="bottom" secondItem="7lU-ct-Tf0" secondAttribute="bottom" constant="8" id="TLq-gz-nKj"/>
+                <constraint firstItem="7lU-ct-Tf0" firstAttribute="top" secondItem="VbY-eq-0R8" secondAttribute="bottom" constant="18" id="XRM-bZ-tra"/>
                 <constraint firstItem="day-sD-Vbl" firstAttribute="leading" secondItem="NJY-gK-lmf" secondAttribute="leading" constant="8" id="Xu9-GH-tbp"/>
                 <constraint firstAttribute="bottom" secondItem="day-sD-Vbl" secondAttribute="bottom" constant="8" id="gVt-U4-Lf4"/>
+                <constraint firstItem="day-sD-Vbl" firstAttribute="top" secondItem="9bI-e2-B4L" secondAttribute="bottom" constant="18" id="lLF-ie-R7S"/>
                 <constraint firstItem="9bI-e2-B4L" firstAttribute="top" secondItem="NJY-gK-lmf" secondAttribute="top" constant="8" id="lrw-Sc-wyA"/>
                 <constraint firstAttribute="trailing" secondItem="VbY-eq-0R8" secondAttribute="trailing" constant="8" id="tHd-p3-gkv"/>
             </constraints>
