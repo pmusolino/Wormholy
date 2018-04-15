@@ -62,11 +62,27 @@
                     <navigationItem key="navigationItem" title="Requests" id="0te-N4-NBT"/>
                     <connections>
                         <outlet property="collectionView" destination="v4V-Us-h8K" id="gOb-1m-oHE"/>
+                        <segue destination="oCq-W9-inr" kind="show" id="CHW-0s-7Ks"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uo5-0K-pSr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="301.60000000000002" y="147.97601199400302"/>
+        </scene>
+        <!--Request Detail View Controller-->
+        <scene sceneID="JaV-AO-yRE">
+            <objects>
+                <viewController storyboardIdentifier="RequestDetailViewController" id="oCq-W9-inr" customClass="RequestDetailViewController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dxP-Gd-tGS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="f1w-um-ttt"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jrn-OG-d87" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1100" y="148"/>
         </scene>
     </scenes>
 </document>

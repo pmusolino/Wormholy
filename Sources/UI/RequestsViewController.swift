@@ -31,15 +31,14 @@ class RequestsViewController: BaseViewController {
     }
     
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func openRequestDetailVC(request: RequestModel){
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        if let requestDetailVC = storyboard.instantiateViewController(withIdentifier: "RequestDetailViewController") as? RequestDetailViewController{
+            requestDetailVC.request = request
+            self.show(requestDetailVC, sender: self)
+        }
     }
-    */
 
 }
 
@@ -57,5 +56,7 @@ extension RequestsViewController: UICollectionViewDataSource{
 }
 
 extension RequestsViewController: UICollectionViewDelegate{
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        openRequestDetailVC(request: Storage.shared.requests[indexPath.item])
+    }
 }
