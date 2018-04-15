@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import Foundation
 import Wormholy
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 10.0, *) {
+            let timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { (timer) in
+                DataFetcher.sharedInstance.getPost(id: Utils.random(max: 128), completion: {
+                    print("API: Get post")
+                }) { (error) in
+                    print("ERROR: api Get post")
+                }
+            }
+            timer.fire()
+        }
     }
 
     override func didReceiveMemoryWarning() {
