@@ -10,6 +10,8 @@ import UIKit
 
 class RequestDetailViewController: BaseViewController {
 
+    @IBOutlet weak var tableView: WHTableView!
+    
     var request: RequestModel?
     
     override func viewDidLoad() {
@@ -31,4 +33,23 @@ class RequestDetailViewController: BaseViewController {
     }
     */
 
+}
+
+extension RequestDetailViewController: UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+    }
+   
+}
+
+extension RequestDetailViewController: UITableViewDelegate{
+    
 }

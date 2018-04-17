@@ -76,9 +76,28 @@
                     <view key="view" contentMode="scaleToFill" id="dxP-Gd-tGS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C1R-oy-f7k" customClass="WHTableView" customModule="Wormholy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="oCq-W9-inr" id="Z6M-JZ-roo"/>
+                                    <outlet property="delegate" destination="oCq-W9-inr" id="Bfm-Lj-QfA"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="C1R-oy-f7k" firstAttribute="top" secondItem="f1w-um-ttt" secondAttribute="top" id="8TE-0v-S2s"/>
+                            <constraint firstItem="f1w-um-ttt" firstAttribute="bottom" secondItem="C1R-oy-f7k" secondAttribute="bottom" id="Qr3-Yj-aUX"/>
+                            <constraint firstItem="C1R-oy-f7k" firstAttribute="leading" secondItem="f1w-um-ttt" secondAttribute="leading" id="qBv-zw-PIG"/>
+                            <constraint firstItem="f1w-um-ttt" firstAttribute="trailing" secondItem="C1R-oy-f7k" secondAttribute="trailing" id="z7M-h8-ReO"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="f1w-um-ttt"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="C1R-oy-f7k" id="jHN-Zy-hHn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jrn-OG-d87" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
