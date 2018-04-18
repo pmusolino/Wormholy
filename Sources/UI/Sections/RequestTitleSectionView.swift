@@ -1,5 +1,5 @@
 //
-//  CollapsibleTableViewHeader.swift
+//  RequestTitleSectionView.swift
 //  Wormholy-iOS
 //
 //  Created by Paolo Musolino on 18/04/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollapsibleTableViewHeader: UITableViewHeaderFooterView {
+class RequestTitleSectionView: UITableViewHeaderFooterView {
 
     @IBOutlet weak var titleLabel: WHLabel!
     /*

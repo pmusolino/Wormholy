@@ -30,7 +30,7 @@ class RequestDetailViewController: BaseViewController {
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib(nibName: "TextTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "TextTableViewCell")
-        tableView.register(UINib(nibName: "CollapsibleTableViewHeader", bundle:WHBundle.getBundle()), forHeaderFooterViewReuseIdentifier: "CollapsibleTableViewHeader")
+        tableView.register(UINib(nibName: "RequestTitleSectionView", bundle:WHBundle.getBundle()), forHeaderFooterViewReuseIdentifier: "RequestTitleSectionView")
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +61,7 @@ extension RequestDetailViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CollapsibleTableViewHeader") as! CollapsibleTableViewHeader
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "RequestTitleSectionView") as! RequestTitleSectionView
         header.contentView.backgroundColor = Colors.Gray.lighestGray
         header.titleLabel.text = sections[section].name
         return header

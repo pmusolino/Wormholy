@@ -45,8 +45,8 @@
 		45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4F220860FBC007D0D17 /* WHTextView.swift */; };
 		45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */; };
 		45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4920875EFA0084BD50 /* WHView.swift */; };
-		45FF5C4C20875F710084BD50 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4B20875F710084BD50 /* CollapsibleTableViewHeader.swift */; };
-		45FF5C4E20875F770084BD50 /* CollapsibleTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FF5C4D20875F770084BD50 /* CollapsibleTableViewHeader.xib */; };
+		45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */; };
+		45FF5C4E20875F770084BD50 /* RequestTitleSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FF5C4D20875F770084BD50 /* RequestTitleSectionView.xib */; };
 		45FF5C5220877A950084BD50 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C5120877A950084BD50 /* Section.swift */; };
 		45FF5C54208794720084BD50 /* WHDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C53208794720084BD50 /* WHDate.swift */; };
 		52D6D9871BEFF229002C0205 /* Wormholy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */; };
@@ -104,8 +104,8 @@
 		45C4F4F220860FBC007D0D17 /* WHTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTextView.swift; sourceTree = "<group>"; };
 		45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
 		45FF5C4920875EFA0084BD50 /* WHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHView.swift; sourceTree = "<group>"; };
-		45FF5C4B20875F710084BD50 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
-		45FF5C4D20875F770084BD50 /* CollapsibleTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollapsibleTableViewHeader.xib; sourceTree = "<group>"; };
+		45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTitleSectionView.swift; sourceTree = "<group>"; };
+		45FF5C4D20875F770084BD50 /* RequestTitleSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestTitleSectionView.xib; sourceTree = "<group>"; };
 		45FF5C5120877A950084BD50 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		45FF5C53208794720084BD50 /* WHDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHDate.swift; sourceTree = "<group>"; };
 		52D6D97C1BEFF229002C0205 /* Wormholy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Wormholy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,8 +257,8 @@
 		45FF5C4820875ED90084BD50 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
-				45FF5C4B20875F710084BD50 /* CollapsibleTableViewHeader.swift */,
-				45FF5C4D20875F770084BD50 /* CollapsibleTableViewHeader.xib */,
+				45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */,
+				45FF5C4D20875F770084BD50 /* RequestTitleSectionView.xib */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -463,7 +463,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45FF5C4E20875F770084BD50 /* CollapsibleTableViewHeader.xib in Resources */,
+				45FF5C4E20875F770084BD50 /* RequestTitleSectionView.xib in Resources */,
 				451C9E552080E5E4002A34BC /* Flow.storyboard in Resources */,
 				451C9E6320810472002A34BC /* RequestCell.xib in Resources */,
 				45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */,
@@ -504,7 +504,7 @@
 				455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */,
 				8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */,
 				455818C4207D61A100D2F954 /* Storage.swift in Sources */,
-				45FF5C4C20875F710084BD50 /* CollapsibleTableViewHeader.swift in Sources */,
+				45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */,
 				45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */,
 				451C9E5A2080E8D2002A34BC /* BaseViewController.swift in Sources */,
 				45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */,
