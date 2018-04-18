@@ -62,7 +62,7 @@
                     <navigationItem key="navigationItem" title="Requests" id="0te-N4-NBT"/>
                     <connections>
                         <outlet property="collectionView" destination="v4V-Us-h8K" id="gOb-1m-oHE"/>
-                        <segue destination="oCq-W9-inr" kind="show" id="CHW-0s-7Ks"/>
+                        <segue destination="oCq-W9-inr" kind="show" identifier="showRequestDetailVC" id="CHW-0s-7Ks"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uo5-0K-pSr" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,6 +14,8 @@ class RequestsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))]
+        
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout{
             flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 76)
@@ -32,6 +34,10 @@ class RequestsViewController: BaseViewController {
     
 
     // MARK: - Navigation
+    @objc func done(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func openRequestDetailVC(request: RequestModel){
         let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
         if let requestDetailVC = storyboard.instantiateViewController(withIdentifier: "RequestDetailViewController") as? RequestDetailViewController{

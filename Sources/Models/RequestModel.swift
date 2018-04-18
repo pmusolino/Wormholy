@@ -6,6 +6,7 @@
 //  Copyright © 2018 Wormholy. All rights reserved.
 //
 import Foundation
+import UIKit
 
 class RequestModel: Codable {
     let id: String
@@ -33,5 +34,5 @@ class RequestModel: Codable {
         guard let responseHttp = response as? HTTPURLResponse else {return}
         code = responseHttp.statusCode
     }
+    
 }
-
