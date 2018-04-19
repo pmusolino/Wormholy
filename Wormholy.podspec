@@ -12,6 +12,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
   s.source       = { :git => "https://github.com/pmusolino/Wormholy.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*"
-  s.private_header_files = "Sources/Objc/Wormholy+Foo.h"
+  s.private_header_files = "Sources/**/*.h"
   s.frameworks  = "Foundation"
 end
