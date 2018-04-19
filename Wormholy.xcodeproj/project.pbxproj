@@ -89,6 +89,7 @@
 		451C9E6820810B98002A34BC /* WHCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHCollectionView.swift; sourceTree = "<group>"; };
 		451C9E6A20810BBD002A34BC /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
 		4521A1062088FB6800AA39FC /* WormholyUmbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WormholyUmbrella.h; sourceTree = "<group>"; };
+		4521A1082088FF4900AA39FC /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModelBeautifier.swift; sourceTree = "<group>"; };
 		455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHTTPProtocol.swift; sourceTree = "<group>"; };
 		455818C2207D61A100D2F954 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -211,6 +212,7 @@
 			children = (
 				451C9E5D2080EFF5002A34BC /* Config.swift */,
 				45820CF5208170F400CA74D6 /* Colors.swift */,
+				4521A1082088FF4900AA39FC /* module.modulemap */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -745,6 +747,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Wormholy.Wormholy-iOS";
@@ -769,6 +772,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Wormholy.Wormholy-iOS";
 				PRODUCT_NAME = Wormholy;
