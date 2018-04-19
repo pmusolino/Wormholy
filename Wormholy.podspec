@@ -16,6 +16,5 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'Wormholy' => ['Sources/**/*.storyboard', 'Sources/**/*.xib']
   }
-  s.static_framework = true
   s.frameworks  = "Foundation"
 end

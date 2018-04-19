@@ -1,6 +1,0 @@
-framework module Wormholy {
-    umbrella header "WormholyUmbrella.h"
-    
-    export *
-    module * { export * }
-}
