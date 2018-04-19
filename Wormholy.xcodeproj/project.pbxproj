@@ -28,6 +28,7 @@
 		451C9E6720810B4C002A34BC /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E6620810B4C002A34BC /* RequestCell.swift */; };
 		451C9E6920810B98002A34BC /* WHCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E6820810B98002A34BC /* WHCollectionView.swift */; };
 		451C9E6B20810BBD002A34BC /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E6A20810BBD002A34BC /* RequestsViewController.swift */; };
+		4521A1072088FB6800AA39FC /* WormholyUmbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4521A1062088FB6800AA39FC /* WormholyUmbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */; };
 		455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */; };
 		455818C4207D61A100D2F954 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C2207D61A100D2F954 /* Storage.swift */; };
@@ -87,6 +88,7 @@
 		451C9E6620810B4C002A34BC /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		451C9E6820810B98002A34BC /* WHCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHCollectionView.swift; sourceTree = "<group>"; };
 		451C9E6A20810BBD002A34BC /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
+		4521A1062088FB6800AA39FC /* WormholyUmbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WormholyUmbrella.h; sourceTree = "<group>"; };
 		454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModelBeautifier.swift; sourceTree = "<group>"; };
 		455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHTTPProtocol.swift; sourceTree = "<group>"; };
 		455818C2207D61A100D2F954 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				455818D2207D64A800D2F954 /* Wormholy+Foo.m */,
 				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
 				455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */,
+				4521A1062088FB6800AA39FC /* WormholyUmbrella.h */,
 			);
 			path = Objc;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4521A1072088FB6800AA39FC /* WormholyUmbrella.h in Headers */,
 				455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */,
 				455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */,
 				455818D7207D64A900D2F954 /* Wormholy+Foo.h in Headers */,
