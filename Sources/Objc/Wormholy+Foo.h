@@ -8,6 +8,6 @@
 
 #import <Wormholy/Wormholy-Swift.h>
 
-@interface Wormholy (private)
+@interface Wormholy (public)
 
 @end
