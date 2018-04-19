@@ -9,17 +9,16 @@
 import Foundation
 import UIKit
 
-@objcMembers
-open class Wormholy: NSObject
+public class Wormholy: NSObject
 {
-    @objc open static func swiftyLoad() {
+    @objc public static func swiftyLoad() {
         print("Rock 'n' roll!")
         NotificationCenter.default.addObserver(forName: shakeNotification, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()
         }
     }
     
-    @objc open static func swiftyInitialize() {
+    @objc public static func swiftyInitialize() {
         if self == Wormholy.self{
             Wormholy.enable(true)
         }
