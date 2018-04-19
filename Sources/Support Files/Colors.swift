@@ -8,15 +8,15 @@
 
 import UIKit
 
-public struct Colors {
+struct Colors {
     
-    public struct Brand{
+    struct Brand{
     }
     
-    public struct UI{
+    struct UI{
     }
     
-    public struct Gray{
+    struct Gray{
         static public let darkestGray = UIColor(hexString: "#666666")
         static public let darkerGray = UIColor(hexString: "#888888")
         static public let darkGray = UIColor(hexString: "#999999")
@@ -25,7 +25,7 @@ public struct Colors {
         static public let lighestGray = UIColor(hexString: "#E7E7E7")
     }
     
-    public struct HTTPCode{
+    struct HTTPCode{
         static public let Success = UIColor(hexString: "#297E4C") //2xx
         static public let Redirect = UIColor(hexString: "#3D4140") //3xx
         static public let ClientError = UIColor(hexString: "#D97853") //4xx
@@ -36,7 +36,7 @@ public struct Colors {
 
 extension UIColor{
     
-    public convenience init(hexString:String) {
+    convenience init(hexString:String) {
         let hexString:String = hexString.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) as String
         let scanner = Scanner(string: hexString)
         if (hexString.hasPrefix("#")) {
@@ -57,7 +57,7 @@ extension UIColor{
         self.init(red:red, green:green, blue:blue, alpha:1)
     }
     
-    public func toHexString() -> String {
+    func toHexString() -> String {
         var r:CGFloat = 0
         var g:CGFloat = 0
         var b:CGFloat = 0
@@ -67,7 +67,7 @@ extension UIColor{
         return NSString(format:"#%06x", rgb) as String
     }
     
-    public func randomGreyColor() -> String{
+    func randomGreyColor() -> String{
         let value = arc4random_uniform(255)
         let grayscale = (value << 16) | (value << 8) | value;
         let color = "#" + String(grayscale, radix: 16);
