@@ -13,5 +13,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/pmusolino/Wormholy.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*"
   s.private_header_files = "Sources/**/*.h"
+  s.resource_bundles = {
+    'Wormholy' => ['Sources/**/*.storyboard', 'Sources/**/*.xib']
+  }
   s.frameworks  = "Foundation"
 end
