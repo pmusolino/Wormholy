@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'Wormholy' => ['Sources/**/*.storyboard', 'Sources/**/*.xib']
   }
-  s.compiler_flags = "-ObjC"
+  s.compiler_flags = "-all_load"
   s.frameworks  = "Foundation"
 end
