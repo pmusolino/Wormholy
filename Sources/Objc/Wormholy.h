@@ -9,5 +9,8 @@
 #ifndef Wormholy_h
 #define Wormholy_h
 
+#import "NSURLSessionConfiguration+Wormholy.h"
+#import "Wormholy+Foo.h"
+#import "WormholyMethodSwizzling.h"
 
 #endif /* Wormholy_h */
