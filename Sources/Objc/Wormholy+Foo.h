@@ -6,7 +6,8 @@
 //  Copyright © 2018 Wormholy. All rights reserved.
 //
 
-#import <Wormholy/Wormholy-Swift.h>
+//#import <Wormholy/Wormholy-Swift.h>
+#import <Wormholy.h>
 
 @interface Wormholy (private)
 

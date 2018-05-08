@@ -34,10 +34,10 @@
 		455818C9207D621200D2F954 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C8207D621200D2F954 /* RequestModel.swift */; };
 		455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */; };
 		455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */; };
-		455818D7207D64A900D2F954 /* Wormholy+Foo.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D1207D64A800D2F954 /* Wormholy+Foo.h */; };
+		455818D7207D64A900D2F954 /* Wormholy+Foo.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D1207D64A800D2F954 /* Wormholy+Foo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		455818D8207D64A900D2F954 /* Wormholy+Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D2207D64A800D2F954 /* Wormholy+Foo.m */; };
-		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; };
-		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; };
+		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45820CF6208170F400CA74D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45820CF5208170F400CA74D6 /* Colors.swift */; };
 		45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EA20860D14007D0D17 /* WHTableView.swift */; };
 		45C4F4F020860DC0007D0D17 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */; };

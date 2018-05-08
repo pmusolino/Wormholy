@@ -17,11 +17,11 @@
 #endif
 #endif
 
-//#import "NSURLSessionConfiguration+Wormholy.h"
-//#import "Wormholy+Foo.h"
-//#import "WormholyMethodSwizzling.h"
+#import "Wormholy-Swift.h"
+#import "NSURLSessionConfiguration+Wormholy.h"
+#import "Wormholy+Foo.h"
+#import "WormholyMethodSwizzling.h"
 
-@class Wormholy;
 
 FOUNDATION_EXPORT double WormholyVersionNumber;
 FOUNDATION_EXPORT const unsigned char WormholyVersionString[];
