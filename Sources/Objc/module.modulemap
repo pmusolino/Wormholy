@@ -1,4 +1,4 @@
-module Wormholy {
+framework module Wormholy {
     header "Wormholy.h"
     export *
 }
