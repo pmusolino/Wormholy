@@ -19,9 +19,9 @@ public class Wormholy: NSObject
     }
     
     @objc public static func swiftyInitialize() {
-        if self == Wormholy.self{
+       // if self == Wormholy.self{
             Wormholy.enable(true)
-        }
+      //  }
     }
     
     static func enable(_ enable: Bool){
