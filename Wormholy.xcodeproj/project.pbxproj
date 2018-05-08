@@ -43,7 +43,7 @@
 		45C4F4F020860DC0007D0D17 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */; };
 		45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */; };
 		45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4F220860FBC007D0D17 /* WHTextView.swift */; };
-		45C51A1520A1F75E006933CE /* Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C51A1420A1F75E006933CE /* Wormholy.h */; };
+		45C51A1820A20B38006933CE /* Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C51A1720A20B38006933CE /* Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */; };
 		45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4920875EFA0084BD50 /* WHView.swift */; };
 		45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */; };
@@ -103,8 +103,8 @@
 		45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
 		45C4F4F220860FBC007D0D17 /* WHTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTextView.swift; sourceTree = "<group>"; };
-		45C51A1420A1F75E006933CE /* Wormholy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wormholy.h; sourceTree = "<group>"; };
 		45C51A1620A1FDBC006933CE /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		45C51A1720A20B38006933CE /* Wormholy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wormholy.h; sourceTree = "<group>"; };
 		45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
 		45FF5C4920875EFA0084BD50 /* WHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHView.swift; sourceTree = "<group>"; };
 		45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTitleSectionView.swift; sourceTree = "<group>"; };
@@ -253,8 +253,6 @@
 				455818D2207D64A800D2F954 /* Wormholy+Foo.m */,
 				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
 				455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */,
-				45C51A1420A1F75E006933CE /* Wormholy.h */,
-				45C51A1620A1FDBC006933CE /* module.modulemap */,
 			);
 			path = Objc;
 			sourceTree = "<group>";
@@ -305,6 +303,8 @@
 				8933C7841EB5B820000D00A4 /* Wormholy.swift */,
 				455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */,
 				455818C2207D61A100D2F954 /* Storage.swift */,
+				45C51A1620A1FDBC006933CE /* module.modulemap */,
+				45C51A1720A20B38006933CE /* Wormholy.h */,
 				451C9E532080E592002A34BC /* UI */,
 				451C9E562080E5F0002A34BC /* Subclasses */,
 				455818CA207D647900D2F954 /* Objc */,
@@ -347,8 +347,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45C51A1820A20B38006933CE /* Wormholy.h in Headers */,
 				455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */,
-				45C51A1520A1F75E006933CE /* Wormholy.h in Headers */,
 				455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */,
 				455818D7207D64A900D2F954 /* Wormholy+Foo.h in Headers */,
 			);
@@ -378,9 +378,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "Wormholy-iOS" */;
 			buildPhases = (
+				52D6D9791BEFF229002C0205 /* Headers */,
 				52D6D9771BEFF229002C0205 /* Sources */,
 				52D6D9781BEFF229002C0205 /* Frameworks */,
-				52D6D9791BEFF229002C0205 /* Headers */,
 				52D6D97A1BEFF229002C0205 /* Resources */,
 			);
 			buildRules = (
@@ -736,6 +736,7 @@
 		52D6D9911BEFF229002C0205 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -748,20 +749,24 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
-				MODULEMAP_FILE = "$(SRCROOT)/Wormholy/module.modulemap";
+				MODULEMAP_FILE = "$(SRCROOT)/Sources/module.modulemap";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Wormholy.Wormholy-iOS";
 				PRODUCT_NAME = Wormholy;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "";
+				USE_HEADERMAP = YES;
 			};
 			name = Debug;
 		};
 		52D6D9921BEFF229002C0205 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -774,13 +779,16 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
-				MODULEMAP_FILE = "$(SRCROOT)/Wormholy/module.modulemap";
+				MODULEMAP_FILE = "$(SRCROOT)/Sources/module.modulemap";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Wormholy.Wormholy-iOS";
 				PRODUCT_NAME = Wormholy;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
+				USER_HEADER_SEARCH_PATHS = "";
+				USE_HEADERMAP = YES;
 			};
 			name = Release;
 		};
