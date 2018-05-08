@@ -11,6 +11,6 @@
 
 @implementation Wormholy (private)
 + (void)load { [self swiftyLoad];}
-+ (void)initialize { [self swiftyInitialize]; }
++ (void)initialize { NSLog(@"Enter here"); [self swiftyInitialize]; }
 
 @end
