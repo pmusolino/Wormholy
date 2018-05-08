@@ -6,7 +6,6 @@
 //  Copyright © 2018 Wormholy. All rights reserved.
 //
 
-#import <Wormholy/Wormholy-Swift.h>
 #import "NSURLSessionConfiguration+Wormholy.h"
 #import "WormholyMethodSwizzling.h"
 
