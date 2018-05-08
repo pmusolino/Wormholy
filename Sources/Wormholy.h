@@ -21,6 +21,8 @@
 //#import "Wormholy+Foo.h"
 //#import "WormholyMethodSwizzling.h"
 
+@class Wormholy;
+
 FOUNDATION_EXPORT double WormholyVersionNumber;
 FOUNDATION_EXPORT const unsigned char WormholyVersionString[];
 

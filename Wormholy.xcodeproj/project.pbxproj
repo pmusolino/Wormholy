@@ -378,8 +378,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "Wormholy-iOS" */;
 			buildPhases = (
-				52D6D9791BEFF229002C0205 /* Headers */,
 				52D6D9771BEFF229002C0205 /* Sources */,
+				52D6D9791BEFF229002C0205 /* Headers */,
 				52D6D9781BEFF229002C0205 /* Frameworks */,
 				52D6D97A1BEFF229002C0205 /* Resources */,
 			);
