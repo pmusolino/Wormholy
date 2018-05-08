@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-@objc
 public class Wormholy: NSObject
 {
     @objc public static func swiftyLoad() {
