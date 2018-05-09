@@ -9,7 +9,7 @@
 #import "Wormholy+Foo.h"
 #import <Wormholy/Wormholy-Swift.h>
 
-@implementation Wormholy (private)
+@implementation Wormholy (public)
 + (void)load { [self swiftyLoad];}
 + (void)initialize { [self swiftyInitialize]; }
 
