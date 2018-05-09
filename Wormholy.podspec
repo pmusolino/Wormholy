@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.social_media_url   = ""
   s.ios.deployment_target = "9.0"
   s.source       = { :git => "https://github.com/pmusolino/Wormholy.git", :tag => s.version.to_s }
-  s.source_files  = "Sources/**/*.{swift, h , m}"
+  s.source_files  = "Sources/**/*.{swift,h,m}"
   s.public_header_files = "Sources/**/*.h"
   #s.private_header_files = "Sources/**/WormholyMethodSwizzling.h"
   s.resource_bundles = {
