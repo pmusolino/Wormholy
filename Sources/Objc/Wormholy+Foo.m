@@ -7,7 +7,6 @@
 //
 
 #import "Wormholy+Foo.h"
-#import <Wormholy/Wormholy-Swift.h>
 
 @implementation Wormholy (private)
 + (void)load { [self swiftyLoad];}
