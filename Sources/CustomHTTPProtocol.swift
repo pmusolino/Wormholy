@@ -53,7 +53,7 @@ public class CustomHTTPProtocol: URLProtocol {
         
         currentRequest?.httpBody = request.httpBody
         if let startDate = currentRequest?.date{
-            currentRequest?.duration = fabs(startDate.timeIntervalSinceNow)
+            currentRequest?.duration = fabs(startDate.timeIntervalSinceNow) * 1000 //Find elapsed time and convert to milliseconds
         }
         Storage.shared.saveRequest(request: currentRequest)
         NotificationCenter.default.post(name: newRequestNotification, object: nil)
