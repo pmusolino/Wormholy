@@ -86,8 +86,6 @@ extension RequestDetailViewController: UITableViewDataSource{
                 cell.textView.attributedText = RequestModelBeautifier.body(request: req)
             case .responseBody:
                 cell.textView.attributedText = RequestModelBeautifier.responseBody(request: req)
-            default:
-                break
             }
         }
         else{
