@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 10.0, *) {
-            let timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { (timer) in
+            let timer = Timer.scheduledTimer(withTimeInterval: 8, repeats: true) { (timer) in
                 DataFetcher.sharedInstance.getPost(id: Utils.random(max: 128), completion: {
                     print("API: Get post")
                 }) { (error) in

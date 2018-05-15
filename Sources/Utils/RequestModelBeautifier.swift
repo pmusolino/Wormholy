@@ -46,12 +46,20 @@ class RequestModelBeautifier: NSObject {
     }
     
     static func responseBody(request: RequestModel) -> NSMutableAttributedString{
+        
+        
         guard request.dataResponse != nil else {
             return NSMutableAttributedString(string: "-")
         }
         
         if let data = String(data: request.dataResponse!, encoding: .utf8){
-            return NSMutableAttributedString().normal(data)
+            if let highlightr = Highlightr(){
+                highlightr.setTheme(to: "paraiso-dark")
+                
+                if let highlightedCode = highlightr.highlight(data){
+                    return NSMutableAttributedString(attributedString: highlightedCode)
+                }
+            }
         }
         return NSMutableAttributedString(string: "-")
     }
