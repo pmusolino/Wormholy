@@ -17,11 +17,9 @@
 #endif
 #endif
 
-
-#import "Wormholy-Swift.h"
-//#import "NSURLSessionConfiguration+Wormholy.h"
-//#import "Wormholy+Foo.h"
-//#import "WormholyMethodSwizzling.h"
+#import "NSObject+Foo.h"
+#import "NSURLSessionConfiguration+Worm.h"
+#import "WormholyMethodSwizzling.h"
 
 
 FOUNDATION_EXPORT double WormholyVersionNumber;
