@@ -6,8 +6,10 @@
 //  Copyright © 2018 Wormholy. All rights reserved.
 //
 
-#import <Wormholy.h>
 
-@interface Wormholy (private)
+//@class Wormholy;
+//
+//@interface Wormholy (private)
+//
+//@end
 
-@end

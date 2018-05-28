@@ -34,10 +34,9 @@
 		455818C9207D621200D2F954 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C8207D621200D2F954 /* RequestModel.swift */; };
 		455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */; };
 		455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */; };
-		455818D7207D64A900D2F954 /* Wormholy+Foo.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D1207D64A800D2F954 /* Wormholy+Foo.h */; };
 		455818D8207D64A900D2F954 /* Wormholy+Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D2207D64A800D2F954 /* Wormholy+Foo.m */; };
-		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; };
-		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; };
+		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45820CF6208170F400CA74D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45820CF5208170F400CA74D6 /* Colors.swift */; };
 		4582B00D20AAE6DF0016FCBC /* HTMLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4582B00920AAE6DF0016FCBC /* HTMLUtils.swift */; };
 		4582B00E20AAE6DF0016FCBC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4582B00A20AAE6DF0016FCBC /* Theme.swift */; };
@@ -307,6 +306,7 @@
 		45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4F220860FBC007D0D17 /* WHTextView.swift */; };
 		45C51A1820A20B38006933CE /* Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C51A1720A20B38006933CE /* Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */; };
+		45F51C1E20BC8DDB002CB534 /* Wormholy+Foo.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D1207D64A800D2F954 /* Wormholy+Foo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4920875EFA0084BD50 /* WHView.swift */; };
 		45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */; };
 		45FF5C4E20875F770084BD50 /* RequestTitleSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FF5C4D20875F770084BD50 /* RequestTitleSectionView.xib */; };
@@ -1173,10 +1173,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F51C1E20BC8DDB002CB534 /* Wormholy+Foo.h in Headers */,
 				45C51A1820A20B38006933CE /* Wormholy.h in Headers */,
 				455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */,
 				455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */,
-				455818D7207D64A900D2F954 /* Wormholy+Foo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1828,7 +1828,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
@@ -1863,7 +1863,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;

@@ -6,8 +6,9 @@
 //  Copyright © 2018 Wormholy. All rights reserved.
 //
 
-#import <Wormholy.h>
+//@class Wormholy;
+//
+//@interface NSURLSessionConfiguration (Wormholy)
+//
+//@end
 
-@interface NSURLSessionConfiguration (Wormholy)
-
-@end
