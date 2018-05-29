@@ -46,7 +46,7 @@ class Highlightr
     {
         jsContext = JSContext()
         jsContext.evaluateScript("var window = {};")
-        bundle = Bundle(for: Highlightr.self)
+        bundle = WHBundle.getBundle()
         guard let hgPath = bundle.path(forResource: "highlight.min", ofType: "js") else
         {
             return nil
