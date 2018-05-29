@@ -7,11 +7,12 @@
   
   **What you can do:**
   
-  - [x] Record all the app traffic.
-  - [x] Reveal the content of all requests, responses, cookies and headers shaking your phone!
+  - [x] Record all the app traffic that use NSURLSession.
+  - [x] Reveal the content of all requests, responses and headers shaking your phone!
   - [x] No headaches with SSL certificates on HTTPS calls.
   - [x] Search and delete bugs quickly.
   - [x] Swift & Objective-C compatibility
+  - [x] Works also with external libraries like Alamofire & AFNetworking.
   
 ## Usage
 ----------------
