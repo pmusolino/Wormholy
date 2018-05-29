@@ -22,7 +22,7 @@ class RequestCell: UICollectionViewCell {
         
         methodLabel.text = request?.method.uppercased()
         codeLabel.isHidden = request?.code == 0 ? true : false
-        codeLabel.text = request?.code != nil ? String(request!.code) : ""
+        codeLabel.text = request?.code != nil ? String(request!.code) : "-"
         if let code = request?.code{
             var color: UIColor = Colors.HTTPCode.Generic
             switch code {
@@ -39,6 +39,10 @@ class RequestCell: UICollectionViewCell {
             }
             codeLabel.borderColor = color
             codeLabel.textColor = color
+        }
+        else{
+            codeLabel.borderColor = Colors.HTTPCode.Generic
+            codeLabel.textColor = Colors.HTTPCode.Generic
         }
         urlLabel.text = request?.url
         durationLabel.text = request?.duration?.formattedMilliseconds() ?? ""
