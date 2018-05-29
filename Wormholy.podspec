@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.public_header_files = "Sources/**/*.h"
   #s.private_header_files = "Sources/**/WormholyMethodSwizzling.h"
   s.resource_bundles = {
-    'Wormholy' => ['Sources/**/*.storyboard', 'Sources/**/*.xib']
+    'Wormholy' => ['Sources/**/*.storyboard', 'Sources/**/*.xib', 'Sources/**/*.{css,js}']
   }
   #s.xcconfig = { 'OTHER_LDFLAGS' => '-ObjC' }
   s.frameworks  = "Foundation"
