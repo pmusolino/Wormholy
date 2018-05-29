@@ -14,6 +14,21 @@ class RequestsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        if #available(iOS 9.1, *) {
+            searchController.obscuresBackgroundDuringPresentation = false
+        } else {
+            // Fallback
+        }
+        searchController.searchBar.placeholder = "Search inside requests content"
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        } else {
+            navigationItem.titleView = searchController.searchBar
+        }
+        definesPresentationContext = true
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))]
         
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
@@ -64,5 +79,12 @@ extension RequestsViewController: UICollectionViewDataSource{
 extension RequestsViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         openRequestDetailVC(request: Storage.shared.requests[indexPath.item])
+    }
+}
+
+// MARK: - UISearchResultsUpdating Delegate
+extension RequestsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO
     }
 }
