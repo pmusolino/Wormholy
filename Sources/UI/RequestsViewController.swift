@@ -11,6 +11,7 @@ import UIKit
 class RequestsViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: WHCollectionView!
+    var filteredRequests: [RequestModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class RequestsViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync {
+                self?.filteredRequests = Storage.shared.requests
                 self?.collectionView.reloadData()
             }
         }
@@ -66,24 +68,27 @@ class RequestsViewController: BaseViewController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: newRequestNotification, object: nil)
+    }
 }
 
 extension RequestsViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Storage.shared.requests.count
+        return filteredRequests.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RequestCell", for: indexPath) as! RequestCell
         
-        cell.populate(request: Storage.shared.requests[indexPath.item])
+        cell.populate(request: filteredRequests[indexPath.item])
         return cell
     }
 }
 
 extension RequestsViewController: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        openRequestDetailVC(request: Storage.shared.requests[indexPath.item])
+        openRequestDetailVC(request: filteredRequests[indexPath.item])
     }
 }
 
