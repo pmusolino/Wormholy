@@ -9,12 +9,34 @@
 import UIKit
 
 class RequestsViewController: BaseViewController {
-
+    
     @IBOutlet weak var collectionView: WHCollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addSearchController()
+        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))]
+        
+        collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout{
+            flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 76)
+        }
+        
+        NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
+            DispatchQueue.main.sync {
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    //  MARK: - Search
+    func addSearchController(){
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         if #available(iOS 9.1, *) {
@@ -29,25 +51,8 @@ class RequestsViewController: BaseViewController {
             navigationItem.titleView = searchController.searchBar
         }
         definesPresentationContext = true
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))]
-        
-        collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
-        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout{
-            flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 76)
-        }
-        
-        NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
-            DispatchQueue.main.sync {
-                self?.collectionView.reloadData()
-            }
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
-
     // MARK: - Navigation
     @objc func done(){
         self.dismiss(animated: true, completion: nil)
@@ -60,7 +65,7 @@ class RequestsViewController: BaseViewController {
             self.show(requestDetailVC, sender: self)
         }
     }
-
+    
 }
 
 extension RequestsViewController: UICollectionViewDataSource{
