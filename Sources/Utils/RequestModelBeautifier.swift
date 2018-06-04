@@ -69,7 +69,6 @@ class RequestModelBeautifier: NSObject {
                     
                     if let highlightedCode = highlightr.highlight(data){
                         completion(NSMutableAttributedString(attributedString: highlightedCode))
-                        print("entra qui")
                         return
                     }
                 }
