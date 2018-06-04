@@ -34,38 +34,49 @@ class RequestModelBeautifier: NSObject {
         return final
     }
     
-    static func body(request: RequestModel) -> NSMutableAttributedString{
-        guard request.httpBody != nil else {
-            return NSMutableAttributedString(string: "-")
-        }
-        
-        if let data = String(data: request.httpBody!, encoding: .utf8){
-            if let highlightr = Highlightr(){
-                highlightr.setTheme(to: "paraiso-dark")
-                
-                if let highlightedCode = highlightr.highlight(data){
-                    return NSMutableAttributedString(attributedString: highlightedCode)
+    static func body(request: RequestModel, completion: @escaping (NSMutableAttributedString) -> Void){
+        DispatchQueue.global().async {
+            guard request.httpBody != nil else {
+                completion(NSMutableAttributedString(string: "-"))
+                return
+            }
+            
+            if let data = String(data: request.httpBody!, encoding: .utf8){
+                if let highlightr = Highlightr(){
+                    highlightr.setTheme(to: "paraiso-dark")
+                    
+                    if let highlightedCode = highlightr.highlight(data){
+                        completion(NSMutableAttributedString(attributedString: highlightedCode))
+                        return
+                    }
                 }
             }
+            completion(NSMutableAttributedString(string: "-"))
+            return
         }
-        return NSMutableAttributedString(string: "-")
     }
     
-    static func responseBody(request: RequestModel) -> NSMutableAttributedString{
-        guard request.dataResponse != nil else {
-            return NSMutableAttributedString(string: "-")
-        }
-        
-        if let data = String(data: request.dataResponse!, encoding: .utf8){
-            if let highlightr = Highlightr(){
-                highlightr.setTheme(to: "paraiso-dark")
-                
-                if let highlightedCode = highlightr.highlight(data){
-                    return NSMutableAttributedString(attributedString: highlightedCode)
+    static func responseBody(request: RequestModel, completion: @escaping (NSMutableAttributedString) -> Void){
+        DispatchQueue.global().async {
+            guard request.dataResponse != nil else {
+                completion(NSMutableAttributedString(string: "-"))
+                return
+            }
+            
+            if let data = String(data: request.dataResponse!, encoding: .utf8){
+                if let highlightr = Highlightr(){
+                    highlightr.setTheme(to: "paraiso-dark")
+                    
+                    if let highlightedCode = highlightr.highlight(data){
+                        completion(NSMutableAttributedString(attributedString: highlightedCode))
+                        print("entra qui")
+                        return
+                    }
                 }
             }
+            completion(NSMutableAttributedString(string: "-"))
+            return
         }
-        return NSMutableAttributedString(string: "-")
     }
     
 }

@@ -19,6 +19,8 @@ class RequestDetailViewController: BaseViewController {
         Section(name: "Request Body", type: .requestBody),
         Section(name: "Response Body", type: .responseBody)
     ]
+    var body: NSMutableAttributedString?
+    var responseBody: NSMutableAttributedString?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +33,27 @@ class RequestDetailViewController: BaseViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib(nibName: "TextTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "TextTableViewCell")
         tableView.register(UINib(nibName: "RequestTitleSectionView", bundle:WHBundle.getBundle()), forHeaderFooterViewReuseIdentifier: "RequestTitleSectionView")
+        
+        populate()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    func populate(){
+        guard request != nil else {
+            return
+        }
+        RequestModelBeautifier.body(request: request!) { [weak self] (attributedString) in
+            self?.body = attributedString
+            self?.tableView.reloadData()
+        }
+        RequestModelBeautifier.responseBody(request: request!) { [weak self] (attributedString) in
+            self?.responseBody = attributedString
+            self?.tableView.reloadData()
+        }
+    }
     
     /*
     // MARK: - Navigation
@@ -82,10 +99,13 @@ extension RequestDetailViewController: UITableViewDataSource{
                 break
             case .header:
                 cell.textView.attributedText = RequestModelBeautifier.header(request: req)
+                break
             case .requestBody:
-                cell.textView.attributedText = RequestModelBeautifier.body(request: req)
+                cell.textView.attributedText = body
+                break
             case .responseBody:
-                cell.textView.attributedText = RequestModelBeautifier.responseBody(request: req)
+                cell.textView.attributedText = responseBody
+                break
             }
         }
         else{

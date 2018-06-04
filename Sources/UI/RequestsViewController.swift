@@ -25,6 +25,7 @@ class RequestsViewController: BaseViewController {
             flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 76)
         }
         
+        filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync {
                 self?.filteredRequests = Storage.shared.requests
