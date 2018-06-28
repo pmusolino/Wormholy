@@ -54,5 +54,12 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func getPhotosButtonPressed(_ sender: Any) {
+        DataFetcher.sharedInstance.getPhotosList(completion: {
+            print("API: Get photos")
+        }) { (error) in
+            print("ERROR: api Get photos")
+        }
+    }
 }
 

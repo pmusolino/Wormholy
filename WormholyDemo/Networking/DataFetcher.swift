@@ -76,7 +76,7 @@ class DataFetcher: NSObject {
         task?.resume()
     }
     
-    func getWrongURL( completion: @escaping () -> Void, failure:@escaping (Error) -> Void){
+    func getWrongURL(completion: @escaping () -> Void, failure:@escaping (Error) -> Void){
         var urlRequest = Routing.WrongURL().urlRequest
         urlRequest.httpMethod = "GET"
         
@@ -96,5 +96,24 @@ class DataFetcher: NSObject {
         task?.resume()
     }
     
+    func getPhotosList(completion: @escaping () -> Void, failure:@escaping (Error) -> Void){
+        var urlRequest = Routing.Photos().urlRequest
+        urlRequest.httpMethod = "GET"
+        
+        let task = session?.dataTask(with: urlRequest) {
+            (
+            data, response, error) in
+            
+            guard response?.validate() == nil else{
+                failure(response!.validate()!)
+                return
+            }
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+        
+        task?.resume()
+    }
 }
 

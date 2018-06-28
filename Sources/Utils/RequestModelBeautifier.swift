@@ -34,46 +34,34 @@ class RequestModelBeautifier: NSObject {
         return final
     }
     
-    static func body(request: RequestModel, completion: @escaping (NSMutableAttributedString) -> Void){
+    static func body(request: RequestModel, completion: @escaping (String) -> Void){
         DispatchQueue.global().async {
             guard request.httpBody != nil else {
-                completion(NSMutableAttributedString(string: "-"))
+                completion("-")
                 return
             }
             
             if let data = String(data: request.httpBody!, encoding: .utf8){
-                if let highlightr = Highlightr(){
-                    highlightr.setTheme(to: "paraiso-dark")
-                    
-                    if let highlightedCode = highlightr.highlight(data){
-                        completion(NSMutableAttributedString(attributedString: highlightedCode))
-                        return
-                    }
-                }
+                completion(data)
+                return
             }
-            completion(NSMutableAttributedString(string: "-"))
+            completion("-")
             return
         }
     }
     
-    static func responseBody(request: RequestModel, completion: @escaping (NSMutableAttributedString) -> Void){
+    static func responseBody(request: RequestModel, completion: @escaping (String) -> Void){
         DispatchQueue.global().async {
             guard request.dataResponse != nil else {
-                completion(NSMutableAttributedString(string: "-"))
+                completion("-")
                 return
             }
             
             if let data = String(data: request.dataResponse!, encoding: .utf8){
-                if let highlightr = Highlightr(){
-                    highlightr.setTheme(to: "paraiso-dark")
-                    
-                    if let highlightedCode = highlightr.highlight(data){
-                        completion(NSMutableAttributedString(attributedString: highlightedCode))
-                        return
-                    }
-                }
+                completion(data)
+                return
             }
-            completion(NSMutableAttributedString(string: "-"))
+            completion("-")
             return
         }
     }

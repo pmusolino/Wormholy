@@ -9,7 +9,7 @@
 import UIKit
 
 class RequestDetailViewController: BaseViewController {
-
+    
     @IBOutlet weak var tableView: WHTableView!
     
     var request: RequestModel?
@@ -19,8 +19,16 @@ class RequestDetailViewController: BaseViewController {
         Section(name: "Request Body", type: .requestBody),
         Section(name: "Response Body", type: .responseBody)
     ]
-    var body: NSMutableAttributedString?
-    var responseBody: NSMutableAttributedString?
+    var body: String?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    var responseBody: String?{
+        didSet{
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +44,7 @@ class RequestDetailViewController: BaseViewController {
         
         populate()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -45,26 +53,24 @@ class RequestDetailViewController: BaseViewController {
         guard request != nil else {
             return
         }
-        RequestModelBeautifier.body(request: request!) { [weak self] (attributedString) in
-            self?.body = attributedString
-            self?.tableView.reloadData()
+        RequestModelBeautifier.body(request: request!) { [weak self] (textData) in
+            self?.body = textData
         }
-        RequestModelBeautifier.responseBody(request: request!) { [weak self] (attributedString) in
-            self?.responseBody = attributedString
-            self?.tableView.reloadData()
+        RequestModelBeautifier.responseBody(request: request!) { [weak self] (textData) in
+            self?.responseBody = textData
         }
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 
@@ -101,10 +107,10 @@ extension RequestDetailViewController: UITableViewDataSource{
                 cell.textView.attributedText = RequestModelBeautifier.header(request: req)
                 break
             case .requestBody:
-                cell.textView.attributedText = body
+                cell.textView.text = body
                 break
             case .responseBody:
-                cell.textView.attributedText = responseBody
+                cell.textView.text = responseBody
                 break
             }
         }
@@ -114,7 +120,7 @@ extension RequestDetailViewController: UITableViewDataSource{
         
         return cell
     }
-   
+    
 }
 
 extension RequestDetailViewController: UITableViewDelegate{
