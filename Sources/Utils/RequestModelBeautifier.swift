@@ -34,36 +34,48 @@ class RequestModelBeautifier: NSObject {
         return final
     }
     
-    static func body(request: RequestModel, completion: @escaping (String) -> Void){
+    static func body(request: RequestModel, splitLength: Int? = nil, completion: @escaping (NSMutableAttributedString) -> Void){
         DispatchQueue.global().async {
             guard request.httpBody != nil else {
-                completion("-")
+                completion(NSMutableAttributedString(string: "-"))
                 return
             }
             
-            if let data = String(data: request.httpBody!, encoding: .utf8){
-                completion(data)
-                return
+            if let data = splitLength != nil ? String(data: request.httpBody!, encoding: .utf8)?.characters(n: splitLength!) : String(data: request.httpBody!, encoding: .utf8){
+                if let highlightr = Highlightr(){
+                    highlightr.setTheme(to: "paraiso-dark")
+                    
+                    if let highlightedCode = highlightr.highlight(data){
+                        completion(NSMutableAttributedString(attributedString: highlightedCode))
+                        return
+                    }
+                }
             }
-            completion("-")
+            completion(NSMutableAttributedString(string: "-"))
             return
         }
     }
     
-    static func responseBody(request: RequestModel, completion: @escaping (String) -> Void){
+    static func responseBody(request: RequestModel, splitLength: Int? = nil, completion: @escaping (NSMutableAttributedString) -> Void){
         DispatchQueue.global().async {
             guard request.dataResponse != nil else {
-                completion("-")
+                completion(NSMutableAttributedString(string: "-"))
                 return
             }
             
-            if let data = String(data: request.dataResponse!, encoding: .utf8){
-                completion(data)
-                return
+            if let data = splitLength != nil ? String(data: request.dataResponse!, encoding: .utf8)?.characters(n: splitLength!) : String(data: request.dataResponse!, encoding: .utf8){
+                if let highlightr = Highlightr(){
+                    highlightr.setTheme(to: "paraiso-dark")
+                    
+                    if let highlightedCode = highlightr.highlight(data){
+                        completion(NSMutableAttributedString(attributedString: highlightedCode))
+                        return
+                    }
+                }
             }
-            completion("-")
+            completion(NSMutableAttributedString(string: "-"))
             return
-        }
+            }
     }
     
 }

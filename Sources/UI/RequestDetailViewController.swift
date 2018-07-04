@@ -19,16 +19,8 @@ class RequestDetailViewController: BaseViewController {
         Section(name: "Request Body", type: .requestBody),
         Section(name: "Response Body", type: .responseBody)
     ]
-    var body: String?{
-        didSet{
-            tableView.reloadData()
-        }
-    }
-    var responseBody: String?{
-        didSet{
-            tableView.reloadData()
-        }
-    }
+    var body: NSAttributedString?
+    var responseBody: NSAttributedString?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,11 +45,17 @@ class RequestDetailViewController: BaseViewController {
         guard request != nil else {
             return
         }
-        RequestModelBeautifier.body(request: request!) { [weak self] (textData) in
-            self?.body = textData
+        RequestModelBeautifier.body(request: request!, splitLength: 5000) { [weak self] (data) in
+            self?.body = data
+            DispatchQueue.main.sync {
+                self?.tableView.reloadData()
+            }
         }
-        RequestModelBeautifier.responseBody(request: request!) { [weak self] (textData) in
-            self?.responseBody = textData
+        RequestModelBeautifier.responseBody(request: request!, splitLength: 5000) { [weak self] (data) in
+            self?.responseBody = data
+            DispatchQueue.main.sync {
+                self?.tableView.reloadData()
+            }
         }
     }
     
@@ -107,10 +105,10 @@ extension RequestDetailViewController: UITableViewDataSource{
                 cell.textView.attributedText = RequestModelBeautifier.header(request: req)
                 break
             case .requestBody:
-                cell.textView.text = body
+                cell.textView.attributedText = body
                 break
             case .responseBody:
-                cell.textView.text = responseBody
+                cell.textView.attributedText = responseBody
                 break
             }
         }
