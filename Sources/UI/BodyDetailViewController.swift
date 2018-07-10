@@ -21,9 +21,9 @@ class BodyDetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let hud = showLoader(view: view)
-        RequestModelBeautifier.body(data) { [weak self] (attributedString) in
+        RequestModelBeautifier.body(data) { [weak self] (stringData) in
             DispatchQueue.main.sync {
-                self?.textView.attributedText = attributedString
+                self?.textView.text = stringData
                 self?.hideLoader(loaderView: hud)
             }
         }

@@ -34,24 +34,19 @@ class RequestModelBeautifier: NSObject {
         return final
     }
     
-    static func body(_ body: Data?, splitLength: Int? = nil, completion: @escaping (NSMutableAttributedString) -> Void){
+    static func body(_ body: Data?, splitLength: Int? = nil, completion: @escaping (String) -> Void){
         DispatchQueue.global().async {
             guard body != nil else {
-                completion(NSMutableAttributedString(string: "-"))
+                completion("-")
                 return
             }
             
             if let data = splitLength != nil ? String(data: body!, encoding: .utf8)?.characters(n: splitLength!) : String(data: body!, encoding: .utf8){
-                if let highlightr = Highlightr(){
-                    highlightr.setTheme(to: "paraiso-dark")
-                    
-                    if let highlightedCode = highlightr.highlight(data){
-                        completion(NSMutableAttributedString(attributedString: highlightedCode))
+                        completion(data)
                         return
-                    }
                 }
-            }
-            completion(NSMutableAttributedString(string: "-"))
+            
+            completion("-")
             return
         }
     }
