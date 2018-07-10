@@ -19,8 +19,6 @@ class RequestDetailViewController: BaseViewController {
         Section(name: "Request Body", type: .requestBody),
         Section(name: "Response Body", type: .responseBody)
     ]
-    var body: NSAttributedString?
-    var responseBody: NSAttributedString?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,42 +30,24 @@ class RequestDetailViewController: BaseViewController {
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UINib(nibName: "TextTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "TextTableViewCell")
+        tableView.register(UINib(nibName: "ActionableTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "ActionableTableViewCell")
         tableView.register(UINib(nibName: "RequestTitleSectionView", bundle:WHBundle.getBundle()), forHeaderFooterViewReuseIdentifier: "RequestTitleSectionView")
-        
-        populate()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func populate(){
-        guard request != nil else {
-            return
-        }
-        RequestModelBeautifier.body(request: request!, splitLength: 5000) { [weak self] (data) in
-            self?.body = data
-            DispatchQueue.main.sync {
-                self?.tableView.reloadData()
-            }
-        }
-        RequestModelBeautifier.responseBody(request: request!, splitLength: 5000) { [weak self] (data) in
-            self?.responseBody = data
-            DispatchQueue.main.sync {
-                self?.tableView.reloadData()
-            }
+    
+    // MARK: - Navigation
+    func openBodyDetailVC(title: String?, body: Data?){
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        if let requestDetailVC = storyboard.instantiateViewController(withIdentifier: "BodyDetailViewController") as? BodyDetailViewController{
+            requestDetailVC.title = title
+            requestDetailVC.data = body
+            self.show(requestDetailVC, sender: self)
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
@@ -93,34 +73,47 @@ extension RequestDetailViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
         
         let section = sections[indexPath.section]
         if let req = request{
             switch section.type {
             case .overview:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
                 cell.textView.attributedText = RequestModelBeautifier.overview(request: req)
-                break
+                return cell
             case .header:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
                 cell.textView.attributedText = RequestModelBeautifier.header(request: req)
-                break
+                return cell
             case .requestBody:
-                cell.textView.attributedText = body
-                break
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
+                cell.labelAction?.text = "View body"
+                return cell
             case .responseBody:
-                cell.textView.attributedText = responseBody
-                break
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
+                cell.labelAction?.text = "View body"
+                return cell
             }
         }
-        else{
-            cell.textView.text = "-"
-        }
         
-        return cell
+        return UITableViewCell()
     }
     
 }
 
 extension RequestDetailViewController: UITableViewDelegate{
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = sections[indexPath.section]
+        
+        switch section.type {
+        case .requestBody:
+            openBodyDetailVC(title: "Request body", body: request?.httpBody)
+            break
+        case .responseBody:
+            openBodyDetailVC(title: "Response body", body: request?.dataResponse)
+            break
+        default:
+            break
+        }
+    }
 }

@@ -20,15 +20,23 @@ class BaseViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Loader
+    func showLoader(view: UIView) -> UIView{
+        //LoaderView with view size, with indicator placed on center of loaderView
+        let loaderView = UIView(frame: view.bounds)
+        loaderView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
+        let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        indicator.center = loaderView.center
+        loaderView.addSubview(indicator)
+        view.addSubview(loaderView)
+        indicator.startAnimating()
+        loaderView.bringSubview(toFront: view)
+        return loaderView
     }
-    */
+    
+    func hideLoader(loaderView: UIView?){
+        loaderView?.removeFromSuperview()
+    }
 
 }
 

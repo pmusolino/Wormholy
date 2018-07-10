@@ -15,6 +15,7 @@
             <objects>
                 <navigationController storyboardIdentifier="WormholyNavigationController" id="XiN-zk-JTq" customClass="NavigationController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nvE-2v-Siz">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -76,11 +77,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C1R-oy-f7k" customClass="WHTableView" customModule="Wormholy" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C1R-oy-f7k" customClass="WHTableView" customModule="Wormholy" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="7BC-LK-4id">
-                                    <rect key="frame" x="0.0" y="602" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -90,7 +91,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="C1R-oy-f7k" firstAttribute="top" secondItem="f1w-um-ttt" secondAttribute="top" id="8TE-0v-S2s"/>
                             <constraint firstItem="f1w-um-ttt" firstAttribute="bottom" secondItem="C1R-oy-f7k" secondAttribute="bottom" id="Qr3-Yj-aUX"/>
@@ -101,11 +102,44 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="C1R-oy-f7k" id="jHN-Zy-hHn"/>
+                        <segue destination="S40-LP-XSy" kind="show" identifier="showBodyDetailVC" id="w0J-H9-db9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jrn-OG-d87" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1100" y="148"/>
+        </scene>
+        <!--Body Detail View Controller-->
+        <scene sceneID="FPQ-PL-XiD">
+            <objects>
+                <viewController storyboardIdentifier="BodyDetailViewController" id="S40-LP-XSy" customClass="BodyDetailViewController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k01-uv-JVw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fpK-qH-d5h" customClass="WHTextView" customModule="Wormholy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fpK-qH-d5h" firstAttribute="leading" secondItem="Y9P-Kk-3xC" secondAttribute="leading" id="LcP-XH-gTf"/>
+                            <constraint firstItem="Y9P-Kk-3xC" firstAttribute="bottom" secondItem="fpK-qH-d5h" secondAttribute="bottom" id="RLZ-Wr-Z9V"/>
+                            <constraint firstItem="Y9P-Kk-3xC" firstAttribute="trailing" secondItem="fpK-qH-d5h" secondAttribute="trailing" id="ey8-iu-S0g"/>
+                            <constraint firstItem="fpK-qH-d5h" firstAttribute="top" secondItem="Y9P-Kk-3xC" secondAttribute="top" id="jfn-FH-a4p"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Y9P-Kk-3xC"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="fpK-qH-d5h" id="9qA-qk-Zwk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BEJ-Hi-Vka" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1945" y="148"/>
         </scene>
     </scenes>
 </document>

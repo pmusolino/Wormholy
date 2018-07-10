@@ -34,14 +34,14 @@ class RequestModelBeautifier: NSObject {
         return final
     }
     
-    static func body(request: RequestModel, splitLength: Int? = nil, completion: @escaping (NSMutableAttributedString) -> Void){
+    static func body(_ body: Data?, splitLength: Int? = nil, completion: @escaping (NSMutableAttributedString) -> Void){
         DispatchQueue.global().async {
-            guard request.httpBody != nil else {
+            guard body != nil else {
                 completion(NSMutableAttributedString(string: "-"))
                 return
             }
             
-            if let data = splitLength != nil ? String(data: request.httpBody!, encoding: .utf8)?.characters(n: splitLength!) : String(data: request.httpBody!, encoding: .utf8){
+            if let data = splitLength != nil ? String(data: body!, encoding: .utf8)?.characters(n: splitLength!) : String(data: body!, encoding: .utf8){
                 if let highlightr = Highlightr(){
                     highlightr.setTheme(to: "paraiso-dark")
                     
@@ -55,29 +55,6 @@ class RequestModelBeautifier: NSObject {
             return
         }
     }
-    
-    static func responseBody(request: RequestModel, splitLength: Int? = nil, completion: @escaping (NSMutableAttributedString) -> Void){
-        DispatchQueue.global().async {
-            guard request.dataResponse != nil else {
-                completion(NSMutableAttributedString(string: "-"))
-                return
-            }
-            
-            if let data = splitLength != nil ? String(data: request.dataResponse!, encoding: .utf8)?.characters(n: splitLength!) : String(data: request.dataResponse!, encoding: .utf8){
-                if let highlightr = Highlightr(){
-                    highlightr.setTheme(to: "paraiso-dark")
-                    
-                    if let highlightedCode = highlightr.highlight(data){
-                        completion(NSMutableAttributedString(attributedString: highlightedCode))
-                        return
-                    }
-                }
-            }
-            completion(NSMutableAttributedString(string: "-"))
-            return
-            }
-    }
-    
 }
 
 extension NSMutableAttributedString {

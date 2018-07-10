@@ -301,6 +301,9 @@
 		4582B21A20AAE71A0016FCBC /* darcula.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4582B1CA20AAE71A0016FCBC /* darcula.min.css */; };
 		4582B21B20AAE71A0016FCBC /* atelier-lakeside-light.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4582B1CB20AAE71A0016FCBC /* atelier-lakeside-light.min.css */; };
 		4582B21C20AAE71A0016FCBC /* monokai-sublime.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 4582B1CC20AAE71A0016FCBC /* monokai-sublime.min.css */; };
+		45868F1420F4E2B10024C77B /* BodyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */; };
+		45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */; };
+		45868F1C20F4E9790024C77B /* ActionableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45868F1A20F4E9790024C77B /* ActionableTableViewCell.xib */; };
 		45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EA20860D14007D0D17 /* WHTableView.swift */; };
 		45C4F4F020860DC0007D0D17 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */; };
 		45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */; };
@@ -625,6 +628,9 @@
 		4582B1CA20AAE71A0016FCBC /* darcula.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = darcula.min.css; sourceTree = "<group>"; };
 		4582B1CB20AAE71A0016FCBC /* atelier-lakeside-light.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "atelier-lakeside-light.min.css"; sourceTree = "<group>"; };
 		4582B1CC20AAE71A0016FCBC /* monokai-sublime.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "monokai-sublime.min.css"; sourceTree = "<group>"; };
+		45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyDetailViewController.swift; sourceTree = "<group>"; };
+		45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionableTableViewCell.swift; sourceTree = "<group>"; };
+		45868F1A20F4E9790024C77B /* ActionableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActionableTableViewCell.xib; sourceTree = "<group>"; };
 		45C4F4EA20860D14007D0D17 /* WHTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTableView.swift; sourceTree = "<group>"; };
 		45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
@@ -711,6 +717,7 @@
 				451C9E542080E5E4002A34BC /* Flow.storyboard */,
 				451C9E6A20810BBD002A34BC /* RequestsViewController.swift */,
 				45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */,
+				45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */,
 				45FF5C4820875ED90084BD50 /* Sections */,
 				451C9E612081045E002A34BC /* Cells */,
 			);
@@ -750,6 +757,8 @@
 				451C9E6220810472002A34BC /* RequestCell.xib */,
 				45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */,
 				45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */,
+				45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */,
+				45868F1A20F4E9790024C77B /* ActionableTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1559,6 +1568,7 @@
 				4582B16920AAE7120016FCBC /* json.min.js in Resources */,
 				4582B20F20AAE71A0016FCBC /* atelier-estuary-dark.min.css in Resources */,
 				4582B1ED20AAE71A0016FCBC /* routeros.min.css in Resources */,
+				45868F1C20F4E9790024C77B /* ActionableTableViewCell.xib in Resources */,
 				4582B12520AAE7120016FCBC /* abnf.min.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1604,6 +1614,7 @@
 				45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */,
 				451C9E5A2080E8D2002A34BC /* BaseViewController.swift in Sources */,
 				45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */,
+				45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */,
 				455818C9207D621200D2F954 /* RequestModel.swift in Sources */,
 				45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */,
 				451C9E602080F653002A34BC /* WHBundle.swift in Sources */,
@@ -1611,6 +1622,7 @@
 				4582B00D20AAE6DF0016FCBC /* HTMLUtils.swift in Sources */,
 				45820CF6208170F400CA74D6 /* Colors.swift in Sources */,
 				453A167720ED1B02001CEB9D /* WHString.swift in Sources */,
+				45868F1420F4E2B10024C77B /* BodyDetailViewController.swift in Sources */,
 				45FF5C5220877A950084BD50 /* Section.swift in Sources */,
 				451C9E6920810B98002A34BC /* WHCollectionView.swift in Sources */,
 				45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */,
