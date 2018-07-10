@@ -77,7 +77,12 @@ public class CustomHTTPProtocol: URLProtocol {
 extension CustomHTTPProtocol: URLSessionDataDelegate {
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         client?.urlProtocol(self, didLoad: data)
-        currentRequest?.dataResponse = data
+        if currentRequest?.dataResponse == nil{
+            currentRequest?.dataResponse = data
+        }
+        else{
+            currentRequest?.dataResponse?.append(data)
+        }
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
