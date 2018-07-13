@@ -22,9 +22,7 @@ class RequestsViewController: BaseViewController {
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))]
         
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
-        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout{
-            flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.size.width, height: 76)
-        }
+        (self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: collectionView.bounds.size.width, height: 76)
         
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
@@ -32,6 +30,19 @@ class RequestsViewController: BaseViewController {
                 self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text) ?? []
                 self?.collectionView.reloadData()
             }
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { (context) in
+            //Place code here to perform animations during the rotation.
+            
+        }) { (completionContext) in
+            //Code here will execute after the rotation has finished.
+            (self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: self.collectionView.bounds.size.width, height: 76)
+            self.collectionView.reloadData()
         }
     }
     

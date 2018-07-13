@@ -12,7 +12,6 @@ import UIKit
 public class Wormholy: NSObject
 {
     @objc public static func swiftyLoad() {
-        print("Rock 'n' roll!")
         NotificationCenter.default.addObserver(forName: shakeNotification, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()
         }
