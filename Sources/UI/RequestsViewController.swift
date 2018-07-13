@@ -29,10 +29,8 @@ class RequestsViewController: BaseViewController {
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync {
-                if self?.searchController?.searchBar.text == "" || self?.searchController?.searchBar.text == nil{
-                    self?.filteredRequests = Storage.shared.requests
-                    self?.collectionView.reloadData()
-                }
+                self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text) ?? []
+                self?.collectionView.reloadData()
             }
         }
     }
@@ -57,6 +55,16 @@ class RequestsViewController: BaseViewController {
             navigationItem.titleView = searchController?.searchBar
         }
         definesPresentationContext = true
+    }
+    
+    func filterRequests(text: String?) -> [RequestModel]{
+        guard text != nil && text != "" else {
+            return Storage.shared.requests
+        }
+        
+        return Storage.shared.requests.filter { (request) -> Bool in
+            return request.url.range(of: text!, options: .caseInsensitive) != nil ? true : false
+        }
     }
     
     // MARK: - Navigation
@@ -99,17 +107,7 @@ extension RequestsViewController: UICollectionViewDelegate{
 // MARK: - UISearchResultsUpdating Delegate
 extension RequestsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard searchController.searchBar.text != nil && searchController.searchBar.text != "" else {
-            filteredRequests = Storage.shared.requests
-            collectionView.reloadData()
-            return
-        }
-        
-        filteredRequests = Storage.shared.requests.filter { (request) -> Bool in
-            return request.url.range(of: searchController.searchBar.text!, options: .caseInsensitive) != nil ? true : false
-        }
+        filteredRequests = filterRequests(text: searchController.searchBar.text)
         collectionView.reloadData()
     }
-    
-    
 }
