@@ -12,6 +12,7 @@ class RequestsViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: WHCollectionView!
     var filteredRequests: [RequestModel] = []
+    var searchController: UISearchController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,10 @@ class RequestsViewController: BaseViewController {
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync {
-                self?.filteredRequests = Storage.shared.requests
-                self?.collectionView.reloadData()
+                if self?.searchController?.searchBar.text == "" || self?.searchController?.searchBar.text == nil{
+                    self?.filteredRequests = Storage.shared.requests
+                    self?.collectionView.reloadData()
+                }
             }
         }
     }
@@ -40,18 +43,18 @@ class RequestsViewController: BaseViewController {
     
     //  MARK: - Search
     func addSearchController(){
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
+        searchController = UISearchController(searchResultsController: nil)
+        searchController?.searchResultsUpdater = self
         if #available(iOS 9.1, *) {
-            searchController.obscuresBackgroundDuringPresentation = false
+            searchController?.obscuresBackgroundDuringPresentation = false
         } else {
             // Fallback
         }
-        searchController.searchBar.placeholder = "Search inside requests content"
+        searchController?.searchBar.placeholder = "Search URL"
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
         } else {
-            navigationItem.titleView = searchController.searchBar
+            navigationItem.titleView = searchController?.searchBar
         }
         definesPresentationContext = true
     }
@@ -96,6 +99,17 @@ extension RequestsViewController: UICollectionViewDelegate{
 // MARK: - UISearchResultsUpdating Delegate
 extension RequestsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        // TODO
+        guard searchController.searchBar.text != nil && searchController.searchBar.text != "" else {
+            filteredRequests = Storage.shared.requests
+            collectionView.reloadData()
+            return
+        }
+        
+        filteredRequests = Storage.shared.requests.filter { (request) -> Bool in
+            return request.url.range(of: searchController.searchBar.text!, options: .caseInsensitive) != nil ? true : false
+        }
+        collectionView.reloadData()
     }
+    
+    
 }
