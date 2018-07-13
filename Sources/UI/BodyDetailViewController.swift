@@ -15,7 +15,8 @@ class BodyDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent))
+        navigationItem.rightBarButtonItems = [shareButton]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,9 +36,16 @@ class BodyDetailViewController: BaseViewController {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    @objc func shareContent(){
+        if let text = textView.text{
+        let textShare = [text]
+        let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
 
     /*
     // MARK: - Navigation
