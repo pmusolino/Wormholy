@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Wormholy"
-  s.version      = "0.1"
+  s.version      = "1.0"
   s.summary      = "Network debugging made easy"
   s.description  = <<-DESC
     Your description here.
