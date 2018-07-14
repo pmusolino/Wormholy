@@ -1,4 +1,6 @@
-# Wormholy
+<p align="center">
+  <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/logo.png" alt="Icon"/>
+</p>
 
   [![Language](https://img.shields.io/badge/Swift-4-orange.svg)]()
   
@@ -7,6 +9,7 @@
   
   **What you can do:**
   
+  - [x] No code, no import.
   - [x] Record all the app traffic that use NSURLSession.
   - [x] Reveal the content of all requests, responses and headers shaking your phone!
   - [x] No headaches with SSL certificates on HTTPS calls.
