@@ -17,6 +17,10 @@
   - [x] Swift & Objective-C compatibility
   - [x] Works also with external libraries like Alamofire & AFNetworking.
   
+  <p align="center">
+  <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
+</p>
+  
 ## Usage
 ----------------
 Add it to your project, and that's all! **Shake your device** or your simulator and Wormholy will appear! You don't need to import the library into your code, it works magically!
