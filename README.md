@@ -3,6 +3,7 @@
 </p>
 
   [![Language](https://img.shields.io/badge/Swift-4-orange.svg)]()
+  [![Pod version](https://img.shields.io/cocoapods/v/Wormholy.svg?style=flat)](https://cocoapods.org/pods/Wormholy)
   
   Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
   
@@ -11,7 +12,7 @@
   
   - [x] No code, no import.
   - [x] Record all the app traffic that use NSURLSession.
-  - [x] Reveal the content of all requests, responses and headers shaking your phone!
+  - [x] Reveal the content of all requests, responses, and headers shaking your phone!
   - [x] No headaches with SSL certificates on HTTPS calls.
   - [x] Search and delete bugs quickly.
   - [x] Swift & Objective-C compatibility
@@ -21,16 +22,34 @@
   <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
 </p>
   
+## Requirements
+----------------
+
+- iOS 9.0+
+- Xcode 9+
+
+
 ## Usage
 ----------------
-Add it to your project, and that's all! **Shake your device** or your simulator and Wormholy will appear! You don't need to import the library into your code, it works magically!
+Add it to your project, and that's all! **Shake your device** or your simulator or device and Wormholy will appear! You don't need to import the library into your code, it works magically!
 
-I suggest you to install it only in debug mode. The easy way is to use cocoapods:
+I suggest you install it only in debug mode. The easy way is via cocoapods:
 
 ```
 pod 'Wormholy', :configurations => ['Debug']
 ``` 
 
+## Carthage
+----------------
+
+Another way to install Wormholy is [Carthage](https://github.com/Carthage/Carthage).
+
+To integrate Wormholy into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "pmusolino/Wormholy"
+```
+Run `carthage update` to build the framework and drag the built `Wormholy.framework` into your Xcode project.
 
 ## Contributing
 
