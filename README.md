@@ -24,7 +24,7 @@ Add it to your project, and that's all! **Shake your device** or your simulator 
 I suggest you to install it only in debug mode. The easy way is to use cocoapods:
 
 ```
-pod 'Wormholy', :git => 'https://github.com/pmusolino/Wormholy', :configurations => ['Debug']
+pod 'Wormholy', :configurations => ['Debug']
 ``` 
 
 
