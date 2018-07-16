@@ -9,17 +9,17 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-
+    
     // MARK: - Loader
     func showLoader(view: UIView) -> UIView{
         //LoaderView with view size, with indicator placed on center of loaderView
@@ -37,7 +37,7 @@ class BaseViewController: UIViewController {
     func hideLoader(loaderView: UIView?){
         loaderView?.removeFromSuperview()
     }
-
+    
 }
 
 extension UIViewController{
@@ -68,7 +68,10 @@ extension UIViewController{
     open override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         //Shake shake
         if motion == .motionShake{
-            NotificationCenter.default.post(name: shakeNotification, object: nil)
+            guard ProcessInfo.processInfo.environment["WORMHOLY_SHAKE_ENABLED"] != "NO" else {
+                return
+            }
+            NotificationCenter.default.post(name: fireWormholy, object: nil)
         }
     }
 }

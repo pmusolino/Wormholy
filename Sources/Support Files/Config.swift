@@ -9,5 +9,5 @@
 import Foundation
 
 //Notifications
-let shakeNotification = NSNotification.Name(rawValue: "wormholy_shake")
+let fireWormholy = NSNotification.Name(rawValue: "wormholy_fire")
 let newRequestNotification = NSNotification.Name(rawValue: "wormholy_new_request")

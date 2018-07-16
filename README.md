@@ -39,6 +39,13 @@ I suggest you install it only in debug mode. The easy way is via cocoapods:
 pod 'Wormholy', :configurations => ['Debug']
 ``` 
 
+-
+If you want to disable the shake, and fire Wormholy from another point inside your app, you need to set the [environment variable](https://medium.com/@derrickho_28266/xcode-custom-environment-variables-681b5b8674ec) `WORMHOLY_SHAKE_ENABLED` = `NO`, and call this local notification:
+
+```
+NotificationCenter.default.post(name: NSNotification.Name(rawValue: "wormholy_fire"), object: nil)
+```
+
 ## Carthage
 ----------------
 
