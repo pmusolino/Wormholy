@@ -31,7 +31,7 @@
 
 ## Usage
 ----------------
-Add it to your project, and that's all! **Shake your device** or your simulator or device and Wormholy will appear! You don't need to import the library into your code, it works magically!
+Add it to your project, and that's all! **Shake your device** or your simulator and Wormholy will appear! You don't need to import the library into your code, it works magically!
 
 I suggest you install it only in debug mode. The easy way is via cocoapods:
 
