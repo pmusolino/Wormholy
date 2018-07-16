@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestDetailViewController: BaseViewController {
+class RequestDetailViewController: WHBaseViewController {
     
     @IBOutlet weak var tableView: WHTableView!
     

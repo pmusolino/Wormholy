@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BodyDetailViewController: BaseViewController {
+class BodyDetailViewController: WHBaseViewController {
 
     @IBOutlet weak var textView: WHTextView!
     var data: Data?

@@ -65,6 +65,9 @@ public class Wormholy: NSObject
     
     // MARK: - Navigation
     static func presentWormholyFlow(){
+        guard UIViewController.currentViewController()?.isKind(of: WHBaseViewController.classForCoder()) == false && UIViewController.currentViewController()?.isKind(of: WHNavigationController.classForCoder()) == false else {
+            return
+        }
         let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
         if let initialVC = storyboard.instantiateInitialViewController(){
             UIViewController.currentViewController()?.present(initialVC, animated: true, completion: nil)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RequestsViewController: BaseViewController {
+class RequestsViewController: WHBaseViewController {
     
     @IBOutlet weak var collectionView: WHCollectionView!
     var filteredRequests: [RequestModel] = []

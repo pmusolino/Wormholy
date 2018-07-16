@@ -13,7 +13,7 @@
         <!--Navigation Controller-->
         <scene sceneID="cC1-jy-BNy">
             <objects>
-                <navigationController storyboardIdentifier="WormholyNavigationController" id="XiN-zk-JTq" customClass="NavigationController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WormholyNavigationController" id="XiN-zk-JTq" customClass="WHNavigationController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nvE-2v-Siz">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
