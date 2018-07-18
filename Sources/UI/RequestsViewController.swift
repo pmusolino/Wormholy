@@ -22,7 +22,6 @@ class RequestsViewController: WHBaseViewController {
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))]
         
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
-        (self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: collectionView.bounds.size.width, height: 76)
         
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
@@ -41,7 +40,7 @@ class RequestsViewController: WHBaseViewController {
             
         }) { (completionContext) in
             //Code here will execute after the rotation has finished.
-            (self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: self.collectionView.bounds.size.width, height: 76)
+            (self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 76)
             self.collectionView.reloadData()
         }
     }
@@ -109,9 +108,15 @@ extension RequestsViewController: UICollectionViewDataSource{
     }
 }
 
-extension RequestsViewController: UICollectionViewDelegate{
+extension RequestsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         openRequestDetailVC(request: filteredRequests[indexPath.item])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.size.width, height: 76)
     }
 }
 
