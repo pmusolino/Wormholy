@@ -117,29 +117,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fpK-qH-d5h" customClass="WHTextView" customModule="Wormholy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fpK-qH-d5h" customClass="WHTextView" customModule="Wormholy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50N-HR-LmK">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="RNb-pa-Z9b"/>
+                                    <barButtonItem style="plain" id="Dvu-s4-6n6">
+                                        <view key="customView" contentMode="scaleToFill" id="wDm-Tn-1Yd">
+                                            <rect key="frame" x="133" y="5.5" width="177" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 of 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxO-VX-XW4">
+                                                    <rect key="frame" x="8" y="6" width="161" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.51784205436706543" green="0.58159953355789185" blue="0.58617168664932251" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="VxO-VX-XW4" firstAttribute="leading" secondItem="wDm-Tn-1Yd" secondAttribute="leading" constant="8" id="1M4-or-p61"/>
+                                                <constraint firstAttribute="trailing" secondItem="VxO-VX-XW4" secondAttribute="trailing" constant="8" id="7tD-VQ-WrV"/>
+                                                <constraint firstItem="VxO-VX-XW4" firstAttribute="centerY" secondItem="wDm-Tn-1Yd" secondAttribute="centerY" id="tj5-2Q-HIO"/>
+                                            </constraints>
+                                        </view>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                    <barButtonItem title="&lt;" id="0uV-bv-w6Y">
+                                        <connections>
+                                            <action selector="previousStep:" destination="S40-LP-XSy" id="9vW-vP-iLe"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="&gt;" id="usk-ma-BJD">
+                                        <connections>
+                                            <action selector="nextStep:" destination="S40-LP-XSy" id="kud-2b-ETO"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="50N-HR-LmK" firstAttribute="bottom" secondItem="Y9P-Kk-3xC" secondAttribute="bottom" id="8iS-pr-kZD"/>
+                            <constraint firstItem="fpK-qH-d5h" firstAttribute="top" secondItem="Y9P-Kk-3xC" secondAttribute="top" id="G1r-th-Ci7"/>
                             <constraint firstItem="fpK-qH-d5h" firstAttribute="leading" secondItem="Y9P-Kk-3xC" secondAttribute="leading" id="LcP-XH-gTf"/>
-                            <constraint firstItem="Y9P-Kk-3xC" firstAttribute="bottom" secondItem="fpK-qH-d5h" secondAttribute="bottom" id="RLZ-Wr-Z9V"/>
+                            <constraint firstItem="50N-HR-LmK" firstAttribute="leading" secondItem="Y9P-Kk-3xC" secondAttribute="leading" id="NDW-xa-Ffi"/>
                             <constraint firstItem="Y9P-Kk-3xC" firstAttribute="trailing" secondItem="fpK-qH-d5h" secondAttribute="trailing" id="ey8-iu-S0g"/>
-                            <constraint firstItem="fpK-qH-d5h" firstAttribute="top" secondItem="Y9P-Kk-3xC" secondAttribute="top" id="jfn-FH-a4p"/>
+                            <constraint firstItem="50N-HR-LmK" firstAttribute="trailing" secondItem="Y9P-Kk-3xC" secondAttribute="trailing" id="ne9-h7-K6x"/>
+                            <constraint firstItem="50N-HR-LmK" firstAttribute="top" secondItem="fpK-qH-d5h" secondAttribute="bottom" id="rIu-y7-dC5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Y9P-Kk-3xC"/>
                     </view>
                     <connections>
+                        <outlet property="buttonNext" destination="usk-ma-BJD" id="WOF-OQ-9lC"/>
+                        <outlet property="buttonPrevious" destination="0uV-bv-w6Y" id="EV2-uG-w6x"/>
+                        <outlet property="constraintBottomViewInput" destination="8iS-pr-kZD" id="gPb-Ca-TPx"/>
+                        <outlet property="labelWordFinded" destination="VxO-VX-XW4" id="n8Q-3A-lhj"/>
                         <outlet property="textView" destination="fpK-qH-d5h" id="9qA-qk-Zwk"/>
+                        <outlet property="toolBar" destination="50N-HR-LmK" id="0YO-MP-cGV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BEJ-Hi-Vka" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1945" y="148"/>
+            <point key="canvasLocation" x="1944.8" y="147.97601199400302"/>
         </scene>
     </scenes>
 </document>

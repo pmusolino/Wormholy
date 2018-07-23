@@ -14,6 +14,8 @@ struct Colors {
     }
     
     struct UI{
+        static public let wordsInEvidence = UIColor(hexString: "#dadfe1")
+        static public let wordFocus = UIColor(hexString: "#f7ca18")
     }
     
     struct Gray{
