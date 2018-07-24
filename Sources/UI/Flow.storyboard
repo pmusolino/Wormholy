@@ -174,9 +174,9 @@
                         <viewLayoutGuide key="safeArea" id="Y9P-Kk-3xC"/>
                     </view>
                     <connections>
+                        <outlet property="bottomViewInputConstraint" destination="8iS-pr-kZD" id="lUv-Y9-u4H"/>
                         <outlet property="buttonNext" destination="usk-ma-BJD" id="WOF-OQ-9lC"/>
                         <outlet property="buttonPrevious" destination="0uV-bv-w6Y" id="EV2-uG-w6x"/>
-                        <outlet property="constraintBottomViewInput" destination="8iS-pr-kZD" id="gPb-Ca-TPx"/>
                         <outlet property="labelWordFinded" destination="VxO-VX-XW4" id="n8Q-3A-lhj"/>
                         <outlet property="textView" destination="fpK-qH-d5h" id="9qA-qk-Zwk"/>
                         <outlet property="toolBar" destination="50N-HR-LmK" id="0YO-MP-cGV"/>

@@ -9,7 +9,7 @@
 import UIKit
 
 class BodyDetailViewController: WHBaseViewController {
-    @IBOutlet weak var constraintBottomViewInput: NSLayoutConstraint!
+    @IBOutlet weak var bottomViewInputConstraint: NSLayoutConstraint!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var labelWordFinded: UILabel!
     @IBOutlet weak var textView: WHTextView!
@@ -111,7 +111,7 @@ class BodyDetailViewController: WHBaseViewController {
         }
     }
 
-    func setupSearch(text: String?) {
+    func performSearch(text: String?) {
         highlightedWords.removeAll()
         highlightedWords = textView.highlights(text: text, with: Colors.UI.wordsInEvidence)
 
@@ -158,7 +158,7 @@ class BodyDetailViewController: WHBaseViewController {
         let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
         let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
 
-        self.constraintBottomViewInput.constant = height
+        self.bottomViewInputConstraint.constant = height
 
         UIView.animate(withDuration: duration?.doubleValue ?? 0.0, delay: 0.0, options: UIViewAnimationOptions(rawValue: UIViewAnimationOptions.RawValue((curve?.intValue)!)), animations: {
             self.view.layoutIfNeeded()
@@ -180,7 +180,7 @@ class BodyDetailViewController: WHBaseViewController {
 extension BodyDetailViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.searchBar.text?.isEmpty == false {
-            setupSearch(text: searchController.searchBar.text)
+            performSearch(text: searchController.searchBar.text)
         }
         else {
             resetSearchText()
@@ -194,7 +194,7 @@ extension BodyDetailViewController: UISearchBarDelegate {
     }
 }
 
-fileprivate extension BodyDetailViewController {
+extension BodyDetailViewController {
     func resetSearchText() {
         let attributedString = NSMutableAttributedString(attributedString: self.textView.attributedText)
             attributedString.addAttribute(.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: self.textView.attributedText.length))
