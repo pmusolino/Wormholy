@@ -319,7 +319,6 @@
 		52D6D9871BEFF229002C0205 /* Wormholy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */; };
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
-		8A0667CC20FFB64900BF8CE1 /* UITextView_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0667CB20FFB64900BF8CE1 /* UITextView_Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -648,7 +647,6 @@
 		52D6D9861BEFF229002C0205 /* Wormholy-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wormholy-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8933C7841EB5B820000D00A4 /* Wormholy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wormholy.swift; sourceTree = "<group>"; };
 		8933C7891EB5B82A000D00A4 /* WormholyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholyTests.swift; sourceTree = "<group>"; };
-		8A0667CB20FFB64900BF8CE1 /* UITextView_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView_Extension.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* Wormholy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wormholy.plist; sourceTree = "<group>"; };
 		AD2FAA281CD0B6E100659CF4 /* WormholyTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WormholyTests.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1145,7 +1143,6 @@
 				455818C2207D61A100D2F954 /* Storage.swift */,
 				45C51A1620A1FDBC006933CE /* module.modulemap */,
 				45C51A1720A20B38006933CE /* Wormholy.h */,
-				8A0667CA20FFB62500BF8CE1 /* Extension */,
 				451C9E532080E592002A34BC /* UI */,
 				451C9E562080E5F0002A34BC /* Subclasses */,
 				455818CA207D647900D2F954 /* Objc */,
@@ -1163,14 +1160,6 @@
 			);
 			name = Tests;
 			path = Tests/WormholyTests;
-			sourceTree = "<group>";
-		};
-		8A0667CA20FFB62500BF8CE1 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				8A0667CB20FFB64900BF8CE1 /* UITextView_Extension.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 		DD7502721C68FC1B006590AF /* Frameworks */ = {
@@ -1614,7 +1603,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4582B00E20AAE6DF0016FCBC /* Theme.swift in Sources */,
-				8A0667CC20FFB64900BF8CE1 /* UITextView_Extension.swift in Sources */,
 				4582B00F20AAE6DF0016FCBC /* Highlightr.swift in Sources */,
 				455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */,
 				45C4F4F020860DC0007D0D17 /* TextTableViewCell.swift in Sources */,
