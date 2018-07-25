@@ -16,6 +16,7 @@ class RequestModel: Codable {
     let headers: [String: String]?
     var httpBody: Data?
     var code: Int
+    var responseHeaders: [String: String]?
     var dataResponse: Data?
     var errorClientDescription: String?
     var duration: Double?
@@ -33,6 +34,7 @@ class RequestModel: Codable {
     func initResponse(response: URLResponse) {
         guard let responseHttp = response as? HTTPURLResponse else {return}
         code = responseHttp.statusCode
+        responseHeaders = responseHttp.allHeaderFields as? [String: String]
     }
     
 }
