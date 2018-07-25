@@ -14,7 +14,7 @@ class RequestDetailViewController: WHBaseViewController {
     
     var request: RequestModel?
     var sections: [Section] = [
-        Section(name: "Request", type: .overview),
+        Section(name: "Overview", type: .overview),
         Section(name: "Request Header", type: .requestHeader),
         Section(name: "Request Body", type: .requestBody),
         Section(name: "Response Header", type: .responseHeader),
