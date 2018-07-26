@@ -20,7 +20,8 @@ struct Section {
 
 enum SectionType {
     case overview
-    case header
+    case requestHeader
     case requestBody
+    case responseHeader
     case responseBody
 }

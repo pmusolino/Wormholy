@@ -23,13 +23,13 @@ class RequestModelBeautifier: NSObject {
         return final
     }
     
-    static func header(request: RequestModel) -> NSMutableAttributedString{
-        guard request.headers != nil else {
+    static func header(_ headers: [String: String]?) -> NSMutableAttributedString{
+        guard let headerDictionary = headers else {
             return NSMutableAttributedString(string: "-")
         }
         let final = NSMutableAttributedString()
-        for key in request.headers!.keys {
-            final.append(NSMutableAttributedString().bold(key).normal(" " + (request.headers![key] ?? "-") + "\n"))
+        for (key, value) in headerDictionary {
+            final.append(NSMutableAttributedString().bold(key).normal(" " + value + "\n"))
         }
         return final
     }

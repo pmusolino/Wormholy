@@ -15,8 +15,9 @@ class RequestDetailViewController: WHBaseViewController {
     var request: RequestModel?
     var sections: [Section] = [
         Section(name: "Overview", type: .overview),
-        Section(name: "Header", type: .header),
+        Section(name: "Request Header", type: .requestHeader),
         Section(name: "Request Body", type: .requestBody),
+        Section(name: "Response Header", type: .responseHeader),
         Section(name: "Response Body", type: .responseBody)
     ]
     
@@ -81,13 +82,17 @@ extension RequestDetailViewController: UITableViewDataSource{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
                 cell.textView.attributedText = RequestModelBeautifier.overview(request: req)
                 return cell
-            case .header:
+            case .requestHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.header(request: req)
+                cell.textView.attributedText = RequestModelBeautifier.header(req.headers)
                 return cell
             case .requestBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
                 cell.labelAction?.text = "View body"
+                return cell
+            case .responseHeader:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
+                cell.textView.attributedText = RequestModelBeautifier.header(req.responseHeaders)
                 return cell
             case .responseBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
