@@ -91,6 +91,6 @@ public class Wormholy: NSObject
             }
         }
         
-        return false
+        return true
     }()
 }
