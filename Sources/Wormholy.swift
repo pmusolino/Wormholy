@@ -74,7 +74,7 @@ public class Wormholy: NSObject
         }
     }
     
-    public static var shakeEnabled: Bool = {
+    @objc public static var shakeEnabled: Bool = {
         let key = "WORMHOLY_SHAKE_ENABLED"
         
         if let environmentVariable = ProcessInfo.processInfo.environment[key] {
