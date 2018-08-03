@@ -6,7 +6,11 @@
 //  Copyright © 2018 Wormholy. All rights reserved.
 //
 
+#if __has_include(<Wormholy/Wormholy-Swift.h>)
 #import <Wormholy/Wormholy-Swift.h>
+#else
+#import "Wormholy-Swift.h"
+#endif
 
 @implementation Wormholy (private)
 + (void)load { [self swiftyLoad];}
