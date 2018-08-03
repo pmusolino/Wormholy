@@ -27,4 +27,8 @@ class Storage: NSObject {
             requests.insert(request!, at: 0)
         }
     }
+
+    func clearRequests() {
+        requests = []
+    }
 }

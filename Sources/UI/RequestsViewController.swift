@@ -20,7 +20,8 @@ class RequestsViewController: WHBaseViewController {
         addSearchController()
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))]
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearRequests))
+
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
         
         filteredRequests = Storage.shared.requests
@@ -75,6 +76,12 @@ class RequestsViewController: WHBaseViewController {
         return Storage.shared.requests.filter { (request) -> Bool in
             return request.url.range(of: text!, options: .caseInsensitive) != nil ? true : false
         }
+    }
+
+    @objc private func clearRequests() {
+        Storage.shared.clearRequests()
+        filteredRequests = Storage.shared.requests
+        collectionView.reloadData()
     }
     
     // MARK: - Navigation
