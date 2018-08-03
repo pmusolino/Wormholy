@@ -94,7 +94,7 @@ class CodeAttributedString : NSTextStorage
      
      - returns: Attributes
      */
-    override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedStringKey : Any]
+    override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedString.Key : Any]
     {
         return stringStorage.attributes(at: location, effectiveRange: range)
     }
@@ -108,7 +108,7 @@ class CodeAttributedString : NSTextStorage
     override func replaceCharacters(in range: NSRange, with str: String)
     {
         stringStorage.replaceCharacters(in: range, with: str)
-        self.edited(NSTextStorageEditActions.editedCharacters, range: range, changeInLength: (str as NSString).length - range.length)
+        self.edited(NSTextStorage.EditActions.editedCharacters, range: range, changeInLength: (str as NSString).length - range.length)
     }
     
     /**
@@ -117,10 +117,10 @@ class CodeAttributedString : NSTextStorage
      - parameter attrs: [String : AnyObject]
      - parameter range: NSRange
      */
-    override func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange)
+    override func setAttributes(_ attrs: [NSAttributedString.Key : Any]?, range: NSRange)
     {
         stringStorage.setAttributes(attrs, range: range)
-        self.edited(NSTextStorageEditActions.editedAttributes, range: range, changeInLength: 0)
+        self.edited(NSTextStorage.EditActions.editedAttributes, range: range, changeInLength: 0)
     }
     
     /// Called internally everytime the string is modified.
@@ -181,7 +181,7 @@ class CodeAttributedString : NSTextStorage
                     self.stringStorage.setAttributes(attrs, range: fixedRange)
                 })
                 self.endEditing()
-                self.edited(NSTextStorageEditActions.editedAttributes, range: range, changeInLength: 0)
+                self.edited(NSTextStorage.EditActions.editedAttributes, range: range, changeInLength: 0)
                 self.highlightDelegate?.didHighlight?(range, success: true)
             })
             
