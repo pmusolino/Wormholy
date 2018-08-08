@@ -10,13 +10,13 @@
   
   **What you can do:**
   
-  - [x] No code, no import.
-  - [x] Record all the app traffic that use NSURLSession.
-  - [x] Reveal the content of all requests, responses, and headers shaking your phone!
+  - [x] No code to write and no imports.
+  - [x] Record all app traffic that uses `NSURLSession`.
+  - [x] Reveal the content of all requests, responses, and headers simply by shaking your phone!
   - [x] No headaches with SSL certificates on HTTPS calls.
-  - [x] Search and delete bugs quickly.
-  - [x] Swift & Objective-C compatibility
-  - [x] Works also with external libraries like Alamofire & AFNetworking.
+  - [x] Find, isolate and fix bugs quickly.
+  - [x] Swift & Objective-C compatibility.
+  - [x] Also works with external libraries like `Alamofire` & `AFNetworking`.
   
   <p align="center">
   <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
@@ -33,7 +33,7 @@
 ----------------
 Add it to your project, and that's all! **Shake your device** or your simulator and Wormholy will appear! You don't need to import the library into your code, it works magically!
 
-I suggest you install it only in debug mode. The easy way is via cocoapods:
+I suggest you install it only in debug mode. The easiest way is with CocoaPods:
 
 ```
 pod 'Wormholy', :configurations => ['Debug']
@@ -53,7 +53,7 @@ You can also programmatically enable/disable the shake gesture at any time. You 
 ## Carthage
 ----------------
 
-Another way to install Wormholy is [Carthage](https://github.com/Carthage/Carthage).
+You can also install Wormholy using [Carthage](https://github.com/Carthage/Carthage).
 
 To integrate Wormholy into your Xcode project using Carthage, specify it in your `Cartfile`:
 
