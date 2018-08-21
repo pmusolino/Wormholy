@@ -11,6 +11,8 @@ import UIKit
 
 public class Wormholy: NSObject
 {
+    @objc public static let shakeEnabledKey = "WORMHOLY_SHAKE_ENABLED"
+
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()
@@ -75,14 +77,15 @@ public class Wormholy: NSObject
     }
     
     @objc public static var shakeEnabled: Bool = {
-        let key = "WORMHOLY_SHAKE_ENABLED"
+        let environmentVariable: String = ProcessInfo.processInfo.environment[Wormholy.shakeEnabledKey] ?? "YES"
+        let userDefaultVariable: Bool = UserDefaults.standard.object(forKey: Wormholy.shakeEnabledKey) as? Bool ?? true
         
-        if let environmentVariable = ProcessInfo.processInfo.environment[key] {
-            return environmentVariable != "NO"
+        if environmentVariable == "NO" || userDefaultVariable == false {
+            return false
         }
         
         let arguments = UserDefaults.standard.volatileDomain(forName: UserDefaults.argumentDomain)
-        if let arg = arguments[key] {
+        if let arg = arguments[Wormholy.shakeEnabledKey] {
             switch arg {
             case let boolean as Bool: return boolean
             case let string as NSString: return string.boolValue
