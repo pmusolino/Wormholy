@@ -29,8 +29,8 @@ class BodyDetailViewController: WHBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(BodyDetailViewController.handleKeyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(BodyDetailViewController.handleKeyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BodyDetailViewController.handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(BodyDetailViewController.handleKeyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearch))
@@ -145,7 +145,7 @@ class BodyDetailViewController: WHBaseViewController {
     // MARK: - Keyboard
 
     @objc func handleKeyboardWillShow(_ sender: NSNotification) {
-        guard let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else { return }
+        guard let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size else { return }
 
         animationInputView(with: -keyboardSize.height, notification: sender)
     }
@@ -155,12 +155,12 @@ class BodyDetailViewController: WHBaseViewController {
     }
 
     func animationInputView(with height: CGFloat, notification: NSNotification) {
-        let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
-        let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
+        let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
 
         self.bottomViewInputConstraint.constant = height
 
-        UIView.animate(withDuration: duration?.doubleValue ?? 0.0, delay: 0.0, options: UIViewAnimationOptions(rawValue: UIViewAnimationOptions.RawValue((curve?.intValue)!)), animations: {
+        UIView.animate(withDuration: duration?.doubleValue ?? 0.0, delay: 0.0, options: UIView.AnimationOptions(rawValue: UIView.AnimationOptions.RawValue((curve?.intValue)!)), animations: {
             self.view.layoutIfNeeded()
         })
     }

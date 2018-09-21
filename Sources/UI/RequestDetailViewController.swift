@@ -29,7 +29,7 @@ class RequestDetailViewController: WHBaseViewController {
         }
         
         tableView.estimatedRowHeight = 100.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "TextTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "TextTableViewCell")
         tableView.register(UINib(nibName: "ActionableTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "ActionableTableViewCell")
         tableView.register(UINib(nibName: "RequestTitleSectionView", bundle:WHBundle.getBundle()), forHeaderFooterViewReuseIdentifier: "RequestTitleSectionView")

@@ -25,12 +25,12 @@ class WHBaseViewController: UIViewController {
         //LoaderView with view size, with indicator placed on center of loaderView
         let loaderView = UIView(frame: view.bounds)
         loaderView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-        let indicator: UIActivityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
         indicator.center = loaderView.center
         loaderView.addSubview(indicator)
         view.addSubview(loaderView)
         indicator.startAnimating()
-        loaderView.bringSubview(toFront: view)
+        loaderView.bringSubviewToFront(view)
         return loaderView
     }
     
@@ -58,14 +58,14 @@ extension UIViewController{
             }
         } else if let viewController = viewController.presentedViewController {
             return viewController
-        } else if viewController.childViewControllers.count > 0 {
-            return viewController.childViewControllers[0]
+        } else if viewController.children.count > 0 {
+            return viewController.children[0]
         } else {
             return viewController
         }
     }
     
-    open override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    open override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         //Shake shake
         if motion == .motionShake && Wormholy.shakeEnabled {
             NotificationCenter.default.post(name: fireWormholy, object: nil)
