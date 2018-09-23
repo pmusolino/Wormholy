@@ -54,14 +54,14 @@ class RequestModelBeautifier: NSObject {
 
 extension NSMutableAttributedString {
     @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
-        let attrs: [NSAttributedStringKey: Any] = [.font: UIFont.boldSystemFont(ofSize: 15)]
+        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 15)]
         let boldString = NSMutableAttributedString(string:text, attributes: attrs)
         append(boldString)
         return self
     }
     
     @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
-        let attrs: [NSAttributedStringKey: Any] = [.font: UIFont.systemFont(ofSize: 14)]
+        let attrs: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14)]
         let normal = NSMutableAttributedString(string:text, attributes: attrs)
         append(normal)
         return self
