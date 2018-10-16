@@ -36,19 +36,40 @@ class RequestModelBeautifier: NSObject {
     
     static func body(_ body: Data?, splitLength: Int? = nil, completion: @escaping (String) -> Void){
         DispatchQueue.global().async {
-            guard body != nil else {
-                completion("-")
-                return
-            }
-            
-            if let data = splitLength != nil ? String(data: body!, encoding: .utf8)?.characters(n: splitLength!) : String(data: body!, encoding: .utf8){
-                        completion(data)
-                        return
-                }
-            
-            completion("-")
+            completion(RequestModelBeautifier.body(body, splitLength: splitLength))
             return
         }
+    }
+    
+    static func body(_ body: Data?, splitLength: Int? = nil) -> String{
+        guard body != nil else {
+            return "-"
+        }
+        
+        if let data = splitLength != nil ? String(data: body!, encoding: .utf8)?.characters(n: splitLength!) : String(data: body!, encoding: .utf8){
+            return data
+        }
+        
+        return "-"
+    }
+    
+    static func txtExport(request: RequestModel) -> String{
+        
+        var txt: String = ""
+        txt.append("*** Overview *** \n")
+        txt.append(RequestModelBeautifier.overview(request: request).string + "\n\n")
+        txt.append("*** Request Header *** \n")
+        txt.append(RequestModelBeautifier.header(request.headers).string + "\n\n")
+        txt.append("*** Request Body *** \n")
+        txt.append(RequestModelBeautifier.body(request.httpBody) + "\n\n")
+        txt.append("*** Response Header *** \n")
+        txt.append(RequestModelBeautifier.header(request.responseHeaders).string + "\n\n")
+        txt.append("*** Response Body *** \n")
+        txt.append(RequestModelBeautifier.body(request.dataResponse) + "\n\n")
+        txt.append("------------------------------------------------------------------------\n")
+        txt.append("------------------------------------------------------------------------\n")
+        txt.append("------------------------------------------------------------------------\n\n\n\n")
+        return txt
     }
 }
 
