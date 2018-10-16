@@ -8,11 +8,11 @@
 
 import Foundation
 
-class Storage: NSObject {
+open class Storage: NSObject {
 
-    static let shared: Storage = Storage()
+    public static let shared: Storage = Storage()
     
-    var requests: [RequestModel] = []
+    open var requests: [RequestModel] = []
     
     func saveRequest(request: RequestModel?){
         guard request != nil else {
@@ -26,6 +26,7 @@ class Storage: NSObject {
         }else{
             requests.insert(request!, at: 0)
         }
+        NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
 
     func clearRequests() {

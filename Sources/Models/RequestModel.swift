@@ -8,18 +8,18 @@
 import Foundation
 import UIKit
 
-class RequestModel: Codable {
-    let id: String
-    let url: String
-    let date: Date
-    let method: String
-    let headers: [String: String]?
-    var httpBody: Data?
-    var code: Int
-    var responseHeaders: [String: String]?
-    var dataResponse: Data?
-    var errorClientDescription: String?
-    var duration: Double?
+open class RequestModel: Codable {
+    public let id: String
+    public let url: String
+    public let date: Date
+    public let method: String
+    public let headers: [String: String]?
+    open var httpBody: Data?
+    open var code: Int
+    open var responseHeaders: [String: String]?
+    open var dataResponse: Data?
+    open var errorClientDescription: String?
+    open var duration: Double?
     
     init(request: NSURLRequest) {
         id = UUID().uuidString
