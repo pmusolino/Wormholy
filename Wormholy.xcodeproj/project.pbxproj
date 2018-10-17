@@ -29,6 +29,8 @@
 		451C9E6920810B98002A34BC /* WHCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E6820810B98002A34BC /* WHCollectionView.swift */; };
 		451C9E6B20810BBD002A34BC /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E6A20810BBD002A34BC /* RequestsViewController.swift */; };
 		452CC1322175FDB200CB5E21 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CC1312175FDB200CB5E21 /* CustomActivity.swift */; };
+		452CC13421773BF600CB5E21 /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CC13321773BF600CB5E21 /* FileHandler.swift */; };
+		452CC13621773DE500CB5E21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452CC13521773DE500CB5E21 /* Assets.xcassets */; };
 		453A167720ED1B02001CEB9D /* WHString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453A167620ED1B02001CEB9D /* WHString.swift */; };
 		454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */; };
 		455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */; };
@@ -356,6 +358,8 @@
 		451C9E6820810B98002A34BC /* WHCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHCollectionView.swift; sourceTree = "<group>"; };
 		451C9E6A20810BBD002A34BC /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
 		452CC1312175FDB200CB5E21 /* CustomActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
+		452CC13321773BF600CB5E21 /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
+		452CC13521773DE500CB5E21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		453A167620ED1B02001CEB9D /* WHString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHString.swift; sourceTree = "<group>"; };
 		454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModelBeautifier.swift; sourceTree = "<group>"; };
 		455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHTTPProtocol.swift; sourceTree = "<group>"; };
@@ -749,6 +753,7 @@
 			children = (
 				451C9E5D2080EFF5002A34BC /* Config.swift */,
 				45820CF5208170F400CA74D6 /* Colors.swift */,
+				452CC13521773DE500CB5E21 /* Assets.xcassets */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -770,6 +775,7 @@
 			isa = PBXGroup;
 			children = (
 				454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */,
+				452CC13321773BF600CB5E21 /* FileHandler.swift */,
 				4582B00820AAE6270016FCBC /* Highlightr */,
 			);
 			path = Utils;
@@ -1358,6 +1364,7 @@
 				4582B1E020AAE71A0016FCBC /* solarized-dark.min.css in Resources */,
 				4582B13220AAE7120016FCBC /* ldif.min.js in Resources */,
 				4582B11120AAE7120016FCBC /* brainfuck.min.js in Resources */,
+				452CC13621773DE500CB5E21 /* Assets.xcassets in Resources */,
 				4582B20220AAE71A0016FCBC /* default.min.css in Resources */,
 				4582B0EA20AAE7120016FCBC /* lasso.min.js in Resources */,
 				4582B14220AAE7120016FCBC /* avrasm.min.js in Resources */,
@@ -1623,6 +1630,7 @@
 				455818C9207D621200D2F954 /* RequestModel.swift in Sources */,
 				45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */,
 				451C9E602080F653002A34BC /* WHBundle.swift in Sources */,
+				452CC13421773BF600CB5E21 /* FileHandler.swift in Sources */,
 				451C9E5E2080EFF5002A34BC /* Config.swift in Sources */,
 				4582B00D20AAE6DF0016FCBC /* HTMLUtils.swift in Sources */,
 				45820CF6208170F400CA74D6 /* Colors.swift in Sources */,

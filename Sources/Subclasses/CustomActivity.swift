@@ -19,7 +19,6 @@ class CustomActivity: UIActivity {
     override var activityType: UIActivity.ActivityType? {
         return UIActivity.ActivityType(rawValue: "com.Wormholy.Wormholy-iOS")
     }
-    
     override class var activityCategory: UIActivity.Category {
         return .action
     }
