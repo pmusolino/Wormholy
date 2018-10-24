@@ -57,7 +57,7 @@ extension UIViewController{
                 return currentViewController(viewController.selectedViewController)
             }
         } else if let viewController = viewController.presentedViewController {
-            return viewController
+            return currentViewController(viewController)
         } else if viewController.children.count > 0 {
             return viewController.children[0]
         } else {
