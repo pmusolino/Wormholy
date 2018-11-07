@@ -47,7 +47,7 @@ class BodyDetailViewController: WHBaseViewController {
         let hud = showLoader(view: view)
         RequestModelBeautifier.body(data) { [weak self] (stringData) in
             DispatchQueue.main.sync {
-                guard let context = JSContext(), let filePath = Bundle(for: self!.classForCoder).path(forResource: "json_parse", ofType: "js"),
+                guard let context = JSContext(), let filePath = Bundle(for: BodyDetailViewController.self).path(forResource: "json_parse", ofType: "js"),
                     let js = try? String(contentsOf: URL(fileURLWithPath: filePath), encoding: String.Encoding.utf8) else {
                         return
                 }
