@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JavaScriptCore
 
 class BodyDetailViewController: WHBaseViewController {
     @IBOutlet weak var bottomViewInputConstraint: NSLayoutConstraint!
@@ -46,7 +47,21 @@ class BodyDetailViewController: WHBaseViewController {
         let hud = showLoader(view: view)
         RequestModelBeautifier.body(data) { [weak self] (stringData) in
             DispatchQueue.main.sync {
-                self?.textView.text = stringData
+                guard let context = JSContext(), let filePath = Bundle(for: self!.classForCoder).path(forResource: "json_parse", ofType: "js"),
+                    let js = try? String(contentsOf: URL(fileURLWithPath: filePath), encoding: String.Encoding.utf8) else {
+                        return
+                }
+                
+                context.evaluateScript(js, withSourceURL: URL(fileURLWithPath: filePath))
+                guard let parseJsonFunc = context.objectForKeyedSubscript("parseJson"),
+                let parseJsonValue = parseJsonFunc.call(withArguments: Array(arrayLiteral: stringData)),
+                let renderJsonFunc = context.objectForKeyedSubscript("renderJson"),
+                let renderJsonValue = renderJsonFunc.call(withArguments: Array(arrayLiteral: parseJsonValue.toObject())),
+                let renderJson = renderJsonValue.toString() else {
+                    return
+                }
+                
+                self?.textView.text = renderJson
                 self?.hideLoader(loaderView: hud)
             }
         }

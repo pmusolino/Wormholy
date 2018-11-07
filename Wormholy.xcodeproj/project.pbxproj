@@ -322,6 +322,7 @@
 		52D6D9871BEFF229002C0205 /* Wormholy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */; };
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
+		FF1E038B21929387004DCBF5 /* json_parse.js in Resources */ = {isa = PBXBuildFile; fileRef = FF1E038A21929387004DCBF5 /* json_parse.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -655,6 +656,7 @@
 		8933C7891EB5B82A000D00A4 /* WormholyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholyTests.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* Wormholy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wormholy.plist; sourceTree = "<group>"; };
 		AD2FAA281CD0B6E100659CF4 /* WormholyTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WormholyTests.plist; sourceTree = "<group>"; };
+		FF1E038A21929387004DCBF5 /* json_parse.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = json_parse.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -724,6 +726,7 @@
 				451C9E6A20810BBD002A34BC /* RequestsViewController.swift */,
 				45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */,
 				45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */,
+				FF1E038A21929387004DCBF5 /* json_parse.js */,
 				45FF5C4820875ED90084BD50 /* Sections */,
 				451C9E612081045E002A34BC /* Cells */,
 			);
@@ -1269,13 +1272,15 @@
 				TargetAttributes = {
 					45087188207E59FE00EE2D31 = {
 						CreatedOnToolsVersion = 9.3;
+						DevelopmentTeam = M5FRG9ANZ2;
 						LastSwiftMigration = 1000;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					52D6D97B1BEFF229002C0205 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = M5FRG9ANZ2;
 						LastSwiftMigration = 1000;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					52D6D9851BEFF229002C0205 = {
 						CreatedOnToolsVersion = 7.1;
@@ -1473,6 +1478,7 @@
 				4582B0F820AAE7120016FCBC /* tex.min.js in Resources */,
 				4582B21720AAE71A0016FCBC /* sunburst.min.css in Resources */,
 				4582B13A20AAE7120016FCBC /* vbscript-html.min.js in Resources */,
+				FF1E038B21929387004DCBF5 /* json_parse.js in Resources */,
 				4582B0EC20AAE7120016FCBC /* makefile.min.js in Resources */,
 				4582B12920AAE7120016FCBC /* nimrod.min.js in Resources */,
 				4582B13320AAE7120016FCBC /* fix.min.js in Resources */,
@@ -1700,8 +1706,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M5FRG9ANZ2;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = WormholyDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1727,8 +1733,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M5FRG9ANZ2;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = WormholyDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1862,9 +1868,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M5FRG9ANZ2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1901,9 +1907,9 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M5FRG9ANZ2;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
