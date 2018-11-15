@@ -74,6 +74,11 @@ public class Wormholy: NSObject
         }
     }
     
+    @objc public static var wormholyFlow: UIViewController? {
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        return storyboard.instantiateInitialViewController()
+    }
+    
     @objc public static var shakeEnabled: Bool = {
         let key = "WORMHOLY_SHAKE_ENABLED"
         
