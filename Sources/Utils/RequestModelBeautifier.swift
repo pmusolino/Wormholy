@@ -88,3 +88,34 @@ extension NSMutableAttributedString {
         return self
     }
 }
+
+extension Dictionary {
+    var prettyPrintedJSON: String? {
+        do {
+            let data: Data = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+            return String(data: data, encoding: .utf8)
+        } catch _ {
+            return nil
+        }
+    }
+}
+
+extension String {
+    var prettyPrintedJSON: String? {
+        guard let data = self.data(using: .utf8) else { return nil }
+        
+        let formattedJSON: String
+        
+        if let jsonObject = try? JSONSerialization.jsonObject(with: data, options : .allowFragments), let jsonDic = jsonObject as? Dictionary<String,Any> {
+            formattedJSON = jsonDic.prettyPrintedJSON ?? self
+        } else if let jsonObject = try? JSONSerialization.jsonObject(with: data, options : .allowFragments), let jsonArray = jsonObject as? [Dictionary<String,Any>] {
+            formattedJSON = jsonArray.reduce("[\n", { (previous, current) in
+                previous + (current.prettyPrintedJSON ?? "")
+            }).appending("\n]")
+        } else {
+            formattedJSON = self
+        }
+        
+        return formattedJSON
+    }
+}
