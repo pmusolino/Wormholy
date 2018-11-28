@@ -74,7 +74,7 @@ class RequestsViewController: WHBaseViewController {
             return Storage.shared.requests
         }
         
-        return Storage.shared.requests.filter { [weak self] (request) -> Bool in
+        return Storage.shared.requests.filter { (request) -> Bool in
             return request.url.range(of: text!, options: .caseInsensitive) != nil ? true : false
         }
     }
