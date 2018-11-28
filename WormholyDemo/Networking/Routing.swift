@@ -32,8 +32,7 @@ enum Routing{
         
         let url:URL = URL(string: API_BASE_URL)!
         
-        var urlRequest = URLRequest(url: URL(string: "https://www.todorock.com/wp-json/wp/v2/posts")!)
-//        var urlRequest = URLRequest(url: url.appendingPathComponent(touple.path))
+        var urlRequest = URLRequest(url: url.appendingPathComponent(touple.path))
         urlRequest.httpBody = Routing.createDataFromJSONDictionary(dataToSend: touple.parameters)
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
