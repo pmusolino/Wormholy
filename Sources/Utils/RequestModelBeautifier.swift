@@ -47,7 +47,7 @@ class RequestModelBeautifier: NSObject {
         }
         
         if let data = splitLength != nil ? String(data: body!, encoding: .utf8)?.characters(n: splitLength!) : String(data: body!, encoding: .utf8){
-            return data
+            return data.prettyPrintedJSON ?? data
         }
         
         return "-"

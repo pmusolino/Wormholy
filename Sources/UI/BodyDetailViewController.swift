@@ -45,7 +45,7 @@ class BodyDetailViewController: WHBaseViewController {
         super.viewWillAppear(animated)
         let hud = showLoader(view: view)
         RequestModelBeautifier.body(data) { [weak self] (stringData) in
-            let formattedJSON = stringData.prettyPrintedJSON ?? stringData
+            let formattedJSON = stringData
             DispatchQueue.main.sync {
                 self?.textView.text = formattedJSON
                 self?.hideLoader(loaderView: hud)
