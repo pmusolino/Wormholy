@@ -26,7 +26,7 @@ class RequestsViewController: WHBaseViewController {
         
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
-            DispatchQueue.main.sync {
+            DispatchQueue.main.sync { [weak self] in
                 self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text) ?? []
                 self?.collectionView.reloadData()
             }
