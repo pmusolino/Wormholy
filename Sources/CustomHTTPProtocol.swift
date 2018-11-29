@@ -70,6 +70,11 @@ public class CustomHTTPProtocol: URLProtocol {
         }
     }
     
+    deinit {
+        session = nil
+        sessionTask = nil
+        currentRequest = nil
+    }
 }
 
 extension CustomHTTPProtocol: URLSessionDataDelegate {
