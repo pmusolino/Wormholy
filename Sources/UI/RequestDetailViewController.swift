@@ -28,8 +28,11 @@ class RequestDetailViewController: WHBaseViewController {
             title = URL(string: urlString)?.path
         }
         
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent))
+        navigationItem.rightBarButtonItems = [shareButton]
+        
         tableView.estimatedRowHeight = 100.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "TextTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "TextTableViewCell")
         tableView.register(UINib(nibName: "ActionableTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "ActionableTableViewCell")
         tableView.register(UINib(nibName: "RequestTitleSectionView", bundle:WHBundle.getBundle()), forHeaderFooterViewReuseIdentifier: "RequestTitleSectionView")
@@ -39,6 +42,21 @@ class RequestDetailViewController: WHBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
+    @objc func shareContent(){
+        if let request = request{
+            let textShare = [RequestModelBeautifier.txtExport(request: request)]
+            let customItem = CustomActivity(title: "Save to the desktop", image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
+                guard let sharedStrings = sharedItems as? [String] else { return }
+                
+                for string in sharedStrings {
+                    FileHandler.writeTxtFileOnDesktop(text: string, fileName: "\(Int(Date().timeIntervalSince1970))-wormholy.txt")
+                }
+            }
+            let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
     
     // MARK: - Navigation
     func openBodyDetailVC(title: String?, body: Data?){

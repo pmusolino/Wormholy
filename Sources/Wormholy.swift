@@ -76,6 +76,11 @@ public class Wormholy: NSObject
         }
     }
     
+    @objc public static var wormholyFlow: UIViewController? {
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        return storyboard.instantiateInitialViewController()
+    }
+    
     @objc public static var shakeEnabled: Bool = {
         let environmentVariable: String = ProcessInfo.processInfo.environment[Wormholy.shakeEnabledKey] ?? "YES"
         let userDefaultVariable: Bool = UserDefaults.standard.object(forKey: Wormholy.shakeEnabledKey) as? Bool ?? true
