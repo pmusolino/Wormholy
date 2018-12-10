@@ -8,11 +8,11 @@
 
 import Foundation
 
-class Storage: NSObject {
+open class Storage: NSObject {
 
-    static let shared: Storage = Storage()
+    public static let shared: Storage = Storage()
     
-    var requests: [RequestModel] = []
+    open var requests: [RequestModel] = []
     
     func saveRequest(request: RequestModel?){
         guard request != nil else {
@@ -22,13 +22,14 @@ class Storage: NSObject {
         if let index = requests.index(where: { (req) -> Bool in
             return request?.id == req.id ? true : false
         }){
-            self.requests[index] = request!
+            requests[index] = request!
         }else{
             requests.insert(request!, at: 0)
         }
+        NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
 
     func clearRequests() {
-        requests = []
+        requests.removeAll()
     }
 }

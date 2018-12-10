@@ -54,10 +54,10 @@ class WHLabel: UILabel {
     override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect
     {
         var insets = self.textInsets
-        let insetRect = UIEdgeInsetsInsetRect(bounds, insets)
+        let insetRect = bounds.inset(by: insets)
         let textRect = super.textRect(forBounds: insetRect, limitedToNumberOfLines: numberOfLines)
         insets = UIEdgeInsets(top: -insets.top, left: -insets.left, bottom: -insets.bottom, right: -insets.right)
-        return UIEdgeInsetsInsetRect(textRect, insets)
+        return textRect.inset(by: insets)
     }
     
     func appendIconToLabel(imageName: String, labelText: String?, bounds_x: Double, bounds_y: Double, boundsWidth: Double, boundsHeight: Double) {
@@ -73,7 +73,7 @@ class WHLabel: UILabel {
     }
     
     override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, self.textInsets))
+        super.drawText(in: rect.inset(by: self.textInsets))
     }
 
 }
