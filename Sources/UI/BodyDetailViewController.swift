@@ -46,14 +46,12 @@ class BodyDetailViewController: WHBaseViewController {
         super.viewWillAppear(animated)
         let hud = showLoader(view: view)
         RequestModelBeautifier.body(data) { [weak self] (stringData) in
-            let formattedJSON = stringData
             DispatchQueue.main.sync {
                 guard let context = JSContext(),
                     let bundleURL = Bundle(for: BodyDetailViewController.self).resourceURL?.appendingPathComponent("Wormholy.bundle"),
                     let js = try? String(contentsOf: bundleURL.appendingPathComponent("json_parse.js"), encoding: String.Encoding.utf8) else {
                         return
                 }
-                
                 context.evaluateScript(js, withSourceURL: bundleURL.appendingPathComponent("json_parse.js"))
                 guard let parseJsonFunc = context.objectForKeyedSubscript("parseJson"),
                 let parseJsonValue = parseJsonFunc.call(withArguments: Array(arrayLiteral: stringData)),
