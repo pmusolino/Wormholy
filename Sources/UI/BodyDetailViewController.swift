@@ -46,6 +46,7 @@ class BodyDetailViewController: WHBaseViewController {
         super.viewWillAppear(animated)
         let hud = showLoader(view: view)
         RequestModelBeautifier.body(data) { [weak self] (stringData) in
+            let formattedJSON = stringData
             DispatchQueue.main.sync {
                 guard let context = JSContext(),
                     let bundleURL = Bundle(for: BodyDetailViewController.self).resourceURL?.appendingPathComponent("Wormholy.bundle"),

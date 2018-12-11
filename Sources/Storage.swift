@@ -22,7 +22,7 @@ open class Storage: NSObject {
         if let index = requests.index(where: { (req) -> Bool in
             return request?.id == req.id ? true : false
         }){
-            self.requests[index] = request!
+            requests[index] = request!
         }else{
             requests.insert(request!, at: 0)
         }
@@ -30,6 +30,6 @@ open class Storage: NSObject {
     }
 
     func clearRequests() {
-        requests = []
+        requests.removeAll()
     }
 }
