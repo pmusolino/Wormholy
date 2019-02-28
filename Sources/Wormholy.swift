@@ -103,8 +103,11 @@ public class Wormholy: NSObject
 extension Wormholy: SelfAware {
     
     static func awake() {
-        swiftyLoad()
-        swiftyInitialize()
+        initializeAction
     }
     
+    private static let initializeAction: Void = {
+        swiftyLoad()
+        swiftyInitialize()
+    }()
 }

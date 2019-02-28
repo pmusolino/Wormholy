@@ -19,7 +19,6 @@
 
 
 #import "NSURLSessionConfiguration+Wormholy.h"
-#import "Wormholy+Foo.h"
 #import "WormholyMethodSwizzling.h"
 
 

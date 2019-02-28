@@ -38,7 +38,6 @@
 		455818C9207D621200D2F954 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C8207D621200D2F954 /* RequestModel.swift */; };
 		455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */; };
 		455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */; };
-		455818D8207D64A900D2F954 /* Wormholy+Foo.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D2207D64A800D2F954 /* Wormholy+Foo.m */; };
 		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45820CF6208170F400CA74D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45820CF5208170F400CA74D6 /* Colors.swift */; };
@@ -51,7 +50,6 @@
 		45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4F220860FBC007D0D17 /* WHTextView.swift */; };
 		45C51A1820A20B38006933CE /* Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C51A1720A20B38006933CE /* Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */; };
-		45F51C1E20BC8DDB002CB534 /* Wormholy+Foo.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D1207D64A800D2F954 /* Wormholy+Foo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4920875EFA0084BD50 /* WHView.swift */; };
 		45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */; };
 		45FF5C4E20875F770084BD50 /* RequestTitleSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FF5C4D20875F770084BD50 /* RequestTitleSectionView.xib */; };
@@ -107,8 +105,6 @@
 		455818C8207D621200D2F954 /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormholyMethodSwizzling.m; sourceTree = "<group>"; };
 		455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+Wormholy.m"; sourceTree = "<group>"; };
-		455818D1207D64A800D2F954 /* Wormholy+Foo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Wormholy+Foo.h"; sourceTree = "<group>"; };
-		455818D2207D64A800D2F954 /* Wormholy+Foo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Wormholy+Foo.m"; sourceTree = "<group>"; };
 		455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+Wormholy.h"; sourceTree = "<group>"; };
 		455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormholyMethodSwizzling.h; sourceTree = "<group>"; };
 		45820CF5208170F400CA74D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -274,8 +270,6 @@
 			children = (
 				455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */,
 				455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */,
-				455818D1207D64A800D2F954 /* Wormholy+Foo.h */,
-				455818D2207D64A800D2F954 /* Wormholy+Foo.m */,
 				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
 				455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */,
 			);
@@ -372,7 +366,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45F51C1E20BC8DDB002CB534 /* Wormholy+Foo.h in Headers */,
 				45C51A1820A20B38006933CE /* Wormholy.h in Headers */,
 				455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */,
 				455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */,
@@ -562,7 +555,6 @@
 				455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */,
 				45FF5C54208794720084BD50 /* WHDate.swift in Sources */,
 				454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */,
-				455818D8207D64A900D2F954 /* Wormholy+Foo.m in Sources */,
 				451C9E65208106D1002A34BC /* WHLabel.swift in Sources */,
 				451C9E6720810B4C002A34BC /* RequestCell.swift in Sources */,
 			);
