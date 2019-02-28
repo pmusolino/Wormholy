@@ -60,6 +60,8 @@
 		52D6D9871BEFF229002C0205 /* Wormholy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */; };
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
+		93A86AB12228349F006E56FB /* SwiftyLoadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A86AB02228349F006E56FB /* SwiftyLoadHelper.swift */; };
+		93A86AB22228349F006E56FB /* SwiftyLoadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A86AB02228349F006E56FB /* SwiftyLoadHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +131,7 @@
 		52D6D9861BEFF229002C0205 /* Wormholy-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wormholy-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8933C7841EB5B820000D00A4 /* Wormholy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wormholy.swift; sourceTree = "<group>"; };
 		8933C7891EB5B82A000D00A4 /* WormholyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholyTests.swift; sourceTree = "<group>"; };
+		93A86AB02228349F006E56FB /* SwiftyLoadHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyLoadHelper.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* Wormholy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wormholy.plist; sourceTree = "<group>"; };
 		AD2FAA281CD0B6E100659CF4 /* WormholyTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WormholyTests.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -252,6 +255,7 @@
 			children = (
 				454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */,
 				452CC13321773BF600CB5E21 /* FileHandler.swift */,
+				93A86AB02228349F006E56FB /* SwiftyLoadHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -522,6 +526,7 @@
 				450871A5207E5C7700EE2D31 /* Config.swift in Sources */,
 				450871A4207E5C7700EE2D31 /* HTTPValidation.swift in Sources */,
 				4508719E207E5C5600EE2D31 /* Utils.swift in Sources */,
+				93A86AB22228349F006E56FB /* SwiftyLoadHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +539,7 @@
 				451C9E582080E607002A34BC /* WHNavigationController.swift in Sources */,
 				455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */,
 				8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */,
+				93A86AB12228349F006E56FB /* SwiftyLoadHelper.swift in Sources */,
 				455818C4207D61A100D2F954 /* Storage.swift in Sources */,
 				45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */,
 				45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */,

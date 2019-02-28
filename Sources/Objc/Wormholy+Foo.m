@@ -13,7 +13,7 @@
 #endif
 
 @implementation Wormholy (private)
-+ (void)load { [self swiftyLoad];}
-+ (void)initialize { [self swiftyInitialize]; }
+//+ (void)load { [self swiftyLoad];}
+//+ (void)initialize { [self swiftyInitialize]; }
 
 @end

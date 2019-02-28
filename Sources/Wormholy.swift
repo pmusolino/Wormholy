@@ -99,3 +99,12 @@ public class Wormholy: NSObject
         return true
     }()
 }
+
+extension Wormholy: SelfAware {
+    
+    static func awake() {
+        swiftyLoad()
+        swiftyInitialize()
+    }
+    
+}
