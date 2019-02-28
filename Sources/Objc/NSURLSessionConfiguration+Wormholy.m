@@ -34,10 +34,8 @@ static NSURLSessionConfiguration* Wormholy_ephemeralSessionConfiguration(id self
     return config;
 }
 
-@implementation NSURLSessionConfiguration (Wormholy)
-
-+(void)load
-{
+__attribute__((constructor)) static void sessionConfigurationInjectEntry(void) {
+    
     orig_defaultSessionConfiguration = (SessionConfigConstructor)WormholyReplaceMethod(@selector(defaultSessionConfiguration),
                                                                                        (IMP)Wormholy_defaultSessionConfiguration,
                                                                                        [NSURLSessionConfiguration class],
@@ -49,5 +47,3 @@ static NSURLSessionConfiguration* Wormholy_ephemeralSessionConfiguration(id self
                                                                                          YES);
 }
 
-
-@end
