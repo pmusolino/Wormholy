@@ -1,5 +1,5 @@
 //
-//  SwiftyLoadHelper.swift
+//  SwiftySelfAwareHelper.swift
 //  Wormholy
 //
 //  Created by Kealdish on 2019/2/28.
@@ -13,7 +13,7 @@ protocol SelfAware: class {
     static func awake()
 }
 
-struct CustomLoadHelper {
+struct CustomSelfAwareHelper {
     
     static func harmlessFunction() {
         
@@ -34,7 +34,7 @@ struct CustomLoadHelper {
 extension UIApplication {
     
     private static let runOnce: Void = {
-        CustomLoadHelper.harmlessFunction()
+        CustomSelfAwareHelper.harmlessFunction()
     }()
     
     override open var next: UIResponder? {
