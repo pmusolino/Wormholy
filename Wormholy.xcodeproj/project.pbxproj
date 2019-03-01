@@ -59,7 +59,6 @@
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
 		93A86AB12228349F006E56FB /* SwiftyLoadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A86AB02228349F006E56FB /* SwiftyLoadHelper.swift */; };
-		93A86AB22228349F006E56FB /* SwiftyLoadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A86AB02228349F006E56FB /* SwiftyLoadHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -519,7 +518,6 @@
 				450871A5207E5C7700EE2D31 /* Config.swift in Sources */,
 				450871A4207E5C7700EE2D31 /* HTTPValidation.swift in Sources */,
 				4508719E207E5C5600EE2D31 /* Utils.swift in Sources */,
-				93A86AB22228349F006E56FB /* SwiftyLoadHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
