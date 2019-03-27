@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/logo.png" alt="Icon"/>
 </p>
 
-  [![Language](https://img.shields.io/badge/Swift-4-orange.svg)]()
+  [![Language](https://img.shields.io/badge/Swift-5-orange.svg)]()
   [![Pod version](https://img.shields.io/cocoapods/v/Wormholy.svg?style=flat)](https://cocoapods.org/pods/Wormholy)
   
   Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
