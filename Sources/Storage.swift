@@ -19,7 +19,7 @@ open class Storage: NSObject {
             return
         }
         
-        if let index = requests.index(where: { (req) -> Bool in
+        if let index = requests.firstIndex(where: { (req) -> Bool in
             return request?.id == req.id ? true : false
         }){
             requests[index] = request!

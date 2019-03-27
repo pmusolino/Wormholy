@@ -12,8 +12,8 @@ enum Routing{
     
     case Post(Int)
     case NewPost(userId: Int, title: String, body: String)
-    case WrongURL()
-    case Photos()
+    case WrongURL(())
+    case Photos(())
     
     var urlRequest: URLRequest{
         let touple : (path: String, parameters: [String: Any]?) = {
