@@ -26,7 +26,7 @@
 ----------------
 
 - iOS 9.0+
-- Xcode 9+
+- Xcode 10+
 - Swift 4, 4.1, 4.2 and Swift 5
 
 
