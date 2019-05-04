@@ -54,6 +54,7 @@ public class CustomHTTPProtocol: URLProtocol {
             currentRequest?.duration = fabs(startDate.timeIntervalSinceNow) * 1000 //Find elapsed time and convert to milliseconds
         }
         Storage.shared.saveRequest(request: currentRequest)
+        session.invalidateAndCancel()
     }
     
     private func body(from request: URLRequest) -> Data? {
