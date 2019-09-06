@@ -70,5 +70,7 @@ extension UIViewController{
         if motion == .motionShake && Wormholy.shakeEnabled {
             NotificationCenter.default.post(name: fireWormholy, object: nil)
         }
+        
+        next?.motionBegan(motion, with: event)
     }
 }
