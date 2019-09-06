@@ -19,7 +19,7 @@ class RequestsViewController: WHBaseViewController {
         
         addSearchController()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(openActionSheet))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(openActionSheet(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
@@ -80,14 +80,14 @@ class RequestsViewController: WHBaseViewController {
     }
     
     // MARK: - Actions
-    @objc func openActionSheet(){
+    @objc func openActionSheet(_ sender: UIBarButtonItem){
         let ac = UIAlertController(title: "Wormholy", message: "Choose an option", preferredStyle: .actionSheet)
         
         ac.addAction(UIAlertAction(title: "Clear", style: .default) { [weak self] (action) in
             self?.clearRequests()
         })
         ac.addAction(UIAlertAction(title: "Share", style: .default) { [weak self] (action) in
-            self?.shareContent()
+            self?.shareContent(sender)
         })
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
@@ -103,7 +103,7 @@ class RequestsViewController: WHBaseViewController {
         collectionView.reloadData()
     }
     
-    func shareContent(){
+    func shareContent(_ sender: UIBarButtonItem){
         var text = ""
         for request in filteredRequests{
             text = text + RequestModelBeautifier.txtExport(request: request)
@@ -117,7 +117,7 @@ class RequestsViewController: WHBaseViewController {
             }
         }
         let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
-        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.popoverPresentationController?.barButtonItem = sender
         self.present(activityViewController, animated: true, completion: nil)
     }
     
