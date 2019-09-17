@@ -102,20 +102,11 @@ extension Dictionary {
 
 extension String {
     var prettyPrintedJSON: String? {
-        guard let data = self.data(using: .utf8) else { return nil }
-        
-        let formattedJSON: String
-        
-        if let jsonObject = try? JSONSerialization.jsonObject(with: data, options : .allowFragments), let jsonDic = jsonObject as? Dictionary<String,Any> {
-            formattedJSON = jsonDic.prettyPrintedJSON ?? self
-        } else if let jsonObject = try? JSONSerialization.jsonObject(with: data, options : .allowFragments), let jsonArray = jsonObject as? [Dictionary<String,Any>] {
-            formattedJSON = jsonArray.reduce("[\n", { (previous, current) in
-                previous + (current.prettyPrintedJSON ?? "")
-            }).appending("\n]")
-        } else {
-            formattedJSON = self
-        }
-        
-        return formattedJSON
+        guard let stringData = self.data(using: .utf8),
+            let object = try? JSONSerialization.jsonObject(with: stringData, options: []),
+            let jsonData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+            let formattedJSON = String(data: jsonData, encoding: .utf8) else { return nil }
+
+        return formattedJSON.replacingOccurrences(of: "\\", with: "")
     }
 }
