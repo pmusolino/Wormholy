@@ -32,7 +32,7 @@ class BodyDetailViewController: WHBaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(BodyDetailViewController.handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(BodyDetailViewController.handleKeyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent(_:)))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearch))
         navigationItem.rightBarButtonItems = [searchButton, shareButton]
 
@@ -130,11 +130,11 @@ class BodyDetailViewController: WHBaseViewController {
         }
     }
 
-    @objc func shareContent(){
+    @objc func shareContent(_ sender: UIBarButtonItem){
         if let text = textView.text{
             let textShare = [text]
             let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
+            activityViewController.popoverPresentationController?.barButtonItem = sender
             self.present(activityViewController, animated: true, completion: nil)
         }
     }

@@ -28,7 +28,7 @@ class RequestDetailViewController: WHBaseViewController {
             title = URL(string: urlString)?.path
         }
         
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent(_:)))
         navigationItem.rightBarButtonItems = [shareButton]
         
         tableView.estimatedRowHeight = 100.0
@@ -42,7 +42,7 @@ class RequestDetailViewController: WHBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @objc func shareContent(){
+    @objc func shareContent(_ sender: UIBarButtonItem){
         if let request = request{
             let textShare = [RequestModelBeautifier.txtExport(request: request)]
             let customItem = CustomActivity(title: "Save to the desktop", image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
@@ -53,7 +53,7 @@ class RequestDetailViewController: WHBaseViewController {
                 }
             }
             let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
-            activityViewController.popoverPresentationController?.sourceView = self.view
+            activityViewController.popoverPresentationController?.barButtonItem = sender
             self.present(activityViewController, animated: true, completion: nil)
         }
     }
