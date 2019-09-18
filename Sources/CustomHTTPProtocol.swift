@@ -9,7 +9,8 @@
 import Foundation
 
 public class CustomHTTPProtocol: URLProtocol {
-    
+    static var blacklistedHosts = [String]()
+
     struct Constants {
         static let RequestHandledKey = "URLProtocolRequestHandled"
     }
@@ -27,6 +28,8 @@ public class CustomHTTPProtocol: URLProtocol {
     }
     
     override public class func canInit(with request: URLRequest) -> Bool {
+        guard CustomHTTPProtocol.shouldHandleRequest(request) else { return false }
+
         if CustomHTTPProtocol.property(forKey: Constants.RequestHandledKey, in: request) != nil {
             return false
         }
@@ -53,6 +56,7 @@ public class CustomHTTPProtocol: URLProtocol {
         if let startDate = currentRequest?.date{
             currentRequest?.duration = fabs(startDate.timeIntervalSinceNow) * 1000 //Find elapsed time and convert to milliseconds
         }
+
         Storage.shared.saveRequest(request: currentRequest)
         session?.invalidateAndCancel()
     }
@@ -69,6 +73,14 @@ public class CustomHTTPProtocol: URLProtocol {
             stream.close()
             return data as Data
         }
+    }
+
+    /// Inspects the request to see if the host has not been blacklisted and can be handled by this URL protocol.
+    /// - Parameter request: The request being processed.
+    private class func shouldHandleRequest(_ request: URLRequest) -> Bool {
+        guard let host = request.url?.host else { return false }
+
+        return CustomHTTPProtocol.blacklistedHosts.filter({ host.hasSuffix($0) }).isEmpty
     }
     
     deinit {

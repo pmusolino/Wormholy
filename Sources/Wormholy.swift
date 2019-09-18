@@ -11,6 +11,11 @@ import UIKit
 
 public class Wormholy: NSObject
 {
+    @objc public static var blacklistedHosts: [String] {
+        get { return CustomHTTPProtocol.blacklistedHosts }
+        set { CustomHTTPProtocol.blacklistedHosts = newValue }
+    }
+
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()
