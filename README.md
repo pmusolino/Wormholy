@@ -17,6 +17,7 @@
   - [x] Find, isolate and fix bugs quickly.
   - [x] Swift & Objective-C compatibility.
   - [x] Also works with external libraries like `Alamofire` & `AFNetworking`.
+  - [x] Ability to blacklist hosts from being recorded using the array `blacklistedHosts`.
   
   <p align="center">
   <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
