@@ -75,6 +75,7 @@ public class Wormholy: NSObject
         }
         let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
         if let initialVC = storyboard.instantiateInitialViewController(){
+            initialVC.modalPresentationStyle = .fullScreen
             UIViewController.currentViewController()?.present(initialVC, animated: true, completion: nil)
         }
     }
