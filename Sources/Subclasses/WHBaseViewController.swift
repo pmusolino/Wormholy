@@ -13,6 +13,10 @@ class WHBaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Always adopt a light interface style.
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
     }
     
     override func didReceiveMemoryWarning() {

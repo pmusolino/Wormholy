@@ -12,10 +12,17 @@ class WHNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Always adopt a light interface style.
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+        
         if #available(iOS 11.0, *) {
             self.navigationBar.prefersLargeTitles = true
             self.navigationItem.largeTitleDisplayMode = .automatic
         }
+        self.navigationBar.isTranslucent = true
     }
 
     override func didReceiveMemoryWarning() {
