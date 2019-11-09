@@ -15,7 +15,7 @@ class WHNavigationController: UINavigationController {
         
         UINavigationBar.appearance(whenContainedInInstancesOf: [WHBaseViewController.self, WHNavigationController.self]).backgroundColor = nil
         UINavigationBar.appearance(whenContainedInInstancesOf: [WHBaseViewController.self, WHNavigationController.self]).tintColor = nil
-        UINavigationBar.appearance(whenContainedInInstancesOf: [WHBaseViewController.self, WHNavigationController.self]).isTranslucent = false
+        UINavigationBar.appearance(whenContainedInInstancesOf: [WHBaseViewController.self, WHNavigationController.self]).isTranslucent = true
         
         // Always adopt a light interface style.
         if #available(iOS 13.0, *) {
