@@ -19,10 +19,13 @@ class WHNavigationController: UINavigationController {
         }
         
         if #available(iOS 11.0, *) {
-            self.navigationBar.prefersLargeTitles = true
-            self.navigationItem.largeTitleDisplayMode = .automatic
+            navigationBar.prefersLargeTitles = true
+            navigationItem.largeTitleDisplayMode = .automatic
         }
-        self.navigationBar.isTranslucent = true
+        navigationBar.isTranslucent = true
+        navigationBar.backgroundColor = .white
+        
+        navigationBar.tintColor = .black
     }
 
     override func didReceiveMemoryWarning() {
