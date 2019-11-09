@@ -13,23 +13,29 @@ class WHNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UINavigationBar.appearance(whenContainedInInstancesOf: [WHBaseViewController.self, WHNavigationController.self]).backgroundColor = nil
-        UINavigationBar.appearance(whenContainedInInstancesOf: [WHBaseViewController.self, WHNavigationController.self]).tintColor = nil
-        UINavigationBar.appearance(whenContainedInInstancesOf: [WHBaseViewController.self, WHNavigationController.self]).isTranslucent = true
-        
         // Always adopt a light interface style.
         if #available(iOS 13.0, *) {
             overrideUserInterfaceStyle = .light
         }
         
+        //Large titles
         if #available(iOS 11.0, *) {
             navigationBar.prefersLargeTitles = true
             navigationItem.largeTitleDisplayMode = .automatic
         }
-        //navigationBar.isTranslucent = true
-        //navigationBar.backgroundColor = .white
         
-       // navigationBar.tintColor = .black
+        // Appearance
+        if #available(iOS 13.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+            navBarAppearance.backgroundColor = Colors.Gray.lighestGray
+            navigationBar.standardAppearance = navBarAppearance
+            navigationBar.scrollEdgeAppearance = navBarAppearance
+            navigationBar.tintColor = .blue
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
