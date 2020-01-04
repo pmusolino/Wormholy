@@ -129,6 +129,7 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     }
     
     public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        client?.urlProtocol(self, didReceive: challenge)
         let protectionSpace = challenge.protectionSpace
         let sender = challenge.sender
         
