@@ -14,11 +14,11 @@ class RequestDetailViewController: WHBaseViewController {
     
     var request: RequestModel?
     var sections: [Section] = [
-        Section(name: "Overview", type: .overview),
-        Section(name: "Request Header", type: .requestHeader),
-        Section(name: "Request Body", type: .requestBody),
-        Section(name: "Response Header", type: .responseHeader),
-        Section(name: "Response Body", type: .responseBody)
+        Section(name: "Overview".localized, type: .overview),
+        Section(name: "Request Header".localized, type: .requestHeader),
+        Section(name: "Request Body".localized, type: .requestBody),
+        Section(name: "Response Header".localized, type: .responseHeader),
+        Section(name: "Response Body".localized, type: .responseBody)
     ]
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class RequestDetailViewController: WHBaseViewController {
             title = URL(string: urlString)?.path
         }
         
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent(_:)))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(openActionSheet(_:)))
         navigationItem.rightBarButtonItems = [shareButton]
         
         tableView.estimatedRowHeight = 100.0
@@ -42,19 +42,28 @@ class RequestDetailViewController: WHBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @objc func shareContent(_ sender: UIBarButtonItem){
+    // MARK: - Actions
+    @objc func openActionSheet(_ sender: UIBarButtonItem){
+        let ac = UIAlertController(title: "Wormholy", message: "Choose an option", preferredStyle: .actionSheet)
+        
+        ac.addAction(UIAlertAction(title: "Share", style: .default) { [weak self] (action) in
+            self?.shareContent(sender)
+        })
+        
+        ac.addAction(UIAlertAction(title: "Share (request as cURL)", style: .default) { [weak self] (action) in
+            self?.shareContent(sender, requestExportOption: .curl)
+        })
+        ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
+        })
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            ac.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
+        }
+        present(ac, animated: true, completion: nil)
+    }
+    
+    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestExportOption = .flat){
         if let request = request{
-            let textShare = [RequestModelBeautifier.txtExport(request: request)]
-            let customItem = CustomActivity(title: "Save to the desktop", image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
-                guard let sharedStrings = sharedItems as? [String] else { return }
-                
-                for string in sharedStrings {
-                    FileHandler.writeTxtFileOnDesktop(text: string, fileName: "\(Int(Date().timeIntervalSince1970))-wormholy.txt")
-                }
-            }
-            let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
-            activityViewController.popoverPresentationController?.barButtonItem = sender
-            self.present(activityViewController, animated: true, completion: nil)
+            ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: [request], requestExportOption: requestExportOption)
         }
     }
     
@@ -106,7 +115,7 @@ extension RequestDetailViewController: UITableViewDataSource{
                 return cell
             case .requestBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
-                cell.labelAction?.text = "View body"
+                cell.labelAction?.text = "View body".localized
                 return cell
             case .responseHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
@@ -114,7 +123,7 @@ extension RequestDetailViewController: UITableViewDataSource{
                 return cell
             case .responseBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
-                cell.labelAction?.text = "View body"
+                cell.labelAction?.text = "View body".localized
                 return cell
             }
         }
@@ -130,10 +139,10 @@ extension RequestDetailViewController: UITableViewDelegate{
         
         switch section.type {
         case .requestBody:
-            openBodyDetailVC(title: "Request body", body: request?.httpBody)
+            openBodyDetailVC(title: "Request Body".localized, body: request?.httpBody)
             break
         case .responseBody:
-            openBodyDetailVC(title: "Response body", body: request?.dataResponse)
+            openBodyDetailVC(title: "Response Body".localized, body: request?.dataResponse)
             break
         default:
             break

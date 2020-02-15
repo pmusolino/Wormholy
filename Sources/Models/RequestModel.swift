@@ -25,7 +25,7 @@ open class RequestModel: Codable {
         id = UUID().uuidString
         url = request.url?.absoluteString ?? ""
         date = Date()
-        method = request.httpMethod ?? "N/A"
+        method = request.httpMethod ?? "GET"
         headers = request.allHTTPHeaderFields
         httpBody = request.httpBody
         code = 0
@@ -37,4 +37,19 @@ open class RequestModel: Codable {
         responseHeaders = responseHttp.allHeaderFields as? [String: String]
     }
     
+    var curlRequest: String {
+        let methodParam = " -X \(method)"
+        var headersParams = ""
+        if let headers = self.headers {
+            for header in headers {
+                headersParams = " -H \"\(header.0): \(header.1)\""
+            }
+        }
+        var bodyParam = ""
+        if let httpBody = self.httpBody {
+            bodyParam = " -d \"\(httpBody)\""
+        }
+        let urlParam = " \"\(url)\""
+        return "curl\(methodParam)\(headersParams)\(bodyParam)\(urlParam)";
+    }
 }

@@ -19,7 +19,7 @@ class RequestsViewController: WHBaseViewController {
         
         addSearchController()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(openActionSheet(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "More".localized, style: .plain, target: self, action: #selector(openActionSheet(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
@@ -83,13 +83,17 @@ class RequestsViewController: WHBaseViewController {
     @objc func openActionSheet(_ sender: UIBarButtonItem){
         let ac = UIAlertController(title: "Wormholy", message: "Choose an option", preferredStyle: .actionSheet)
         
-        ac.addAction(UIAlertAction(title: "Clear", style: .default) { [weak self] (action) in
+        ac.addAction(UIAlertAction(title: "Clear".localized, style: .default) { [weak self] (action) in
             self?.clearRequests()
         })
-        ac.addAction(UIAlertAction(title: "Share", style: .default) { [weak self] (action) in
+        ac.addAction(UIAlertAction(title: "Share".localized, style: .default) { [weak self] (action) in
             self?.shareContent(sender)
         })
-        ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
+        
+        ac.addAction(UIAlertAction(title: "Share as cURL".localized, style: .default) { [weak self] (action) in
+            self?.shareContent(sender, requestExportOption: .curl)
+        })
+        ac.addAction(UIAlertAction(title: "Close".localized, style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
             ac.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
@@ -103,22 +107,8 @@ class RequestsViewController: WHBaseViewController {
         collectionView.reloadData()
     }
     
-    func shareContent(_ sender: UIBarButtonItem){
-        var text = ""
-        for request in filteredRequests{
-            text = text + RequestModelBeautifier.txtExport(request: request)
-        }
-        let textShare = [text]
-        let customItem = CustomActivity(title: "Save to the desktop", image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
-            guard let sharedStrings = sharedItems as? [String] else { return }
-            
-            for string in sharedStrings {
-                FileHandler.writeTxtFileOnDesktop(text: string, fileName: "\(Int(Date().timeIntervalSince1970))-wormholy.txt")
-            }
-        }
-        let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
-        activityViewController.popoverPresentationController?.barButtonItem = sender
-        self.present(activityViewController, animated: true, completion: nil)
+    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestExportOption = .flat){
+        ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: filteredRequests, requestExportOption: requestExportOption)
     }
     
     // MARK: - Navigation
