@@ -93,6 +93,9 @@ class RequestsViewController: WHBaseViewController {
         ac.addAction(UIAlertAction(title: "Share as cURL".localized, style: .default) { [weak self] (action) in
             self?.shareContent(sender, requestExportOption: .curl)
         })
+        ac.addAction(UIAlertAction(title: "Share as Postman Collection".localized, style: .default) { [weak self] (action) in
+                   self?.shareContent(sender, requestExportOption: .postman)
+               })
         ac.addAction(UIAlertAction(title: "Close".localized, style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {

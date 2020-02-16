@@ -120,4 +120,39 @@ open class RequestModel: Codable {
 
         return components.joined(separator: " \\\n\t")
     }
+    
+    var postmanItem: ItemItem? {
+        guard
+            let url = URL(string: self.url),
+            let scheme = self.scheme,
+            let host = self.host
+            else { return nil }
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyyMMdd_HHmmss"
+        
+        let name = "\(dateFormatterGet.string(from: date))-\(url)"
+        
+        var headers: [Header] = []
+        let method = self.method
+        for header in self.headers {
+            headers.append(Header(key: header.0, value: header.1))
+        }
+        
+        let rawBody: String
+        if let httpBodyData = httpBody, let httpBody = String(data: httpBodyData, encoding: .utf8) {
+            rawBody = httpBody
+        }
+        else {
+            rawBody = ""
+        }
+        
+        let hostList = host.split(separator: ".").map{ String(describing: $0) }
+        let pathList = url.pathComponents
+        let body = Body(mode: "raw", raw: rawBody)
+
+        let urlPostman = PostmanURL(raw: self.url, urlProtocol: scheme, host: hostList, path: pathList)
+        let request = Request(method: method, header: headers, body: body, url: urlPostman, description: "")
+        return ItemItem(name: name, item: nil, protocolProfileBehavior: nil, request: request)
+    }
 }

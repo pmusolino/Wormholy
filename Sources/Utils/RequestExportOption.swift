@@ -11,4 +11,5 @@ import Foundation
 enum RequestExportOption {
     case flat
     case curl
+    case postman
 }

@@ -61,6 +61,7 @@
 		64DD525E23F86ED800AB92C4 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD525D23F86ED800AB92C4 /* StringExtensions.swift */; };
 		64DD526223F86F6400AB92C4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64DD526423F86F6400AB92C4 /* Localizable.strings */; };
 		64DD526723F895AE00AB92C4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64DD526423F86F6400AB92C4 /* Localizable.strings */; };
+		64DD527023F9B7FB00AB92C4 /* Postman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD526F23F9B7FB00AB92C4 /* Postman.swift */; };
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
 		93A86AB12228349F006E56FB /* SwiftySelfAwareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */; };
@@ -134,6 +135,7 @@
 		64DD525D23F86ED800AB92C4 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		64DD526323F86F6400AB92C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		64DD526523F86F9700AB92C4 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		64DD526F23F9B7FB00AB92C4 /* Postman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postman.swift; sourceTree = "<group>"; };
 		8933C7841EB5B820000D00A4 /* Wormholy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wormholy.swift; sourceTree = "<group>"; };
 		8933C7891EB5B82A000D00A4 /* WormholyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholyTests.swift; sourceTree = "<group>"; };
 		93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySelfAwareHelper.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 		455818C7207D620900D2F954 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				64DD526E23F9B7EB00AB92C4 /* Postman */,
 				455818C8207D621200D2F954 /* RequestModel.swift */,
 				45FF5C5120877A950084BD50 /* Section.swift */,
 			);
@@ -336,6 +339,14 @@
 				45C51A1720A20B38006933CE /* Wormholy.h */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		64DD526E23F9B7EB00AB92C4 /* Postman */ = {
+			isa = PBXGroup;
+			children = (
+				64DD526F23F9B7FB00AB92C4 /* Postman.swift */,
+			);
+			path = Postman;
 			sourceTree = "<group>";
 		};
 		8933C7811EB5B7E0000D00A4 /* Sources */ = {
@@ -582,6 +593,7 @@
 				45FF5C54208794720084BD50 /* WHDate.swift in Sources */,
 				454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */,
 				451C9E65208106D1002A34BC /* WHLabel.swift in Sources */,
+				64DD527023F9B7FB00AB92C4 /* Postman.swift in Sources */,
 				451C9E6720810B4C002A34BC /* RequestCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

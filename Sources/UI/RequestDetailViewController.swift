@@ -49,9 +49,11 @@ class RequestDetailViewController: WHBaseViewController {
         ac.addAction(UIAlertAction(title: "Share", style: .default) { [weak self] (action) in
             self?.shareContent(sender)
         })
-        
         ac.addAction(UIAlertAction(title: "Share (request as cURL)", style: .default) { [weak self] (action) in
             self?.shareContent(sender, requestExportOption: .curl)
+        })
+        ac.addAction(UIAlertAction(title: "Share as Postman Collection", style: .default) { [weak self] (action) in
+            self?.shareContent(sender, requestExportOption: .postman)
         })
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })

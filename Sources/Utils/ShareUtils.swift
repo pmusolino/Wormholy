@@ -12,14 +12,15 @@ final class ShareUtils {
 
     static func shareRequests(presentingViewController: UIViewController, sender: UIBarButtonItem, requests: [RequestModel], requestExportOption: RequestExportOption = .flat){
          var text = ""
-         for request in requests{
-             switch requestExportOption {
-             case .flat:
-                 text = text + RequestModelBeautifier.txtExport(request: request)
-             case .curl:
-                 text = text + RequestModelBeautifier.curlExport(request: request)
-             }
-         }
+         switch requestExportOption {
+         case .flat:
+             text = getTxtText(requests: requests)
+         case .curl:
+             text = getCurlText(requests: requests)
+         case .postman:
+            text = getPostmanCollection(requests: requests) ?? "{}"
+        }
+         
          let textShare = [text]
         let customItem = CustomActivity(title: "Save to the desktop".localized, image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
              guard let sharedStrings = sharedItems as? [String] else { return }
@@ -35,4 +36,49 @@ final class ShareUtils {
          activityViewController.popoverPresentationController?.barButtonItem = sender
          presentingViewController.present(activityViewController, animated: true, completion: nil)
      }
+        
+    private static func getTxtText(requests: [RequestModel]) -> String {
+        var text: String = ""
+        for request in requests{
+            text = text + RequestModelBeautifier.txtExport(request: request)
+        }
+        return text
+    }
+    
+    private static func getCurlText(requests: [RequestModel]) -> String {
+        var text: String = ""
+        for request in requests{
+            text = text + RequestModelBeautifier.curlExport(request: request)
+        }
+        return text
+    }
+    
+    private static func getPostmanCollection(requests: [RequestModel]) -> String? {
+        var items: [ItemItem] = []
+        
+        for request in requests {
+            guard let postmanItem = request.postmanItem else { continue }
+            items.append(postmanItem)
+        }
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyyMMdd_HHmmss_SSS"
+        
+        let collectionName = "\(dateFormatterGet.string(from: Date()))-Collection"
+
+        let info = Info(postmanID: collectionName, name: collectionName, schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json")
+        
+        let postmanCollectionItem = ItemItem(name: collectionName, item: items, protocolProfileBehavior: nil, request: nil)
+        
+        let postmanCollection = PostmanCollection(info: info, item: [postmanCollectionItem], protocolProfileBehavior: nil)
+        
+        let encoder = JSONEncoder()
+        
+        if let data = try? encoder.encode(postmanCollection), let string = String(data: data, encoding: .utf8) {
+            return string
+        }
+        else {
+            return nil
+        }
+    }
 }
