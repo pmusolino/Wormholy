@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Wormholy"
-  s.version      = "1.5.2"
+  s.version      = "1.5.3"
   s.summary      = "Network debugging made easy"
   s.description  = <<-DESC
     A fork from the original project of Paolo Musolino ( https://github.com/pmusolino/Wormholy ) with some enhancements.

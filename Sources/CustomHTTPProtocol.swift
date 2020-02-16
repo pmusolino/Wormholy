@@ -46,13 +46,12 @@ public class CustomHTTPProtocol: URLProtocol {
         sessionTask = session?.dataTask(with: newRequest as URLRequest)
         sessionTask?.resume()
         
-        currentRequest = RequestModel(request: newRequest)
+        currentRequest = RequestModel(request: newRequest, session: session)
         Storage.shared.saveRequest(request: currentRequest)
     }
     
     override public func stopLoading() {
         sessionTask?.cancel()
-        currentRequest?.httpBody = body(from: request)
         if let startDate = currentRequest?.date{
             currentRequest?.duration = fabs(startDate.timeIntervalSinceNow) * 1000 //Find elapsed time and convert to milliseconds
         }
