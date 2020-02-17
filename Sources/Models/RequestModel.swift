@@ -147,12 +147,41 @@ open class RequestModel: Codable {
             rawBody = ""
         }
         
-        let hostList = host.split(separator: ".").map{ String(describing: $0) }
-        let pathList = url.pathComponents
-        let body = Body(mode: "raw", raw: rawBody)
+        let hostList = host.split(separator: ".")
+            .map{ String(describing: $0) }
+        
+        var pathList = url.pathComponents
+        pathList.removeFirst()
 
-        let urlPostman = PostmanURL(raw: self.url, urlProtocol: scheme, host: hostList, path: pathList)
+        let body = Body(mode: "raw", raw: rawBody)
+        
+        let query: [Query]? = url.query?.split(separator: "&").compactMap{ element in
+            let splittedElements = element.split(separator: "=")
+            guard splittedElements.count != 2 else { return nil }
+            let key = String(splittedElements[0])
+            let value = String(splittedElements[1])
+            return Query(key: key, value: value)
+        }
+
+        let urlPostman = PostmanURL(raw: url.absoluteString, urlProtocol: scheme, host: hostList, path: pathList, query: query)
         let request = Request(method: method, header: headers, body: body, url: urlPostman, description: "")
-        return ItemItem(name: name, item: nil, protocolProfileBehavior: nil, request: request)
+        
+        // build response
+        
+        let responseHeaders = self.responseHeaders?.compactMap{ (key, value) in
+            return Header(key: key, value: value)
+        } ?? []
+        
+        let responseBody: String
+        if let data = dataResponse, let string = String(data: data, encoding: .utf8) {
+            responseBody = string
+        }
+        else {
+            responseBody = ""
+        }
+        
+        let response = Response(name: url.absoluteString, originalRequest: request, status: "", code: code, postmanPreviewlanguage: "html", header: responseHeaders, cookie: [], body: responseBody)
+        
+        return ItemItem(name: name, item: nil, protocolProfileBehavior: nil, request: request, response: [response])
     }
 }

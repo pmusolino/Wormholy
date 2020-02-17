@@ -22,6 +22,7 @@ struct ItemItem: Codable {
     let item: [ItemItem]?
     let protocolProfileBehavior: ProtocolProfileBehavior?
     let request: Request?
+    let response: [Response]?
 }
 
 struct Request: Codable {
@@ -48,7 +49,35 @@ struct PostmanURL: Codable {
     let urlProtocol: String
     let host: [String]
     let path: [String]
+    let query: [Query]?
+    
+    enum CodingKeys: String, CodingKey {
+        case raw, host, path, query
+        case urlProtocol = "protocol"
+    }
 }
 
 struct ProtocolProfileBehavior: Codable {
+}
+
+struct Query: Codable {
+    let key: String
+    let value: String
+}
+
+struct Response: Codable {
+    let name: String
+    let originalRequest: Request
+    let status: String
+    let code: Int
+    let postmanPreviewlanguage: String
+    let header: [Header]
+    let cookie: [String]
+    let body: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name, originalRequest, status, code, header, cookie, body
+        case postmanPreviewlanguage = "_postman_previewlanguage"
+
+    }
 }

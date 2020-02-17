@@ -19,17 +19,32 @@ final class ShareUtils {
              text = getCurlText(requests: requests)
          case .postman:
             text = getPostmanCollection(requests: requests) ?? "{}"
+            text = text.replacingOccurrences(of: "\\/", with: "/")
         }
          
-         let textShare = [text]
+        let textShare = [text]
         let customItem = CustomActivity(title: "Save to the desktop".localized, image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
              guard let sharedStrings = sharedItems as? [String] else { return }
             
+            let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+            
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyyMMdd_HHmmss_SSS"
+            
+            let suffix: String
+            switch requestExportOption {
+                case .flat:
+                    suffix = "-wormholy.txt"
+                case .curl:
+                    suffix = "-wormholy.txt"
+                case .postman:
+                   suffix = "-postman_collection.json"
+            }
+            
+            let filename = "\(appName)_\(dateFormatterGet.string(from: Date()))\(suffix)"
              
              for string in sharedStrings {
-                 FileHandler.writeTxtFileOnDesktop(text: string, fileName: "\(dateFormatterGet.string(from: Date()))-wormholy.txt")
+                 FileHandler.writeTxtFileOnDesktop(text: string, fileName: filename)
              }
          }
          let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
@@ -68,7 +83,7 @@ final class ShareUtils {
 
         let info = Info(postmanID: collectionName, name: collectionName, schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json")
         
-        let postmanCollectionItem = ItemItem(name: collectionName, item: items, protocolProfileBehavior: nil, request: nil)
+        let postmanCollectionItem = ItemItem(name: collectionName, item: items, protocolProfileBehavior: nil, request: nil, response: nil)
         
         let postmanCollection = PostmanCollection(info: info, item: [postmanCollectionItem], protocolProfileBehavior: nil)
         
