@@ -157,7 +157,7 @@ open class RequestModel: Codable {
         
         let query: [Query]? = url.query?.split(separator: "&").compactMap{ element in
             let splittedElements = element.split(separator: "=")
-            guard splittedElements.count != 2 else { return nil }
+            guard splittedElements.count == 2 else { return nil }
             let key = String(splittedElements[0])
             let value = String(splittedElements[1])
             return Query(key: key, value: value)
