@@ -79,7 +79,9 @@ final class ShareUtils {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyyMMdd_HHmmss_SSS"
         
-        let collectionName = "\(dateFormatterGet.string(from: Date()))-Collection"
+        let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
+        
+        let collectionName = "\(appName) \(dateFormatterGet.string(from: Date()))"
 
         let info = Info(postmanID: collectionName, name: collectionName, schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json")
         
