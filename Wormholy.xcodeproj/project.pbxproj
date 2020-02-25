@@ -58,9 +58,6 @@
 		52D6D9871BEFF229002C0205 /* Wormholy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */; };
 		64DD525A23F84A5F00AB92C4 /* RequestExportOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD525923F84A5F00AB92C4 /* RequestExportOption.swift */; };
 		64DD525C23F86B3D00AB92C4 /* ShareUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD525B23F86B3D00AB92C4 /* ShareUtils.swift */; };
-		64DD525E23F86ED800AB92C4 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD525D23F86ED800AB92C4 /* StringExtensions.swift */; };
-		64DD526223F86F6400AB92C4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64DD526423F86F6400AB92C4 /* Localizable.strings */; };
-		64DD526723F895AE00AB92C4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64DD526423F86F6400AB92C4 /* Localizable.strings */; };
 		64DD527023F9B7FB00AB92C4 /* Postman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD526F23F9B7FB00AB92C4 /* Postman.swift */; };
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
@@ -132,9 +129,6 @@
 		52D6D9861BEFF229002C0205 /* Wormholy-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wormholy-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64DD525923F84A5F00AB92C4 /* RequestExportOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestExportOption.swift; sourceTree = "<group>"; };
 		64DD525B23F86B3D00AB92C4 /* ShareUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareUtils.swift; sourceTree = "<group>"; };
-		64DD525D23F86ED800AB92C4 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		64DD526323F86F6400AB92C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		64DD526523F86F9700AB92C4 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		64DD526F23F9B7FB00AB92C4 /* Postman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postman.swift; sourceTree = "<group>"; };
 		8933C7841EB5B820000D00A4 /* Wormholy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wormholy.swift; sourceTree = "<group>"; };
 		8933C7891EB5B82A000D00A4 /* WormholyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholyTests.swift; sourceTree = "<group>"; };
@@ -240,7 +234,6 @@
 				452CC13521773DE500CB5E21 /* Assets.xcassets */,
 				451C9E5D2080EFF5002A34BC /* Config.swift */,
 				45820CF5208170F400CA74D6 /* Colors.swift */,
-				64DD526423F86F6400AB92C4 /* Localizable.strings */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -266,7 +259,6 @@
 				93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */,
 				64DD525923F84A5F00AB92C4 /* RequestExportOption.swift */,
 				64DD525B23F86B3D00AB92C4 /* ShareUtils.swift */,
-				64DD525D23F86ED800AB92C4 /* StringExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -513,7 +505,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				45087196207E5A0100EE2D31 /* LaunchScreen.storyboard in Resources */,
-				64DD526723F895AE00AB92C4 /* Localizable.strings in Resources */,
 				45087193207E5A0100EE2D31 /* Assets.xcassets in Resources */,
 				45087191207E59FF00EE2D31 /* Main.storyboard in Resources */,
 			);
@@ -527,7 +518,6 @@
 				452CC13621773DE500CB5E21 /* Assets.xcassets in Resources */,
 				451C9E552080E5E4002A34BC /* Flow.storyboard in Resources */,
 				451C9E6320810472002A34BC /* RequestCell.xib in Resources */,
-				64DD526223F86F6400AB92C4 /* Localizable.strings in Resources */,
 				45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */,
 				45868F1C20F4E9790024C77B /* ActionableTableViewCell.xib in Resources */,
 			);
@@ -567,7 +557,6 @@
 				455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */,
 				8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */,
 				93A86AB12228349F006E56FB /* SwiftySelfAwareHelper.swift in Sources */,
-				64DD525E23F86ED800AB92C4 /* StringExtensions.swift in Sources */,
 				455818C4207D61A100D2F954 /* Storage.swift in Sources */,
 				45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */,
 				45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */,
@@ -631,15 +620,6 @@
 				45087195207E5A0100EE2D31 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		64DD526423F86F6400AB92C4 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				64DD526323F86F6400AB92C4 /* en */,
-				64DD526523F86F9700AB92C4 /* it */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

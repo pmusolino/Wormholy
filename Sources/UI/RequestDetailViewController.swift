@@ -14,11 +14,11 @@ class RequestDetailViewController: WHBaseViewController {
     
     var request: RequestModel?
     var sections: [Section] = [
-        Section(name: "Overview".localized, type: .overview),
-        Section(name: "Request Header".localized, type: .requestHeader),
-        Section(name: "Request Body".localized, type: .requestBody),
-        Section(name: "Response Header".localized, type: .responseHeader),
-        Section(name: "Response Body".localized, type: .responseBody)
+        Section(name: "Overview", type: .overview),
+        Section(name: "Request Header", type: .requestHeader),
+        Section(name: "Request Body", type: .requestBody),
+        Section(name: "Response Header", type: .responseHeader),
+        Section(name: "Response Body", type: .responseBody)
     ]
     
     override func viewDidLoad() {
@@ -117,7 +117,7 @@ extension RequestDetailViewController: UITableViewDataSource{
                 return cell
             case .requestBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
-                cell.labelAction?.text = "View body".localized
+                cell.labelAction?.text = "View body"
                 return cell
             case .responseHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
@@ -125,7 +125,7 @@ extension RequestDetailViewController: UITableViewDataSource{
                 return cell
             case .responseBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
-                cell.labelAction?.text = "View body".localized
+                cell.labelAction?.text = "View body"
                 return cell
             }
         }
@@ -141,10 +141,10 @@ extension RequestDetailViewController: UITableViewDelegate{
         
         switch section.type {
         case .requestBody:
-            openBodyDetailVC(title: "Request Body".localized, body: request?.httpBody)
+            openBodyDetailVC(title: "Request Body", body: request?.httpBody)
             break
         case .responseBody:
-            openBodyDetailVC(title: "Response Body".localized, body: request?.dataResponse)
+            openBodyDetailVC(title: "Response Body", body: request?.dataResponse)
             break
         default:
             break
