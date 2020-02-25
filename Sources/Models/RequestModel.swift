@@ -121,7 +121,7 @@ open class RequestModel: Codable {
         return components.joined(separator: " \\\n\t")
     }
     
-    var postmanItem: ItemItem? {
+    var postmanItem: PMItem? {
         guard
             let url = URL(string: self.url),
             let scheme = self.scheme,
@@ -133,10 +133,10 @@ open class RequestModel: Codable {
         
         let name = "\(dateFormatterGet.string(from: date))-\(url)"
         
-        var headers: [Header] = []
+        var headers: [PMHeader] = []
         let method = self.method
         for header in self.headers {
-            headers.append(Header(key: header.0, value: header.1))
+            headers.append(PMHeader(key: header.0, value: header.1))
         }
         
         let rawBody: String
@@ -153,23 +153,23 @@ open class RequestModel: Codable {
         var pathList = url.pathComponents
         pathList.removeFirst()
 
-        let body = Body(mode: "raw", raw: rawBody)
+        let body = PMBody(mode: "raw", raw: rawBody)
         
-        let query: [Query]? = url.query?.split(separator: "&").compactMap{ element in
+        let query: [PMQuery]? = url.query?.split(separator: "&").compactMap{ element in
             let splittedElements = element.split(separator: "=")
             guard splittedElements.count == 2 else { return nil }
             let key = String(splittedElements[0])
             let value = String(splittedElements[1])
-            return Query(key: key, value: value)
+            return PMQuery(key: key, value: value)
         }
 
-        let urlPostman = PostmanURL(raw: url.absoluteString, urlProtocol: scheme, host: hostList, path: pathList, query: query)
-        let request = Request(method: method, header: headers, body: body, url: urlPostman, description: "")
+        let urlPostman = PMURL(raw: url.absoluteString, urlProtocol: scheme, host: hostList, path: pathList, query: query)
+        let request = PMRequest(method: method, header: headers, body: body, url: urlPostman, description: "")
         
         // build response
         
         let responseHeaders = self.responseHeaders?.compactMap{ (key, value) in
-            return Header(key: key, value: value)
+            return PMHeader(key: key, value: value)
         } ?? []
         
         let responseBody: String
@@ -180,8 +180,8 @@ open class RequestModel: Codable {
             responseBody = ""
         }
         
-        let response = Response(name: url.absoluteString, originalRequest: request, status: "", code: code, postmanPreviewlanguage: "html", header: responseHeaders, cookie: [], body: responseBody)
+        let response = PMResponse(name: url.absoluteString, originalRequest: request, status: "", code: code, postmanPreviewlanguage: "html", header: responseHeaders, cookie: [], body: responseBody)
         
-        return ItemItem(name: name, item: nil, protocolProfileBehavior: nil, request: request, response: [response])
+        return PMItem(name: name, item: nil, protocolProfileBehavior: nil, request: request, response: [response])
     }
 }

@@ -69,7 +69,7 @@ final class ShareUtils {
     }
     
     private static func getPostmanCollection(requests: [RequestModel]) -> String? {
-        var items: [ItemItem] = []
+        var items: [PMItem] = []
         
         for request in requests {
             guard let postmanItem = request.postmanItem else { continue }
@@ -83,9 +83,9 @@ final class ShareUtils {
         
         let collectionName = "\(appName) \(dateFormatterGet.string(from: Date()))"
 
-        let info = Info(postmanID: collectionName, name: collectionName, schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json")
+        let info = PMInfo(postmanID: collectionName, name: collectionName, schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json")
         
-        let postmanCollectionItem = ItemItem(name: collectionName, item: items, protocolProfileBehavior: nil, request: nil, response: nil)
+        let postmanCollectionItem = PMItem(name: collectionName, item: items, protocolProfileBehavior: nil, request: nil, response: nil)
         
         let postmanCollection = PostmanCollection(info: info, item: [postmanCollectionItem], protocolProfileBehavior: nil)
         

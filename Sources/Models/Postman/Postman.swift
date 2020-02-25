@@ -7,49 +7,49 @@
 import Foundation
 
 struct PostmanCollection: Codable {
-    let info: Info
-    let item: [ItemItem]
-    let protocolProfileBehavior: ProtocolProfileBehavior?
+    let info: PMInfo
+    let item: [PMItem]
+    let protocolProfileBehavior: PMProtocolProfileBehavior?
 }
 
-struct Info: Codable {
+struct PMInfo: Codable {
     let postmanID, name: String
     let schema: String
 }
 
-struct ItemItem: Codable {
+struct PMItem: Codable {
     let name: String
-    let item: [ItemItem]?
-    let protocolProfileBehavior: ProtocolProfileBehavior?
-    let request: Request?
-    let response: [Response]?
+    let item: [PMItem]?
+    let protocolProfileBehavior: PMProtocolProfileBehavior?
+    let request: PMRequest?
+    let response: [PMResponse]?
 }
 
-struct Request: Codable {
+struct PMRequest: Codable {
     let method: String
-    let header: [Header]
-    let body: Body
-    let url: PostmanURL
+    let header: [PMHeader]
+    let body: PMBody
+    let url: PMURL
     let description: String?
 }
 
-struct Body: Codable {
+struct PMBody: Codable {
     let mode: String
     let raw: String
 }
 
 
-struct Header: Codable {
+struct PMHeader: Codable {
     let key: String
     let value: String
 }
 
-struct PostmanURL: Codable {
+struct PMURL: Codable {
     let raw: String
     let urlProtocol: String
     let host: [String]
     let path: [String]
-    let query: [Query]?
+    let query: [PMQuery]?
     
     enum CodingKeys: String, CodingKey {
         case raw, host, path, query
@@ -57,21 +57,21 @@ struct PostmanURL: Codable {
     }
 }
 
-struct ProtocolProfileBehavior: Codable {
+struct PMProtocolProfileBehavior: Codable {
 }
 
-struct Query: Codable {
+struct PMQuery: Codable {
     let key: String
     let value: String
 }
 
-struct Response: Codable {
+struct PMResponse: Codable {
     let name: String
-    let originalRequest: Request
+    let originalRequest: PMRequest
     let status: String
     let code: Int
     let postmanPreviewlanguage: String
-    let header: [Header]
+    let header: [PMHeader]
     let cookie: [String]
     let body: String
     
