@@ -1,6 +1,8 @@
-#import "StarterEngine.h"
 #import <UIKit/UIKit.h>
 
+@interface StarterEngine : NSObject
+
+@end
 
 /**
  The solution was implemented is similar to this https://stackoverflow.com/questions/49029515/is-there-an-alternative-to-initialize-in-macos-now-that-swift-has-deprecated-i/49078874#49078874
