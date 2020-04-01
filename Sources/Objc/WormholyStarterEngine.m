@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@interface StarterEngine : NSObject
+@interface WormholyStarterEngine : NSObject
 
 @end
 
@@ -12,7 +12,7 @@ This is the flow:
 2) StarterEngine receive a `UIApplicationDidFinishLaunchingNotification`
 3) The notification fire the `appWillLaunch()` method under `SwiftySelfAwareHelper`
 */
-@implementation StarterEngine
+@implementation WormholyStarterEngine
 
 static void __attribute__ ((constructor)) Initer() {
 
