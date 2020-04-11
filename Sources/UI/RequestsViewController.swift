@@ -110,7 +110,7 @@ class RequestsViewController: WHBaseViewController {
         collectionView.reloadData()
     }
     
-    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestExportOption = .flat){
+    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestResponseExportOption = .flat){
         ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: filteredRequests, requestExportOption: requestExportOption)
     }
     

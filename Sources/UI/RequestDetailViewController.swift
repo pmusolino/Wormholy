@@ -58,12 +58,12 @@ class RequestDetailViewController: WHBaseViewController {
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
-            ac.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
+            ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         }
         present(ac, animated: true, completion: nil)
     }
     
-    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestExportOption = .flat){
+    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestResponseExportOption = .flat){
         if let request = request{
             ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: [request], requestExportOption: requestExportOption)
         }

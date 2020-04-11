@@ -10,7 +10,7 @@ import Foundation
 
 final class ShareUtils {
 
-    static func shareRequests(presentingViewController: UIViewController, sender: UIBarButtonItem, requests: [RequestModel], requestExportOption: RequestExportOption = .flat){
+    static func shareRequests(presentingViewController: UIViewController, sender: UIBarButtonItem, requests: [RequestModel], requestExportOption: RequestResponseExportOption = .flat){
          var text = ""
          switch requestExportOption {
          case .flat:
@@ -85,9 +85,9 @@ final class ShareUtils {
 
         let info = PMInfo(postmanID: collectionName, name: collectionName, schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json")
         
-        let postmanCollectionItem = PMItem(name: collectionName, item: items, protocolProfileBehavior: nil, request: nil, response: nil)
+        let postmanCollectionItem = PMItem(name: collectionName, item: items, request: nil, response: nil)
         
-        let postmanCollection = PostmanCollection(info: info, item: [postmanCollectionItem], protocolProfileBehavior: nil)
+        let postmanCollection = PostmanCollection(info: info, item: [postmanCollectionItem])
         
         let encoder = JSONEncoder()
         

@@ -39,15 +39,17 @@ open class RequestModel: Codable {
         httpBody = request.httpBody
         code = 0
         
-        session?.configuration.httpAdditionalHeaders?.filter {  $0.0 != AnyHashable("Cookie") }
+        
+        // collecting all HTTP Request headers
+        session?.configuration.httpAdditionalHeaders?
             .forEach { element in
                 guard let key = element.0 as? String, let value = element.1 as? String else { return }
-                headers[key] = value }
+                headers[key] = value
+        }
         self.headers = headers
         
-        
-        if
-            let credentialStorage = session?.configuration.urlCredentialStorage,
+        // if the target server uses HTTP Basic Authentication, collect username and password
+        if let credentialStorage = session?.configuration.urlCredentialStorage,
             let host = self.host,
             let port = self.port {
             let protectionSpace = URLProtectionSpace(
@@ -66,11 +68,10 @@ open class RequestModel: Codable {
             }
         }
         
+        // collect cookies associated with the target host
         if let session = session, let url = request.url, session.configuration.httpShouldSetCookies {
-            if
-                let cookieStorage = session.configuration.httpCookieStorage,
-                let cookies = cookieStorage.cookies(for: url), !cookies.isEmpty
-            {
+            if let cookieStorage = session.configuration.httpCookieStorage,
+                let cookies = cookieStorage.cookies(for: url), !cookies.isEmpty {
                 self.cookies = cookies.reduce("") { $0 + "\($1.name)=\($1.value);" }
             }
         }
@@ -81,6 +82,7 @@ open class RequestModel: Codable {
         code = responseHttp.statusCode
         responseHeaders = responseHttp.allHeaderFields as? [String: String]
     }
+    
     
     var curlRequest: String {
         var components = ["$ curl -v"]
@@ -94,10 +96,9 @@ open class RequestModel: Codable {
         if method != "GET" {
             components.append("-X \(method)")
         }
-
+        
         components += headers.map {
             let escapedValue = String(describing: $0.value).replacingOccurrences(of: "\"", with: "\\\"")
-
             return "-H \"\($0.key): \(escapedValue)\""
         }
 
@@ -182,6 +183,6 @@ open class RequestModel: Codable {
         
         let response = PMResponse(name: url.absoluteString, originalRequest: request, status: "", code: code, postmanPreviewlanguage: "html", header: responseHeaders, cookie: [], body: responseBody)
         
-        return PMItem(name: name, item: nil, protocolProfileBehavior: nil, request: request, response: [response])
+        return PMItem(name: name, item: nil, request: request, response: [response])
     }
 }
