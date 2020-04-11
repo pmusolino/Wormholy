@@ -31,16 +31,9 @@ struct CustomSelfAwareHelper {
     }
 }
 
-extension UIApplication {
-    
-    private static let runOnce: Void = {
+// The class used by StarterEnginer (objc) to start all the process.
+class StarterEngine: NSObject {
+    @objc static func appWillLaunch(_: Notification) {
         CustomSelfAwareHelper.harmlessFunction()
-    }()
-    
-    override open var next: UIResponder? {
-        // Called before applicationDidFinishLaunching
-        UIApplication.runOnce
-        return super.next
     }
-    
 }
