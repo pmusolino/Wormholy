@@ -40,8 +40,9 @@ open class RequestModel: Codable {
         code = 0
         
         
-        // collecting all HTTP Request headers
+        // collect all HTTP Request headers except the "Cookie" header. Many request representations treat cookies with special parameters or structures. For cookie collection, refer to the bottom part of this method
         session?.configuration.httpAdditionalHeaders?
+            .filter {  $0.0 != AnyHashable("Cookie") }
             .forEach { element in
                 guard let key = element.0 as? String, let value = element.1 as? String else { return }
                 headers[key] = value
@@ -68,7 +69,13 @@ open class RequestModel: Codable {
             }
         }
         
-        // collect cookies associated with the target host
+        //  collect cookies associated with the target host
+        //  TODO: Add the else branch.
+        /*  With the condition below, it is handled only the case where session.configuration.httpShouldSetCookies == true.
+            Some developers could opt to handle cookie manually using the "Cookie" header stored in httpAdditionalHeaders
+            and disabling the handling provided by URLSessionConfiguration (httpShouldSetCookies == false).
+            See: https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration/1411589-httpshouldsetcookies?language=objc
+        */
         if let session = session, let url = request.url, session.configuration.httpShouldSetCookies {
             if let cookieStorage = session.configuration.httpCookieStorage,
                 let cookies = cookieStorage.cookies(for: url), !cookies.isEmpty {
