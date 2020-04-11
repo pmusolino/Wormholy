@@ -58,7 +58,7 @@ class RequestDetailViewController: WHBaseViewController {
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
-            ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+            ac.popoverPresentationController?.barButtonItem = sender
         }
         present(ac, animated: true, completion: nil)
     }
