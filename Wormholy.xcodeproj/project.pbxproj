@@ -327,15 +327,6 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
-		64DD525823F835A100AB92C4 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				45C51A1620A1FDBC006933CE /* module.modulemap */,
-				45C51A1720A20B38006933CE /* Wormholy.h */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
 		64DD526E23F9B7EB00AB92C4 /* Postman */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,10 +338,11 @@
 		8933C7811EB5B7E0000D00A4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				64DD525823F835A100AB92C4 /* include */,
 				8933C7841EB5B820000D00A4 /* Wormholy.swift */,
 				455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */,
 				455818C2207D61A100D2F954 /* Storage.swift */,
+				45C51A1620A1FDBC006933CE /* module.modulemap */,
+				45C51A1720A20B38006933CE /* Wormholy.h */,
 				451C9E532080E592002A34BC /* UI */,
 				451C9E562080E5F0002A34BC /* Subclasses */,
 				455818CA207D647900D2F954 /* Objc */,

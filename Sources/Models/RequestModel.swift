@@ -147,12 +147,9 @@ open class RequestModel: Codable {
             headers.append(PMHeader(key: header.0, value: header.1))
         }
         
-        let rawBody: String
+        var rawBody: String = ""
         if let httpBodyData = httpBody, let httpBody = String(data: httpBodyData, encoding: .utf8) {
             rawBody = httpBody
-        }
-        else {
-            rawBody = ""
         }
         
         let hostList = host.split(separator: ".")
