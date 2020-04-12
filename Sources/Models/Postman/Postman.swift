@@ -67,6 +67,5 @@ struct PMResponse: Codable {
     enum CodingKeys: String, CodingKey {
         case name, originalRequest, status, code, header, cookie, body
         case postmanPreviewlanguage = "_postman_previewlanguage"
-
     }
 }
