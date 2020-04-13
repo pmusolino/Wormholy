@@ -110,8 +110,10 @@ open class RequestModel: Codable {
         }
 
         if let httpBodyData = httpBody, let httpBody = String(data: httpBodyData, encoding: .utf8) {
-            var escapedBody = httpBody.replacingOccurrences(of: "\\\"", with: "\\\\\"")
-            escapedBody = escapedBody.replacingOccurrences(of: "\"", with: "\\\"")
+            // the following replacingOccurrences handles cases where httpBody already contains the escape \ character before the double quotation mark (") character
+            var escapedBody = httpBody.replacingOccurrences(of: "\\\"", with: "\\\\\"") // \" -> \\\"
+            // the following replacingOccurrences escapes the character double quotation mark (")
+            escapedBody = escapedBody.replacingOccurrences(of: "\"", with: "\\\"") // " -> \"
 
             components.append("-d \"\(escapedBody)\"")
         }
