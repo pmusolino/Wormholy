@@ -333,7 +333,7 @@
 				454BBA362087B64E00EB13E9 /* Utils */,
 				451C9E5C2080EFC4002A34BC /* Support Files */,
 			);
-			path = Sources;
+			path = Sources/Wormholy;
 			sourceTree = "<group>";
 		};
 		8933C7831EB5B7EB000D00A4 /* Tests */ = {
