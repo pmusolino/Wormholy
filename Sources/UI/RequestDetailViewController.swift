@@ -28,7 +28,7 @@ class RequestDetailViewController: WHBaseViewController {
             title = URL(string: urlString)?.path
         }
         
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent(_:)))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(openActionSheet(_:)))
         navigationItem.rightBarButtonItems = [shareButton]
         
         tableView.estimatedRowHeight = 100.0
@@ -42,19 +42,30 @@ class RequestDetailViewController: WHBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @objc func shareContent(_ sender: UIBarButtonItem){
+    // MARK: - Actions
+    @objc func openActionSheet(_ sender: UIBarButtonItem){
+        let ac = UIAlertController(title: "Wormholy", message: "Choose an option", preferredStyle: .actionSheet)
+        
+        ac.addAction(UIAlertAction(title: "Share", style: .default) { [weak self] (action) in
+            self?.shareContent(sender)
+        })
+        ac.addAction(UIAlertAction(title: "Share (request as cURL)", style: .default) { [weak self] (action) in
+            self?.shareContent(sender, requestExportOption: .curl)
+        })
+        ac.addAction(UIAlertAction(title: "Share as Postman Collection", style: .default) { [weak self] (action) in
+            self?.shareContent(sender, requestExportOption: .postman)
+        })
+        ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
+        })
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            ac.popoverPresentationController?.barButtonItem = sender
+        }
+        present(ac, animated: true, completion: nil)
+    }
+    
+    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestResponseExportOption = .flat){
         if let request = request{
-            let textShare = [RequestModelBeautifier.txtExport(request: request)]
-            let customItem = CustomActivity(title: "Save to the desktop", image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
-                guard let sharedStrings = sharedItems as? [String] else { return }
-                
-                for string in sharedStrings {
-                    FileHandler.writeTxtFileOnDesktop(text: string, fileName: "\(Int(Date().timeIntervalSince1970))-wormholy.txt")
-                }
-            }
-            let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
-            activityViewController.popoverPresentationController?.barButtonItem = sender
-            self.present(activityViewController, animated: true, completion: nil)
+            ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: [request], requestExportOption: requestExportOption)
         }
     }
     
@@ -130,10 +141,10 @@ extension RequestDetailViewController: UITableViewDelegate{
         
         switch section.type {
         case .requestBody:
-            openBodyDetailVC(title: "Request body", body: request?.httpBody)
+            openBodyDetailVC(title: "Request Body", body: request?.httpBody)
             break
         case .responseBody:
-            openBodyDetailVC(title: "Response body", body: request?.dataResponse)
+            openBodyDetailVC(title: "Response Body", body: request?.dataResponse)
             break
         default:
             break

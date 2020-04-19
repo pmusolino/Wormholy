@@ -89,10 +89,17 @@ class RequestsViewController: WHBaseViewController {
         ac.addAction(UIAlertAction(title: "Share", style: .default) { [weak self] (action) in
             self?.shareContent(sender)
         })
+        
+        ac.addAction(UIAlertAction(title: "Share as cURL", style: .default) { [weak self] (action) in
+            self?.shareContent(sender, requestExportOption: .curl)
+        })
+        ac.addAction(UIAlertAction(title: "Share as Postman Collection", style: .default) { [weak self] (action) in
+                   self?.shareContent(sender, requestExportOption: .postman)
+               })
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
-            ac.popoverPresentationController?.barButtonItem = navigationItem.leftBarButtonItem
+            ac.popoverPresentationController?.barButtonItem = sender
         }
         present(ac, animated: true, completion: nil)
     }
@@ -103,22 +110,8 @@ class RequestsViewController: WHBaseViewController {
         collectionView.reloadData()
     }
     
-    func shareContent(_ sender: UIBarButtonItem){
-        var text = ""
-        for request in filteredRequests{
-            text = text + RequestModelBeautifier.txtExport(request: request)
-        }
-        let textShare = [text]
-        let customItem = CustomActivity(title: "Save to the desktop", image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
-            guard let sharedStrings = sharedItems as? [String] else { return }
-            
-            for string in sharedStrings {
-                FileHandler.writeTxtFileOnDesktop(text: string, fileName: "\(Int(Date().timeIntervalSince1970))-wormholy.txt")
-            }
-        }
-        let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
-        activityViewController.popoverPresentationController?.barButtonItem = sender
-        self.present(activityViewController, animated: true, completion: nil)
+    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestResponseExportOption = .flat){
+        ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: filteredRequests, requestExportOption: requestExportOption)
     }
     
     // MARK: - Navigation
