@@ -40,6 +40,7 @@
 		455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */; };
 		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		457202A6244CA7BE0020AA2A /* WormholyDemo-postman_collection.json in Resources */ = {isa = PBXBuildFile; fileRef = 457202A5244CA7BE0020AA2A /* WormholyDemo-postman_collection.json */; };
 		45820CF6208170F400CA74D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45820CF5208170F400CA74D6 /* Colors.swift */; };
 		45868F1420F4E2B10024C77B /* BodyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */; };
 		45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */; };
@@ -110,6 +111,7 @@
 		455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+Wormholy.m"; sourceTree = "<group>"; };
 		455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+Wormholy.h"; sourceTree = "<group>"; };
 		455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormholyMethodSwizzling.h; sourceTree = "<group>"; };
+		457202A5244CA7BE0020AA2A /* WormholyDemo-postman_collection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "WormholyDemo-postman_collection.json"; sourceTree = "<group>"; };
 		45820CF5208170F400CA74D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyDetailViewController.swift; sourceTree = "<group>"; };
 		45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionableTableViewCell.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				64DD526F23F9B7FB00AB92C4 /* Postman.swift */,
+				457202A5244CA7BE0020AA2A /* WormholyDemo-postman_collection.json */,
 			);
 			path = Postman;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				451C9E552080E5E4002A34BC /* Flow.storyboard in Resources */,
 				451C9E6320810472002A34BC /* RequestCell.xib in Resources */,
 				45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */,
+				457202A6244CA7BE0020AA2A /* WormholyDemo-postman_collection.json in Resources */,
 				45868F1C20F4E9790024C77B /* ActionableTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
