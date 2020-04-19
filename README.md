@@ -18,6 +18,8 @@
   - [x] Swift & Objective-C compatibility.
   - [x] Also works with external libraries like `Alamofire` & `AFNetworking`.
   - [x] Ability to blacklist hosts from being recorded using the array `blacklistedHosts`.
+  - [x] Ability to export API requests as Postman collection
+  - [x] Ability to share cURL rappresentation of API requests
   
   <p align="center">
   <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
