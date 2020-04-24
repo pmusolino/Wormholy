@@ -22,7 +22,6 @@ class WHNavigationController: UINavigationController {
         // Appearance
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
-//            navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.label]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.label]
             navBarAppearance.backgroundColor = UIColor.systemBackground
