@@ -21,6 +21,14 @@ class RequestDetailViewController: WHBaseViewController {
         Section(name: "Response Body", type: .responseBody)
     ]
     
+    var labelTextColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return .label
+        } else {
+            return .black
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,7 +101,6 @@ extension RequestDetailViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "RequestTitleSectionView") as! RequestTitleSectionView
-        header.contentView.backgroundColor = Colors.Gray.lighestGray
         header.titleLabel.text = sections[section].name
         return header
     }
@@ -103,17 +110,17 @@ extension RequestDetailViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+                
         let section = sections[indexPath.section]
         if let req = request{
             switch section.type {
             case .overview:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.overview(request: req)
+                cell.textView.attributedText = RequestModelBeautifier.overview(request: req).chageTextColor(to: labelTextColor)
                 return cell
             case .requestHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.header(req.headers)
+                cell.textView.attributedText = RequestModelBeautifier.header(req.headers).chageTextColor(to: labelTextColor)
                 return cell
             case .requestBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
@@ -121,7 +128,7 @@ extension RequestDetailViewController: UITableViewDataSource{
                 return cell
             case .responseHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.header(req.responseHeaders)
+                cell.textView.attributedText = RequestModelBeautifier.header(req.responseHeaders).chageTextColor(to: labelTextColor)
                 return cell
             case .responseBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell

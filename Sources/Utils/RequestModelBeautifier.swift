@@ -104,6 +104,11 @@ extension NSMutableAttributedString {
         append(normal)
         return self
     }
+    
+    func chageTextColor(to color: UIColor) -> NSMutableAttributedString {
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color , range: NSRange(location: 0,length: string.count))
+        return self
+    }
 }
 
 extension Dictionary {
