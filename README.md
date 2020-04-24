@@ -23,6 +23,7 @@
   
   <p align="center">
   <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
+  <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens_dark_mode.png" alt="Icon"/>
 </p>
   
 ## Requirements
