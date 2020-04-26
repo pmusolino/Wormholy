@@ -21,9 +21,8 @@
   - [x] Ability to export API requests as Postman collection
   - [x] Ability to share cURL rappresentation of API requests
   
-  <p align="center">
-  <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
-  <img src="screens_dark_mode.jpg" alt="Icon"/>
+<p align="center">
+<img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
 </p>
   
 ## Requirements
