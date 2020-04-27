@@ -73,7 +73,7 @@ public class Wormholy: NSObject
         guard UIViewController.currentViewController()?.isKind(of: WHBaseViewController.classForCoder()) == false && UIViewController.currentViewController()?.isKind(of: WHNavigationController.classForCoder()) == false else {
             return
         }
-        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        let storyboard = UIStoryboard.wormholyStoryboard
         if let initialVC = storyboard.instantiateInitialViewController(){
             initialVC.modalPresentationStyle = .fullScreen
             UIViewController.currentViewController()?.present(initialVC, animated: true, completion: nil)
@@ -81,7 +81,7 @@ public class Wormholy: NSObject
     }
     
     @objc public static var wormholyFlow: UIViewController? {
-        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        let storyboard = UIStoryboard.wormholyStoryboard
         return storyboard.instantiateInitialViewController()
     }
     

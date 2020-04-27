@@ -105,7 +105,7 @@ extension NSMutableAttributedString {
         return self
     }
     
-    func chageTextColor(to color: UIColor) -> NSMutableAttributedString {
+    func changeTextColor(to color: UIColor) -> NSMutableAttributedString {
         self.addAttribute(NSAttributedString.Key.foregroundColor, value: color , range: NSRange(location: 0,length: string.count))
         return self
     }

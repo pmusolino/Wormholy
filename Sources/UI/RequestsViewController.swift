@@ -8,21 +8,21 @@
 
 import UIKit
 
+/// Displays the list of all requests that have been made.
 class RequestsViewController: WHBaseViewController {
     
     @IBOutlet weak var collectionView: WHCollectionView!
-    var filteredRequests: [RequestModel] = []
-    var searchController: UISearchController?
+    
+    private var filteredRequests: [RequestModel] = []
+    private var searchController: UISearchController?
+    private let requestCellIdentifier = String(describing: RequestCell.self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addNavigationItems()
         addSearchController()
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(openActionSheet(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
-        
-        collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
+        registerNibs()
         
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
@@ -31,28 +31,19 @@ class RequestsViewController: WHBaseViewController {
                 self?.collectionView.reloadData()
             }
         }
-        
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate(alongsideTransition: { (context) in
-            //Place code here to perform animations during the rotation.
-            
-        }) { (completionContext) in
-            //Code here will execute after the rotation has finished.
-            (self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 76)
-            self.collectionView.reloadData()
-        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    private func registerNibs() {
+        collectionView?.register(UINib(nibName: String(describing: RequestCell.self), bundle: Bundle.wormholyBundle), forCellWithReuseIdentifier: requestCellIdentifier)
+    }
+    
     //  MARK: - Search
-    func addSearchController(){
+    
+    private func addSearchController(){
         searchController = UISearchController(searchResultsController: nil)
         searchController?.searchResultsUpdater = self
         if #available(iOS 9.1, *) {
@@ -69,18 +60,17 @@ class RequestsViewController: WHBaseViewController {
         definesPresentationContext = true
     }
     
-    func filterRequests(text: String?) -> [RequestModel]{
-        guard text != nil && text != "" else {
-            return Storage.shared.requests
-        }
+    private func filterRequests(text: String?) -> [RequestModel]{
+        guard let searchText = text, !searchText.isEmpty else { return Storage.shared.requests }
         
-        return Storage.shared.requests.filter { (request) -> Bool in
-            return request.url.range(of: text!, options: .caseInsensitive) != nil ? true : false
+        return Storage.shared.requests.filter {
+             $0.url.range(of: searchText, options: .caseInsensitive) != nil
         }
     }
     
     // MARK: - Actions
-    @objc func openActionSheet(_ sender: UIBarButtonItem){
+    
+    @objc private func openActionSheet(_ sender: UIBarButtonItem){
         let ac = UIAlertController(title: "Wormholy", message: "Choose an option", preferredStyle: .actionSheet)
         
         ac.addAction(UIAlertAction(title: "Clear", style: .default) { [weak self] (action) in
@@ -104,24 +94,30 @@ class RequestsViewController: WHBaseViewController {
         present(ac, animated: true, completion: nil)
     }
     
-    func clearRequests() {
+    private func clearRequests() {
         Storage.shared.clearRequests()
         filteredRequests = Storage.shared.requests
         collectionView.reloadData()
     }
     
-    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestResponseExportOption = .flat){
+    private func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestResponseExportOption = .flat){
         ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: filteredRequests, requestExportOption: requestExportOption)
     }
     
     // MARK: - Navigation
-    @objc func done(){
+    
+    private func addNavigationItems() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "More", style: .plain, target: self, action: #selector(openActionSheet(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+    }
+    
+    @objc private func done(){
         self.dismiss(animated: true, completion: nil)
     }
     
-    func openRequestDetailVC(request: RequestModel){
-        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
-        if let requestDetailVC = storyboard.instantiateViewController(withIdentifier: "RequestDetailViewController") as? RequestDetailViewController{
+    private func openRequestDetailVC(request: RequestModel){
+        let storyboard = UIStoryboard.wormholyStoryboard
+        if let requestDetailVC = storyboard.instantiateViewController(withIdentifier: String(describing: RequestDetailViewController.self)) as? RequestDetailViewController{
             requestDetailVC.request = request
             self.show(requestDetailVC, sender: self)
         }
@@ -132,13 +128,13 @@ class RequestsViewController: WHBaseViewController {
     }
 }
 
-extension RequestsViewController: UICollectionViewDataSource{
+extension RequestsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredRequests.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RequestCell", for: indexPath) as! RequestCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: requestCellIdentifier, for: indexPath) as! RequestCell
         
         cell.populate(request: filteredRequests[indexPath.item])
         return cell
