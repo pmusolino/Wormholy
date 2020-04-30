@@ -44,7 +44,7 @@ extension UIViewController{
         guard let viewController = viewController else { return nil }
         
         if let viewController = viewController.presentedViewController {
-            return currentViewController(viewController)
+                return currentViewController(viewController)
         } else if let viewController = viewController as? UINavigationController {
             if let viewController = viewController.visibleViewController {
                 return currentViewController(viewController)
