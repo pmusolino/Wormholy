@@ -15,6 +15,11 @@ public class Wormholy: NSObject
         get { return CustomHTTPProtocol.blacklistedHosts }
         set { CustomHTTPProtocol.blacklistedHosts = newValue }
     }
+  
+    @objc public static var limit: NSNumber? {
+        get { Storage.limit }
+        set { Storage.limit = newValue }
+    }
 
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in
