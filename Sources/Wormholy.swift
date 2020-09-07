@@ -11,9 +11,15 @@ import UIKit
 
 public class Wormholy: NSObject
 {
+    @available(*, deprecated, renamed: "ignoredHosts")
     @objc public static var blacklistedHosts: [String] {
-        get { return CustomHTTPProtocol.blacklistedHosts }
-        set { CustomHTTPProtocol.blacklistedHosts = newValue }
+        get { return CustomHTTPProtocol.ignoredHosts }
+        set { CustomHTTPProtocol.ignoredHosts = newValue }
+    }
+
+    @objc public static var ignoredHosts: [String] {
+        get { return CustomHTTPProtocol.ignoredHosts }
+        set { CustomHTTPProtocol.ignoredHosts = newValue }
     }
 
     @objc public static func swiftyLoad() {
