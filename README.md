@@ -17,7 +17,7 @@
   - [x] Find, isolate and fix bugs quickly.
   - [x] Swift & Objective-C compatibility.
   - [x] Also works with external libraries like `Alamofire` & `AFNetworking`.
-  - [x] Ability to blacklist hosts from being recorded using the array `blacklistedHosts`.
+  - [x] Ability to blacklist hosts from being recorded using the array `ignoredHosts`.
   - [x] Ability to export API requests as Postman collection
   - [x] Ability to share cURL rappresentation of API requests
   
