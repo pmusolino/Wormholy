@@ -17,11 +17,15 @@ public class Wormholy: NSObject
         set { CustomHTTPProtocol.ignoredHosts = newValue }
     }
 
+    /// Hosts that will be ignored from being recorded
+    ///
     @objc public static var ignoredHosts: [String] {
         get { return CustomHTTPProtocol.ignoredHosts }
         set { CustomHTTPProtocol.ignoredHosts = newValue }
     }
   
+    /// Limit the logging count
+    ///
     @objc public static var limit: NSNumber? {
         get { Storage.limit }
         set { Storage.limit = newValue }
