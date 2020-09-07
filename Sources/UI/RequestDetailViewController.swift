@@ -41,9 +41,9 @@ class RequestDetailViewController: WHBaseViewController {
         
         tableView.estimatedRowHeight = 100.0
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(UINib(nibName: "TextTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "TextTableViewCell")
-        tableView.register(UINib(nibName: "ActionableTableViewCell", bundle:WHBundle.getBundle()), forCellReuseIdentifier: "ActionableTableViewCell")
-        tableView.register(UINib(nibName: "RequestTitleSectionView", bundle:WHBundle.getBundle()), forHeaderFooterViewReuseIdentifier: "RequestTitleSectionView")
+        tableView.register(UINib(nibName: "TextTableViewCell", bundle: Bundle.wormholyBundle), forCellReuseIdentifier: "TextTableViewCell")
+        tableView.register(UINib(nibName: "ActionableTableViewCell", bundle: Bundle.wormholyBundle), forCellReuseIdentifier: "ActionableTableViewCell")
+        tableView.register(UINib(nibName: "RequestTitleSectionView", bundle: Bundle.wormholyBundle), forHeaderFooterViewReuseIdentifier: "RequestTitleSectionView")
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,7 +79,7 @@ class RequestDetailViewController: WHBaseViewController {
     
     // MARK: - Navigation
     func openBodyDetailVC(title: String?, body: Data?){
-        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        let storyboard = UIStoryboard.wormholyStoryboard
         if let requestDetailVC = storyboard.instantiateViewController(withIdentifier: "BodyDetailViewController") as? BodyDetailViewController{
             requestDetailVC.title = title
             requestDetailVC.data = body
@@ -88,7 +88,6 @@ class RequestDetailViewController: WHBaseViewController {
     }
     
 }
-
 
 extension RequestDetailViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -116,11 +115,11 @@ extension RequestDetailViewController: UITableViewDataSource{
             switch section.type {
             case .overview:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.overview(request: req).chageTextColor(to: labelTextColor)
+                cell.textView.attributedText = RequestModelBeautifier.overview(request: req).changeTextColor(to: labelTextColor)
                 return cell
             case .requestHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.header(req.headers).chageTextColor(to: labelTextColor)
+                cell.textView.attributedText = RequestModelBeautifier.header(req.headers).changeTextColor(to: labelTextColor)
                 return cell
             case .requestBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
@@ -128,7 +127,7 @@ extension RequestDetailViewController: UITableViewDataSource{
                 return cell
             case .responseHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.header(req.responseHeaders).chageTextColor(to: labelTextColor)
+                cell.textView.attributedText = RequestModelBeautifier.header(req.responseHeaders).changeTextColor(to: labelTextColor)
                 return cell
             case .responseBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell

@@ -1,27 +1,48 @@
 //
-//  WHDate.swift
+//  Extensions.swift
 //  Wormholy-iOS
 //
-//  Created by Paolo Musolino on 18/04/18.
-//  Copyright © 2018 Wormholy. All rights reserved.
+//  Created by Sagar Dagdu on 4/27/20.
+//  Copyright © 2020 Wormholy. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-extension Date{
+///This file is a centralized place for all the extensions used in the framework.
+
+extension Bundle {
+    static var wormholyBundle: Bundle {
+        let podBundle = Bundle(for: Wormholy.classForCoder())
+        if let bundleURL = podBundle.url(forResource: "Wormholy", withExtension: "bundle"){
+            if let bundle = Bundle(url: bundleURL) {
+                return bundle
+            }
+        }
+        
+        return Bundle(for: Wormholy.classForCoder())
+    }
+}
+
+extension String {
+    //substrings of equal length
+    func characters(n: Int) -> String {
+        return String(prefix(n))
+    }
+}
+
+extension Date {
     func stringWithFormat(dateFormat: String, timezone: TimeZone? = nil) -> String?{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
-        if timezone != nil{
-            dateFormatter.timeZone = timezone!
+        if let timezone = timezone {
+            dateFormatter.timeZone = timezone
         }
         return dateFormatter.string(from: self)
     }
 }
 
 extension Double {
-    func formattedMilliseconds() -> String{
-        
+    func formattedMilliseconds() -> String {
         let rounded = self
         if rounded < 1000 {
             return "\(Int(rounded))ms"
@@ -50,3 +71,8 @@ extension Double {
     }
 }
 
+extension UIStoryboard {
+    static var wormholyStoryboard: UIStoryboard {
+        return UIStoryboard(name: "Flow", bundle: Bundle.wormholyBundle)
+    }
+}

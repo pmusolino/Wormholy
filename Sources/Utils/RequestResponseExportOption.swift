@@ -16,4 +16,13 @@ enum RequestResponseExportOption {
     case curl
     /// Request and response are exported as Postman collection (v.2.1). Response is attached as "example".
     case postman
+    
+    func filenameSuffix() -> String {
+        switch self {
+        case .flat, .curl:
+            return "-wormholy.txt"
+        case .postman:
+            return "-postman_collection.json"
+        }
+    }
 }
