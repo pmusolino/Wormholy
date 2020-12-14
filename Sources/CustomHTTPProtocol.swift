@@ -71,7 +71,10 @@ public class CustomHTTPProtocol: URLProtocol {
     }
     
     private func body(from request: URLRequest) -> Data? {
-        return request.httpBody
+        /// The receiver will have either an HTTP body or an HTTP body stream only one may be set for a request.
+        /// A HTTP body stream is preserved when copying an NSURLRequest object,
+        /// but is lost when a request is archived using the NSCoding protocol.
+        return request.httpBody ?? request.httpBodyStream?.readfully()
     }
 
     /// Inspects the request to see if the host has not been blacklisted and can be handled by this URL protocol.

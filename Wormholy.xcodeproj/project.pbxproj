@@ -45,6 +45,7 @@
 		45868F1420F4E2B10024C77B /* BodyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */; };
 		45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */; };
 		45868F1C20F4E9790024C77B /* ActionableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45868F1A20F4E9790024C77B /* ActionableTableViewCell.xib */; };
+		45BE33CD258787AB000AEA0E /* InputStream+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE33CC258787AB000AEA0E /* InputStream+Utils.swift */; };
 		45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EA20860D14007D0D17 /* WHTableView.swift */; };
 		45C4F4F020860DC0007D0D17 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */; };
 		45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */; };
@@ -116,6 +117,7 @@
 		45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyDetailViewController.swift; sourceTree = "<group>"; };
 		45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionableTableViewCell.swift; sourceTree = "<group>"; };
 		45868F1A20F4E9790024C77B /* ActionableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActionableTableViewCell.xib; sourceTree = "<group>"; };
+		45BE33CC258787AB000AEA0E /* InputStream+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputStream+Utils.swift"; sourceTree = "<group>"; };
 		45C4F4EA20860D14007D0D17 /* WHTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTableView.swift; sourceTree = "<group>"; };
 		45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */,
 				64DD525923F84A5F00AB92C4 /* RequestResponseExportOption.swift */,
 				64DD525B23F86B3D00AB92C4 /* ShareUtils.swift */,
+				45BE33CC258787AB000AEA0E /* InputStream+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */,
 				451C9E6B20810BBD002A34BC /* RequestsViewController.swift in Sources */,
 				455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */,
+				45BE33CD258787AB000AEA0E /* InputStream+Utils.swift in Sources */,
 				45FF5C54208794720084BD50 /* WHDate.swift in Sources */,
 				454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */,
 				451C9E65208106D1002A34BC /* WHLabel.swift in Sources */,
