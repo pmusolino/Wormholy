@@ -31,6 +31,13 @@ public class Wormholy: NSObject
         set { Storage.limit = newValue }
     }
 
+    /// Default filter for the search box
+    ///
+    @objc public static var defaultFilter: String? {
+        get { Storage.defaultFilter }
+        set { Storage.defaultFilter = newValue }
+    }
+
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()

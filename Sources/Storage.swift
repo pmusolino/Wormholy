@@ -13,6 +13,8 @@ open class Storage: NSObject {
     public static let shared: Storage = Storage()
   
     public static var limit: NSNumber? = nil
+
+    public static var defaultFilter: String? = nil
     
     open var requests: [RequestModel] = []
     
