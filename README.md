@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/logo.png" alt="Icon"/>
 </p>
 
-  [![Language](https://img.shields.io/badge/Swift-4-orange.svg)]()
+  [![Language](https://img.shields.io/badge/Swift-5-orange.svg)]()
   [![Pod version](https://img.shields.io/cocoapods/v/Wormholy.svg?style=flat)](https://cocoapods.org/pods/Wormholy)
   
   Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
@@ -17,17 +17,20 @@
   - [x] Find, isolate and fix bugs quickly.
   - [x] Swift & Objective-C compatibility.
   - [x] Also works with external libraries like `Alamofire` & `AFNetworking`.
+  - [x] Ability to blacklist hosts from being recorded using the array `ignoredHosts`.
+  - [x] Ability to export API requests as Postman collection
+  - [x] Ability to share cURL rappresentation of API requests
   
-  <p align="center">
-  <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
+<p align="center">
+<img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
 </p>
   
 ## Requirements
 ----------------
 
 - iOS 9.0+
-- Xcode 9+
-- Swift 4, 4.1 & 4.2
+- Xcode 10+
+- Swift 4, 4.1, 4.2 and Swift 5
 
 
 ## Usage
@@ -73,11 +76,16 @@ Run `carthage update` to build the framework and drag the built `Wormholy.framew
 
 ## Acknowledgements
 
-Made with ❤️ by [Paolo Musolino](https://github.com/pmusolino).
-Follow me on:
-[Twitter](http://twitter.com/pmusolino)
-[Linkedin](https://www.linkedin.com/in/paolomusolino/)
-[Facebook](https://www.facebook.com/paolomusolino)
+**Made with ❤️ by [Paolo Musolino](https://github.com/pmusolino).**
+
+***Follow me on:***
+#### 💼 [Linkedin](https://www.linkedin.com/in/paolomusolino/)
+
+#### 🤖 [Twitter](https://twitter.com/pmusolino)
+
+#### 🌇 [Instagram](https://www.instagram.com/pmusolino/)
+
+#### 👨🏼‍🎤 [Facebook](https://www.facebook.com/paolomusolino)
 
 ## MIT License
 ----------------

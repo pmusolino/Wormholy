@@ -47,7 +47,7 @@ class RequestModelBeautifier: NSObject {
         }
         
         if let data = splitLength != nil ? String(data: body!, encoding: .utf8)?.characters(n: splitLength!) : String(data: body!, encoding: .utf8){
-            return data
+            return data.prettyPrintedJSON ?? data
         }
         
         return "-"
@@ -62,6 +62,23 @@ class RequestModelBeautifier: NSObject {
         txt.append(header(request.headers).string + "\n\n")
         txt.append("*** Request Body *** \n")
         txt.append(body(request.httpBody) + "\n\n")
+        txt.append("*** Response Header *** \n")
+        txt.append(header(request.responseHeaders).string + "\n\n")
+        txt.append("*** Response Body *** \n")
+        txt.append(body(request.dataResponse) + "\n\n")
+        txt.append("------------------------------------------------------------------------\n")
+        txt.append("------------------------------------------------------------------------\n")
+        txt.append("------------------------------------------------------------------------\n\n\n\n")
+        return txt
+    }
+    
+    static func curlExport(request: RequestModel) -> String{
+        
+        var txt: String = ""
+        txt.append("*** Overview *** \n")
+        txt.append(overview(request: request).string + "\n\n")
+        txt.append("*** curl Request *** \n")
+        txt.append(request.curlRequest + "\n\n")
         txt.append("*** Response Header *** \n")
         txt.append(header(request.responseHeaders).string + "\n\n")
         txt.append("*** Response Body *** \n")
@@ -86,5 +103,32 @@ extension NSMutableAttributedString {
         let normal = NSMutableAttributedString(string:text, attributes: attrs)
         append(normal)
         return self
+    }
+    
+    func chageTextColor(to color: UIColor) -> NSMutableAttributedString {
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color , range: NSRange(location: 0,length: string.count))
+        return self
+    }
+}
+
+extension Dictionary {
+    var prettyPrintedJSON: String? {
+        do {
+            let data: Data = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+            return String(data: data, encoding: .utf8)
+        } catch _ {
+            return nil
+        }
+    }
+}
+
+extension String {
+    var prettyPrintedJSON: String? {
+        guard let stringData = self.data(using: .utf8),
+            let object = try? JSONSerialization.jsonObject(with: stringData, options: []),
+            let jsonData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+            let formattedJSON = String(data: jsonData, encoding: .utf8) else { return nil }
+
+        return formattedJSON.replacingOccurrences(of: "\\/", with: "/")
     }
 }

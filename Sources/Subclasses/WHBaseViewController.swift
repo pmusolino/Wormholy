@@ -12,7 +12,6 @@ class WHBaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,7 +56,7 @@ extension UIViewController{
                 return currentViewController(viewController.selectedViewController)
             }
         } else if let viewController = viewController.presentedViewController {
-            return viewController
+            return currentViewController(viewController)
         } else if viewController.children.count > 0 {
             return viewController.children[0]
         } else {
@@ -70,5 +69,7 @@ extension UIViewController{
         if motion == .motionShake && Wormholy.shakeEnabled {
             NotificationCenter.default.post(name: fireWormholy, object: nil)
         }
+        
+        next?.motionBegan(motion, with: event)
     }
 }

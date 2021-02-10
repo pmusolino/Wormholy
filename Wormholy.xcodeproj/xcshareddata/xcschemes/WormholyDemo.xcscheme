@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52D6DA0E1BF000BD002C0205"
-               BuildableName = "Wormholy.framework"
-               BlueprintName = "Wormholy-macOS"
+               BlueprintIdentifier = "45087188207E59FE00EE2D31"
+               BuildableName = "WormholyDemo.app"
+               BlueprintName = "WormholyDemo"
                ReferencedContainer = "container:Wormholy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,28 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52D6DA0E1BF000BD002C0205"
-            BuildableName = "Wormholy.framework"
-            BlueprintName = "Wormholy-macOS"
-            ReferencedContainer = "container:Wormholy.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DD7502791C68FCFC006590AF"
-               BuildableName = "Wormholy-macOS Tests.xctest"
-               BlueprintName = "Wormholy-macOS Tests"
-               ReferencedContainer = "container:Wormholy.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -60,15 +40,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52D6DA0E1BF000BD002C0205"
-            BuildableName = "Wormholy.framework"
-            BlueprintName = "Wormholy-macOS"
+            BlueprintIdentifier = "45087188207E59FE00EE2D31"
+            BuildableName = "WormholyDemo.app"
+            BlueprintName = "WormholyDemo"
             ReferencedContainer = "container:Wormholy.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -76,15 +57,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52D6DA0E1BF000BD002C0205"
-            BuildableName = "Wormholy.framework"
-            BlueprintName = "Wormholy-macOS"
+            BlueprintIdentifier = "45087188207E59FE00EE2D31"
+            BuildableName = "WormholyDemo.app"
+            BlueprintName = "WormholyDemo"
             ReferencedContainer = "container:Wormholy.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

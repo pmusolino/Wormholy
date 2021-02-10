@@ -13,12 +13,12 @@ class WHTextView: UITextView {
 }
 
 extension WHTextView {
-    func highlights(text: String?, with color: UIColor = UIColor.green, font: UIFont = UIFont.boldSystemFont(ofSize: 14)) -> [NSTextCheckingResult] {
+    func highlights(text: String?, with color: UIColor = UIColor.green, font: UIFont = UIFont.systemFont(ofSize: 14), highlightedFont: UIFont = UIFont.boldSystemFont(ofSize: 14)) -> [NSTextCheckingResult] {
         
         guard let keywordSearch = text?.lowercased(), let textViewText = self.text?.lowercased() else { return [] }
         
         let attributed = NSMutableAttributedString(string: textViewText)
-        attributed.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: NSRange(location: 0, length: self.attributedText.length))
+        attributed.addAttribute(.font, value: font, range: NSRange(location: 0, length: self.attributedText.length))
         
         do {
             let regex = try NSRegularExpression(pattern: keywordSearch, options: .caseInsensitive)
@@ -26,7 +26,7 @@ extension WHTextView {
             
             matches.forEach {
                 attributed.addAttribute(.backgroundColor, value: color, range: $0.range)
-                attributed.addAttribute(.font, value: font, range: $0.range)
+                attributed.addAttribute(.font, value: highlightedFont, range: $0.range)
             }
             self.attributedText = attributed
             

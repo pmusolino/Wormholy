@@ -11,6 +11,26 @@ import UIKit
 
 public class Wormholy: NSObject
 {
+    @available(*, deprecated, renamed: "ignoredHosts")
+    @objc public static var blacklistedHosts: [String] {
+        get { return CustomHTTPProtocol.ignoredHosts }
+        set { CustomHTTPProtocol.ignoredHosts = newValue }
+    }
+
+    /// Hosts that will be ignored from being recorded
+    ///
+    @objc public static var ignoredHosts: [String] {
+        get { return CustomHTTPProtocol.ignoredHosts }
+        set { CustomHTTPProtocol.ignoredHosts = newValue }
+    }
+  
+    /// Limit the logging count
+    ///
+    @objc public static var limit: NSNumber? {
+        get { Storage.limit }
+        set { Storage.limit = newValue }
+    }
+
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()
@@ -43,7 +63,7 @@ public class Wormholy: NSObject
                 return
             }
             
-            let index = urlProtocolClasses?.index(where: { (obj) -> Bool in
+            let index = urlProtocolClasses?.firstIndex(where: { (obj) -> Bool in
                 if obj == protoCls{
                     return true
                 }
@@ -70,8 +90,14 @@ public class Wormholy: NSObject
         }
         let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
         if let initialVC = storyboard.instantiateInitialViewController(){
+            initialVC.modalPresentationStyle = .fullScreen
             UIViewController.currentViewController()?.present(initialVC, animated: true, completion: nil)
         }
+    }
+    
+    @objc public static var wormholyFlow: UIViewController? {
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        return storyboard.instantiateInitialViewController()
     }
     
     @objc public static var shakeEnabled: Bool = {
@@ -92,5 +118,17 @@ public class Wormholy: NSObject
         }
         
         return true
+    }()
+}
+
+extension Wormholy: SelfAware {
+    
+    static func awake() {
+        initializeAction
+    }
+    
+    private static let initializeAction: Void = {
+        swiftyLoad()
+        swiftyInitialize()
     }()
 }

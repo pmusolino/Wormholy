@@ -21,6 +21,14 @@ class RequestDetailViewController: WHBaseViewController {
         Section(name: "Response Body", type: .responseBody)
     ]
     
+    var labelTextColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return .label
+        } else {
+            return .black
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +36,7 @@ class RequestDetailViewController: WHBaseViewController {
             title = URL(string: urlString)?.path
         }
         
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(openActionSheet(_:)))
         navigationItem.rightBarButtonItems = [shareButton]
         
         tableView.estimatedRowHeight = 100.0
@@ -42,19 +50,30 @@ class RequestDetailViewController: WHBaseViewController {
         super.didReceiveMemoryWarning()
     }
     
-    @objc func shareContent(){
+    // MARK: - Actions
+    @objc func openActionSheet(_ sender: UIBarButtonItem){
+        let ac = UIAlertController(title: "Wormholy", message: "Choose an option", preferredStyle: .actionSheet)
+        
+        ac.addAction(UIAlertAction(title: "Share", style: .default) { [weak self] (action) in
+            self?.shareContent(sender)
+        })
+        ac.addAction(UIAlertAction(title: "Share (request as cURL)", style: .default) { [weak self] (action) in
+            self?.shareContent(sender, requestExportOption: .curl)
+        })
+        ac.addAction(UIAlertAction(title: "Share as Postman Collection", style: .default) { [weak self] (action) in
+            self?.shareContent(sender, requestExportOption: .postman)
+        })
+        ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
+        })
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            ac.popoverPresentationController?.barButtonItem = sender
+        }
+        present(ac, animated: true, completion: nil)
+    }
+    
+    func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestResponseExportOption = .flat){
         if let request = request{
-            let textShare = [RequestModelBeautifier.txtExport(request: request)]
-            let customItem = CustomActivity(title: "Save to the desktop", image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
-                guard let sharedStrings = sharedItems as? [String] else { return }
-                
-                for string in sharedStrings {
-                    FileHandler.writeTxtFileOnDesktop(text: string, fileName: "\(Int(Date().timeIntervalSince1970))-wormholy.txt")
-                }
-            }
-            let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            self.present(activityViewController, animated: true, completion: nil)
+            ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: [request], requestExportOption: requestExportOption)
         }
     }
     
@@ -82,7 +101,6 @@ extension RequestDetailViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "RequestTitleSectionView") as! RequestTitleSectionView
-        header.contentView.backgroundColor = Colors.Gray.lighestGray
         header.titleLabel.text = sections[section].name
         return header
     }
@@ -92,17 +110,17 @@ extension RequestDetailViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+                
         let section = sections[indexPath.section]
         if let req = request{
             switch section.type {
             case .overview:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.overview(request: req)
+                cell.textView.attributedText = RequestModelBeautifier.overview(request: req).chageTextColor(to: labelTextColor)
                 return cell
             case .requestHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.header(req.headers)
+                cell.textView.attributedText = RequestModelBeautifier.header(req.headers).chageTextColor(to: labelTextColor)
                 return cell
             case .requestBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
@@ -110,7 +128,7 @@ extension RequestDetailViewController: UITableViewDataSource{
                 return cell
             case .responseHeader:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TextTableViewCell", for: indexPath) as! TextTableViewCell
-                cell.textView.attributedText = RequestModelBeautifier.header(req.responseHeaders)
+                cell.textView.attributedText = RequestModelBeautifier.header(req.responseHeaders).chageTextColor(to: labelTextColor)
                 return cell
             case .responseBody:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ActionableTableViewCell", for: indexPath) as! ActionableTableViewCell
@@ -130,10 +148,10 @@ extension RequestDetailViewController: UITableViewDelegate{
         
         switch section.type {
         case .requestBody:
-            openBodyDetailVC(title: "Request body", body: request?.httpBody)
+            openBodyDetailVC(title: "Request Body", body: request?.httpBody)
             break
         case .responseBody:
-            openBodyDetailVC(title: "Response body", body: request?.dataResponse)
+            openBodyDetailVC(title: "Response Body", body: request?.dataResponse)
             break
         default:
             break

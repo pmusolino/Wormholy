@@ -17,7 +17,7 @@ class BodyDetailViewController: WHBaseViewController {
     @IBOutlet weak var buttonNext: UIBarButtonItem!
 
     static let kPadding: CGFloat = 10.0
-    
+
     var searchController: UISearchController?
     var highlightedWords: [NSTextCheckingResult] = []
     var data: Data?
@@ -26,13 +26,16 @@ class BodyDetailViewController: WHBaseViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(BodyDetailViewController.handleKeyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(BodyDetailViewController.handleKeyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
 
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent))
+        textView.font = UIFont(name: "Courier", size: 14)
+        textView.dataDetectorTypes = UIDataDetectorTypes.link
+
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareContent(_:)))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearch))
         navigationItem.rightBarButtonItems = [searchButton, shareButton]
 
@@ -40,13 +43,14 @@ class BodyDetailViewController: WHBaseViewController {
         buttonNext.isEnabled = false
         addSearchController()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let hud = showLoader(view: view)
         RequestModelBeautifier.body(data) { [weak self] (stringData) in
+            let formattedJSON = stringData
             DispatchQueue.main.sync {
-                self?.textView.text = stringData
+                self?.textView.text = formattedJSON
                 self?.hideLoader(loaderView: hud)
             }
         }
@@ -56,7 +60,7 @@ class BodyDetailViewController: WHBaseViewController {
         super.viewDidAppear(animated)
 
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -88,7 +92,7 @@ class BodyDetailViewController: WHBaseViewController {
         }
         getCursor()
     }
-    
+
     @IBAction func nextStep(_ sender: UIBarButtonItem?) {
         indexOfWord += 1
         if indexOfWord >= highlightedWords.count {
@@ -113,7 +117,7 @@ class BodyDetailViewController: WHBaseViewController {
 
     func performSearch(text: String?) {
         highlightedWords.removeAll()
-        highlightedWords = textView.highlights(text: text, with: Colors.UI.wordsInEvidence)
+        highlightedWords = textView.highlights(text: text, with: Colors.UI.wordsInEvidence, font: UIFont(name: "Courier", size: 14)!, highlightedFont: UIFont(name: "Courier-Bold", size: 14)!)
 
         indexOfWord = 0
 
@@ -129,11 +133,11 @@ class BodyDetailViewController: WHBaseViewController {
         }
     }
 
-    @objc func shareContent(){
+    @objc func shareContent(_ sender: UIBarButtonItem){
         if let text = textView.text{
             let textShare = [text]
             let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = self.view
+            activityViewController.popoverPresentationController?.barButtonItem = sender
             self.present(activityViewController, animated: true, completion: nil)
         }
     }
@@ -198,7 +202,7 @@ extension BodyDetailViewController {
     func resetSearchText() {
         let attributedString = NSMutableAttributedString(attributedString: self.textView.attributedText)
             attributedString.addAttribute(.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: self.textView.attributedText.length))
-            attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: NSRange(location: 0, length: self.textView.attributedText.length))
+            attributedString.addAttribute(.font, value: UIFont(name: "Courier", size: 14)!, range: NSRange(location: 0, length: self.textView.attributedText.length))
 
         self.textView.attributedText = attributedString
         self.labelWordFinded.text = "0 of 0"
@@ -211,7 +215,7 @@ extension BodyDetailViewController {
 
         highlightedWords.forEach {
             attributedString.addAttribute(.backgroundColor, value: Colors.UI.wordsInEvidence, range: $0.range)
-            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 14), range: $0.range)
+            attributedString.addAttribute(.font, value: UIFont(name: "Courier-Bold", size: 14)!, range: $0.range)
         }
         self.textView.attributedText = attributedString
 
@@ -219,4 +223,3 @@ extension BodyDetailViewController {
         self.textView.attributedText = attributedString
     }
 }
-

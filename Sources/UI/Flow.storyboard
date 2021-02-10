@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XiN-zk-JTq">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XiN-zk-JTq">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +13,7 @@
             <objects>
                 <navigationController storyboardIdentifier="WormholyNavigationController" id="XiN-zk-JTq" customClass="WHNavigationController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nvE-2v-Siz">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -29,14 +27,14 @@
         <!--Requests-->
         <scene sceneID="bMY-jK-aiL">
             <objects>
-                <viewController storyboardIdentifier="RequestsViewController" id="hrW-Yh-eEJ" customClass="RequestsViewController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestsViewController" automaticallyAdjustsScrollViewInsets="NO" id="hrW-Yh-eEJ" customClass="RequestsViewController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NrO-gO-tFr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v4V-Us-h8K" customClass="WHCollectionView" customModule="Wormholy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="o7G-P5-gW8">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -50,12 +48,12 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v4V-Us-h8K" firstAttribute="bottom" secondItem="9Dg-qw-sac" secondAttribute="bottom" id="Bfc-3a-gZU"/>
-                            <constraint firstItem="v4V-Us-h8K" firstAttribute="leading" secondItem="9Dg-qw-sac" secondAttribute="leading" id="BhY-Uv-5gP"/>
-                            <constraint firstItem="v4V-Us-h8K" firstAttribute="top" secondItem="9Dg-qw-sac" secondAttribute="top" id="Gmh-YD-YLf"/>
-                            <constraint firstItem="v4V-Us-h8K" firstAttribute="trailing" secondItem="9Dg-qw-sac" secondAttribute="trailing" id="vVH-ir-41b"/>
+                            <constraint firstItem="v4V-Us-h8K" firstAttribute="bottom" secondItem="9Dg-qw-sac" secondAttribute="bottom" id="CGy-p2-ipv"/>
+                            <constraint firstItem="v4V-Us-h8K" firstAttribute="leading" secondItem="9Dg-qw-sac" secondAttribute="leading" id="Iu5-hg-pmY"/>
+                            <constraint firstItem="v4V-Us-h8K" firstAttribute="top" secondItem="9Dg-qw-sac" secondAttribute="top" id="c4j-6c-710"/>
+                            <constraint firstItem="v4V-Us-h8K" firstAttribute="trailing" secondItem="9Dg-qw-sac" secondAttribute="trailing" id="d9w-Ug-1wh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Dg-qw-sac"/>
                     </view>
@@ -72,18 +70,17 @@
         <!--Request Detail View Controller-->
         <scene sceneID="JaV-AO-yRE">
             <objects>
-                <viewController storyboardIdentifier="RequestDetailViewController" id="oCq-W9-inr" customClass="RequestDetailViewController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestDetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="oCq-W9-inr" customClass="RequestDetailViewController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dxP-Gd-tGS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C1R-oy-f7k" customClass="WHTableView" customModule="Wormholy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="7BC-LK-4id">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <connections>
                                     <outlet property="dataSource" destination="oCq-W9-inr" id="Z6M-JZ-roo"/>
@@ -91,7 +88,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="C1R-oy-f7k" firstAttribute="top" secondItem="f1w-um-ttt" secondAttribute="top" id="8TE-0v-S2s"/>
                             <constraint firstItem="f1w-um-ttt" firstAttribute="bottom" secondItem="C1R-oy-f7k" secondAttribute="bottom" id="Qr3-Yj-aUX"/>
@@ -112,14 +109,15 @@
         <!--Body Detail View Controller-->
         <scene sceneID="FPQ-PL-XiD">
             <objects>
-                <viewController storyboardIdentifier="BodyDetailViewController" id="S40-LP-XSy" customClass="BodyDetailViewController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BodyDetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="S40-LP-XSy" customClass="BodyDetailViewController" customModule="Wormholy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k01-uv-JVw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fpK-qH-d5h" customClass="WHTextView" customModule="Wormholy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="579"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -135,7 +133,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 of 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxO-VX-XW4">
                                                     <rect key="frame" x="8" y="6" width="161" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.51784205436706543" green="0.58159953355789185" blue="0.58617168664932251" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -161,7 +159,7 @@
                                 </items>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="50N-HR-LmK" firstAttribute="bottom" secondItem="Y9P-Kk-3xC" secondAttribute="bottom" id="8iS-pr-kZD"/>
                             <constraint firstItem="fpK-qH-d5h" firstAttribute="top" secondItem="Y9P-Kk-3xC" secondAttribute="top" id="G1r-th-Ci7"/>
