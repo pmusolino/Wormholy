@@ -43,6 +43,9 @@ public class Wormholy: NSObject
         }
     }
     
+    /// Enable or disable requests tracking. Recommended to disable it when in production environments
+    @objc public static var trackingEnabled: Bool = true
+    
     static func enable(_ enable: Bool){
         if enable{
             URLProtocol.registerClass(CustomHTTPProtocol.self)

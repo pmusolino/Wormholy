@@ -21,16 +21,16 @@ static SessionConfigConstructor orig_ephemeralSessionConfiguration;
 static NSURLSessionConfiguration* Wormholy_defaultSessionConfiguration(id self, SEL _cmd)
 {
     NSURLSessionConfiguration* config = orig_defaultSessionConfiguration(self,_cmd); // call original method
-    
-    [Wormholy enable:YES sessionConfiguration:config];
+    BOOL enable = [Wormholy trackingEnabled];
+    [Wormholy enable:enable sessionConfiguration:config];
     return config;
 }
 
 static NSURLSessionConfiguration* Wormholy_ephemeralSessionConfiguration(id self, SEL _cmd)
 {
     NSURLSessionConfiguration* config = orig_ephemeralSessionConfiguration(self,_cmd); // call original method
-    
-    [Wormholy enable:YES sessionConfiguration:config];
+    BOOL enable = [Wormholy trackingEnabled];
+    [Wormholy enable:enable sessionConfiguration:config];
     return config;
 }
 
