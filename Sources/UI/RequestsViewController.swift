@@ -96,7 +96,7 @@ class RequestsViewController: WHBaseViewController {
         ac.addAction(UIAlertAction(title: "Share as Postman Collection", style: .default) { [weak self] (action) in
             self?.shareContent(sender, requestExportOption: .postman)
         })
-        ac.addAction(UIAlertAction(title: "Replace server", style: .default) { [weak self] (action) in
+        ac.addAction(UIAlertAction(title: "Change server", style: .default) { [weak self] (action) in
             self?.replaceServer()
         })
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in

@@ -16,13 +16,14 @@ class ChangeServerViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(textfield)
         view.addSubview(confirm)
-        
+        view.backgroundColor = UIColor.white
+        title = "Change server"
         textfield.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 11.0, *) {
             textfield.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
         }
         textfield.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        textfield.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
+        textfield.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         textfield.layer.borderWidth = 2
         textfield.layer.borderColor = UIColor.lightGray.cgColor
         textfield.layer.cornerRadius = 12
@@ -33,7 +34,8 @@ class ChangeServerViewController: UIViewController {
         confirm.translatesAutoresizingMaskIntoConstraints = false
         confirm.topAnchor.constraint(equalTo: textfield.bottomAnchor, constant: 20).isActive = true
         confirm.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        confirm.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
+        confirm.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        confirm.heightAnchor.constraint(equalToConstant: 44).isActive = true
         confirm.setTitle("Save", for: .normal)
         confirm.addTarget(self, action: #selector(ChangeServerViewController.confirmMethod), for: .touchUpInside)
     }
