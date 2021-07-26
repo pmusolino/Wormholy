@@ -8,9 +8,23 @@
 
 import UIKit
 
+class InsettedTextField: UITextField {
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return super.textRect(forBounds: bounds).inset(by: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return super.editingRect(forBounds: bounds).inset(by: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12))
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return super.placeholderRect(forBounds: bounds).inset(by: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12))
+    }
+}
+
 class ChangeServerViewController: UIViewController {
-    let textfield = UITextField()
-    let confirm = UIButton()
+    let textfield = InsettedTextField()
+    let confirm = UIButton(type: .roundedRect)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +50,7 @@ class ChangeServerViewController: UIViewController {
         confirm.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         confirm.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         confirm.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        confirm.setTitleColor(.darkText, for: .normal)
         confirm.setTitle("Save", for: .normal)
         confirm.addTarget(self, action: #selector(ChangeServerViewController.confirmMethod), for: .touchUpInside)
     }
