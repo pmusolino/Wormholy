@@ -65,6 +65,7 @@
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
 		93A86AB12228349F006E56FB /* SwiftySelfAwareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */; };
+		C1A982A126AEF9F500895C4C /* ChangeServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A982A026AEF9F500895C4C /* ChangeServerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySelfAwareHelper.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* Wormholy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wormholy.plist; sourceTree = "<group>"; };
 		AD2FAA281CD0B6E100659CF4 /* WormholyTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WormholyTests.plist; sourceTree = "<group>"; };
+		C1A982A026AEF9F500895C4C /* ChangeServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeServerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +214,7 @@
 				45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */,
 				45FF5C4820875ED90084BD50 /* Sections */,
 				451C9E612081045E002A34BC /* Cells */,
+				C1A982A026AEF9F500895C4C /* ChangeServerViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */,
 				45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */,
 				451C9E5A2080E8D2002A34BC /* WHBaseViewController.swift in Sources */,
+				C1A982A126AEF9F500895C4C /* ChangeServerViewController.swift in Sources */,
 				45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */,
 				45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */,
 				455818C9207D621200D2F954 /* RequestModel.swift in Sources */,

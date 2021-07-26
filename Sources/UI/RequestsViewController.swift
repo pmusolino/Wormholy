@@ -94,14 +94,21 @@ class RequestsViewController: WHBaseViewController {
             self?.shareContent(sender, requestExportOption: .curl)
         })
         ac.addAction(UIAlertAction(title: "Share as Postman Collection", style: .default) { [weak self] (action) in
-                   self?.shareContent(sender, requestExportOption: .postman)
-               })
+            self?.shareContent(sender, requestExportOption: .postman)
+        })
+        ac.addAction(UIAlertAction(title: "Replace server", style: .default) { [weak self] (action) in
+            self?.replaceServer()
+        })
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
             ac.popoverPresentationController?.barButtonItem = sender
         }
         present(ac, animated: true, completion: nil)
+    }
+    
+    func replaceServer() {
+        navigationController?.pushViewController(ChangeServerViewController(), animated: true)
     }
     
     func clearRequests() {
