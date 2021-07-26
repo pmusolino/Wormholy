@@ -16,15 +16,11 @@ class InsettedTextField: UITextField {
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return super.editingRect(forBounds: bounds).inset(by: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12))
     }
-    
-    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return super.placeholderRect(forBounds: bounds).inset(by: UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12))
-    }
 }
 
 class ChangeServerViewController: UIViewController {
     let textfield = InsettedTextField()
-    let confirm = UIButton(type: .roundedRect)
+    let confirm = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +29,10 @@ class ChangeServerViewController: UIViewController {
         view.backgroundColor = UIColor.white
         title = "Change server"
         textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.autocapitalizationType = .none
+        if #available(iOS 10.0, *) {
+            textfield.textContentType = .URL
+        }
         if #available(iOS 11.0, *) {
             textfield.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
         }
@@ -58,6 +58,8 @@ class ChangeServerViewController: UIViewController {
     @objc func confirmMethod() {
         if let text = textfield.text, text.count > 0, let url = URL(string: text) {
             NotificationCenter.default.post(name: NSNotification.Name("kWormholyRequestChangeServer"), object: nil, userInfo: ["url" : url])
+            textfield.layer.borderColor = UIColor.green.cgColor
+            navigationController?.popViewController(animated: true)
         } else {
             textfield.layer.borderColor = UIColor.red.cgColor
         }
