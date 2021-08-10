@@ -51,7 +51,7 @@
 		45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */; };
 		45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4F220860FBC007D0D17 /* WHTextView.swift */; };
 		45C51A1820A20B38006933CE /* Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C51A1720A20B38006933CE /* Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45CDAFA52433616800F83C22 /* WormholyStarterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CDAFA32433616800F83C22 /* WormholyStarterEngine.m */; };
+		45CDAFA52433616800F83C22 /* WormholyConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CDAFA32433616800F83C22 /* WormholyConstructor.m */; };
 		45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */; };
 		45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4920875EFA0084BD50 /* WHView.swift */; };
 		45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */; };
@@ -64,7 +64,6 @@
 		64DD527023F9B7FB00AB92C4 /* Postman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD526F23F9B7FB00AB92C4 /* Postman.swift */; };
 		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
 		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
-		93A86AB12228349F006E56FB /* SwiftySelfAwareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,7 +123,7 @@
 		45C4F4F220860FBC007D0D17 /* WHTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTextView.swift; sourceTree = "<group>"; };
 		45C51A1620A1FDBC006933CE /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		45C51A1720A20B38006933CE /* Wormholy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wormholy.h; sourceTree = "<group>"; };
-		45CDAFA32433616800F83C22 /* WormholyStarterEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WormholyStarterEngine.m; sourceTree = "<group>"; };
+		45CDAFA32433616800F83C22 /* WormholyConstructor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WormholyConstructor.m; sourceTree = "<group>"; };
 		45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
 		45FF5C4920875EFA0084BD50 /* WHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHView.swift; sourceTree = "<group>"; };
 		45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTitleSectionView.swift; sourceTree = "<group>"; };
@@ -138,7 +137,6 @@
 		64DD526F23F9B7FB00AB92C4 /* Postman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postman.swift; sourceTree = "<group>"; };
 		8933C7841EB5B820000D00A4 /* Wormholy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wormholy.swift; sourceTree = "<group>"; };
 		8933C7891EB5B82A000D00A4 /* WormholyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholyTests.swift; sourceTree = "<group>"; };
-		93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftySelfAwareHelper.swift; sourceTree = "<group>"; };
 		AD2FAA261CD0B6D800659CF4 /* Wormholy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wormholy.plist; sourceTree = "<group>"; };
 		AD2FAA281CD0B6E100659CF4 /* WormholyTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WormholyTests.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,7 +260,6 @@
 			children = (
 				454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */,
 				452CC13321773BF600CB5E21 /* FileHandler.swift */,
-				93A86AB02228349F006E56FB /* SwiftySelfAwareHelper.swift */,
 				64DD525923F84A5F00AB92C4 /* RequestResponseExportOption.swift */,
 				64DD525B23F86B3D00AB92C4 /* ShareUtils.swift */,
 				45BE33CC258787AB000AEA0E /* InputStream+Utils.swift */,
@@ -287,7 +284,7 @@
 				455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */,
 				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
 				455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */,
-				45CDAFA32433616800F83C22 /* WormholyStarterEngine.m */,
+				45CDAFA32433616800F83C22 /* WormholyConstructor.m */,
 			);
 			path = Objc;
 			sourceTree = "<group>";
@@ -558,7 +555,6 @@
 				451C9E582080E607002A34BC /* WHNavigationController.swift in Sources */,
 				455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */,
 				8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */,
-				93A86AB12228349F006E56FB /* SwiftySelfAwareHelper.swift in Sources */,
 				455818C4207D61A100D2F954 /* Storage.swift in Sources */,
 				45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */,
 				45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */,
@@ -567,7 +563,7 @@
 				45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */,
 				455818C9207D621200D2F954 /* RequestModel.swift in Sources */,
 				45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */,
-				45CDAFA52433616800F83C22 /* WormholyStarterEngine.m in Sources */,
+				45CDAFA52433616800F83C22 /* WormholyConstructor.m in Sources */,
 				451C9E602080F653002A34BC /* WHBundle.swift in Sources */,
 				64DD525C23F86B3D00AB92C4 /* ShareUtils.swift in Sources */,
 				452CC13421773BF600CB5E21 /* FileHandler.swift in Sources */,
