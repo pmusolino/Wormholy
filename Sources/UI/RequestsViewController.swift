@@ -99,6 +99,9 @@ class RequestsViewController: WHBaseViewController {
         ac.addAction(UIAlertAction(title: "Change server", style: .default) { [weak self] (action) in
             self?.replaceServer()
         })
+        ac.addAction(UIAlertAction(title: "Change locale", style: .default) { [weak self] (action) in
+            self?.changeLocale()
+        })
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -109,6 +112,10 @@ class RequestsViewController: WHBaseViewController {
     
     func replaceServer() {
         navigationController?.pushViewController(ChangeServerViewController(), animated: true)
+    }
+    
+    func changeLocale() {
+        NotificationCenter.default.post(name: NSNotification.Name("kWormholyRequestChangeLocale"), object: nil, userInfo: nil)
     }
     
     func clearRequests() {
