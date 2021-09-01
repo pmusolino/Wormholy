@@ -121,9 +121,10 @@ public class Wormholy: NSObject
     }()
 }
 
-extension Wormholy: SelfAware {
+/// WormholyConstructor calls this to initialize library
+extension Wormholy {
     
-    static func awake() {
+    @objc static func applicationDidFinishLaunching() {
         initializeAction
     }
     
