@@ -141,10 +141,10 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
 }
 
 final class CustomAuthenticationChallengeSender: NSObject, URLAuthenticationChallengeSender {
-    typealias CustomAuthenticationCHallengeHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
-    let handler: CustomAuthenticationCHallengeHandler
+    typealias CustomAuthenticationChallengeHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    let handler: CustomAuthenticationChallengeHandler
     
-    init(handler: @escaping CustomAuthenticationCHallengeHandler) {
+    init(handler: @escaping CustomAuthenticationChallengeHandler) {
         self.handler = handler
     }
 
