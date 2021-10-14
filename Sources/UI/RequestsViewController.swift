@@ -102,6 +102,9 @@ class RequestsViewController: WHBaseViewController {
         ac.addAction(UIAlertAction(title: "Change locale", style: .default) { [weak self] (action) in
             self?.changeLocale()
         })
+        ac.addAction(UIAlertAction(title: "ChangeMode", style: .default, handler: { [weak self] (action) in
+            NotificationCenter.default.post(name: NSNotification.Name("kWormholyRequestChangeMode"), object: nil, userInfo: nil)
+        }))
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
