@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol SelfAware: AnyObject {
+protocol SelfAware: class {
     static func awake()
 }
 
