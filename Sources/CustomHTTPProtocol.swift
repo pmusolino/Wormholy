@@ -131,17 +131,8 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     }
     
     public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        let protectionSpace = challenge.protectionSpace
-        let sender = challenge.sender
-        
-        if protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-            if let serverTrust = protectionSpace.serverTrust {
-                let credential = URLCredential(trust: serverTrust)
-                sender?.use(credential, for: challenge)
-                completionHandler(.useCredential, credential)
-                return
-            }
-        }
+        let wrappedChallenge = URLAuthenticationChallenge(authenticationChallenge: challenge, sender: CustomAuthenticationChallengeSender(handler: completionHandler))
+        client?.urlProtocol(self, didReceive: wrappedChallenge)
     }
     
     public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
@@ -149,3 +140,31 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     }
 }
 
+final class CustomAuthenticationChallengeSender: NSObject, URLAuthenticationChallengeSender {
+    typealias CustomAuthenticationChallengeHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    let handler: CustomAuthenticationChallengeHandler
+    
+    init(handler: @escaping CustomAuthenticationChallengeHandler) {
+        self.handler = handler
+    }
+
+    func use(_ credential: URLCredential, for challenge: URLAuthenticationChallenge) {
+        handler(.useCredential, credential)
+    }
+    
+    func continueWithoutCredential(for challenge: URLAuthenticationChallenge) {
+        handler(.useCredential, nil)
+    }
+    
+    func cancel(_ challenge: URLAuthenticationChallenge) {
+        handler(.cancelAuthenticationChallenge, nil)
+    }
+    
+    func performDefaultHandling(for challenge: URLAuthenticationChallenge) {
+        handler(.performDefaultHandling, nil)
+    }
+    
+    func rejectProtectionSpaceAndContinue(with challenge: URLAuthenticationChallenge) {
+        handler(.rejectProtectionSpace, nil)
+    }
+}
