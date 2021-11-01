@@ -32,6 +32,8 @@ class RequestsViewController: WHBaseViewController {
             }
         }
 
+        /// Handling keyboard notifications
+        ///
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)),
@@ -139,7 +141,7 @@ class RequestsViewController: WHBaseViewController {
         NotificationCenter.default.removeObserver(self, name: newRequestNotification, object: nil)
     }
 
-    // MARK: - Keyboard
+    // MARK: - Keyboard management
     @objc
     func keyboardWillShow(_ notification: NSNotification) {
         let userInfo = notification.userInfo
