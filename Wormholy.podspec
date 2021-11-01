@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Wormholy"
-  s.version      = "1.6.4"
+  s.version      = "1.6.5"
   s.summary      = "Network debugging made easy"
   s.description  = <<-DESC
     Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
