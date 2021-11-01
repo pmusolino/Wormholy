@@ -66,6 +66,9 @@ class RequestsViewController: WHBaseViewController {
             // Fallback
         }
         searchController?.searchBar.placeholder = "Search URL"
+        if let filter = Storage.defaultFilter {
+            searchController?.searchBar.text = filter
+        }
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
         } else {
