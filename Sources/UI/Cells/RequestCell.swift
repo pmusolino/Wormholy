@@ -45,7 +45,9 @@ class RequestCell: UICollectionViewCell {
             codeLabel.textColor = Colors.HTTPCode.Generic
         }
         if let method = request?.headers["X-APOLLO-OPERATION-NAME"] {
-            urlLabel.text = method + " " + (request?.url ?? "")
+            let str = NSMutableAttributedString(string: method + " " + (request?.url ?? ""), attributes: [.font : UIFont.systemFont(ofSize: 15)])
+            str.addAttributes([.font: UIFont.boldSystemFont(ofSize: 15)], range: NSMakeRange(0, method.count))
+            urlLabel.attributedText = str
         } else {
             urlLabel.text = request?.url
         }
