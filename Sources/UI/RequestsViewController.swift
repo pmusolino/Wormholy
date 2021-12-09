@@ -75,7 +75,7 @@ class RequestsViewController: WHBaseViewController {
         }
         
         return Storage.shared.requests.filter { (request) -> Bool in
-            return request.url.range(of: text!, options: .caseInsensitive) != nil ? true : false
+            return (request.url.range(of: text!, options: .caseInsensitive) != nil || request.headers["X-APOLLO-OPERATION-NAME"]?.range(of: text!, options: .caseInsensitive) != nil) ? true : false
         }
     }
     

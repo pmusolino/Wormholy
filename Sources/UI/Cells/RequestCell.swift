@@ -44,7 +44,11 @@ class RequestCell: UICollectionViewCell {
             codeLabel.borderColor = Colors.HTTPCode.Generic
             codeLabel.textColor = Colors.HTTPCode.Generic
         }
-        urlLabel.text = request?.url
+        if let method = request?.headers["X-APOLLO-OPERATION-NAME"] {
+            urlLabel.text = method + " " + (request?.url ?? "")
+        } else {
+            urlLabel.text = request?.url
+        }
         durationLabel.text = request?.duration?.formattedMilliseconds() ?? ""
     }
 }
