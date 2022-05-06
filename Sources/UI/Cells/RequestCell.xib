@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,11 +61,23 @@
                                             <constraint firstAttribute="width" constant="80" id="Sd8-Uy-wXT"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https://jsonplaceholder.typicode.com/wrongURL/" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70z-Jd-XUy" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="zmL-B0-jwg">
                                         <rect key="frame" x="84" y="0.0" width="332" height="130"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="https://jsonplaceholder.typicode.com/wrongURL/" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zb8-jU-lsg" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="332" height="88.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some optional header field value" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMa-oK-4hI" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="88.5" width="332" height="41.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -77,22 +90,42 @@
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="fQB-kE-nuz"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="ifk-de-caS" firstAttribute="top" secondItem="A3c-1c-xAq" secondAttribute="top" constant="8" id="Fr6-Lt-8nW"/>
                 <constraint firstAttribute="bottom" secondItem="ifk-de-caS" secondAttribute="bottom" constant="8" id="ORE-qq-vpF"/>
                 <constraint firstAttribute="trailing" secondItem="ifk-de-caS" secondAttribute="trailing" constant="8" id="qjG-xV-mdu"/>
                 <constraint firstItem="ifk-de-caS" firstAttribute="leading" secondItem="A3c-1c-xAq" secondAttribute="leading" constant="8" id="yPd-8B-Jjl"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fQB-kE-nuz"/>
             <size key="customSize" width="432" height="158"/>
             <connections>
                 <outlet property="codeLabel" destination="jmr-Ta-RoN" id="cuG-ij-NN9"/>
+                <outlet property="detailLabel" destination="eMa-oK-4hI" id="s3S-SW-bVV"/>
                 <outlet property="durationLabel" destination="Wzf-5k-iHI" id="Pcz-o7-wgo"/>
                 <outlet property="methodLabel" destination="hvP-NF-g2J" id="reo-m6-Mo0"/>
-                <outlet property="urlLabel" destination="70z-Jd-XUy" id="7el-vR-YxL"/>
+                <outlet property="urlLabel" destination="zb8-jU-lsg" id="sGc-j0-Pct"/>
             </connections>
             <point key="canvasLocation" x="204.80000000000001" y="16.191904047976013"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="Wzf-5k-iHI">
+            <size key="intrinsicContentSize" width="57" height="18"/>
+        </designable>
+        <designable name="hvP-NF-g2J">
+            <size key="intrinsicContentSize" width="66.5" height="18"/>
+        </designable>
+        <designable name="jmr-Ta-RoN">
+            <size key="intrinsicContentSize" width="54" height="30"/>
+        </designable>
+        <designable name="zb8-jU-lsg">
+            <size key="intrinsicContentSize" width="333.5" height="18"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
