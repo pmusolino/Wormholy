@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RequestCell" id="A3c-1c-xAq" customClass="RequestCell" customModule="Wormholy" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier=" " reuseIdentifier="RequestCell" id="A3c-1c-xAq" customClass="RequestCell" customModule="WormholySwift">
             <rect key="frame" x="0.0" y="0.0" width="432" height="146"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -26,14 +27,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="qYn-tG-enh">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="130"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="METHOD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvP-NF-g2J" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="METHOD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvP-NF-g2J" customClass="WHLabel" customModule="WormholySwift">
                                                 <rect key="frame" x="0.0" y="0.0" width="66.5" height="40.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmr-Ta-RoN" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="54" height="41"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CODE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmr-Ta-RoN" customClass="WHLabel" customModule="WormholySwift">
+                                                <rect key="frame" x="0.0" y="44.5" width="42" height="41"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -49,7 +50,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzf-5k-iHI" customClass="WHLabel" customModule="Wormholy" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzf-5k-iHI" customClass="WHLabel" customModule="WormholySwift">
                                                 <rect key="frame" x="0.0" y="89.5" width="57" height="40.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
@@ -77,14 +78,14 @@
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="fQB-kE-nuz"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="ifk-de-caS" firstAttribute="top" secondItem="A3c-1c-xAq" secondAttribute="top" constant="8" id="Fr6-Lt-8nW"/>
                 <constraint firstAttribute="bottom" secondItem="ifk-de-caS" secondAttribute="bottom" constant="8" id="ORE-qq-vpF"/>
                 <constraint firstAttribute="trailing" secondItem="ifk-de-caS" secondAttribute="trailing" constant="8" id="qjG-xV-mdu"/>
                 <constraint firstItem="ifk-de-caS" firstAttribute="leading" secondItem="A3c-1c-xAq" secondAttribute="leading" constant="8" id="yPd-8B-Jjl"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fQB-kE-nuz"/>
             <size key="customSize" width="432" height="158"/>
             <connections>
                 <outlet property="codeLabel" destination="jmr-Ta-RoN" id="cuG-ij-NN9"/>
@@ -95,4 +96,23 @@
             <point key="canvasLocation" x="204.80000000000001" y="16.191904047976013"/>
         </collectionViewCell>
     </objects>
+    <designables>
+        <designable name="70z-Jd-XUy">
+            <size key="intrinsicContentSize" width="333.5" height="18"/>
+        </designable>
+        <designable name="Wzf-5k-iHI">
+            <size key="intrinsicContentSize" width="57" height="18"/>
+        </designable>
+        <designable name="hvP-NF-g2J">
+            <size key="intrinsicContentSize" width="66.5" height="18"/>
+        </designable>
+        <designable name="jmr-Ta-RoN">
+            <size key="intrinsicContentSize" width="42" height="18"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
