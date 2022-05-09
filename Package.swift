@@ -1,15 +1,16 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "Wormholy",
+    platforms: [.iOS(.v9)],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "Wormholy",
-            targets: ["Wormholy"]),
+            targets: ["WormholyObjC"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -19,10 +20,29 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "Wormholy",
-            dependencies: []),
+            name: "WormholySwift",
+            dependencies: [],
+            exclude: [
+                "Models/Postman/Postman_demo_collection.json",
+            ],
+            resources: [
+                .process("Resources/ActionableTableViewCell.xib"),
+                .process("Resources/Assets.xcassets"),
+                .process("Resources/Flow.storyboard"),
+                .process("Resources/RequestCell.xib"),
+                .process("Resources/RequestTitleSectionView.xib"),
+                .process("Resources/TextTableViewCell.xib"),
+            ]
+        ),
+        .target(
+            name: "WormholyObjC",
+            dependencies: [
+                "WormholySwift"
+            ]),
         .testTarget(
             name: "WormholyTests",
-            dependencies: ["Wormholy"]),
+            dependencies: [
+                "WormholyObjC"
+            ]),
     ]
 )

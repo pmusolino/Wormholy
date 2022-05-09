@@ -3,80 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 47;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40DBE2F528292E0600B89C42 /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 40DBE2F428292E0600B89C42 /* Wormholy */; };
 		4508718C207E59FF00EE2D31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508718B207E59FF00EE2D31 /* AppDelegate.swift */; };
 		4508718E207E59FF00EE2D31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508718D207E59FF00EE2D31 /* ViewController.swift */; };
 		45087191207E59FF00EE2D31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4508718F207E59FF00EE2D31 /* Main.storyboard */; };
 		45087193207E5A0100EE2D31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45087192207E5A0100EE2D31 /* Assets.xcassets */; };
 		45087196207E5A0100EE2D31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45087194207E5A0100EE2D31 /* LaunchScreen.storyboard */; };
-		4508719C207E5A1A00EE2D31 /* Wormholy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */; };
 		4508719E207E5C5600EE2D31 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508719D207E5C5600EE2D31 /* Utils.swift */; };
 		450871A4207E5C7700EE2D31 /* HTTPValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A0207E5C7700EE2D31 /* HTTPValidation.swift */; };
 		450871A5207E5C7700EE2D31 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A1207E5C7700EE2D31 /* Config.swift */; };
 		450871A6207E5C7700EE2D31 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A2207E5C7700EE2D31 /* Routing.swift */; };
 		450871A7207E5C7700EE2D31 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A3207E5C7700EE2D31 /* DataFetcher.swift */; };
-		451C9E552080E5E4002A34BC /* Flow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 451C9E542080E5E4002A34BC /* Flow.storyboard */; };
-		451C9E582080E607002A34BC /* WHNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E572080E607002A34BC /* WHNavigationController.swift */; };
-		451C9E5A2080E8D2002A34BC /* WHBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E592080E8D2002A34BC /* WHBaseViewController.swift */; };
-		451C9E5E2080EFF5002A34BC /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E5D2080EFF5002A34BC /* Config.swift */; };
-		451C9E602080F653002A34BC /* WHBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E5F2080F653002A34BC /* WHBundle.swift */; };
-		451C9E6320810472002A34BC /* RequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 451C9E6220810472002A34BC /* RequestCell.xib */; };
-		451C9E65208106D1002A34BC /* WHLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E64208106D1002A34BC /* WHLabel.swift */; };
-		451C9E6720810B4C002A34BC /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E6620810B4C002A34BC /* RequestCell.swift */; };
-		451C9E6920810B98002A34BC /* WHCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E6820810B98002A34BC /* WHCollectionView.swift */; };
-		451C9E6B20810BBD002A34BC /* RequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C9E6A20810BBD002A34BC /* RequestsViewController.swift */; };
-		452CC1322175FDB200CB5E21 /* CustomActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CC1312175FDB200CB5E21 /* CustomActivity.swift */; };
-		452CC13421773BF600CB5E21 /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CC13321773BF600CB5E21 /* FileHandler.swift */; };
-		452CC13621773DE500CB5E21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452CC13521773DE500CB5E21 /* Assets.xcassets */; };
-		453A167720ED1B02001CEB9D /* WHString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453A167620ED1B02001CEB9D /* WHString.swift */; };
-		454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */; };
-		455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */; };
-		455818C4207D61A100D2F954 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C2207D61A100D2F954 /* Storage.swift */; };
-		455818C9207D621200D2F954 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455818C8207D621200D2F954 /* RequestModel.swift */; };
-		455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */; };
-		455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */ = {isa = PBXBuildFile; fileRef = 455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */; };
-		455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		457202A6244CA7BE0020AA2A /* Postman_demo_collection.json in Resources */ = {isa = PBXBuildFile; fileRef = 457202A5244CA7BE0020AA2A /* Postman_demo_collection.json */; };
-		45820CF6208170F400CA74D6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45820CF5208170F400CA74D6 /* Colors.swift */; };
-		45868F1420F4E2B10024C77B /* BodyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */; };
-		45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */; };
-		45868F1C20F4E9790024C77B /* ActionableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45868F1A20F4E9790024C77B /* ActionableTableViewCell.xib */; };
-		45BE33CD258787AB000AEA0E /* InputStream+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE33CC258787AB000AEA0E /* InputStream+Utils.swift */; };
-		45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EA20860D14007D0D17 /* WHTableView.swift */; };
-		45C4F4F020860DC0007D0D17 /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */; };
-		45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */; };
-		45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4F4F220860FBC007D0D17 /* WHTextView.swift */; };
-		45C51A1820A20B38006933CE /* Wormholy.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C51A1720A20B38006933CE /* Wormholy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45CDAFA52433616800F83C22 /* WormholyConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CDAFA32433616800F83C22 /* WormholyConstructor.m */; };
-		45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */; };
-		45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4920875EFA0084BD50 /* WHView.swift */; };
-		45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */; };
-		45FF5C4E20875F770084BD50 /* RequestTitleSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FF5C4D20875F770084BD50 /* RequestTitleSectionView.xib */; };
-		45FF5C5220877A950084BD50 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C5120877A950084BD50 /* Section.swift */; };
-		45FF5C54208794720084BD50 /* WHDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF5C53208794720084BD50 /* WHDate.swift */; };
-		52D6D9871BEFF229002C0205 /* Wormholy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */; };
-		64DD525A23F84A5F00AB92C4 /* RequestResponseExportOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD525923F84A5F00AB92C4 /* RequestResponseExportOption.swift */; };
-		64DD525C23F86B3D00AB92C4 /* ShareUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD525B23F86B3D00AB92C4 /* ShareUtils.swift */; };
-		64DD527023F9B7FB00AB92C4 /* Postman.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DD526F23F9B7FB00AB92C4 /* Postman.swift */; };
-		8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7841EB5B820000D00A4 /* Wormholy.swift */; };
-		8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* WormholyTests.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		52D6D9881BEFF229002C0205 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52D6D97B1BEFF229002C0205;
-			remoteInfo = Wormholy;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		40DBE2F328292DF500B89C42 /* Wormholy */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Wormholy; sourceTree = "<group>"; };
 		45087189207E59FE00EE2D31 /* WormholyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WormholyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4508718B207E59FF00EE2D31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4508718D207E59FF00EE2D31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,56 +34,6 @@
 		450871A1207E5C7700EE2D31 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		450871A2207E5C7700EE2D31 /* Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
 		450871A3207E5C7700EE2D31 /* DataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
-		451C9E542080E5E4002A34BC /* Flow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Flow.storyboard; sourceTree = "<group>"; };
-		451C9E572080E607002A34BC /* WHNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHNavigationController.swift; sourceTree = "<group>"; };
-		451C9E592080E8D2002A34BC /* WHBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHBaseViewController.swift; sourceTree = "<group>"; };
-		451C9E5D2080EFF5002A34BC /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		451C9E5F2080F653002A34BC /* WHBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHBundle.swift; sourceTree = "<group>"; };
-		451C9E6220810472002A34BC /* RequestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestCell.xib; sourceTree = "<group>"; };
-		451C9E64208106D1002A34BC /* WHLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHLabel.swift; sourceTree = "<group>"; };
-		451C9E6620810B4C002A34BC /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
-		451C9E6820810B98002A34BC /* WHCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHCollectionView.swift; sourceTree = "<group>"; };
-		451C9E6A20810BBD002A34BC /* RequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsViewController.swift; sourceTree = "<group>"; };
-		452CC1312175FDB200CB5E21 /* CustomActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivity.swift; sourceTree = "<group>"; };
-		452CC13321773BF600CB5E21 /* FileHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
-		452CC13521773DE500CB5E21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		453A167620ED1B02001CEB9D /* WHString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHString.swift; sourceTree = "<group>"; };
-		454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModelBeautifier.swift; sourceTree = "<group>"; };
-		455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHTTPProtocol.swift; sourceTree = "<group>"; };
-		455818C2207D61A100D2F954 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		455818C8207D621200D2F954 /* RequestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
-		455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormholyMethodSwizzling.m; sourceTree = "<group>"; };
-		455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+Wormholy.m"; sourceTree = "<group>"; };
-		455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+Wormholy.h"; sourceTree = "<group>"; };
-		455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormholyMethodSwizzling.h; sourceTree = "<group>"; };
-		457202A5244CA7BE0020AA2A /* Postman_demo_collection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Postman_demo_collection.json; sourceTree = "<group>"; };
-		45820CF5208170F400CA74D6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyDetailViewController.swift; sourceTree = "<group>"; };
-		45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionableTableViewCell.swift; sourceTree = "<group>"; };
-		45868F1A20F4E9790024C77B /* ActionableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActionableTableViewCell.xib; sourceTree = "<group>"; };
-		45BE33CC258787AB000AEA0E /* InputStream+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputStream+Utils.swift"; sourceTree = "<group>"; };
-		45C4F4EA20860D14007D0D17 /* WHTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTableView.swift; sourceTree = "<group>"; };
-		45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
-		45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
-		45C4F4F220860FBC007D0D17 /* WHTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHTextView.swift; sourceTree = "<group>"; };
-		45C51A1620A1FDBC006933CE /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		45C51A1720A20B38006933CE /* Wormholy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wormholy.h; sourceTree = "<group>"; };
-		45CDAFA32433616800F83C22 /* WormholyConstructor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WormholyConstructor.m; sourceTree = "<group>"; };
-		45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
-		45FF5C4920875EFA0084BD50 /* WHView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHView.swift; sourceTree = "<group>"; };
-		45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTitleSectionView.swift; sourceTree = "<group>"; };
-		45FF5C4D20875F770084BD50 /* RequestTitleSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestTitleSectionView.xib; sourceTree = "<group>"; };
-		45FF5C5120877A950084BD50 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		45FF5C53208794720084BD50 /* WHDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WHDate.swift; sourceTree = "<group>"; };
-		52D6D97C1BEFF229002C0205 /* Wormholy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Wormholy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		52D6D9861BEFF229002C0205 /* Wormholy-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wormholy-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		64DD525923F84A5F00AB92C4 /* RequestResponseExportOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResponseExportOption.swift; sourceTree = "<group>"; };
-		64DD525B23F86B3D00AB92C4 /* ShareUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareUtils.swift; sourceTree = "<group>"; };
-		64DD526F23F9B7FB00AB92C4 /* Postman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Postman.swift; sourceTree = "<group>"; };
-		8933C7841EB5B820000D00A4 /* Wormholy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Wormholy.swift; sourceTree = "<group>"; };
-		8933C7891EB5B82A000D00A4 /* WormholyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormholyTests.swift; sourceTree = "<group>"; };
-		AD2FAA261CD0B6D800659CF4 /* Wormholy.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Wormholy.plist; sourceTree = "<group>"; };
-		AD2FAA281CD0B6E100659CF4 /* WormholyTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WormholyTests.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,28 +41,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4508719C207E5A1A00EE2D31 /* Wormholy.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9781BEFF229002C0205 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9831BEFF229002C0205 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				52D6D9871BEFF229002C0205 /* Wormholy.framework in Frameworks */,
+				40DBE2F528292E0600B89C42 /* Wormholy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		40DBE2F228292DF500B89C42 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				40DBE2F328292DF500B89C42 /* Wormholy */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		4508718A207E59FF00EE2D31 /* WormholyDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,109 +89,10 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		451C9E532080E592002A34BC /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				451C9E542080E5E4002A34BC /* Flow.storyboard */,
-				451C9E6A20810BBD002A34BC /* RequestsViewController.swift */,
-				45DB6DAE2083E738009494AE /* RequestDetailViewController.swift */,
-				45868F1320F4E2B10024C77B /* BodyDetailViewController.swift */,
-				45FF5C4820875ED90084BD50 /* Sections */,
-				451C9E612081045E002A34BC /* Cells */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		451C9E562080E5F0002A34BC /* Subclasses */ = {
-			isa = PBXGroup;
-			children = (
-				451C9E572080E607002A34BC /* WHNavigationController.swift */,
-				451C9E592080E8D2002A34BC /* WHBaseViewController.swift */,
-				45FF5C4920875EFA0084BD50 /* WHView.swift */,
-				451C9E64208106D1002A34BC /* WHLabel.swift */,
-				45C4F4F220860FBC007D0D17 /* WHTextView.swift */,
-				451C9E6820810B98002A34BC /* WHCollectionView.swift */,
-				45C4F4EA20860D14007D0D17 /* WHTableView.swift */,
-				451C9E5F2080F653002A34BC /* WHBundle.swift */,
-				45FF5C53208794720084BD50 /* WHDate.swift */,
-				453A167620ED1B02001CEB9D /* WHString.swift */,
-				452CC1312175FDB200CB5E21 /* CustomActivity.swift */,
-			);
-			path = Subclasses;
-			sourceTree = "<group>";
-		};
-		451C9E5C2080EFC4002A34BC /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				452CC13521773DE500CB5E21 /* Assets.xcassets */,
-				451C9E5D2080EFF5002A34BC /* Config.swift */,
-				45820CF5208170F400CA74D6 /* Colors.swift */,
-			);
-			path = "Support Files";
-			sourceTree = "<group>";
-		};
-		451C9E612081045E002A34BC /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				451C9E6620810B4C002A34BC /* RequestCell.swift */,
-				451C9E6220810472002A34BC /* RequestCell.xib */,
-				45C4F4EE20860DC0007D0D17 /* TextTableViewCell.swift */,
-				45C4F4EF20860DC0007D0D17 /* TextTableViewCell.xib */,
-				45868F1920F4E9790024C77B /* ActionableTableViewCell.swift */,
-				45868F1A20F4E9790024C77B /* ActionableTableViewCell.xib */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		454BBA362087B64E00EB13E9 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				454BBA372087B66200EB13E9 /* RequestModelBeautifier.swift */,
-				452CC13321773BF600CB5E21 /* FileHandler.swift */,
-				64DD525923F84A5F00AB92C4 /* RequestResponseExportOption.swift */,
-				64DD525B23F86B3D00AB92C4 /* ShareUtils.swift */,
-				45BE33CC258787AB000AEA0E /* InputStream+Utils.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		455818C7207D620900D2F954 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				64DD526E23F9B7EB00AB92C4 /* Postman */,
-				455818C8207D621200D2F954 /* RequestModel.swift */,
-				45FF5C5120877A950084BD50 /* Section.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		455818CA207D647900D2F954 /* Objc */ = {
-			isa = PBXGroup;
-			children = (
-				455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */,
-				455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */,
-				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
-				455818CF207D64A800D2F954 /* WormholyMethodSwizzling.m */,
-				45CDAFA32433616800F83C22 /* WormholyConstructor.m */,
-			);
-			path = Objc;
-			sourceTree = "<group>";
-		};
-		45FF5C4820875ED90084BD50 /* Sections */ = {
-			isa = PBXGroup;
-			children = (
-				45FF5C4B20875F710084BD50 /* RequestTitleSectionView.swift */,
-				45FF5C4D20875F770084BD50 /* RequestTitleSectionView.xib */,
-			);
-			path = Sections;
-			sourceTree = "<group>";
-		};
 		52D6D9721BEFF229002C0205 = {
 			isa = PBXGroup;
 			children = (
-				8933C7811EB5B7E0000D00A4 /* Sources */,
-				8933C7831EB5B7EB000D00A4 /* Tests */,
-				52D6D99C1BEFF38C002C0205 /* Configs */,
+				40DBE2F228292DF500B89C42 /* Packages */,
 				4508718A207E59FF00EE2D31 /* WormholyDemo */,
 				52D6D97D1BEFF229002C0205 /* Products */,
 				4508719B207E5A1A00EE2D31 /* Frameworks */,
@@ -313,88 +102,12 @@
 		52D6D97D1BEFF229002C0205 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				52D6D97C1BEFF229002C0205 /* Wormholy.framework */,
-				52D6D9861BEFF229002C0205 /* Wormholy-iOS Tests.xctest */,
 				45087189207E59FE00EE2D31 /* WormholyDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		52D6D99C1BEFF38C002C0205 /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				DD7502721C68FC1B006590AF /* Frameworks */,
-				DD7502731C68FC20006590AF /* Tests */,
-			);
-			path = Configs;
-			sourceTree = "<group>";
-		};
-		64DD526E23F9B7EB00AB92C4 /* Postman */ = {
-			isa = PBXGroup;
-			children = (
-				64DD526F23F9B7FB00AB92C4 /* Postman.swift */,
-				457202A5244CA7BE0020AA2A /* Postman_demo_collection.json */,
-			);
-			path = Postman;
-			sourceTree = "<group>";
-		};
-		8933C7811EB5B7E0000D00A4 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				8933C7841EB5B820000D00A4 /* Wormholy.swift */,
-				455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */,
-				455818C2207D61A100D2F954 /* Storage.swift */,
-				45C51A1620A1FDBC006933CE /* module.modulemap */,
-				45C51A1720A20B38006933CE /* Wormholy.h */,
-				451C9E532080E592002A34BC /* UI */,
-				451C9E562080E5F0002A34BC /* Subclasses */,
-				455818CA207D647900D2F954 /* Objc */,
-				455818C7207D620900D2F954 /* Models */,
-				454BBA362087B64E00EB13E9 /* Utils */,
-				451C9E5C2080EFC4002A34BC /* Support Files */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		8933C7831EB5B7EB000D00A4 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				8933C7891EB5B82A000D00A4 /* WormholyTests.swift */,
-			);
-			name = Tests;
-			path = Tests/WormholyTests;
-			sourceTree = "<group>";
-		};
-		DD7502721C68FC1B006590AF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				AD2FAA261CD0B6D800659CF4 /* Wormholy.plist */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DD7502731C68FC20006590AF /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				AD2FAA281CD0B6E100659CF4 /* WormholyTests.plist */,
-			);
-			name = Tests;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		52D6D9791BEFF229002C0205 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45C51A1820A20B38006933CE /* Wormholy.h in Headers */,
-				455818DA207D64A900D2F954 /* WormholyMethodSwizzling.h in Headers */,
-				455818D9207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		45087188207E59FE00EE2D31 /* WormholyDemo */ = {
@@ -410,45 +123,12 @@
 			dependencies = (
 			);
 			name = WormholyDemo;
+			packageProductDependencies = (
+				40DBE2F428292E0600B89C42 /* Wormholy */,
+			);
 			productName = WormholyDemo;
 			productReference = 45087189207E59FE00EE2D31 /* WormholyDemo.app */;
 			productType = "com.apple.product-type.application";
-		};
-		52D6D97B1BEFF229002C0205 /* Wormholy-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "Wormholy-iOS" */;
-			buildPhases = (
-				52D6D9771BEFF229002C0205 /* Sources */,
-				52D6D9791BEFF229002C0205 /* Headers */,
-				52D6D9781BEFF229002C0205 /* Frameworks */,
-				52D6D97A1BEFF229002C0205 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Wormholy-iOS";
-			productName = Wormholy;
-			productReference = 52D6D97C1BEFF229002C0205 /* Wormholy.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		52D6D9851BEFF229002C0205 /* Wormholy-iOS Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6D9931BEFF229002C0205 /* Build configuration list for PBXNativeTarget "Wormholy-iOS Tests" */;
-			buildPhases = (
-				52D6D9821BEFF229002C0205 /* Sources */,
-				52D6D9831BEFF229002C0205 /* Frameworks */,
-				52D6D9841BEFF229002C0205 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				52D6D9891BEFF229002C0205 /* PBXTargetDependency */,
-			);
-			name = "Wormholy-iOS Tests";
-			productName = WormholyTests;
-			productReference = 52D6D9861BEFF229002C0205 /* Wormholy-iOS Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -464,15 +144,6 @@
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
-					};
-					52D6D97B1BEFF229002C0205 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 1000;
-						ProvisioningStyle = Manual;
-					};
-					52D6D9851BEFF229002C0205 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -490,8 +161,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				52D6D97B1BEFF229002C0205 /* Wormholy-iOS */,
-				52D6D9851BEFF229002C0205 /* Wormholy-iOS Tests */,
 				45087188207E59FE00EE2D31 /* WormholyDemo */,
 			);
 		};
@@ -505,27 +174,6 @@
 				45087196207E5A0100EE2D31 /* LaunchScreen.storyboard in Resources */,
 				45087193207E5A0100EE2D31 /* Assets.xcassets in Resources */,
 				45087191207E59FF00EE2D31 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D97A1BEFF229002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45FF5C4E20875F770084BD50 /* RequestTitleSectionView.xib in Resources */,
-				452CC13621773DE500CB5E21 /* Assets.xcassets in Resources */,
-				451C9E552080E5E4002A34BC /* Flow.storyboard in Resources */,
-				451C9E6320810472002A34BC /* RequestCell.xib in Resources */,
-				45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */,
-				457202A6244CA7BE0020AA2A /* Postman_demo_collection.json in Resources */,
-				45868F1C20F4E9790024C77B /* ActionableTableViewCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9841BEFF229002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,64 +194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52D6D9771BEFF229002C0205 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				455818C3207D61A100D2F954 /* CustomHTTPProtocol.swift in Sources */,
-				45C4F4F020860DC0007D0D17 /* TextTableViewCell.swift in Sources */,
-				451C9E582080E607002A34BC /* WHNavigationController.swift in Sources */,
-				455818D6207D64A900D2F954 /* NSURLSessionConfiguration+Wormholy.m in Sources */,
-				8933C7851EB5B820000D00A4 /* Wormholy.swift in Sources */,
-				455818C4207D61A100D2F954 /* Storage.swift in Sources */,
-				45FF5C4C20875F710084BD50 /* RequestTitleSectionView.swift in Sources */,
-				45DB6DAF2083E738009494AE /* RequestDetailViewController.swift in Sources */,
-				451C9E5A2080E8D2002A34BC /* WHBaseViewController.swift in Sources */,
-				45FF5C4A20875EFA0084BD50 /* WHView.swift in Sources */,
-				45868F1B20F4E9790024C77B /* ActionableTableViewCell.swift in Sources */,
-				455818C9207D621200D2F954 /* RequestModel.swift in Sources */,
-				45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */,
-				45CDAFA52433616800F83C22 /* WormholyConstructor.m in Sources */,
-				451C9E602080F653002A34BC /* WHBundle.swift in Sources */,
-				64DD525C23F86B3D00AB92C4 /* ShareUtils.swift in Sources */,
-				452CC13421773BF600CB5E21 /* FileHandler.swift in Sources */,
-				451C9E5E2080EFF5002A34BC /* Config.swift in Sources */,
-				64DD525A23F84A5F00AB92C4 /* RequestResponseExportOption.swift in Sources */,
-				45820CF6208170F400CA74D6 /* Colors.swift in Sources */,
-				453A167720ED1B02001CEB9D /* WHString.swift in Sources */,
-				452CC1322175FDB200CB5E21 /* CustomActivity.swift in Sources */,
-				45868F1420F4E2B10024C77B /* BodyDetailViewController.swift in Sources */,
-				45FF5C5220877A950084BD50 /* Section.swift in Sources */,
-				451C9E6920810B98002A34BC /* WHCollectionView.swift in Sources */,
-				45C4F4F320860FBC007D0D17 /* WHTextView.swift in Sources */,
-				451C9E6B20810BBD002A34BC /* RequestsViewController.swift in Sources */,
-				455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */,
-				45BE33CD258787AB000AEA0E /* InputStream+Utils.swift in Sources */,
-				45FF5C54208794720084BD50 /* WHDate.swift in Sources */,
-				454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */,
-				451C9E65208106D1002A34BC /* WHLabel.swift in Sources */,
-				64DD527023F9B7FB00AB92C4 /* Postman.swift in Sources */,
-				451C9E6720810B4C002A34BC /* RequestCell.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9821BEFF229002C0205 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8933C7901EB5B82D000D00A4 /* WormholyTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		52D6D9891BEFF229002C0205 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52D6D97B1BEFF229002C0205 /* Wormholy-iOS */;
-			targetProxy = 52D6D9881BEFF229002C0205 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4508718F207E59FF00EE2D31 /* Main.storyboard */ = {
@@ -642,7 +233,10 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = WormholyDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.6.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codeido.Wormholy.WormholyDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -670,12 +264,16 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = WormholyDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.6.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codeido.Wormholy.WormholyDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -794,111 +392,6 @@
 			};
 			name = Release;
 		};
-		52D6D9911BEFF229002C0205 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = NO;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = Configs/Wormholy.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = mh_dylib;
-				MARKETING_VERSION = 1.6.5;
-				MODULEMAP_FILE = "$(SRCROOT)/Sources/module.modulemap";
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Wormholy.Wormholy-iOS";
-				PRODUCT_NAME = "$(PROJECT_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(PROJECT_NAME)-Swift.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				USER_HEADER_SEARCH_PATHS = "";
-				USE_HEADERMAP = YES;
-			};
-			name = Debug;
-		};
-		52D6D9921BEFF229002C0205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				APPLICATION_EXTENSION_API_ONLY = NO;
-				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CODE_SIGN_STYLE = Manual;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = Configs/Wormholy.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = mh_dylib;
-				MARKETING_VERSION = 1.6.5;
-				MODULEMAP_FILE = "$(SRCROOT)/Sources/module.modulemap";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Wormholy.Wormholy-iOS";
-				PRODUCT_NAME = "$(PROJECT_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(PROJECT_NAME)-Swift.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
-				USER_HEADER_SEARCH_PATHS = "";
-				USE_HEADERMAP = YES;
-			};
-			name = Release;
-		};
-		52D6D9941BEFF229002C0205 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = Configs/WormholyTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Wormholy.Wormholy-iOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		52D6D9951BEFF229002C0205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = Configs/WormholyTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Wormholy.Wormholy-iOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -920,25 +413,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "Wormholy-iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52D6D9911BEFF229002C0205 /* Debug */,
-				52D6D9921BEFF229002C0205 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52D6D9931BEFF229002C0205 /* Build configuration list for PBXNativeTarget "Wormholy-iOS Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52D6D9941BEFF229002C0205 /* Debug */,
-				52D6D9951BEFF229002C0205 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		40DBE2F428292E0600B89C42 /* Wormholy */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Wormholy;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 52D6D9731BEFF229002C0205 /* Project object */;
 }
