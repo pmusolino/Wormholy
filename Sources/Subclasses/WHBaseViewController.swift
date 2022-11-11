@@ -40,7 +40,7 @@ class WHBaseViewController: UIViewController {
 }
 
 extension UIViewController{
-    static func currentViewController(_ viewController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    static func currentViewController(_ viewController: UIViewController? = UIApplication.shared.windows.filter(\.isKeyWindow).first?.rootViewController) -> UIViewController? {
         guard let viewController = viewController else { return nil }
         
         if let viewController = viewController as? UINavigationController {
