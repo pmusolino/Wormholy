@@ -12,28 +12,37 @@ class FilterViewController: UIViewController {
 
     private static var cellHeight: CGFloat = 50
     
-    private var filterModel: [Any] = []
+    private var filterModel: FilterModel = FilterModel(categories: [])
     
     
     private lazy var tableView: WHTableView = {
        let tableView = WHTableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        let tableViewcell = UINib(nibName: "FilterCategoryTableViewCell", bundle: nil)
+        let tableViewcell = UINib(nibName: "FilterCategoryTableViewCell", bundle: WHBundle.getBundle())
         tableView.register(tableViewcell, forCellReuseIdentifier: FilterCategoryTableViewCell.reuseIdentifier)
+        return tableView
+    }()
+    
+    override func viewWillLayoutSubviews() {
+        self.preferredContentSize = .init(width: 200, height: filterModel.categories.count * Int(FilterViewController.cellHeight))
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupTableView()
+        self.navigationItem.title = "Filters"
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    private func setupTableView(){
         self.view.addSubview(self.tableView)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .singleLine
         self.tableView.separatorInset = .zero
-        return tableView
-    }()
     
-    override func viewWillLayoutSubviews() {
-        self.preferredContentSize = .init(width: 200, height: filterModel.count * Int(FilterViewController.cellHeight))
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        self.registerTableViewConstraints()
+        
         self.tableView.reloadData()
     }
     
@@ -47,21 +56,42 @@ class FilterViewController: UIViewController {
         ])
         
     }
+    
+    // MARK: - Object lifecycle -
+    init(with filterModel: FilterModel) {
+        self.filterModel = filterModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+    }
 }
 
 extension FilterViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        FilterViewController.cellHeight
+    }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    }
 }
 
 extension FilterViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        filterModel.count
+        filterModel.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilterCategoryTableViewCell.reuseIdentifier, for: indexPath) as! FilterCategoryTableViewCell
-        
-        cell.populate(title: "Name")
+        cell.populate(title: self.filterModel.categories[indexPath.item].name)
         return cell
     }
 }

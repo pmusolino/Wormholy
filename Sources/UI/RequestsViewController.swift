@@ -13,6 +13,7 @@ class RequestsViewController: WHBaseViewController {
     @IBOutlet weak var collectionView: WHCollectionView!
     var filteredRequests: [RequestModel] = []
     var searchController: UISearchController?
+    var mockFilterData: FilterModel = .init(categories: [.init(name: "Code", filterType: [.init(value: 400, count: 4), .init(value: 200, count: 5)]), .init(name: "Method", filterType: [.init(value: "GET", count: 6), .init(value: "POST", count: 3)])])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,15 @@ class RequestsViewController: WHBaseViewController {
             navigationItem.titleView = searchController?.searchBar
         }
         definesPresentationContext = true
+        
+        searchController?.searchBar.showsBookmarkButton = true
+        if #available(iOS 13.0, *) {
+            searchController?.searchBar.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .bookmark, state: .normal)
+        } else {
+            searchController?.searchBar.setImage(UIImage(named: "line.3.horizontal.decrease.circle"), for: .bookmark, state: .normal)
+        }
+        searchController?.searchBar.delegate = self
+        
     }
     
     func filterRequests(text: String?) -> [RequestModel]{
@@ -190,5 +200,35 @@ extension RequestsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filteredRequests = filterRequests(text: searchController.searchBar.text)
         collectionView.reloadData()
+        
+        // Hide filter button on search
+        searchController.searchBar.showsBookmarkButton = !searchController.isActive
+        
+    }
+}
+// MARK: - UISearchBarDelegate Delegate
+extension RequestsViewController: UISearchBarDelegate{
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        let filterViewController = FilterViewController(with: self.mockFilterData)
+        
+        let filterNavigationController = UINavigationController(rootViewController: filterViewController)
+        
+        filterNavigationController.modalPresentationStyle = .popover
+        let popoverPresentationController = filterNavigationController.popoverPresentationController
+        
+        popoverPresentationController?.delegate = self
+        if #available(iOS 13.0, *) {
+            popoverPresentationController?.sourceView = self.searchController?.searchBar.searchTextField.rightView
+        } else {
+            popoverPresentationController?.sourceView = self.searchController?.searchBar
+        }
+        self.present(filterNavigationController, animated: true)
+        print("Bookmark button pressed!")
+    }
+}
+
+extension RequestsViewController: UIPopoverPresentationControllerDelegate{
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }
