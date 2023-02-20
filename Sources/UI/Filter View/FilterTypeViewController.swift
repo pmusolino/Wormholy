@@ -1,30 +1,29 @@
 //
-//  FilterViewController.swift
+//  FilterTypeViewController.swift
 //  Wormholy-iOS
 //
-//  Created by Mert Tecimen on 15.02.2023.
+//  Created by Mert Tecimen on 16.02.2023.
 //  Copyright © 2023 Wormholy. All rights reserved.
 //
 
 import UIKit
 
-class FilterViewController: UIViewController {
+class FilterTypeViewController: UIViewController {
 
-    private static var cellHeight: CGFloat = 50
-    
-    private var filterModel: [FilterModel] = []
+    private var cellHeight: CGFloat
+    private var filterData: [FilterModel]
     
     
     private lazy var tableView: WHTableView = {
-       let tableView = WHTableView()
+        let tableView = WHTableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        let tableViewcell = UINib(nibName: "FilterCategoryTableViewCell", bundle: WHBundle.getBundle())
-        tableView.register(tableViewcell, forCellReuseIdentifier: FilterCategoryTableViewCell.reuseIdentifier)
+        let tableViewcell = UINib(nibName: "FilterTypeTableViewCell", bundle: WHBundle.getBundle())
+        tableView.register(tableViewcell, forCellReuseIdentifier: FilterTypeTableViewCell.reuseIdentifier)
         return tableView
     }()
     
     override func viewWillLayoutSubviews() {
-        self.preferredContentSize = .init(width: 200, height: FilterCategory.allCases.count * Int(FilterViewController.cellHeight))
+        self.preferredContentSize = .init(width: 200, height: filterData.count * Int(self.cellHeight))
     }
     
     override func viewDidLoad() {
@@ -40,7 +39,7 @@ class FilterViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .singleLine
         self.tableView.separatorInset = .zero
-    
+        
         self.registerTableViewConstraints()
         
         self.tableView.reloadData()
@@ -58,45 +57,46 @@ class FilterViewController: UIViewController {
     }
     
     // MARK: - Object lifecycle -
-    init(with filterModel: [FilterModel]) {
-        self.filterModel = filterModel
+    init(with FilterData: [FilterModel], _ cellHeight: CGFloat = 50) {
+        self.filterData = FilterData
+        self.cellHeight = cellHeight
         super.init(nibName: nil, bundle: nil)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        
+    required init?(coder aDecoder: NSCoder, with FilterData: [FilterModel], _ cellHeight: CGFloat = 50) {
+        self.filterData = FilterData
+        self.cellHeight = cellHeight
+        super.init(coder: aDecoder)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
-extension FilterViewController: UITableViewDelegate{
+extension FilterTypeViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        FilterViewController.cellHeight
+        self.cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = FilterTypeViewController(with: filterModel.filter{ filter in
-            filter.filterCategory == FilterCategory.allCases[indexPath.item]
-        })
-        
-        self.navigationController?.pushViewController(vc, animated: true)
         
     }
 }
 
-extension FilterViewController: UITableViewDataSource{
+extension FilterTypeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        FilterCategory.allCases.count
+        filterData.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FilterCategoryTableViewCell.reuseIdentifier, for: indexPath) as! FilterCategoryTableViewCell
-        cell.populate(title: FilterCategory.allCases[indexPath.item].description)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FilterTypeTableViewCell.reuseIdentifier, for: indexPath) as! FilterTypeTableViewCell
+        
+        let cellData = filterData[indexPath.item]
+        
+        cell.populate(title: cellData.name, quantity: cellData.count)
         return cell
     }
 }

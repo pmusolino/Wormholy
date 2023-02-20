@@ -13,7 +13,7 @@ class RequestsViewController: WHBaseViewController {
     @IBOutlet weak var collectionView: WHCollectionView!
     var filteredRequests: [RequestModel] = []
     var searchController: UISearchController?
-    var mockFilterData: FilterModel = .init(categories: [.init(name: "Code", filterType: [.init(value: 400, count: 4), .init(value: 200, count: 5)]), .init(name: "Method", filterType: [.init(value: "GET", count: 6), .init(value: "POST", count: 3)])])
+    var filterModels: [FilterModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +29,7 @@ class RequestsViewController: WHBaseViewController {
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync { [weak self] in
                 self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text) ?? []
+                self?.filterModels = self?.createFilterData(from: self?.filteredRequests ?? []) ?? []
                 self?.collectionView.reloadData()
             }
         }
@@ -86,6 +87,37 @@ class RequestsViewController: WHBaseViewController {
             searchController?.searchBar.setImage(UIImage(named: "line.3.horizontal.decrease.circle"), for: .bookmark, state: .normal)
         }
         searchController?.searchBar.delegate = self
+        
+    }
+    
+    
+    func createFilterData(from requests: [RequestModel]) -> [FilterModel]{
+        var codeDict: [Int: Int] = [:]
+        var methodDict: [String: Int] = [:]
+        var filterArray: [FilterModel] = []
+        
+        for request in requests {
+            if codeDict[request.code] != nil{
+                codeDict[request.code]! += 1
+            } else {
+                codeDict[request.code] = 1
+            }
+            if methodDict[request.method] != nil {
+                methodDict[request.method]! += 1
+            } else {
+                methodDict[request.method] = 1
+            }
+        }
+        
+        for codeKey in codeDict.keys{
+            filterArray.append(.init(filterCategory: .code, value: codeKey, count: codeDict[codeKey] ?? 1))
+        }
+        
+        for methodKey in methodDict.keys{
+            filterArray.append(.init(filterCategory: .method, value: methodKey, count: methodDict[methodKey] ?? 1))
+        }
+        
+        return filterArray
         
     }
     
@@ -209,7 +241,8 @@ extension RequestsViewController: UISearchResultsUpdating {
 // MARK: - UISearchBarDelegate Delegate
 extension RequestsViewController: UISearchBarDelegate{
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        let filterViewController = FilterViewController(with: self.mockFilterData)
+        
+        let filterViewController = FilterViewController(with: self.filterModels)
         
         let filterNavigationController = UINavigationController(rootViewController: filterViewController)
         
@@ -223,6 +256,7 @@ extension RequestsViewController: UISearchBarDelegate{
             popoverPresentationController?.sourceView = self.searchController?.searchBar
         }
         self.present(filterNavigationController, animated: true)
+       
         print("Bookmark button pressed!")
     }
 }

@@ -12,6 +12,9 @@
 		006A112A299D1E6F0040BDE2 /* FilterCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006A1128299D1E6F0040BDE2 /* FilterCategoryTableViewCell.xib */; };
 		006A112C299D23C80040BDE2 /* Interfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006A112B299D23C80040BDE2 /* Interfaces.swift */; };
 		00F9BB64299E04E30048ECC7 /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F9BB63299E04E30048ECC7 /* FilterModel.swift */; };
+		00F9BB67299E43EB0048ECC7 /* FilterTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F9BB65299E43EB0048ECC7 /* FilterTypeTableViewCell.swift */; };
+		00F9BB68299E43EB0048ECC7 /* FilterTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F9BB66299E43EB0048ECC7 /* FilterTypeTableViewCell.xib */; };
+		00F9BB6A299E44040048ECC7 /* FilterTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F9BB69299E44040048ECC7 /* FilterTypeViewController.swift */; };
 		4508718C207E59FF00EE2D31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508718B207E59FF00EE2D31 /* AppDelegate.swift */; };
 		4508718E207E59FF00EE2D31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508718D207E59FF00EE2D31 /* ViewController.swift */; };
 		45087191207E59FF00EE2D31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4508718F207E59FF00EE2D31 /* Main.storyboard */; };
@@ -87,6 +90,9 @@
 		006A1128299D1E6F0040BDE2 /* FilterCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		006A112B299D23C80040BDE2 /* Interfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interfaces.swift; sourceTree = "<group>"; };
 		00F9BB63299E04E30048ECC7 /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
+		00F9BB65299E43EB0048ECC7 /* FilterTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypeTableViewCell.swift; sourceTree = "<group>"; };
+		00F9BB66299E43EB0048ECC7 /* FilterTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterTypeTableViewCell.xib; sourceTree = "<group>"; };
+		00F9BB69299E44040048ECC7 /* FilterTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypeViewController.swift; sourceTree = "<group>"; };
 		45087189207E59FE00EE2D31 /* WormholyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WormholyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4508718B207E59FF00EE2D31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4508718D207E59FF00EE2D31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				006A1125299D1C630040BDE2 /* FilterViewController.swift */,
+				00F9BB69299E44040048ECC7 /* FilterTypeViewController.swift */,
 				006A1124299D1BD00040BDE2 /* Cells */,
 			);
 			path = "Filter View";
@@ -190,6 +197,8 @@
 		006A1124299D1BD00040BDE2 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				00F9BB65299E43EB0048ECC7 /* FilterTypeTableViewCell.swift */,
+				00F9BB66299E43EB0048ECC7 /* FilterTypeTableViewCell.xib */,
 				006A1127299D1E6F0040BDE2 /* FilterCategoryTableViewCell.swift */,
 				006A1128299D1E6F0040BDE2 /* FilterCategoryTableViewCell.xib */,
 			);
@@ -547,6 +556,7 @@
 				452CC13621773DE500CB5E21 /* Assets.xcassets in Resources */,
 				451C9E552080E5E4002A34BC /* Flow.storyboard in Resources */,
 				451C9E6320810472002A34BC /* RequestCell.xib in Resources */,
+				00F9BB68299E43EB0048ECC7 /* FilterTypeTableViewCell.xib in Resources */,
 				45C4F4F120860DC0007D0D17 /* TextTableViewCell.xib in Resources */,
 				457202A6244CA7BE0020AA2A /* Postman_demo_collection.json in Resources */,
 				45868F1C20F4E9790024C77B /* ActionableTableViewCell.xib in Resources */,
@@ -598,6 +608,7 @@
 				00F9BB64299E04E30048ECC7 /* FilterModel.swift in Sources */,
 				45C4F4EB20860D14007D0D17 /* WHTableView.swift in Sources */,
 				45CDAFA52433616800F83C22 /* WormholyConstructor.m in Sources */,
+				00F9BB6A299E44040048ECC7 /* FilterTypeViewController.swift in Sources */,
 				006A1126299D1C630040BDE2 /* FilterViewController.swift in Sources */,
 				451C9E602080F653002A34BC /* WHBundle.swift in Sources */,
 				64DD525C23F86B3D00AB92C4 /* ShareUtils.swift in Sources */,
@@ -614,6 +625,7 @@
 				451C9E6B20810BBD002A34BC /* RequestsViewController.swift in Sources */,
 				455818D5207D64A900D2F954 /* WormholyMethodSwizzling.m in Sources */,
 				45BE33CD258787AB000AEA0E /* InputStream+Utils.swift in Sources */,
+				00F9BB67299E43EB0048ECC7 /* FilterTypeTableViewCell.swift in Sources */,
 				45FF5C54208794720084BD50 /* WHDate.swift in Sources */,
 				454BBA382087B66200EB13E9 /* RequestModelBeautifier.swift in Sources */,
 				451C9E65208106D1002A34BC /* WHLabel.swift in Sources */,

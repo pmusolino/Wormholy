@@ -8,23 +8,30 @@
 
 import Foundation
 
+
+enum FilterCategory: CaseIterable{
+    case code, method
+    
+    var description: String{
+        switch self {
+        case .code:
+            return "Code"
+        case .method:
+            return "Method"
+        }
+    }
+}
+
 struct FilterModel{
-    var categories: [FilterCategory]
-}
-
-
-struct FilterCategory{
-    var name: String
-    var filterType: [FilterType]
-}
-
-struct FilterType{
     var name: String
     var value: any Equatable
-    var count: Int
+    var filterCategory: FilterCategory
+    var count: Int = 1
+    var isSelected: Bool = false
     
-    init(name: String? = nil, value: any Equatable, count: Int) {
+    init(name: String? = nil, filterCategory: FilterCategory, value: any Equatable, count: Int = 1) {
         self.name = name ?? String(describing: value)
+        self.filterCategory = filterCategory
         self.value = value
         self.count = count
     }
