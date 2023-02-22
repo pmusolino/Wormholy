@@ -29,10 +29,17 @@ class RequestsViewController: WHBaseViewController {
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync { [weak self] in
                 self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text) ?? []
-                self?.filterModels = self?.createFilterData(from: self?.filteredRequests ?? []) ?? []
+                self?.createFilterData(from: self?.filteredRequests ?? [])
                 self?.collectionView.reloadData()
+                
             }
         }
+        
+        NotificationCenter.default.addObserver(forName: filterChangeNotification, object: nil, queue: nil){ [weak self] (notification) in
+            self?.filterModels = Storage.shared.filters
+            print(self?.filterModels)
+        }
+        
 
         /// Handling keyboard notifications
         ///
@@ -91,7 +98,7 @@ class RequestsViewController: WHBaseViewController {
     }
     
     
-    func createFilterData(from requests: [RequestModel]) -> [FilterModel]{
+    func createFilterData(from requests: [RequestModel]){
         var codeDict: [Int: Int] = [:]
         var methodDict: [String: Int] = [:]
         var filterArray: [FilterModel] = []
@@ -117,7 +124,9 @@ class RequestsViewController: WHBaseViewController {
             filterArray.append(.init(filterCategory: .method, value: methodKey, count: methodDict[methodKey] ?? 1))
         }
         
-        return filterArray
+        for filter in filterArray{
+            Storage.shared.saveFilter(filter: filter)
+        }
         
     }
     

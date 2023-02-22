@@ -11,7 +11,8 @@ import UIKit
 class FilterTypeViewController: UIViewController {
 
     private var cellHeight: CGFloat
-    private var filterData: [FilterModel]
+    private var filterData: [FilterModel] = []
+    private var filterCategory: FilterCategory
     
     
     private lazy var tableView: WHTableView = {
@@ -28,6 +29,20 @@ class FilterTypeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        self.filterData = Storage.shared.filters.filter{ filter in
+            filter.filterCategory == self.filterCategory
+        }
+        NotificationCenter.default.addObserver(forName: filterChangeNotification, object: nil, queue: nil){ [weak self] (notification) in
+            DispatchQueue.main.async {
+                self?.filterData = Storage.shared.filters.filter{ filter in
+                    filter.filterCategory == self?.filterCategory
+                }
+                self?.tableView.reloadData()
+            }
+        }
+        
         self.setupTableView()
         self.navigationItem.title = "Filters"
         self.navigationController?.isNavigationBarHidden = false
@@ -57,14 +72,14 @@ class FilterTypeViewController: UIViewController {
     }
     
     // MARK: - Object lifecycle -
-    init(with FilterData: [FilterModel], _ cellHeight: CGFloat = 50) {
-        self.filterData = FilterData
+    init(with filterCategory: FilterCategory, _ cellHeight: CGFloat = 50) {
+        self.filterCategory = filterCategory
         self.cellHeight = cellHeight
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder aDecoder: NSCoder, with FilterData: [FilterModel], _ cellHeight: CGFloat = 50) {
-        self.filterData = FilterData
+    required init?(coder aDecoder: NSCoder, with filterCategory: FilterCategory, _ cellHeight: CGFloat = 50) {
+        self.filterCategory = filterCategory
         self.cellHeight = cellHeight
         super.init(coder: aDecoder)
     }
@@ -81,14 +96,20 @@ extension FilterTypeViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        var filter = self.filterData[indexPath.item]
+        switch filter.selectionStatus{
+        case .new, .noneSelected:
+            filter.selectionStatus = .selected
+        case .selected:
+            filter.selectionStatus = .noneSelected
+        }
+        Storage.shared.saveFilter(filter: filter)
     }
 }
 
 extension FilterTypeViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         filterData.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,6 +118,7 @@ extension FilterTypeViewController: UITableViewDataSource{
         let cellData = filterData[indexPath.item]
         
         cell.populate(title: cellData.name, quantity: cellData.count)
+        cell.setSelectionStatus(with: cellData.selectionStatus)
         return cell
     }
 }

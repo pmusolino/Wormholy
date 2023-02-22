@@ -26,11 +26,12 @@ class FilterTypeTableViewCell: UITableViewCell {
         self.quantityLabel.text = "(\(quantity))"
     }
     
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+    func setSelectionStatus(with selectionStatus: FilterSelectionStatus){
+        switch selectionStatus {
+        case .selected:
+            self.backgroundColor = .blue
+        case .noneSelected, .new:
+            self.backgroundColor = .white
+        }
+    }    
 }

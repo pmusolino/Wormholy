@@ -13,6 +13,8 @@ class FilterViewController: UIViewController {
     private static var cellHeight: CGFloat = 50
     
     private var filterModel: [FilterModel] = []
+    private var filterCategories: [FilterCategory] = [.code, .method]
+
     
     
     private lazy var tableView: WHTableView = {
@@ -80,12 +82,8 @@ extension FilterViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = FilterTypeViewController(with: filterModel.filter{ filter in
-            filter.filterCategory == FilterCategory.allCases[indexPath.item]
-        })
-        
+        let vc = FilterTypeViewController(with: self.filterCategories[indexPath.item])
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
 }
 
@@ -96,7 +94,7 @@ extension FilterViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FilterCategoryTableViewCell.reuseIdentifier, for: indexPath) as! FilterCategoryTableViewCell
-        cell.populate(title: FilterCategory.allCases[indexPath.item].description)
+        cell.populate(title: self.filterCategories[indexPath.item].description)
         return cell
     }
 }
