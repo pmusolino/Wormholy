@@ -33,12 +33,12 @@ class FilterTypeViewController: UIViewController {
         
         self.filterData = Storage.shared.filters.filter{ filter in
             filter.filterCategory == self.filterCategory
-        }
+        }.sorted()
         NotificationCenter.default.addObserver(forName: filterChangeNotification, object: nil, queue: nil){ [weak self] (notification) in
             DispatchQueue.main.async {
                 self?.filterData = Storage.shared.filters.filter{ filter in
                     filter.filterCategory == self?.filterCategory
-                }
+                }.sorted()
                 self?.tableView.reloadData()
             }
         }

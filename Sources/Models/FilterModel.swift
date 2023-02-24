@@ -48,3 +48,41 @@ open class FilterModel: Comparable{
         self.selectionStatus = selectionStatus
     }
 }
+
+open class FilterCollectionModel{
+    var filterCollection: [FilterModel]
+    
+    var selectedFilterCollection: [FilterModel]{
+        filterCollection.filter{ filterModel -> Bool in
+            filterModel.selectionStatus == .selected
+        }
+    }
+    
+    var selectedMethodFilterCollection: [String]{
+        getSelectedFilterCollection(by: .method) as! [String]
+    }
+    
+    var selectedCodeFilterCollection: [Int]{
+        getSelectedFilterCollection(by: .code) as! [Int]
+    }
+    
+    init(filterCollection: [FilterModel]) {
+        self.filterCollection = filterCollection
+    }
+    
+    func getFilterCollection(by filterCategory: FilterCategory) -> [any Equatable]{
+        return filterCollection.filter{ filterModel -> Bool in
+            filterModel.filterCategory == filterCategory
+        }.map{ filterModel -> any Equatable in
+            filterModel.value
+        }
+    }
+    
+    private func getSelectedFilterCollection(by filterCategory: FilterCategory) -> [any Equatable]{
+        return filterCollection.filter{ filterModel -> Bool in
+            filterModel.filterCategory == filterCategory && filterModel.selectionStatus == .selected
+        }.map{ filterModel -> any Equatable in
+            filterModel.value
+        }
+    }
+}

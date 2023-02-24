@@ -13,7 +13,7 @@ class RequestsViewController: WHBaseViewController {
     @IBOutlet weak var collectionView: WHCollectionView!
     var filteredRequests: [RequestModel] = []
     var searchController: UISearchController?
-    var filterModels: [FilterModel] = []
+    var filterCollectionModel: FilterCollectionModel = .init(filterCollection: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +28,16 @@ class RequestsViewController: WHBaseViewController {
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync { [weak self] in
-                self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text) ?? []
                 self?.createFilterData(from: self?.filteredRequests ?? [])
+                self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text, filterCollection: self?.filterCollectionModel) ?? []
                 self?.collectionView.reloadData()
                 
             }
         }
         
         NotificationCenter.default.addObserver(forName: filterChangeNotification, object: nil, queue: nil){ [weak self] (notification) in
-            self?.filterModels = Storage.shared.filters
-            print(self?.filterModels)
+            self?.filterCollectionModel = .init(filterCollection: Storage.shared.filters)
+            
         }
         
 
@@ -130,13 +130,43 @@ class RequestsViewController: WHBaseViewController {
         
     }
     
-    func filterRequests(text: String?) -> [RequestModel]{
+    func filterRequests(text: String?, filterCollection: FilterCollectionModel?) -> [RequestModel]{
+        
+        let requests = Storage.shared.requests
+        
+        var filteredRequests = filterBySearch(text: text, requests: requests)
+        filteredRequests = filterByFilterModels(filterCollection: filterCollection, requests: filteredRequests)
+        
+        return filteredRequests
+    }
+    
+    
+    func filterBySearch(text: String?, requests: [RequestModel]) -> [RequestModel]{
         guard text != nil && text != "" else {
-            return Storage.shared.requests
+            return requests
+        }
+        return requests.filter { (request) -> Bool in
+            return request.url.range(of: text!, options: .caseInsensitive) != nil ? true : false
+        }
+    }
+    
+    func filterByFilterModels(filterCollection: FilterCollectionModel?, requests: [RequestModel]) -> [RequestModel]{
+        
+        guard let filterCollection = filterCollection else{
+            return requests
         }
         
-        return Storage.shared.requests.filter { (request) -> Bool in
-            return request.url.range(of: text!, options: .caseInsensitive) != nil ? true : false
+        if filterCollection.selectedFilterCollection.isEmpty{
+            return requests
+        }
+        
+        // If no selected filter exists for category, contain all of the category filters.
+        let codeArray: [Int] = filterCollection.selectedCodeFilterCollection.isEmpty ? filterCollection.getFilterCollection(by: .code) as! [Int] : filterCollection.selectedCodeFilterCollection
+        
+        let methodArray: [String] = filterCollection.selectedMethodFilterCollection.isEmpty ? filterCollection.getFilterCollection(by: .method) as! [String] : filterCollection.selectedMethodFilterCollection
+        
+        return requests.filter{ request -> Bool in
+            methodArray.contains(request.method) && codeArray.contains(request.code)
         }
     }
     
@@ -239,7 +269,7 @@ extension RequestsViewController: UICollectionViewDelegate, UICollectionViewDele
 // MARK: - UISearchResultsUpdating Delegate
 extension RequestsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        filteredRequests = filterRequests(text: searchController.searchBar.text)
+        filteredRequests = filterRequests(text: searchController.searchBar.text, filterCollection: self.filterCollectionModel)
         collectionView.reloadData()
         
         // Hide filter button on search
@@ -251,7 +281,7 @@ extension RequestsViewController: UISearchResultsUpdating {
 extension RequestsViewController: UISearchBarDelegate{
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         
-        let filterViewController = FilterViewController(with: self.filterModels)
+        let filterViewController = FilterViewController(with: self.filterCollectionModel.filterCollection)
         
         let filterNavigationController = UINavigationController(rootViewController: filterViewController)
         
