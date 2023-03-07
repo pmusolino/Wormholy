@@ -4,6 +4,7 @@
 
   [![Language](https://img.shields.io/badge/Swift-5-orange.svg)]()
   [![Pod version](https://img.shields.io/badge/Cocoapods-Compatible%20-blue)](https://cocoapods.org/pods/Wormholy)
+  [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-yellow.svg)](https://github.com/Carthage/Carthage)
   
   Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
   
