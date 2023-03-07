@@ -19,6 +19,9 @@ extension WHTextView {
         
         let attributed = NSMutableAttributedString(string: textViewText)
         attributed.addAttribute(.font, value: font, range: NSRange(location: 0, length: self.attributedText.length))
+        if #available(iOS 13.0, *) {
+            attributed.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: self.attributedText.length))
+        }
         
         do {
             let regex = try NSRegularExpression(pattern: keywordSearch, options: .caseInsensitive)
