@@ -3,7 +3,7 @@
 </p>
 
   [![Language](https://img.shields.io/badge/Swift-5-orange.svg)]()
-  [![Pod version](https://img.shields.io/cocoapods/v/Wormholy.svg?style=flat)](https://cocoapods.org/pods/Wormholy)
+  [![Pod version](https://img.shields.io/badge/Cocoapods-Compatible%20-blue)](https://cocoapods.org/pods/Wormholy)
   
   Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
   
