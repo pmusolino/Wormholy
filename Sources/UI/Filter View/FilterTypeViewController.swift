@@ -96,7 +96,7 @@ extension FilterTypeViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var filter = self.filterData[indexPath.item]
+        let filter = self.filterData[indexPath.item]
         switch filter.selectionStatus{
         case .new, .noneSelected:
             filter.selectionStatus = .selected

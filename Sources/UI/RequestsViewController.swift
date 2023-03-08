@@ -28,7 +28,6 @@ class RequestsViewController: WHBaseViewController {
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync { [weak self] in
-                self?.createFilterData(from: self?.filteredRequests ?? [])
                 self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text, filterCollection: self?.filterCollectionModel) ?? []
                 self?.collectionView.reloadData()
                 
@@ -36,8 +35,11 @@ class RequestsViewController: WHBaseViewController {
         }
         
         NotificationCenter.default.addObserver(forName: filterChangeNotification, object: nil, queue: nil){ [weak self] (notification) in
-            self?.filterCollectionModel = .init(filterCollection: Storage.shared.filters)
-            
+            DispatchQueue.main.async{ [weak self] in
+                self?.filterCollectionModel = .init(filterCollection: Storage.shared.filters)
+                self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text, filterCollection: self?.filterCollectionModel) ?? []
+                self?.collectionView.reloadData()
+            }
         }
         
 
@@ -97,39 +99,11 @@ class RequestsViewController: WHBaseViewController {
         
     }
     
-    
-    func createFilterData(from requests: [RequestModel]){
-        var codeDict: [Int: Int] = [:]
-        var methodDict: [String: Int] = [:]
-        var filterArray: [FilterModel] = []
-        
-        for request in requests {
-            if codeDict[request.code] != nil{
-                codeDict[request.code]! += 1
-            } else {
-                codeDict[request.code] = 1
-            }
-            if methodDict[request.method] != nil {
-                methodDict[request.method]! += 1
-            } else {
-                methodDict[request.method] = 1
-            }
-        }
-        
-        for codeKey in codeDict.keys{
-            filterArray.append(.init(filterCategory: .code, value: codeKey, count: codeDict[codeKey] ?? 1))
-        }
-        
-        for methodKey in methodDict.keys{
-            filterArray.append(.init(filterCategory: .method, value: methodKey, count: methodDict[methodKey] ?? 1))
-        }
-        
-        for filter in filterArray{
-            Storage.shared.saveFilter(filter: filter)
-        }
-        
-    }
-    
+    /// Filters given ``RequestModel``s by given text and ``FilterCollectionModel`` and returns filtered ``RequestModel``s
+    /// - Parameters:
+    ///   - text: Text evaluate URL strings in ``RequestModel``s.
+    ///   - filterCollection: collection of ``FilterModel``s to filter matching variables in ``RequestModel``s.
+    /// - Returns: Filtered array of ``RequestModel``s
     func filterRequests(text: String?, filterCollection: FilterCollectionModel?) -> [RequestModel]{
         
         let requests = Storage.shared.requests

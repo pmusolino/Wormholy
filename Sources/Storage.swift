@@ -16,7 +16,11 @@ open class Storage: NSObject {
 
     public static var defaultFilter: String? = nil
     
-    open var requests: [RequestModel] = []
+    open var requests: [RequestModel] = []{
+        didSet{
+            self.createFilterModel(from: requests)
+        }
+    }
     open var filters: [FilterModel] = []
     
     func saveRequest(request: RequestModel?){
@@ -66,5 +70,39 @@ open class Storage: NSObject {
     
     func clearRequests() {
         requests.removeAll()
+    }
+}
+
+private extension Storage{
+    func createFilterModel(from requests: [RequestModel]){
+        var codeDict: [Int: Int] = [:]
+        var methodDict: [String: Int] = [:]
+        var filterArray: [FilterModel] = []
+        
+        for request in requests {
+            if codeDict[request.code] != nil{
+                codeDict[request.code]! += 1
+            } else {
+                codeDict[request.code] = 1
+            }
+            if methodDict[request.method] != nil {
+                methodDict[request.method]! += 1
+            } else {
+                methodDict[request.method] = 1
+            }
+        }
+        
+        for codeKey in codeDict.keys{
+            filterArray.append(.init(filterCategory: .code, value: codeKey, count: codeDict[codeKey] ?? 1))
+        }
+        
+        for methodKey in methodDict.keys{
+            filterArray.append(.init(filterCategory: .method, value: methodKey, count: methodDict[methodKey] ?? 1))
+        }
+        
+        for filter in filterArray{
+            Storage.shared.saveFilter(filter: filter)
+        }
+        
     }
 }
