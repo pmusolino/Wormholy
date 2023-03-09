@@ -19,16 +19,29 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxh-o0-3Ka" userLabel="Title">
-                        <rect key="frame" x="44" y="11.666666666666664" width="45" height="21"/>
+                        <rect key="frame" x="36" y="11.666666666666664" width="45" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Keu-fx-fpO" userLabel="IndicatorContainer">
-                        <rect key="frame" x="10" y="10" width="24" height="24"/>
+                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Keu-fx-fpO" userLabel="IndicatorContainer">
+                        <rect key="frame" x="10" y="14" width="16" height="16"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PL0-h2-qG0" userLabel="IndicatorView">
+                                <rect key="frame" x="4" y="4" width="8" height="8"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="PL0-h2-qG0" secondAttribute="height" multiplier="1:1" id="YUk-ru-bxZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="PL0-h2-qG0" secondAttribute="bottom" constant="4" id="0nV-O5-sgg"/>
                             <constraint firstAttribute="width" secondItem="Keu-fx-fpO" secondAttribute="height" multiplier="1:1" id="H5w-d2-hxz"/>
+                            <constraint firstItem="PL0-h2-qG0" firstAttribute="leading" secondItem="Keu-fx-fpO" secondAttribute="leading" constant="4" id="UaI-sq-9E0"/>
+                            <constraint firstItem="PL0-h2-qG0" firstAttribute="top" secondItem="Keu-fx-fpO" secondAttribute="top" constant="4" id="XSj-iD-WnA"/>
+                            <constraint firstAttribute="trailing" secondItem="PL0-h2-qG0" secondAttribute="trailing" constant="4" id="qij-Uf-c6a"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMe-wf-ds6" userLabel="Quantity">
@@ -39,9 +52,9 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Keu-fx-fpO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="9w4-z6-0cJ"/>
+                    <constraint firstItem="Keu-fx-fpO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="9w4-z6-0cJ"/>
                     <constraint firstItem="Keu-fx-fpO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Cxg-d5-bhm"/>
-                    <constraint firstAttribute="bottom" secondItem="Keu-fx-fpO" secondAttribute="bottom" constant="10" id="KZp-Hl-sYK"/>
+                    <constraint firstAttribute="bottom" secondItem="Keu-fx-fpO" secondAttribute="bottom" constant="14" id="KZp-Hl-sYK"/>
                     <constraint firstItem="tMe-wf-ds6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Rhi-vX-hL2"/>
                     <constraint firstItem="pxh-o0-3Ka" firstAttribute="leading" secondItem="Keu-fx-fpO" secondAttribute="trailing" constant="10" id="XIc-mQ-PiP"/>
                     <constraint firstAttribute="trailing" secondItem="tMe-wf-ds6" secondAttribute="trailing" constant="10" id="buC-ae-jgu"/>
@@ -51,6 +64,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="indicatorContainerView" destination="Keu-fx-fpO" id="6SO-Wi-Hyt"/>
+                <outlet property="indicatorView" destination="PL0-h2-qG0" id="G6q-Qg-kx7"/>
                 <outlet property="quantityLabel" destination="tMe-wf-ds6" id="oQd-7C-2bf"/>
                 <outlet property="titleLabel" destination="pxh-o0-3Ka" id="kzd-t7-TgC"/>
             </connections>

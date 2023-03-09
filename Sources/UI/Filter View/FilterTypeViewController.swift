@@ -40,6 +40,7 @@ class FilterTypeViewController: UIViewController {
                     filter.filterCategory == self?.filterCategory
                 }.sorted()
                 self?.tableView.reloadData()
+                self?.viewWillLayoutSubviews()
             }
         }
         
@@ -97,13 +98,19 @@ extension FilterTypeViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let filter = self.filterData[indexPath.item]
+        
         switch filter.selectionStatus{
         case .new, .noneSelected:
             filter.selectionStatus = .selected
         case .selected:
             filter.selectionStatus = .noneSelected
         }
-        Storage.shared.saveFilter(filter: filter)
+        
+        (tableView.cellForRow(at: indexPath) as! FilterTypeTableViewCell).setSelectionStatusWithAnimation(with: filter.selectionStatus)
+        // Wait until animation completed.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
+            Storage.shared.saveFilter(filter: filter)
+        }
     }
 }
 
@@ -117,8 +124,7 @@ extension FilterTypeViewController: UITableViewDataSource{
         
         let cellData = filterData[indexPath.item]
         
-        cell.populate(title: cellData.name, quantity: cellData.count)
-        cell.setSelectionStatus(with: cellData.selectionStatus)
+        cell.populate(title: cellData.name, quantity: cellData.count, selectionStatus: cellData.selectionStatus)
         return cell
     }
 }

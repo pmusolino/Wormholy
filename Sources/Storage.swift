@@ -42,6 +42,8 @@ open class Storage: NSObject {
         NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
     
+    /// Adds or updates given ``FilterModel`` to storage and posts notification.
+    /// - Parameter filter: ``FilterModel``to save.
     func saveFilter(filter: FilterModel){
         if let index = filters.firstIndex(where: {(filt) -> Bool in
             return filter == filt
@@ -74,12 +76,22 @@ open class Storage: NSObject {
 }
 
 private extension Storage{
+    
+    /// Creates and saves ``FilterModel``s created by parsing given collection of ``RequestModel``.
+    /// Loops through requests while creating dictionaries that corresponds to known filter categories. Dictionaries stores request values as  types that corresonds to category as keys and number of requests that corresponds to type as value. Then creates indivisual ``FilterModel``for category types and saves them to storage.
+    /// - Parameter requests: Array of filter requests to parse through.
     func createFilterModel(from requests: [RequestModel]){
+        
         var codeDict: [Int: Int] = [:]
         var methodDict: [String: Int] = [:]
         var filterArray: [FilterModel] = []
         
         for request in requests {
+            
+            if request.code == 0{
+                continue
+            }
+            
             if codeDict[request.code] != nil{
                 codeDict[request.code]! += 1
             } else {
@@ -103,6 +115,6 @@ private extension Storage{
         for filter in filterArray{
             Storage.shared.saveFilter(filter: filter)
         }
-        
     }
+    
 }

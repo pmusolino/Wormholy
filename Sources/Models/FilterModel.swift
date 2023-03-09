@@ -22,6 +22,7 @@ enum FilterCategory: CaseIterable{
     }
 }
 
+/// Selection status of new ``FilterModel`` can be "selected" and "noneSelected" for previously existing ones and "new" for newly introduced ``FilterModel``.
 enum FilterSelectionStatus{
     case selected, noneSelected, new
 }
@@ -70,6 +71,9 @@ open class FilterCollectionModel{
         self.filterCollection = filterCollection
     }
     
+    /// Returns collection of any Equatable from current filter collection that matches with given filter category.
+    /// - Parameter filterCategory: ``FilterCategory`` type that filter collection element must conform.
+    /// - Returns: Filtered filter colelction values as array.
     func getFilterCollection(by filterCategory: FilterCategory) -> [any Equatable]{
         return filterCollection.filter{ filterModel -> Bool in
             filterModel.filterCategory == filterCategory
@@ -78,6 +82,9 @@ open class FilterCollectionModel{
         }
     }
     
+    /// Returns collection of any Equatable from current filter collection that matches with given filter category and selected status.
+    /// - Parameter filterCategory: ``FilterCategory`` type that filter collection element must conform.
+    /// - Returns: Filtered filter colelction values as array.
     private func getSelectedFilterCollection(by filterCategory: FilterCategory) -> [any Equatable]{
         return filterCollection.filter{ filterModel -> Bool in
             filterModel.filterCategory == filterCategory && filterModel.selectionStatus == .selected
