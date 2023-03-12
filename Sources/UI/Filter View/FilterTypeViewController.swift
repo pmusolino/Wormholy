@@ -109,7 +109,7 @@ extension FilterTypeViewController: UITableViewDelegate{
         (tableView.cellForRow(at: indexPath) as! FilterTypeTableViewCell).setSelectionStatusWithAnimation(with: filter.selectionStatus)
         // Wait until animation completed.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
-            Storage.shared.saveFilter(filter: filter)
+            Storage.shared.updateFilter(filter: filter)
         }
     }
 }

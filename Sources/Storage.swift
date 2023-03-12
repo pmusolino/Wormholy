@@ -42,27 +42,40 @@ open class Storage: NSObject {
         NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
     
-    /// Adds or updates given ``FilterModel`` to storage and posts notification.
-    /// - Parameter filter: ``FilterModel``to save.
-    func saveFilter(filter: FilterModel){
+    /// Updates selection status of existing ``FilterModel`` on Storage  with given   ``FilterModel`` and posts notification.
+    /// - Parameter filter: Existing ``FilterModel`` type to update with.
+    func updateFilter(filter: FilterModel){
         if let index = filters.firstIndex(where: {(filt) -> Bool in
             return filter == filt
         }){
             // Filter might be selected before.
-            let previousSelectionStatus = self.filters[index].selectionStatus
-            self.filters[index] = filter
-            if filter.selectionStatus == .new{
-                self.filters[index].selectionStatus = previousSelectionStatus
-            }
-            
-        } else {
-            self.filters.insert(filter, at: 0)
+            self.filters[index].selectionStatus = filter.selectionStatus
+            NotificationCenter.default.post(name: filterChangeNotification, object: nil)
         }
-        
-        NotificationCenter.default.post(name: filterChangeNotification, object: nil)
-        
     }
     
+    /// Save new types and updates existing types via given ``FilterModel`` collection and posts updates via Notification Center
+    /// - Parameter filters: New collection of ``FilterModel`` to update and save with.
+    func saveFilters(filters: [FilterModel]){
+        var newFilters = [FilterModel]()
+        for filter in filters{
+            if let index = self.filters.firstIndex(where: {(filt) -> Bool in
+                return filter == filt
+            }){
+                // Filter might be selected before.
+                let previousSelectionStatus = self.filters[index].selectionStatus
+                var newFilter = filter
+                if filter.selectionStatus == .new{
+                    newFilter.selectionStatus = previousSelectionStatus
+                }
+                newFilters.insert(newFilter, at: 0)
+            } else {
+                newFilters.insert(filter, at: 0)
+            }
+        }
+        self.filters = newFilters
+        NotificationCenter.default.post(name: filterChangeNotification, object: nil)
+    }
 
     func clearFilters(){
         self.filters = filters.map{ filter in
@@ -112,9 +125,7 @@ private extension Storage{
             filterArray.append(.init(filterCategory: .method, value: methodKey, count: methodDict[methodKey] ?? 1))
         }
         
-        for filter in filterArray{
-            Storage.shared.saveFilter(filter: filter)
-        }
+        Storage.shared.saveFilters(filters: filterArray)
     }
     
 }
