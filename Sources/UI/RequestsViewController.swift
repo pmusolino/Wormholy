@@ -26,13 +26,6 @@ class RequestsViewController: WHBaseViewController {
         collectionView?.register(UINib(nibName: "RequestCell", bundle:WHBundle.getBundle()), forCellWithReuseIdentifier: "RequestCell")
         
         filteredRequests = Storage.shared.requests
-        NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
-            DispatchQueue.main.sync { [weak self] in
-                self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text, filterCollection: self?.filterCollectionModel) ?? []
-                self?.collectionView.reloadData()
-                
-            }
-        }
         
         NotificationCenter.default.addObserver(forName: filterChangeNotification, object: nil, queue: nil){ [weak self] (notification) in
             DispatchQueue.main.async{ [weak self] in
