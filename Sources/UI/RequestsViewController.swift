@@ -117,8 +117,11 @@ class RequestsViewController: WHBaseViewController {
             self?.shareContent(sender, requestExportOption: .curl)
         })
         ac.addAction(UIAlertAction(title: "Share as Postman Collection", style: .default) { [weak self] (action) in
-                   self?.shareContent(sender, requestExportOption: .postman)
-               })
+            self?.shareContent(sender, requestExportOption: .postman)
+        })
+        ac.addAction(UIAlertAction(title: "Filter by Status Code", style: .default) { [weak self] (action) in
+            self?.openFilterActionSheet(sender)
+        })
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -130,7 +133,7 @@ class RequestsViewController: WHBaseViewController {
     func openFilterActionSheet(_ sender: UIBarButtonItem) {
         let ac = UIAlertController(title: "Filter", message: "Choose a status code", preferredStyle: .actionSheet)
         
-        Array(Set(Storage.shared.requests.map(\.code))).forEach { statusCode in
+        Set(Storage.shared.requests.map(\.code)).sorted().forEach { statusCode in
             ac.addAction(UIAlertAction(title: "Status Code: \(statusCode)", style: .default) { [weak self] (action) in
                 self?.filteredStatusCode = statusCode
                 self?.filteredRequests = self?.filterRequests(code: statusCode) ?? []
