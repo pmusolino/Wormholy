@@ -13,6 +13,7 @@ class RequestsViewController: WHBaseViewController {
     @IBOutlet weak var collectionView: WHCollectionView!
     var filteredRequests: [RequestModel] = []
     var searchController: UISearchController?
+    var filteredStatusCode: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,11 @@ class RequestsViewController: WHBaseViewController {
         filteredRequests = Storage.shared.requests
         NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { [weak self] (notification) in
             DispatchQueue.main.sync { [weak self] in
-                self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text) ?? []
+                if let filteredStatusCode = self?.filteredStatusCode {
+                    self?.filteredRequests = self?.filterRequests(code: filteredStatusCode) ?? []
+                } else {
+                    self?.filteredRequests = self?.filterRequests(text: self?.searchController?.searchBar.text) ?? []
+                }
                 self?.collectionView.reloadData()
             }
         }
@@ -89,6 +94,14 @@ class RequestsViewController: WHBaseViewController {
         }
     }
     
+    func filterRequests(code: Int?) -> [RequestModel] {
+        guard let code else {
+            return Storage.shared.requests
+        }
+        
+        return Storage.shared.requests.filter { $0.code == code }
+    }
+    
     // MARK: - Actions
     @objc func openActionSheet(_ sender: UIBarButtonItem){
         let ac = UIAlertController(title: "Wormholy", message: "Choose an option", preferredStyle: .actionSheet)
@@ -114,8 +127,39 @@ class RequestsViewController: WHBaseViewController {
         present(ac, animated: true, completion: nil)
     }
     
+    func openFilterActionSheet(_ sender: UIBarButtonItem) {
+        let ac = UIAlertController(title: "Filter", message: "Choose a status code", preferredStyle: .actionSheet)
+        
+        Array(Set(Storage.shared.requests.map(\.code))).forEach { statusCode in
+            ac.addAction(UIAlertAction(title: "Status Code: \(statusCode)", style: .default) { [weak self] (action) in
+                self?.filteredStatusCode = statusCode
+                self?.filteredRequests = self?.filterRequests(code: statusCode) ?? []
+                self?.collectionView.reloadData()
+            })
+        }
+        
+        if filteredStatusCode != nil {
+            ac.addAction(UIAlertAction(title: "Clear Filter", style: .default) { [weak self] (action) in
+                self?.clearFiltering()
+            })
+        }
+        
+        ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (_) in })
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            ac.popoverPresentationController?.barButtonItem = sender
+        }
+        present(ac, animated: true, completion: nil)
+    }
+    
     func clearRequests() {
         Storage.shared.clearRequests()
+        filteredRequests = Storage.shared.requests
+        collectionView.reloadData()
+    }
+    
+    func clearFiltering() {
+        filteredStatusCode = nil
         filteredRequests = Storage.shared.requests
         collectionView.reloadData()
     }
