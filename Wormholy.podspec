@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Paolo Musolino" => "info@codeido.com" }
   s.social_media_url   = "https://twitter.com/pmusolino"
-  s.ios.deployment_target = "9.0"
+  s.ios.deployment_target = "11.0"
   s.source       = { :git => "https://github.com/pmusolino/Wormholy.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*.{swift,h,m}"
   s.swift_version = "5.0"
