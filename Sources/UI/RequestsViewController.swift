@@ -105,7 +105,10 @@ class RequestsViewController: WHBaseViewController {
         })
         ac.addAction(UIAlertAction(title: "Share as Postman Collection", style: .default) { [weak self] (action) in
                    self?.shareContent(sender, requestExportOption: .postman)
-               })
+        })
+        ac.addAction(UIAlertAction(title: "Stats", style: .default) { [weak self] (action) in
+            self?.openStatsDetailVC()
+        })
         ac.addAction(UIAlertAction(title: "Close", style: .cancel) { (action) in
         })
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -134,6 +137,15 @@ class RequestsViewController: WHBaseViewController {
         if let requestDetailVC = storyboard.instantiateViewController(withIdentifier: "RequestDetailViewController") as? RequestDetailViewController{
             requestDetailVC.request = request
             self.show(requestDetailVC, sender: self)
+        }
+    }
+    
+    func openStatsDetailVC(){
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        if let statsDetailVC = storyboard.instantiateViewController(withIdentifier: "StatsViewController") as? StatsViewController{
+            statsDetailVC.title = "Stats"
+            statsDetailVC.filteredRequests = self.filteredRequests
+            self.show(statsDetailVC, sender: self)
         }
     }
     
