@@ -11,3 +11,4 @@ import Foundation
 //Notifications
 let fireWormholy = NSNotification.Name(rawValue: "wormholy_fire")
 let newRequestNotification = NSNotification.Name(rawValue: "wormholy_new_request")
+let filterChangeNotification = NSNotification.Name(rawValue: "wormholy_filter_change_notification")

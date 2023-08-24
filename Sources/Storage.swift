@@ -16,7 +16,12 @@ open class Storage: NSObject {
 
     public static var defaultFilter: String? = nil
     
-    open var requests: [RequestModel] = []
+    open var requests: [RequestModel] = []{
+        didSet{
+            self.createFilterModel(from: requests)
+        }
+    }
+    open var filters: [FilterModel] = []
     
     func saveRequest(request: RequestModel?){
         guard request != nil else {
@@ -36,8 +41,91 @@ open class Storage: NSObject {
         }
         NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
+    
+    /// Updates selection status of existing ``FilterModel`` on Storage  with given   ``FilterModel`` and posts notification.
+    /// - Parameter filter: Existing ``FilterModel`` type to update with.
+    func updateFilter(filter: FilterModel){
+        if let index = filters.firstIndex(where: {(filt) -> Bool in
+            return filter == filt
+        }){
+            // Filter might be selected before.
+            self.filters[index].selectionStatus = filter.selectionStatus
+            NotificationCenter.default.post(name: filterChangeNotification, object: nil)
+        }
+    }
+    
+    /// Save new types and updates existing types via given ``FilterModel`` collection and posts updates via Notification Center
+    /// - Parameter filters: New collection of ``FilterModel`` to update and save with.
+    func saveFilters(filters: [FilterModel]){
+        var newFilters = [FilterModel]()
+        for filter in filters{
+            if let index = self.filters.firstIndex(where: {(filt) -> Bool in
+                return filter == filt
+            }){
+                // Filter might be selected before.
+                let previousSelectionStatus = self.filters[index].selectionStatus
+                var newFilter = filter
+                if filter.selectionStatus == .new{
+                    newFilter.selectionStatus = previousSelectionStatus
+                }
+                newFilters.insert(newFilter, at: 0)
+            } else {
+                newFilters.insert(filter, at: 0)
+            }
+        }
+        self.filters = newFilters
+        NotificationCenter.default.post(name: filterChangeNotification, object: nil)
+    }
 
+    func clearFilters(){
+        self.filters = filters.map{ filter in
+                .init(filterCategory: filter.filterCategory, value: filter.value)
+        }
+    }
+    
     func clearRequests() {
         requests.removeAll()
     }
+}
+
+private extension Storage{
+    
+    /// Creates and saves ``FilterModel``s created by parsing given collection of ``RequestModel``.
+    /// Loops through requests while creating dictionaries that corresponds to known filter categories. Dictionaries stores request values as  types that corresonds to category as keys and number of requests that corresponds to type as value. Then creates indivisual ``FilterModel``for category types and saves them to storage.
+    /// - Parameter requests: Array of filter requests to parse through.
+    func createFilterModel(from requests: [RequestModel]){
+        
+        var codeDict: [Int: Int] = [:]
+        var methodDict: [String: Int] = [:]
+        var filterArray: [FilterModel] = []
+        
+        for request in requests {
+            
+            if request.code == 0{
+                continue
+            }
+            
+            if codeDict[request.code] != nil{
+                codeDict[request.code]! += 1
+            } else {
+                codeDict[request.code] = 1
+            }
+            if methodDict[request.method] != nil {
+                methodDict[request.method]! += 1
+            } else {
+                methodDict[request.method] = 1
+            }
+        }
+        
+        for codeKey in codeDict.keys{
+            filterArray.append(.init(filterCategory: .code, value: codeKey, count: codeDict[codeKey] ?? 1))
+        }
+        
+        for methodKey in methodDict.keys{
+            filterArray.append(.init(filterCategory: .method, value: methodKey, count: methodDict[methodKey] ?? 1))
+        }
+        
+        Storage.shared.saveFilters(filters: filterArray)
+    }
+    
 }
