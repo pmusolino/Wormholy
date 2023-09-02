@@ -14,6 +14,7 @@ class RequestCell: UICollectionViewCell {
     @IBOutlet weak var codeLabel: WHLabel!
     @IBOutlet weak var urlLabel: WHLabel!
     @IBOutlet weak var durationLabel: WHLabel!
+    @IBOutlet weak var detailLabel: WHLabel!
     
     func populate(request: RequestModel?){
         guard request != nil else {
@@ -46,5 +47,12 @@ class RequestCell: UICollectionViewCell {
         }
         urlLabel.text = request?.url
         durationLabel.text = request?.duration?.formattedMilliseconds() ?? ""
+        if let request = request,
+            let detail = Wormholy.detailProvider?(request) {
+            detailLabel.text = detail
+            detailLabel.isHidden = false
+        } else {
+            detailLabel.isHidden = true
+        }
     }
 }

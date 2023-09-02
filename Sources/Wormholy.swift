@@ -49,6 +49,11 @@ public class Wormholy: NSObject
             Wormholy.enable(true)
         }
     }
+
+    /// List screen cell will show additional detail about a request.
+    /// Can be used for example to show GraphQL operation name.
+    ///
+    public static var detailProvider: ((RequestModel) -> String?)?
     
     static func enable(_ enable: Bool){
         if enable{
