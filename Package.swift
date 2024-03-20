@@ -24,6 +24,7 @@ let package = Package(
             dependencies: [],
             exclude: [
                 "Models/Postman/Postman_demo_collection.json",
+                "Support Files/Assets.xcassets"
             ],
             resources: [
                 .process("Resources/ActionableTableViewCell.xib"),
