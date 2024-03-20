@@ -8,6 +8,7 @@
 
 import UIKit
 import Wormholy
+import WormholySwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

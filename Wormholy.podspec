@@ -13,9 +13,9 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/pmusolino/Wormholy.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*.{swift,h,m}"
   s.swift_version = "5.0"
-  s.public_header_files = "Sources/**/*.h"
+  s.public_header_files = "Sources/Wormholy/include/*.h"
   s.resource_bundles = {
-    'Wormholy' => ['Sources/**/*.storyboard', 'Sources/**/*.xib', 'Sources/**/*.{css,js}']
+    'Wormholy' => ['Sources/WormholySwift/Resources/*.storyboard', 'Sources/WormholySwift/Resources/*.xib', 'Sources/**/*.{css,js}']
   }
   s.frameworks  = "Foundation"
 end
