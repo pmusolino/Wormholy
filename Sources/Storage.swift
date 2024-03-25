@@ -15,25 +15,36 @@ open class Storage: NSObject {
     public static var limit: NSNumber? = nil
 
     public static var defaultFilter: String? = nil
-    
+
+    public static var filteredURLs: [String]? = nil
+
     open var requests: [RequestModel] = []
     
-    func saveRequest(request: RequestModel?){
+    func saveRequest(request: RequestModel?) {
         guard request != nil else {
             return
         }
         
         if let index = requests.firstIndex(where: { (req) -> Bool in
             return request?.id == req.id ? true : false
-        }){
+        }) {
             requests[index] = request!
-        }else{
+        } else {
             requests.insert(request!, at: 0)
         }
 
         if let limit = Self.limit?.intValue {
             requests = Array(requests.prefix(limit))
         }
+        
+        if let filteredURLs = Self.filteredURLs {
+            requests = requests.filter({ request in
+                filteredURLs.contains { url in
+                    request.url.contains(url)
+                }
+            })
+        }
+        
         NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
 
