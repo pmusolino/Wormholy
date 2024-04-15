@@ -77,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4025634F2BCD49E700694AEB /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		45087189207E59FE00EE2D31 /* WormholyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WormholyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4508718B207E59FF00EE2D31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4508718D207E59FF00EE2D31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +169,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		402563472BCD3F9D00694AEB /* include */ = {
+			isa = PBXGroup;
+			children = (
+				45C51A1620A1FDBC006933CE /* module.modulemap */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 		4508718A207E59FF00EE2D31 /* WormholyDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,6 +289,8 @@
 		455818CA207D647900D2F954 /* Objc */ = {
 			isa = PBXGroup;
 			children = (
+				45C51A1720A20B38006933CE /* Wormholy.h */,
+				402563472BCD3F9D00694AEB /* include */,
 				455818D3207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.h */,
 				455818D0207D64A800D2F954 /* NSURLSessionConfiguration+Wormholy.m */,
 				455818D4207D64A800D2F954 /* WormholyMethodSwizzling.h */,
@@ -342,10 +353,9 @@
 			isa = PBXGroup;
 			children = (
 				8933C7841EB5B820000D00A4 /* Wormholy.swift */,
+				4025634F2BCD49E700694AEB /* module.modulemap */,
 				455818C1207D61A100D2F954 /* CustomHTTPProtocol.swift */,
 				455818C2207D61A100D2F954 /* Storage.swift */,
-				45C51A1620A1FDBC006933CE /* module.modulemap */,
-				45C51A1720A20B38006933CE /* Wormholy.h */,
 				451C9E532080E592002A34BC /* UI */,
 				451C9E562080E5F0002A34BC /* Subclasses */,
 				455818CA207D647900D2F954 /* Objc */,

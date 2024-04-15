@@ -1,0 +1,8 @@
+// This is the modulemap for the ObjC SPM target **ONLY**.
+
+module Wormholy {
+    umbrella header "../Wormholy.h"
+
+    export *
+    module * { export * }
+}
