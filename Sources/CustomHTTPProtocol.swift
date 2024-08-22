@@ -42,6 +42,11 @@ public class CustomHTTPProtocol: URLProtocol {
         if CustomHTTPProtocol.property(forKey: Constants.RequestHandledKey, in: request) != nil {
             return false
         }
+        
+        if request.url?.scheme == "wss" || request.url?.scheme == "ws" {
+            return false
+        }
+        
         return true
     }
     
