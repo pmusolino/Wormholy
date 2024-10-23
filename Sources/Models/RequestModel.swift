@@ -14,7 +14,6 @@ open class RequestModel: Codable {
     public let host: String?
     public let port: Int?
     public let scheme: String?
-    public let date: Date
     public let method: String
     public let headers: [String: String]
     public var credentials: [String : String]
@@ -25,14 +24,25 @@ open class RequestModel: Codable {
     open var dataResponse: Data?
     open var errorClientDescription: String?
     open var duration: Double?
-    
+
+    public var startDate: Date?
+    public var requestStartDate: Date?
+    public var requestEndDate: Date?
+    public var responseStartDate: Date?
+    public var responseEndDate: Date?
+    public var countOfRequestBodyBytesBeforeEncoding: Int64?
+    public var countOfRequestBodyBytesSent: Int64?
+    public var countOfRequestHeaderBytesSent: Int64?
+    public var countOfResponseBodyBytesAfterDecoding: Int64?
+    public var countOfResponseBodyBytesReceived: Int64?
+    public var countOfResponseHeaderBytesReceived: Int64?
+
     init(request: NSURLRequest, session: URLSession?) {
         id = UUID().uuidString
         url = request.url?.absoluteString ?? ""
         host = request.url?.host
         port = request.url?.port
         scheme = request.url?.scheme
-        date = Date()
         method = request.httpMethod ?? "GET"
         credentials = [:]
         var headers = request.allHTTPHeaderFields ?? [:]
@@ -135,14 +145,15 @@ open class RequestModel: Codable {
         guard
             let url = URL(string: self.url),
             let scheme = self.scheme,
-            let host = self.host
+            let host = self.host,
+            let startDate = self.startDate
             else { return nil }
         
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyyMMdd_HHmmss"
         
-        let name = "\(dateFormatterGet.string(from: date))-\(url)"
-        
+        let name = "\(dateFormatterGet.string(from: startDate))-\(url)"
+
         var headers: [PMHeader] = []
         let method = self.method
         for header in self.headers {
@@ -191,4 +202,71 @@ open class RequestModel: Codable {
         
         return PMItem(name: name, item: nil, request: request, response: [response])
     }
+
+    var preRequestTime: Double? {
+        guard let requestStartDate = self.requestStartDate,
+                let startDate = self.startDate else { return nil }
+        return requestStartDate.durationInMilliSeconds(since: startDate)
+    }
+
+    var requestTime: Double? {
+        guard let requestEndDate = self.requestEndDate,
+                let requestStartDate = self.requestStartDate else { return nil }
+        return requestEndDate.durationInMilliSeconds(since: requestStartDate)
+    }
+
+    var responseTime: Double? {
+        guard let responseStartDate = self.responseStartDate,
+                let requestEndDate = self.requestEndDate else { return nil }
+        return responseStartDate.durationInMilliSeconds(since: requestEndDate)
+    }
+
+    var downloadTime: Double? {
+        guard let responseEndDate = self.responseEndDate,
+                let responseStartDate = self.responseStartDate else { return nil }
+        return responseEndDate.durationInMilliSeconds(since: responseStartDate)
+    }
+}
+
+
+extension Date {
+    func durationInMilliSeconds() -> Double {
+        let double = Date().timeIntervalSince(self) * 1000
+        return double.round(to: 3)
+    }
+
+    func durationInMilliSeconds(since date: Date) -> Double {
+        let double = self.timeIntervalSince(date) * 1000
+        return double.round(to: 3)
+    }
+}
+
+
+extension Double {
+    func round(to places: Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+}
+
+
+extension Int64 {
+    var kilobytes: Double { return Double(self) / 1_024 }
+    var megabytes: Double { return kilobytes / 1_024 }
+    var gigabytes: Double { return megabytes / 1_024 }
+
+    public func getReadableUnit() -> String {
+       switch self {
+       case 0..<1_024:
+         return "\(self) bytes"
+       case 1_024..<(1_024 * 1_024):
+         return "\(String(format: "%.2f", kilobytes)) kb"
+       case 1_024..<(1_024 * 1_024 * 1_024):
+         return "\(String(format: "%.2f", megabytes)) mb"
+       case (1_024 * 1_024 * 1_024)...Int64.max:
+         return "\(String(format: "%.2f", gigabytes)) gb"
+       default:
+         return "\(self) bytes"
+       }
+     }
 }

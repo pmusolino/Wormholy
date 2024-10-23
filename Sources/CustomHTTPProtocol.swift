@@ -62,10 +62,6 @@ public class CustomHTTPProtocol: URLProtocol {
     override public func stopLoading() {
         sessionTask?.cancel()
         currentRequest?.httpBody = body(from: request)
-        if let startDate = currentRequest?.date{
-            currentRequest?.duration = fabs(startDate.timeIntervalSinceNow) * 1000 //Find elapsed time and convert to milliseconds
-        }
-
         Storage.shared.saveRequest(request: currentRequest)
         session?.invalidateAndCancel()
     }
@@ -137,6 +133,23 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     
     public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         client?.urlProtocolDidFinishLoading(self)
+    }
+
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
+        currentRequest?.startDate = metrics.taskInterval.start
+        currentRequest?.requestStartDate = metrics.transactionMetrics.first?.requestStartDate
+        currentRequest?.requestEndDate = metrics.transactionMetrics.first?.requestEndDate
+        currentRequest?.responseStartDate = metrics.transactionMetrics.first?.responseStartDate
+        currentRequest?.responseEndDate = metrics.transactionMetrics.first?.responseEndDate
+        currentRequest?.duration = Double(metrics.taskInterval.duration) * 1000
+        if #available(iOS 13.0, *) {
+            currentRequest?.countOfRequestBodyBytesBeforeEncoding = metrics.transactionMetrics.first?.countOfRequestBodyBytesBeforeEncoding
+            currentRequest?.countOfRequestBodyBytesSent = metrics.transactionMetrics.first?.countOfRequestBodyBytesSent
+            currentRequest?.countOfRequestHeaderBytesSent = metrics.transactionMetrics.first?.countOfRequestHeaderBytesSent
+            currentRequest?.countOfResponseBodyBytesAfterDecoding = metrics.transactionMetrics.first?.countOfResponseBodyBytesAfterDecoding
+            currentRequest?.countOfResponseBodyBytesReceived = metrics.transactionMetrics.first?.countOfResponseBodyBytesReceived
+            currentRequest?.countOfResponseHeaderBytesReceived = metrics.transactionMetrics.first?.countOfResponseHeaderBytesReceived
+        }
     }
 }
 

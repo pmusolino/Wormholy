@@ -14,10 +14,27 @@ class RequestModelBeautifier: NSObject {
         let url = NSMutableAttributedString().bold("URL ").normal(request.url + "\n")
         let method = NSMutableAttributedString().bold("Method ").normal(request.method + "\n")
         let responseCode = NSMutableAttributedString().bold("Response Code ").normal((request.code != 0 ? "\(request.code)" : "-") + "\n")
-        let requestStartTime = NSMutableAttributedString().bold("Request Start Time ").normal((request.date.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-") + "\n")
-        let duration = NSMutableAttributedString().bold("Duration ").normal(request.duration?.formattedMilliseconds() ?? "-" + "\n")
+        let requestStartTime = NSMutableAttributedString().bold("Request Start Time ").normal((request.startDate?.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-") + "\n")
+
+        let preRequestTime = NSMutableAttributedString().bold("Pre-Request Duration ").normal((request.preRequestTime?.formattedMilliseconds() ?? "-") + "\n")
+        let requestTime = NSMutableAttributedString().bold("Request Duration ").normal((request.requestTime?.formattedMilliseconds() ?? "-") + "\n")
+        let responseTime = NSMutableAttributedString().bold("Response Duration ").normal((request.responseTime?.formattedMilliseconds() ?? "-") + "\n")
+        let downloadTime = NSMutableAttributedString().bold("Download Duration ").normal((request.downloadTime?.formattedMilliseconds() ?? "-") + "\n")
+        let duration = NSMutableAttributedString().bold("Total Duration ").normal(request.duration?.formattedMilliseconds() ?? "-")
+
         let final = NSMutableAttributedString()
-        for attr in [url, method, responseCode, requestStartTime, duration]{
+        var items: [NSMutableAttributedString] = []
+        if #available(iOS 13.0, *) {
+            let requestBodyBytesSent = NSMutableAttributedString().bold("Request Body Bytes Sent ").normal((request.countOfRequestBodyBytesSent?.getReadableUnit() ?? "-") + "\n")
+            let requestHeaderBytesSent = NSMutableAttributedString().bold("Request Header Bytes Sent ").normal((request.countOfRequestHeaderBytesSent?.getReadableUnit() ?? "-") + "\n")
+            let responseBodyBytesReceived = NSMutableAttributedString().bold("Response Body Bytes Received ").normal((request.countOfResponseBodyBytesReceived?.getReadableUnit() ?? "-") + "\n")
+            let responseHeaderBytesReceived = NSMutableAttributedString().bold("Response Header Bytes Received ").normal((request.countOfResponseHeaderBytesReceived?.getReadableUnit() ?? "-") + "\n")
+            items = [url, method, responseCode, requestStartTime, requestBodyBytesSent, requestHeaderBytesSent, responseBodyBytesReceived, responseHeaderBytesReceived, preRequestTime, requestTime, responseTime, downloadTime, duration]
+        } else {
+            items = [url, method, responseCode, requestStartTime, preRequestTime, requestTime, responseTime, downloadTime, duration]
+        }
+
+        for attr in items {
             final.append(attr)
         }
         return final
