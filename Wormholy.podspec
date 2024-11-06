@@ -14,6 +14,9 @@ Pod::Spec.new do |s|
   s.swift_version = "5.0"
   s.frameworks  = "Foundation", "UIKit"
   
+  # Include WormholySwift by default
+  s.default_subspecs = 'WormholySwift'
+
   s.subspec 'WormholySwift' do |ss|
     ss.source_files = 'Sources/WormholySwift/**/*.{swift}'
     ss.resource_bundles = {
