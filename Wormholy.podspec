@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.public_header_files = "Sources/WormholyObjC/include/*.h"
   s.resource_bundles = {
     'Wormholy' => [
-      'Sources/WormholySwift/*'
+      'Sources/WormholySwift/Resources/*'
     ]
   }
   s.frameworks  = "Foundation", "UIKit"
@@ -31,5 +31,6 @@ Pod::Spec.new do |s|
   s.subspec 'WormholyObjC' do |ss|
     ss.source_files = 'Sources/WormholyObjC/**/*.{h,m}'
     ss.dependency 'Wormholy/WormholySwift'
+    ss.public_header_files = 'Sources/WormholyObjC/**/*.h'
   end
 end
