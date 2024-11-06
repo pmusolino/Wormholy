@@ -16,12 +16,7 @@ Pod::Spec.new do |s|
   s.public_header_files = "Sources/WormholyObjC/include/*.h"
   s.resource_bundles = {
     'Wormholy' => [
-      'Sources/WormholySwift/Resources/ActionableTableViewCell.xib',
-      'Sources/WormholySwift/Resources/Assets.xcassets',
-      'Sources/WormholySwift/Resources/Flow.storyboard',
-      'Sources/WormholySwift/Resources/RequestCell.xib',
-      'Sources/WormholySwift/Resources/RequestTitleSectionView.xib',
-      'Sources/WormholySwift/Resources/TextTableViewCell.xib'
+      'Sources/WormholySwift/*'
     ]
   }
   s.frameworks  = "Foundation", "UIKit"
@@ -29,12 +24,7 @@ Pod::Spec.new do |s|
     ss.source_files = 'Sources/WormholySwift/**/*.{swift}'
     ss.resource_bundles = {
       'WormholySwiftResources' => [
-        'Sources/WormholySwift/Resources/ActionableTableViewCell.xib',
-        'Sources/WormholySwift/Resources/Assets.xcassets',
-        'Sources/WormholySwift/Resources/Flow.storyboard',
-        'Sources/WormholySwift/Resources/RequestCell.xib',
-        'Sources/WormholySwift/Resources/RequestTitleSectionView.xib',
-        'Sources/WormholySwift/Resources/TextTableViewCell.xib'
+        'Sources/WormholySwift/Resources/*'
       ]
     }
   end
