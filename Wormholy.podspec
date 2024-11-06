@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Wormholy"
-  s.version      = "1.7.0"
+  s.version      = "2.0.0"
   s.summary      = "Network debugging made easy"
   s.description  = <<-DESC
     Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
@@ -25,4 +25,17 @@ Pod::Spec.new do |s|
     ]
   }
   s.frameworks  = "Foundation", "UIKit"
+  s.subspec 'WormholySwift' do |ss|
+    ss.source_files = 'Sources/WormholySwift/**/*.{swift}'
+    ss.resource_bundles = {
+      'WormholySwiftResources' => [
+        'Sources/WormholySwift/Resources/ActionableTableViewCell.xib',
+        'Sources/WormholySwift/Resources/Assets.xcassets',
+        'Sources/WormholySwift/Resources/Flow.storyboard',
+        'Sources/WormholySwift/Resources/RequestCell.xib',
+        'Sources/WormholySwift/Resources/RequestTitleSectionView.xib',
+        'Sources/WormholySwift/Resources/TextTableViewCell.xib'
+      ]
+    }
+  end
 end
