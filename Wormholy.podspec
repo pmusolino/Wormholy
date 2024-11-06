@@ -37,5 +37,10 @@ Pod::Spec.new do |s|
         'Sources/WormholySwift/Resources/TextTableViewCell.xib'
       ]
     }
+    ss.dependency 'Wormholy/WormholyObjC'
+  end
+  s.subspec 'WormholyObjC' do |ss|
+    ss.source_files = 'Sources/WormholyObjC/**/*.{h,m}'
+    ss.dependency 'Wormholy/WormholySwift'
   end
 end
