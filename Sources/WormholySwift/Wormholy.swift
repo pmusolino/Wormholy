@@ -2,7 +2,7 @@
 //  Wormholy.swift
 //  Wormholy
 //
-//  Created by Paolo Musolino on {TODAY}.
+//  Created by Paolo Musolino.
 //  Copyright © 2018 Wormholy. All rights reserved.
 //
 
@@ -86,7 +86,7 @@ public class Wormholy: NSObject
             sessionConfiguration.protocolClasses = urlProtocolClasses
         }
         else{
-            print("[Wormholy] is only available when running on iOS9+")
+            print("[Wormholy] is only available when running on iOS12+")
         }
     }
     
