@@ -9,13 +9,20 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Paolo Musolino" => "info@codeido.com" }
   s.social_media_url   = "https://twitter.com/pmusolino"
-  s.ios.deployment_target = "11.0"
+  s.ios.deployment_target = "12.0"
   s.source       = { :git => "https://github.com/pmusolino/Wormholy.git", :tag => s.version.to_s }
   s.source_files  = "Sources/**/*.{swift,h,m}"
   s.swift_version = "5.0"
-  s.public_header_files = "Sources/Wormholy/include/*.h"
+  s.public_header_files = "Sources/WormholyObjC/include/*.h"
   s.resource_bundles = {
-    'Wormholy' => ['Sources/WormholySwift/Resources/*.storyboard', 'Sources/WormholySwift/Resources/*.xib', 'Sources/**/*.{css,js}']
+    'Wormholy' => [
+      'Sources/WormholySwift/Resources/ActionableTableViewCell.xib',
+      'Sources/WormholySwift/Resources/Assets.xcassets',
+      'Sources/WormholySwift/Resources/Flow.storyboard',
+      'Sources/WormholySwift/Resources/RequestCell.xib',
+      'Sources/WormholySwift/Resources/RequestTitleSectionView.xib',
+      'Sources/WormholySwift/Resources/TextTableViewCell.xib'
+    ]
   }
-  s.frameworks  = "Foundation"
+  s.frameworks  = "Foundation", "UIKit"
 end
