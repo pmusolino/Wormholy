@@ -15,19 +15,19 @@ Pod::Spec.new do |s|
   s.frameworks  = "Foundation", "UIKit"
   
   # Include WormholySwift by default
-  s.default_subspecs = 'WormholySwift'
+  s.default_subspecs = ['WormholyObjC', 'WormholySwift']
 
   s.subspec 'WormholySwift' do |ss|
     ss.source_files = 'Sources/WormholySwift/**/*.{swift}'
     ss.resource_bundles = {
-      'WormholySwiftResources' => [
-        'Sources/WormholySwift/Resources/*'
+      'WormholyResources' => [
+        'Sources/**/*.storyboard', 'Sources/**/*.xib'
       ]
     }
   end
   
   s.subspec 'WormholyObjC' do |ss|
-    ss.source_files = 'Sources/WormholyObjC/**/*.{h,m}'
+    ss.source_files = 'Sources/WormholyObjC/**/*'
     ss.dependency 'Wormholy/WormholySwift'
     ss.public_header_files = 'Sources/WormholyObjC/**/*.h'
   end

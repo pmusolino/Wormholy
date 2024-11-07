@@ -13,7 +13,7 @@ class WHBundle: Bundle {
         return Bundle.module
         #else
         let podBundle = Bundle(for: Wormholy.classForCoder())
-        if let bundleURL = podBundle.url(forResource: "Wormholy", withExtension: "bundle"){
+        if let bundleURL = podBundle.url(forResource: "WormholyResources", withExtension: "bundle"){
             if let bundle = Bundle(url: bundleURL) {
                 return bundle
             }
