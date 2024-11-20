@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-import Wormholy
+import WormholySwift
 class ViewController: UIViewController {
 
     override func viewDidLoad() {

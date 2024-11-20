@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-open class RequestModel: Codable {
+open class RequestModel: Codable, Hashable {
     public let id: String
     public let url: String
     public let host: String?
@@ -84,12 +84,54 @@ open class RequestModel: Codable {
         }
     }
     
+    // Initializer for mocking purposes
+    init(id: String = UUID().uuidString,
+         url: String,
+         host: String? = nil,
+         port: Int? = nil,
+         scheme: String? = nil,
+         date: Date = Date(),
+         method: String = "GET",
+         headers: [String: String] = [:],
+         credentials: [String: String] = [:],
+         cookies: String? = nil,
+         httpBody: Data? = nil,
+         code: Int = 0,
+         responseHeaders: [String: String]? = nil,
+         dataResponse: Data? = nil,
+         errorClientDescription: String? = nil,
+         duration: Double? = nil) {
+        self.id = id
+        self.url = url
+        self.host = host
+        self.port = port
+        self.scheme = scheme
+        self.date = date
+        self.method = method
+        self.headers = headers
+        self.credentials = credentials
+        self.cookies = cookies
+        self.httpBody = httpBody
+        self.code = code
+        self.responseHeaders = responseHeaders
+        self.dataResponse = dataResponse
+        self.errorClientDescription = errorClientDescription
+        self.duration = duration
+    }
+    
     func initResponse(response: URLResponse) {
         guard let responseHttp = response as? HTTPURLResponse else {return}
         code = responseHttp.statusCode
         responseHeaders = responseHttp.allHeaderFields as? [String: String]
     }
     
+    public static func == (lhs: RequestModel, rhs: RequestModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
     
     var curlRequest: String {
         var components = ["$ curl -v"]

@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "Wormholy",
-    platforms: [.iOS(.v12)],
+    platforms: [.iOS(.v15)],
     products: [
         .library(
             name: "Wormholy",
@@ -16,7 +16,7 @@ let package = Package(
         .target(
             name: "WormholySwift",
             dependencies: [],
-            exclude: [],
+            exclude: ["../../WormholyDemo"],
             resources: [
                 .process("Resources/ActionableTableViewCell.xib"),
                 .process("Resources/Assets.xcassets"),

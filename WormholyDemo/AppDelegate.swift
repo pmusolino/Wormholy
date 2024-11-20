@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Wormholy
 import WormholySwift
 
 @UIApplicationMain
