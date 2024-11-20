@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 public class Wormholy: NSObject
 {
@@ -91,20 +92,23 @@ public class Wormholy: NSObject
     }
     
     // MARK: - Navigation
-    static func presentWormholyFlow(){
-        guard UIViewController.currentViewController()?.isKind(of: WHBaseViewController.classForCoder()) == false && UIViewController.currentViewController()?.isKind(of: WHNavigationController.classForCoder()) == false else {
-            return
+    static func presentWormholyFlow() {
+        if let currentVC = UIViewController.currentViewController() {
+            guard !currentVC.isKind(of: WHBaseViewController.classForCoder()) && !currentVC.isKind(of: WHNavigationController.classForCoder()) else {
+                return
+            }
+            // Present RequestsView as a SwiftUI view
+            let requestsView = RequestsView()
+            let hostingController = UIHostingController(rootView: requestsView)
+            hostingController.modalPresentationStyle = .fullScreen
+            currentVC.present(hostingController, animated: true, completion: nil)
+        } else {
+            // Assuming the current view is a SwiftUI view, present the RequestsView
+            let requestsView = RequestsView()
+            let hostingController = UIHostingController(rootView: requestsView)
+            hostingController.modalPresentationStyle = .fullScreen
+            UIApplication.shared.windows.first?.rootViewController?.present(hostingController, animated: true, completion: nil)
         }
-        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
-        if let initialVC = storyboard.instantiateInitialViewController(){
-            initialVC.modalPresentationStyle = .fullScreen
-            UIViewController.currentViewController()?.present(initialVC, animated: true, completion: nil)
-        }
-    }
-    
-    @objc public static var wormholyFlow: UIViewController? {
-        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
-        return storyboard.instantiateInitialViewController()
     }
     
     @objc public static var shakeEnabled: Bool = {

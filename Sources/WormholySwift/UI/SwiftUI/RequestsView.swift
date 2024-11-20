@@ -10,7 +10,8 @@ import SwiftUI
 struct RequestsView: View {
     @State private var searchText = ""
     @State private var filteredRequests: [RequestModel]
-    
+    @Environment(\.presentationMode) var presentationMode
+
     init(requests: [RequestModel] = Storage.shared.requests) {
         _filteredRequests = State(initialValue: requests)
     }
@@ -23,7 +24,7 @@ struct RequestsView: View {
                     ForEach(filteredRequests, id: \.self) { request in
                         VStack(spacing: 0) {
                             RequestCellView(request: request)
-                                .frame(height: 80)
+                                .frame(height: 72)
                                 .onTapGesture {
                                     openRequestDetail(request: request)
                                 }
@@ -31,8 +32,8 @@ struct RequestsView: View {
 
                             // Separator    
                             Rectangle()
-                                .fill(Color.gray)
-                                .frame( height: 8)
+                                .fill(Color.gray.opacity(0.2))
+                                .frame(height: 8)
                         }
                         .listRowInsets(EdgeInsets())
                         .listRowSeparator(.hidden)
@@ -49,7 +50,7 @@ struct RequestsView: View {
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button("Done") {
-                            dismissView()
+                            presentationMode.wrappedValue.dismiss()
                         }
                     }
                 }
@@ -73,15 +74,11 @@ struct RequestsView: View {
     }
     
     private func openRequestDetail(request: RequestModel) {
-        // Implement navigation to request detail view
+        // TODO: Implement navigation to request detail view
     }
     
     private func openActionSheet() {
-        // Implement action sheet presentation
-    }
-    
-    private func dismissView() {
-        // Implement view dismissal
+        // TODO: Implement action sheet presentation
     }
 }
 
@@ -176,11 +173,12 @@ struct RequestCellView: View {
         HStack(alignment: .center, spacing: 8) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(request.method.uppercased())
-                    .font(.headline)
+                    .font(.subheadline)
+                    .bold()
                 
                 if request.code != 0 {
                     Text("\(request.code)")
-                        .font(.caption)
+                        .font(.caption2)
                         .padding(6)
                         .background(RoundedRectangle(cornerRadius: 6)
                                         .stroke(getCodeColor(code: request.code), lineWidth: 0.5))
@@ -189,18 +187,19 @@ struct RequestCellView: View {
                 
                 if let duration = request.duration {
                     Text(duration.formattedMilliseconds())
-                        .font(.subheadline)
+                        .font(.footnote)
                 }
             }
-            .frame(width: 50, height: 80, alignment: .leading)
+            .frame(width: 50, alignment: .leading)
             .padding(.leading, 8)
             
-            
             Text(request.url)
-                .font(.body)
+                .font(.footnote)
                 .lineLimit(nil)
                 .multilineTextAlignment(.leading)
-                .padding([.leading, .trailing], 16)
+                .padding([.leading, .trailing], 8)
+            
+            Spacer()
         }
     }
     
