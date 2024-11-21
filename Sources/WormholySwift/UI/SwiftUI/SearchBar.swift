@@ -43,3 +43,15 @@ struct SearchBar: UIViewRepresentable {
         uiView.text = text
     }
 }
+
+struct SearchBar_Previews: PreviewProvider {
+    @State static var searchText = ""
+
+    static var previews: some View {
+        SearchBar(text: $searchText, onSearchButtonClicked: {
+            print("Search button clicked with text: \(searchText)")
+        })
+        .previewLayout(.sizeThatFits)
+        .padding()
+    }
+}
