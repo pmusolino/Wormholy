@@ -55,16 +55,16 @@ final class ShareUtils {
         
     private static func getTxtText(requests: [RequestModel]) -> String {
         var text: String = ""
-        for request in requests{
-            text = text + RequestModelBeautifier.txtExport(request: request)
+        for request in requests {
+            text += "\(RequestModelBeautifier.txtExport(request: request))"
         }
         return text
     }
     
     private static func getCurlText(requests: [RequestModel]) -> String {
         var text: String = ""
-        for request in requests{
-            text = text + RequestModelBeautifier.curlExport(request: request)
+        for request in requests {
+            text += "\(RequestModelBeautifier.curlExport(request: request))"
         }
         return text
     }

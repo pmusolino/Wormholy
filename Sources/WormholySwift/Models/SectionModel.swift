@@ -1,5 +1,5 @@
 //
-//  Section.swift
+//  SectionModel.swift
 //  Wormholy-iOS
 //
 //  Created by Paolo Musolino on 18/04/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Section {
+struct SectionModel {
     var name: String
     var type: SectionType
     
