@@ -22,7 +22,10 @@ struct RequestDetailView: View {
             }
             
             Section("Request Body") {
-                Text(RequestModelBeautifier.body(request.httpBody))
+                NavigationLink(destination: BodyDetailView(dataBody: request.httpBody)) {
+                    Text("View body")
+                        .foregroundColor(.blue)
+                }
             }
             
             Section("Response Header") {
@@ -30,7 +33,10 @@ struct RequestDetailView: View {
             }
             
             Section("Response Body") {
-                Text(RequestModelBeautifier.body(request.dataResponse))
+                NavigationLink(destination: BodyDetailView(dataBody: request.dataResponse)) {
+                    Text("View body")
+                        .foregroundColor(.blue)
+                }
             }
             
             if let errorDescription = request.errorClientDescription {
@@ -41,7 +47,7 @@ struct RequestDetailView: View {
             }
         }
         .listStyle(GroupedListStyle())
-        .navigationBarTitle("Request Detail", displayMode: .inline)
+        .navigationTitle(URL(string: request.url)?.path ?? "Request Detail")
     }
 }
 
