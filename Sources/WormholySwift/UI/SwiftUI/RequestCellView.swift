@@ -4,6 +4,7 @@
 //
 //  Created by Paolo Musolino on 21/11/24.
 //
+
 import SwiftUI
 
 struct RequestCellView: View {
@@ -20,7 +21,7 @@ struct RequestCellView: View {
                     Text("\(request.code)")
                         .font(.caption)
                         .bold()
-                        .padding(3)
+                        .padding(4)
                         .background(RoundedRectangle(cornerRadius: 6)
                                         .stroke(getCodeColor(code: request.code), lineWidth: 0.5))
                         .foregroundColor(getCodeColor(code: request.code))
