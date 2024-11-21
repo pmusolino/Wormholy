@@ -8,28 +8,25 @@ import SwiftUI
 
 struct SearchBar: UIViewRepresentable {
     @Binding var text: String
-    var onSearchButtonClicked: () -> Void
+    var onTextChanged: () -> Void
 
     class Coordinator: NSObject, UISearchBarDelegate {
         @Binding var text: String
-        var onSearchButtonClicked: () -> Void
+        var onTextChanged: () -> Void
 
-        init(text: Binding<String>, onSearchButtonClicked: @escaping () -> Void) {
+        init(text: Binding<String>, onTextChanged: @escaping () -> Void) {
             _text = text
-            self.onSearchButtonClicked = onSearchButtonClicked
+            self.onTextChanged = onTextChanged
         }
 
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             text = searchText
-        }
-
-        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            onSearchButtonClicked()
+            onTextChanged()
         }
     }
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(text: $text, onSearchButtonClicked: onSearchButtonClicked)
+        return Coordinator(text: $text, onTextChanged: onTextChanged)
     }
 
     func makeUIView(context: Context) -> UISearchBar {
@@ -48,8 +45,8 @@ struct SearchBar_Previews: PreviewProvider {
     @State static var searchText = ""
 
     static var previews: some View {
-        SearchBar(text: $searchText, onSearchButtonClicked: {
-            print("Search button clicked with text: \(searchText)")
+        SearchBar(text: $searchText, onTextChanged: {
+            print("Text changed to: \(searchText)")
         })
         .previewLayout(.sizeThatFits)
         .padding()

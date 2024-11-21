@@ -23,7 +23,7 @@ struct RequestsView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                SearchBar(text: $searchText, onSearchButtonClicked: filterRequests)
+                SearchBar(text: $searchText, onTextChanged: filterRequests)
                 List {
                     ForEach(filteredRequests, id: \.id) { request in
                             NavigationLink(destination: RequestDetailView(request: request)) {
