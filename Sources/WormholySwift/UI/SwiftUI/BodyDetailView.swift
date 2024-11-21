@@ -34,7 +34,7 @@ struct BodyDetailView: View {
             
             if let dataBody = dataBody, let bodyString = String(data: dataBody, encoding: .utf8) {
                 ScrollViewReader { proxy in
-                    TextEditor(text: .constant(bodyString))
+                    HighlightedTextEditor(text: bodyString, highlightedRanges: highlightedRanges)
                         .padding()
                         .background(Color(UIColor.systemBackground))
                         .overlay(
@@ -101,25 +101,21 @@ struct BodyDetailView: View {
         currentHighlightIndex = nil
         
         if !text.isEmpty {
-            let lowercasedBodyString = bodyString.lowercased()
-            let lowercasedText = text.lowercased()
-            var ranges: [Range<String.Index>] = []
-            var searchRange: Range<String.Index>?
+            let regex = try! NSRegularExpression(pattern: NSRegularExpression.escapedPattern(for: text), options: [.caseInsensitive])
+            let nsString = bodyString as NSString
+            let matches = regex.matches(in: bodyString, options: [], range: NSRange(location: 0, length: nsString.length))
             
-            while let foundRange = lowercasedBodyString.range(of: lowercasedText, options: [], range: searchRange) {
-                ranges.append(foundRange)
-                searchRange = foundRange.upperBound..<lowercasedBodyString.endIndex
+            for (index, match) in matches.enumerated() {
+                if let range = Range(match.range, in: bodyString) {
+                    let transcriptionRange = TranscriptionRange(position: index, range: range)
+                    let id = UUID()
+                    highlightedRanges[id] = [transcriptionRange]
+                    positionProxy[index] = id
+                    positionProxyForID[id] = [index]
+                }
             }
             
-            for (index, range) in ranges.enumerated() {
-                let transcriptionRange = TranscriptionRange(position: index, range: range)
-                let id = UUID()
-                highlightedRanges[id] = [transcriptionRange]
-                positionProxy[index] = id
-                positionProxyForID[id] = [index]
-            }
-            
-            count = ranges.count
+            count = matches.count
             currentHighlightIndex = count > 0 ? 0 : nil
         }
     }
@@ -145,6 +141,41 @@ struct BodyDetailView: View {
 struct TranscriptionRange {
     let position: Int
     let range: Range<String.Index>
+}
+
+struct HighlightedTextEditor: View {
+    let text: String
+    let highlightedRanges: [UUID: [TranscriptionRange]]
+    
+    var body: some View {
+        ScrollView {
+            buildHighlightedText()
+                .padding()
+        }
+    }
+    
+    private func buildHighlightedText() -> Text {
+        var result = Text("")
+        var currentIndex = text.startIndex
+        
+        for ranges in highlightedRanges.values {
+            for transcriptionRange in ranges {
+                let range = transcriptionRange.range
+                if currentIndex < range.lowerBound {
+                    result = result + Text(String(text[currentIndex..<range.lowerBound]))
+                }
+                result = result + Text(String(text[range]))
+                    .foregroundColor(.blue) // Changed to blue for highlighting
+                currentIndex = range.upperBound
+            }
+        }
+        
+        if currentIndex < text.endIndex {
+            result = result + Text(String(text[currentIndex..<text.endIndex]))
+        }
+        
+        return result
+    }
 }
 
 struct BodyDetailView_Previews: PreviewProvider {
