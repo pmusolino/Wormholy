@@ -32,7 +32,6 @@ struct RequestCellView: View {
                 }
             }
             .frame(width: 50, alignment: .leading)
-            .padding(.leading, 8)
             
             Text(request.url)
                 .font(.footnote)

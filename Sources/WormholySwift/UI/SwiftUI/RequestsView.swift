@@ -22,25 +22,17 @@ struct RequestsView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 0) {
                 SearchBar(text: $searchText, onSearchButtonClicked: filterRequests)
                 List {
                     ForEach(filteredRequests, id: \.id) { request in
-                        VStack(spacing: 0) {
-                            RequestCellView(request: request)
-                                .onTapGesture {
-                                    openRequestDetail(request: request)
-                                }
-                                .padding(.all, 8)
-                                .frame(height: 76)
-
-                            // Separator
-                            Rectangle()
-                                .fill(Color.gray.opacity(0.2))
-                                .frame(height: 8)
-                        }
-                        .listRowInsets(EdgeInsets())
-                        .listRowSeparator(.hidden)
+                            NavigationLink(destination: RequestDetailView(request: request)) {
+                                RequestCellView(request: request)
+                                    .padding(.all, 8)
+                                    .frame(height: 76)
+                                    
+                            }
+                        .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
                     }
                 }
                 
@@ -74,11 +66,7 @@ struct RequestsView: View {
             }
         }
     }
-    
-    private func openRequestDetail(request: RequestModel) {
-        // TODO: Implement navigation to request detail view
-    }
-    
+
     private func openActionSheet() {
         // TODO: Implement action sheet presentation
     }
