@@ -82,6 +82,39 @@ struct RequestDetailView_Previews: PreviewProvider {
             errorClientDescription: nil,
             duration: 1.23
         )
-        return RequestDetailView(request: fakeRequest)
+        
+        // Create a fake request with an error for preview
+        let fakeErrorRequest = RequestModel(
+            id: UUID().uuidString,
+            url: "https://example.com/api/v1/resources/items/12345/details?include=all&expand=full",
+            host: "example.com",
+            port: 443,
+            scheme: "https",
+            date: Date(),
+            method: "GET",
+            headers: [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer token",
+                "Accept": "application/json",
+                "User-Agent": "Wormholy/1.0"
+            ],
+            credentials: ["user": "password"],
+            cookies: "sessionid=abc123;",
+            httpBody: nil,
+            code: 500,
+            responseHeaders: [
+                "Content-Type": "application/json",
+                "Cache-Control": "no-cache",
+                "Server": "Apache/2.4.41 (Ubuntu)"
+            ],
+            dataResponse: nil,
+            errorClientDescription: "Internal Server Error",
+            duration: 1.23
+        )
+        
+        return Group {
+            RequestDetailView(request: fakeRequest)
+            RequestDetailView(request: fakeErrorRequest)
+        }
     }
 }
