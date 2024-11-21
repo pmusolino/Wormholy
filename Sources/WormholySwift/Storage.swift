@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class Storage: NSObject {
+open class Storage: NSObject, ObservableObject {
 
     public static let shared: Storage = Storage()
   
@@ -16,28 +16,39 @@ open class Storage: NSObject {
 
     public static var defaultFilter: String? = nil
     
-    open var requests: [RequestModel] = []
+    // The requests array is published to notify SwiftUI views of changes.
+    @Published open private(set) var requests: [RequestModel] = []
     
-    func saveRequest(request: RequestModel?){
-        guard request != nil else {
+    func saveRequest(request: RequestModel?) {
+        guard let request = request else {
             return
         }
         
-        if let index = requests.firstIndex(where: { (req) -> Bool in
-            return request?.id == req.id ? true : false
-        }){
-            requests[index] = request!
-        }else{
-            requests.insert(request!, at: 0)
+        var updatedRequests = self.requests
+        
+        if let index = updatedRequests.firstIndex(where: { $0.id == request.id }) {
+            // Update the existing request if it already exists.
+            updatedRequests[index] = request
+        } else {
+            // Insert the new request at the beginning of the array.
+            updatedRequests.insert(request, at: 0)
         }
 
-        if let limit = Self.limit?.intValue {
-            requests = Array(requests.prefix(limit))
+        // Enforce a limit on the number of stored requests, if specified.
+        if let limit = Self.limit?.intValue, updatedRequests.count > limit {
+            updatedRequests = Array(updatedRequests.prefix(limit))
         }
-        NotificationCenter.default.post(name: newRequestNotification, object: nil)
+        
+        // Update the requests array on the main thread.
+        DispatchQueue.main.async {
+            self.requests = updatedRequests
+        }
     }
 
     func clearRequests() {
-        requests.removeAll()
+        // Clear requests array on the main thread.
+        DispatchQueue.main.async {
+            self.requests.removeAll()
+        }
     }
 }

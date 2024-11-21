@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct RequestsView: View {
-    @State private var searchText = ""
+    @State private var searchText = Storage.defaultFilter ?? ""
+    @ObservedObject private var storage = Storage.shared
     @State private var filteredRequests: [RequestModel]
     @Environment(\.presentationMode) var presentationMode
 
     init(requests: [RequestModel] = Storage.shared.requests) {
         _filteredRequests = State(initialValue: requests)
+        if let defaultFilter = Storage.defaultFilter, !defaultFilter.isEmpty {
+            _searchText = State(initialValue: defaultFilter)
+        }
     }
     
     var body: some View {
@@ -21,16 +25,16 @@ struct RequestsView: View {
             VStack {
                 SearchBar(text: $searchText, onSearchButtonClicked: filterRequests)
                 List {
-                    ForEach(filteredRequests, id: \.self) { request in
+                    ForEach(filteredRequests, id: \.id) { request in
                         VStack(spacing: 0) {
                             RequestCellView(request: request)
-                                .frame(height: 72)
                                 .onTapGesture {
                                     openRequestDetail(request: request)
                                 }
                                 .padding(.all, 8)
+                                .frame(height: 76)
 
-                            // Separator    
+                            // Separator
                             Rectangle()
                                 .fill(Color.gray.opacity(0.2))
                                 .frame(height: 8)
@@ -56,18 +60,16 @@ struct RequestsView: View {
                 }
             }
         }
-        .onAppear {
-            NotificationCenter.default.addObserver(forName: newRequestNotification, object: nil, queue: nil) { _ in
-                filterRequests()
-            }
+        .onReceive(storage.$requests) { _ in
+            filterRequests()
         }
     }
     
     private func filterRequests() {
         if searchText.isEmpty {
-            filteredRequests = Storage.shared.requests
+            filteredRequests = storage.requests
         } else {
-            filteredRequests = Storage.shared.requests.filter { request in
+            filteredRequests = storage.requests.filter { request in
                 request.url.range(of: searchText, options: .caseInsensitive) != nil
             }
         }
@@ -171,15 +173,16 @@ struct RequestCellView: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 8) {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(request.method.uppercased())
                     .font(.subheadline)
                     .bold()
                 
                 if request.code != 0 {
                     Text("\(request.code)")
-                        .font(.caption2)
-                        .padding(6)
+                        .font(.caption)
+                        .bold()
+                        .padding(3)
                         .background(RoundedRectangle(cornerRadius: 6)
                                         .stroke(getCodeColor(code: request.code), lineWidth: 0.5))
                         .foregroundColor(getCodeColor(code: request.code))
