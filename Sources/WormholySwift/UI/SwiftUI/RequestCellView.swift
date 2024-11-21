@@ -35,7 +35,7 @@ struct RequestCellView: View {
             .frame(width: 50, alignment: .leading)
             
             Text(request.url)
-                .font(.footnote)
+                .font(.subheadline)
                 .lineLimit(nil)
                 .multilineTextAlignment(.leading)
                 .padding([.leading, .trailing], 8)
@@ -57,5 +57,42 @@ struct RequestCellView: View {
         default:
             return Color(Colors.HTTPCode.Generic)
         }
+    }
+}
+
+struct RequestCellView_Previews: PreviewProvider {
+    static var previews: some View {
+        // Create a fake request for preview
+        let fakeRequest = RequestModel(
+            id: UUID().uuidString,
+            url: "https://example.com/api/v1/resources/items/12345/details?include=all&expand=full",
+            host: "example.com",
+            port: 443,
+            scheme: "https",
+            date: Date(),
+            method: "GET",
+            headers: [
+                "Content-Type": "application/json",
+                "Authorization": "Bearer token",
+                "Accept": "application/json",
+                "User-Agent": "Wormholy/1.0"
+            ],
+            credentials: ["user": "password"],
+            cookies: "sessionid=abc123;",
+            httpBody: nil,
+            code: 200,
+            responseHeaders: [
+                "Content-Type": "application/json",
+                "Cache-Control": "no-cache",
+                "Server": "Apache/2.4.41 (Ubuntu)"
+            ],
+            dataResponse: nil,
+            errorClientDescription: nil,
+            duration: 1.23
+        )
+        
+        RequestCellView(request: fakeRequest)
+            .previewLayout(.sizeThatFits)
+            .padding()
     }
 }
