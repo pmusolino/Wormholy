@@ -146,35 +146,27 @@ struct HighlightedTextEditor: View {
     }
     
     private func buildHighlightedText() -> Text {
-        var result = Text("")
-        let nsString = text as NSString
-        var lastRangeEnd = text.startIndex
+        var attributedText = AttributedString(text)
         
         for (id, ranges) in highlightedRanges {
             for transcriptionRange in ranges {
-                let range = transcriptionRange.range
-                if lastRangeEnd < range.lowerBound {
-                    let nonHighlightedText = nsString.substring(with: NSRange(lastRangeEnd..<range.lowerBound, in: text))
-                    result = result + Text(nonHighlightedText)
+                if let lowerBound = AttributedString.Index(transcriptionRange.range.lowerBound, within: attributedText),
+                   let upperBound = AttributedString.Index(transcriptionRange.range.upperBound, within: attributedText) {
+                    
+                    if currentPosition == transcriptionRange.position {
+                        attributedText[lowerBound..<upperBound].swiftUI.backgroundColor = .yellow
+                    } else {
+                        attributedText[lowerBound..<upperBound].swiftUI.backgroundColor = .gray
+                    }
+                    attributedText[lowerBound..<upperBound].swiftUI.foregroundColor = .primary
+                    
+                    let positionScheme = "goPosition"
+                    attributedText[lowerBound..<upperBound].link = URL(string: "\(positionScheme)://\(transcriptionRange.position)")
                 }
-                
-                let highlightedText = nsString.substring(with: NSRange(range, in: text))
-                if let currentPosition = currentPosition, positionProxyForID[id]?.contains(currentPosition) == true {
-                    result = result + Text(highlightedText).foregroundColor(Color.green) // Different color for current position
-                } else {
-                    result = result + Text(highlightedText).foregroundColor(Color.yellow)
-                }
-                
-                lastRangeEnd = range.upperBound
             }
         }
         
-        if lastRangeEnd < text.endIndex {
-            let remainingText = String(text[lastRangeEnd..<text.endIndex])
-            result = result + Text(remainingText)
-        }
-        
-        return result
+        return Text(attributedText)
     }
 }
 
