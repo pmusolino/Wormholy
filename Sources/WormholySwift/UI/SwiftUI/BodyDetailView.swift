@@ -10,40 +10,29 @@ import SwiftUI
 struct BodyDetailView: View {
     @State private var searchText: String = ""
     @State private var highlightedRanges: [UUID: [TranscriptionRange]] = [:]
-    @State private var currentHighlightIndex: Int? = nil
+    @State private var currentPosition: Int? = nil
     @State private var positionProxy: [Int: UUID] = [:]
     @State private var positionProxyForID: [UUID: [Int]] = [:]
     @State private var count: Int = 0
-    @State private var isSearching: Bool = false
     var dataBody: Data?
 
     var body: some View {
         VStack {
             SearchBar(text: $searchText, onTextChanged: {
                 if let dataBody = dataBody, let bodyString = String(data: dataBody, encoding: .utf8) {
-                    isSearching = true
                     DispatchQueue.global(qos: .userInitiated).async {
                         performSearch(text: searchText, in: bodyString)
-                        DispatchQueue.main.async {
-                            isSearching = false
-                        }
                     }
                 }
             })
-            .padding([.leading, .trailing])
+            .padding(8)
             
             if let dataBody = dataBody, let bodyString = String(data: dataBody, encoding: .utf8) {
                 ScrollViewReader { proxy in
-                    HighlightedTextEditor(text: bodyString, highlightedRanges: highlightedRanges)
-                        .padding()
+                    HighlightedTextEditor(text: bodyString, highlightedRanges: highlightedRanges, currentPosition: currentPosition, positionProxyForID: positionProxyForID)
+                        .padding(8)
                         .background(Color(UIColor.systemBackground))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .onAppear {
-                            performSearch(text: searchText, in: bodyString)
-                        }
+                        .frame(maxHeight: .infinity)
                         .overlay(
                             VStack {
                                 Spacer()
@@ -53,19 +42,19 @@ struct BodyDetailView: View {
                                     }) {
                                         Image(systemName: "chevron.up")
                                     }
-                                    .disabled(currentHighlightIndex == nil || isSearching)
+                                    .disabled(currentPosition == nil)
                                     
                                     Button(action: {
                                         gotoNext()
                                     }) {
                                         Image(systemName: "chevron.down")
                                     }
-                                    .disabled(currentHighlightIndex == nil || isSearching)
+                                    .disabled(currentPosition == nil)
                                     
                                     Spacer()
                                     
-                                    if let currentHighlightIndex = currentHighlightIndex {
-                                        Text("\(currentHighlightIndex + 1) of \(count)")
+                                    if let currentPosition = currentPosition {
+                                        Text("\(currentPosition + 1) of \(count)")
                                             .font(.footnote)
                                             .foregroundColor(.gray)
                                     }
@@ -74,7 +63,7 @@ struct BodyDetailView: View {
                                 .background(Color(UIColor.systemBackground).opacity(0.9))
                             }
                         )
-                        .onChange(of: currentHighlightIndex) { [lastID = currentID] _ in
+                        .onChange(of: currentPosition) { [lastID = currentID] _ in
                             let currentID = currentID
                             if lastID != currentID {
                                 withAnimation {
@@ -87,10 +76,10 @@ struct BodyDetailView: View {
                 }
             } else {
                 Text("No body available")
-                    .padding()
+                    .padding(8)
             }
         }
-        .navigationTitle("Body Detail")
+        .navigationTitle("Response Body")
     }
     
     private func performSearch(text: String, in bodyString: String) {
@@ -98,7 +87,7 @@ struct BodyDetailView: View {
         positionProxy = [:]
         positionProxyForID = [:]
         count = 0
-        currentHighlightIndex = nil
+        currentPosition = nil
         
         if !text.isEmpty {
             let regex = try! NSRegularExpression(pattern: NSRegularExpression.escapedPattern(for: text), options: [.caseInsensitive])
@@ -116,25 +105,25 @@ struct BodyDetailView: View {
             }
             
             count = matches.count
-            currentHighlightIndex = count > 0 ? 0 : nil
+            currentPosition = count > 0 ? 0 : nil
         }
     }
     
     private func gotoPrevious() {
-        if let currentHighlightIndex, currentHighlightIndex > 0 {
-            self.currentHighlightIndex = currentHighlightIndex - 1
+        if let currentPosition, currentPosition > 0 {
+            self.currentPosition = currentPosition - 1
         }
     }
     
     private func gotoNext() {
-        if let currentHighlightIndex, currentHighlightIndex < count - 1 {
-            self.currentHighlightIndex = currentHighlightIndex + 1
+        if let currentPosition, currentPosition < count - 1 {
+            self.currentPosition = currentPosition + 1
         }
     }
     
     private var currentID: UUID? {
-        guard let currentHighlightIndex else { return nil }
-        return positionProxy[currentHighlightIndex]
+        guard let currentPosition else { return nil }
+        return positionProxy[currentPosition]
     }
 }
 
@@ -146,32 +135,43 @@ struct TranscriptionRange {
 struct HighlightedTextEditor: View {
     let text: String
     let highlightedRanges: [UUID: [TranscriptionRange]]
+    let currentPosition: Int?
+    let positionProxyForID: [UUID: [Int]]
     
     var body: some View {
         ScrollView {
             buildHighlightedText()
-                .padding()
+                .padding(8)
         }
     }
     
     private func buildHighlightedText() -> Text {
         var result = Text("")
-        var currentIndex = text.startIndex
+        let nsString = text as NSString
+        var lastRangeEnd = text.startIndex
         
-        for ranges in highlightedRanges.values {
+        for (id, ranges) in highlightedRanges {
             for transcriptionRange in ranges {
                 let range = transcriptionRange.range
-                if currentIndex < range.lowerBound {
-                    result = result + Text(String(text[currentIndex..<range.lowerBound]))
+                if lastRangeEnd < range.lowerBound {
+                    let nonHighlightedText = nsString.substring(with: NSRange(lastRangeEnd..<range.lowerBound, in: text))
+                    result = result + Text(nonHighlightedText)
                 }
-                result = result + Text(String(text[range]))
-                    .foregroundColor(.blue) // Changed to blue for highlighting
-                currentIndex = range.upperBound
+                
+                let highlightedText = nsString.substring(with: NSRange(range, in: text))
+                if let currentPosition = currentPosition, positionProxyForID[id]?.contains(currentPosition) == true {
+                    result = result + Text(highlightedText).foregroundColor(Color.green) // Different color for current position
+                } else {
+                    result = result + Text(highlightedText).foregroundColor(Color.yellow)
+                }
+                
+                lastRangeEnd = range.upperBound
             }
         }
         
-        if currentIndex < text.endIndex {
-            result = result + Text(String(text[currentIndex..<text.endIndex]))
+        if lastRangeEnd < text.endIndex {
+            let remainingText = String(text[lastRangeEnd..<text.endIndex])
+            result = result + Text(remainingText)
         }
         
         return result

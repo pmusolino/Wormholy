@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RequestDetailView: View {
     var request: RequestModel
-
+    
     var body: some View {
         List {
             
@@ -22,9 +22,13 @@ struct RequestDetailView: View {
             }
             
             Section("Request Body") {
-                NavigationLink(destination: BodyDetailView(dataBody: request.httpBody)) {
-                    Text("View body")
-                        .foregroundColor(.blue)
+                if let httpBody = request.httpBody {
+                    NavigationLink(destination: BodyDetailView(dataBody: httpBody)) {
+                        Text("View body")
+                            .foregroundColor(.blue)
+                    }
+                } else {
+                    Text("No body available")
                 }
             }
             
@@ -33,9 +37,13 @@ struct RequestDetailView: View {
             }
             
             Section("Response Body") {
-                NavigationLink(destination: BodyDetailView(dataBody: request.dataResponse)) {
-                    Text("View body")
-                        .foregroundColor(.blue)
+                if let dataResponse = request.dataResponse {
+                    NavigationLink(destination: BodyDetailView(dataBody: dataResponse)) {
+                        Text("View body")
+                            .foregroundColor(.blue)
+                    }
+                } else {
+                    Text("No body available")
                 }
             }
             
