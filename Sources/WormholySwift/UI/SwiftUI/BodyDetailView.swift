@@ -15,7 +15,7 @@ struct BodyDetailView: View {
     @State private var positionProxyForID: [UUID: [Int]] = [:]
     @State private var count: Int = 0
     var dataBody: Data?
-
+    
     var body: some View {
         VStack {
             SearchBar(text: $searchText, onTextChanged: {
@@ -140,12 +140,12 @@ struct HighlightedTextEditor: View {
     
     var body: some View {
         ScrollView {
-            buildHighlightedText()
+            Text(buildHighlightedText())
                 .padding(8)
         }
     }
     
-    private func buildHighlightedText() -> Text {
+    private func buildHighlightedText() -> AttributedString {
         var attributedText = AttributedString(text)
         
         for (id, ranges) in highlightedRanges {
@@ -166,7 +166,7 @@ struct HighlightedTextEditor: View {
             }
         }
         
-        return Text(attributedText)
+        return attributedText
     }
 }
 

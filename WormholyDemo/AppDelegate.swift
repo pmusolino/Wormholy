@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Limit the number of API requests stored
-        Wormholy.limit = 10
+        Wormholy.limit = 100
         
         return true
     }
