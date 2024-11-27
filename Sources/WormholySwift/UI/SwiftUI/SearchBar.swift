@@ -19,13 +19,32 @@ struct SearchBar: UIViewRepresentable {
             self.onTextChanged = onTextChanged
         }
 
+        // Called when the text in the search bar changes
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             text = searchText
             onTextChanged()
         }
         
+        // Called when the search button is clicked
         func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            searchBar.resignFirstResponder()
+            searchBar.resignFirstResponder() // Dismiss the keyboard
+        }
+        
+        // Called when the cancel button is clicked
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.resignFirstResponder() // Dismiss the keyboard
+            text = "" // Clear the search text
+            onTextChanged()
+        }
+        
+        // Called when the user begins editing the search bar
+        func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+            searchBar.setShowsCancelButton(true, animated: true) // Show the cancel button
+        }
+        
+        // Called when the user ends editing the search bar
+        func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+            searchBar.setShowsCancelButton(false, animated: true) // Hide the cancel button
         }
     }
 
@@ -36,12 +55,12 @@ struct SearchBar: UIViewRepresentable {
     func makeUIView(context: Context) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
-        searchBar.placeholder = "Search URL"
+        searchBar.placeholder = "Search" // Placeholder text
         return searchBar
     }
 
     func updateUIView(_ uiView: UISearchBar, context: Context) {
-        uiView.text = text
+        uiView.text = text // Update the text in the search bar
     }
 }
 
