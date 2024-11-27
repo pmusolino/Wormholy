@@ -15,11 +15,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         if #available(iOS 10.0, *) {
-            let timer = Timer.scheduledTimer(withTimeInterval: 8, repeats: true) { (timer) in
-                DataFetcher.sharedInstance.getPost(id: Utils.random(max: 128), completion: {
-                    print("API: Get post")
-                }) { (error) in
-                    print("ERROR: api Get post")
+            let timer = Timer.scheduledTimer(withTimeInterval: 8, repeats: true) { [weak self] (timer) in
+                if let strongSelf = self {
+                    strongSelf.getPostsButtonPressed(strongSelf)
+                    strongSelf.getPhotosButtonPressed(strongSelf)
                 }
             }
             timer.fire()
