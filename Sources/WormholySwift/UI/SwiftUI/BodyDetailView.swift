@@ -52,7 +52,7 @@ struct BodyDetailView: View {
                             
                             if !highlightedRanges.isEmpty {
                                 Text("\(currentPosition + 1) of \(highlightedRanges.count)")
-                                    .font(.footnote)
+                                    .font(.body)
                                     .foregroundColor(.gray)
                             }
                         }
@@ -97,13 +97,15 @@ struct HighlightedTextView: UIViewRepresentable {
         let textView = WHTextView()
         textView.isEditable = false
         textView.isSelectable = true
-        textView.font = UIFont.systemFont(ofSize: 14)
         return textView
     }
     
     func updateUIView(_ uiView: WHTextView, context: Context) {
-        uiView.text = text
         let attributedText = NSMutableAttributedString(string: text)
+        let fullRange = NSRange(location: 0, length: attributedText.length)
+        
+        // Set the font size to 16 for the entire text
+        attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: fullRange)
         
         for (index, match) in highlightedRanges.enumerated() {
             let color: UIColor = (index == currentPosition) ? .yellow : .gray
