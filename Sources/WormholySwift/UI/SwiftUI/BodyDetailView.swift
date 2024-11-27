@@ -14,69 +14,65 @@ struct BodyDetailView: View {
     @State private var positionProxy: [Int: UUID] = [:]
     @State private var positionProxyForID: [UUID: [Int]] = [:]
     @State private var count: Int = 0
-    var dataBody: Data?
+    private let dataBody: String
+    
+    init(dataBody: Data) {
+        self.dataBody = String(data: dataBody, encoding: .utf8) ?? "No body available"
+    }
     
     var body: some View {
         VStack {
-            SearchBar(text: $searchText, onTextChanged: {
-                if let dataBody = dataBody, let bodyString = String(data: dataBody, encoding: .utf8) {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        performSearch(text: searchText, in: bodyString)
-                    }
-                }
-            })
-            .padding(8)
+//            SearchBar(text: $searchText, onTextChanged: {
+//                performSearch(text: searchText, in: dataBody)
+//            })
+//            .padding(8)
             
-            if let dataBody = dataBody, let bodyString = String(data: dataBody, encoding: .utf8) {
-                ScrollViewReader { proxy in
-                    HighlightedTextEditor(text: bodyString, highlightedRanges: highlightedRanges, currentPosition: currentPosition, positionProxyForID: positionProxyForID)
-                        .padding(8)
-                        .background(Color(UIColor.systemBackground))
-                        .frame(maxHeight: .infinity)
-                        .overlay(
-                            VStack {
-                                Spacer()
-                                HStack {
-                                    Button(action: {
-                                        gotoPrevious()
-                                    }) {
-                                        Image(systemName: "chevron.up")
-                                    }
-                                    .disabled(currentPosition == nil)
-                                    
-                                    Button(action: {
-                                        gotoNext()
-                                    }) {
-                                        Image(systemName: "chevron.down")
-                                    }
-                                    .disabled(currentPosition == nil)
-                                    
-                                    Spacer()
-                                    
-                                    if let currentPosition = currentPosition {
-                                        Text("\(currentPosition + 1) of \(count)")
-                                            .font(.footnote)
-                                            .foregroundColor(.gray)
-                                    }
+            
+            ScrollViewReader { proxy in
+                HighlightedTextEditor(text: dataBody, highlightedRanges: highlightedRanges, currentPosition: currentPosition, positionProxyForID: positionProxyForID)
+                    .padding(8)
+                    .background(Color(UIColor.systemBackground))
+                    .frame(maxHeight: .infinity)
+                    .overlay(
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Button(action: {
+                                    gotoPrevious()
+                                }) {
+                                    Image(systemName: "chevron.up")
                                 }
-                                .padding()
-                                .background(Color(UIColor.systemBackground).opacity(0.9))
+                                .disabled(currentPosition == nil)
+                                
+                                Button(action: {
+                                    gotoNext()
+                                }) {
+                                    Image(systemName: "chevron.down")
+                                }
+                                .disabled(currentPosition == nil)
+                                
+                                Spacer()
+                                
+                                if let currentPosition = currentPosition {
+                                    Text("\(currentPosition + 1) of \(count)")
+                                        .font(.footnote)
+                                        .foregroundColor(.gray)
+                                }
                             }
-                        )
-                        .onChange(of: currentPosition) { [lastID = currentID] _ in
-                            let currentID = currentID
-                            if lastID != currentID {
-                                withAnimation {
-                                    if let currentID = currentID {
-                                        proxy.scrollTo(currentID, anchor: .center)
-                                    }
+                            .padding()
+                            .background(Color(UIColor.systemBackground).opacity(0.9))
+                        }
+                    )
+                    .onChange(of: currentPosition) { [lastID = currentID] _ in
+                        let currentID = currentID
+                        if lastID != currentID {
+                            withAnimation {
+                                if let currentID = currentID {
+                                    proxy.scrollTo(currentID, anchor: .center)
                                 }
                             }
                         }
-                }
-            } else {
-                Text("No body available")
-                    .padding(8)
+                    }
             }
         }
         .navigationTitle("Response Body")
@@ -139,10 +135,10 @@ struct HighlightedTextEditor: View {
     let positionProxyForID: [UUID: [Int]]
     
     var body: some View {
-        ScrollView {
-            Text(buildHighlightedText())
-                .padding(8)
-        }
+        //ScrollView {
+        Text(buildHighlightedText())
+            .padding(8)
+        // }
     }
     
     private func buildHighlightedText() -> AttributedString {
@@ -180,7 +176,7 @@ struct BodyDetailView_Previews: PreviewProvider {
         }
         """.data(using: .utf8)
         
-        return BodyDetailView(dataBody: sampleData)
+        return BodyDetailView(dataBody: sampleData!)
             .previewDisplayName("Body Detail View")
     }
 }
