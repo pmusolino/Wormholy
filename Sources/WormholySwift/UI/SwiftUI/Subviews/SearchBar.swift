@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct SearchBar: UIViewRepresentable {
+internal struct SearchBar: UIViewRepresentable {
     @Binding var text: String
     var onTextChanged: () -> Void
 

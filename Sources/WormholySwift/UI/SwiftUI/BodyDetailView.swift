@@ -8,10 +8,11 @@
 import SwiftUI
 import UIKit
 
-struct BodyDetailView: View {
+internal struct BodyDetailView: View {
     @State private var searchText: String = ""
     @State private var highlightedRanges: [NSTextCheckingResult] = []
     @State private var currentPosition: Int = 0
+    @State private var isShareSheetPresented: Bool = false
     private let dataBody: String
     
     init(dataBody: Data) {
@@ -62,6 +63,14 @@ struct BodyDetailView: View {
                 )
         }
         .navigationTitle("Response Body")
+        .navigationBarItems(trailing: Button(action: {
+            isShareSheetPresented = true
+        }) {
+            Image(systemName: "square.and.arrow.up")
+        })
+        .sheet(isPresented: $isShareSheetPresented, content: {
+            ActivityView(activityItems: [dataBody])
+        })
     }
     
     private func performSearch(text: String) {
@@ -88,7 +97,7 @@ struct BodyDetailView: View {
     }
 }
 
-struct HighlightedTextView: UIViewRepresentable {
+internal struct HighlightedTextView: UIViewRepresentable {
     let text: String
     @Binding var highlightedRanges: [NSTextCheckingResult]
     @Binding var currentPosition: Int

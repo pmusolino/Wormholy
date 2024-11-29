@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RequestCellView: View {
+internal struct RequestCellView: View {
     var request: RequestModel
 
     var body: some View {
