@@ -17,7 +17,7 @@ internal struct RequestDetailView: View {
             
             // Overview Section
             Section(header: Text("Overview")) {
-                Text(RequestModelBeautifier.overview(request: request))
+                Text(RequestModelBeautifier.overview(request: request).0)
                     .onTapGesture {
                         // Copy the original overview text to clipboard
                         copyToClipboard(text: overviewText())
@@ -26,7 +26,7 @@ internal struct RequestDetailView: View {
             
             // Request Header Section
             Section(header: Text("Request Header")) {
-                Text(RequestModelBeautifier.header(request.headers))
+                Text(RequestModelBeautifier.header(request.headers).0)
                     .onTapGesture {
                         // Copy the original request header text to clipboard
                         copyToClipboard(text: headerText(request.headers))
@@ -51,7 +51,7 @@ internal struct RequestDetailView: View {
             
             // Response Header Section
             Section(header: Text("Response Header")) {
-                Text(RequestModelBeautifier.header(request.responseHeaders))
+                Text(RequestModelBeautifier.header(request.responseHeaders).0)
                     .onTapGesture {
                         // Copy the original response header text to clipboard
                         copyToClipboard(text: headerText(request.responseHeaders))

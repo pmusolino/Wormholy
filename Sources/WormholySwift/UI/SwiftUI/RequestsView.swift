@@ -10,10 +10,13 @@ import SwiftUI
 internal struct RequestsView: View {
     @State private var searchText = Storage.defaultFilter ?? ""
     @ObservedObject private var storage = Storage.shared
-    @State private var filteredRequests: [RequestModel]
+    @State private var filteredRequests: [RequestModel] = []
     @Environment(\.presentationMode) var presentationMode
+    @State private var isActionSheetPresented = false
+    @State private var isShareSheetPresented = false
+    @State private var selectedExportOption: RequestResponseExportOption = .flat
 
-    init(requests: [RequestModel] = Storage.shared.requests) {
+    init(requests: [RequestModel] = []) {
         _filteredRequests = State(initialValue: requests)
         if let defaultFilter = Storage.defaultFilter, !defaultFilter.isEmpty {
             _searchText = State(initialValue: defaultFilter)
@@ -40,7 +43,7 @@ internal struct RequestsView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button("More") {
-                            openActionSheet()
+                            isActionSheetPresented = true
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -48,6 +51,30 @@ internal struct RequestsView: View {
                             presentationMode.wrappedValue.dismiss()
                         }
                     }
+                }
+                .actionSheet(isPresented: $isActionSheetPresented) {
+                    ActionSheet(title: Text("Wormholy"), message: Text("Choose an option"), buttons: [
+                        .default(Text("Clear")) {
+                            clearRequests()
+                        },
+                        .default(Text("Share")) {
+                            selectedExportOption = .flat
+                            isShareSheetPresented = true
+                        },
+                        .default(Text("Share as cURL")) {
+                            selectedExportOption = .curl
+                            isShareSheetPresented = true
+                        },
+                        .default(Text("Share as Postman Collection")) {
+                            selectedExportOption = .postman
+                            isShareSheetPresented = true
+                        },
+                        .cancel()
+                    ])
+                }
+                .sheet(isPresented: $isShareSheetPresented) {
+                    // Using ShareUtils to create the ActivityView for sharing content
+                    ShareUtils.shareRequests(requests: filteredRequests, requestExportOption: selectedExportOption)
                 }
             }
         }
@@ -66,8 +93,10 @@ internal struct RequestsView: View {
         }
     }
 
-    private func openActionSheet() {
-        // TODO: Implement action sheet presentation
+    private func clearRequests() {
+        // Clear the requests from storage.
+        storage.clearRequests()
+        filterRequests() // Ensure filteredRequests is updated after clearing
     }
 }
 

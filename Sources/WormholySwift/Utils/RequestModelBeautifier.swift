@@ -9,68 +9,71 @@
 import UIKit
 import SwiftUI
 
-class RequestModelBeautifier {
+internal class RequestModelBeautifier {
     
-    static func overview(request: RequestModel) -> LocalizedStringKey {
+    static func overview(request: RequestModel) -> (LocalizedStringKey, String) {
         let url = "**URL:** \(request.url)\n"
         let method = "**Method:** \(request.method)\n"
         let responseCode = "**Response Code:** \(request.code != 0 ? "\(request.code)" : "-")\n"
         let requestStartTime = "**Request Start Time:** \(request.date.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-")\n"
         let duration = "**Duration:** \(request.duration?.formattedMilliseconds() ?? "-")"
-        return LocalizedStringKey([url, method, responseCode, requestStartTime, duration].joined())
+        let combinedString = [url, method, responseCode, requestStartTime, duration].joined()
+        return (LocalizedStringKey(combinedString), combinedString)
     }
     
-    static func header(_ headers: [String: String]?) -> LocalizedStringKey {
+    static func header(_ headers: [String: String]?) -> (LocalizedStringKey, String) {
         guard let headerDictionary = headers else {
-            return LocalizedStringKey("-")
+            return (LocalizedStringKey("-"), "-")
         }
-        return LocalizedStringKey(headerDictionary.map { "**\($0.key):** \($0.value)" }.joined(separator: "\n"))
+        let combinedString = headerDictionary.map { "**\($0.key):** \($0.value)" }.joined(separator: "\n")
+        return (LocalizedStringKey(combinedString), combinedString)
     }
     
-    static func body(_ body: Data?, splitLength: Int? = nil) -> LocalizedStringKey {
+    static func body(_ body: Data?, splitLength: Int? = nil) -> (LocalizedStringKey, String) {
         guard let body = body else {
-            return LocalizedStringKey("-")
+            return (LocalizedStringKey("-"), "-")
         }
         
         if let data = splitLength != nil ? String(data: body, encoding: .utf8)?.characters(n: splitLength!) : String(data: body, encoding: .utf8) {
-            return LocalizedStringKey(data.prettyPrintedJSON ?? data)
+            let prettyData = data.prettyPrintedJSON ?? data
+            return (LocalizedStringKey(prettyData), prettyData)
         }
         
-        return LocalizedStringKey("-")
+        return (LocalizedStringKey("-"), "-")
     }
     
-    static func txtExport(request: RequestModel) -> LocalizedStringKey {
+    static func txtExport(request: RequestModel) -> String {
         var txt: String = ""
         txt += "*** Overview *** \n"
-        txt += "\(overview(request: request))\n\n"
+        txt += "\(String(describing: overview(request: request).1))\n\n"
         txt += "*** Request Header *** \n"
-        txt += "\(header(request.headers))\n\n"
+        txt += "\(String(describing: header(request.headers).1))\n\n"
         txt += "*** Request Body *** \n"
-        txt += "\(body(request.httpBody))\n\n"
+        txt += "\(String(describing: body(request.httpBody).1))\n\n"
         txt += "*** Response Header *** \n"
-        txt += "\(header(request.responseHeaders))\n\n"
+        txt += "\(String(describing: header(request.responseHeaders).1))\n\n"
         txt += "*** Response Body *** \n"
-        txt += "\(body(request.dataResponse))\n\n"
+        txt += "\(String(describing: body(request.dataResponse).1))\n\n"
         txt += "------------------------------------------------------------------------\n"
         txt += "------------------------------------------------------------------------\n"
         txt += "------------------------------------------------------------------------\n\n\n\n"
-        return LocalizedStringKey(txt)
+        return txt
     }
     
-    static func curlExport(request: RequestModel) -> LocalizedStringKey {
+    static func curlExport(request: RequestModel) -> String {
         var txt: String = ""
         txt += "*** Overview *** \n"
-        txt += "\(overview(request: request))\n\n"
+        txt += "\(String(describing: overview(request: request).1))\n\n"
         txt += "*** curl Request *** \n"
-        txt += "\(LocalizedStringKey(request.curlRequest))\n\n"
+        txt += "\(request.curlRequest)\n\n"
         txt += "*** Response Header *** \n"
-        txt += "\(header(request.responseHeaders))\n\n"
+        txt += "\(String(describing: header(request.responseHeaders).1))\n\n"
         txt += "*** Response Body *** \n"
-        txt += "\(body(request.dataResponse))\n\n"
+        txt += "\(String(describing: body(request.dataResponse).1))\n\n"
         txt += "------------------------------------------------------------------------\n"
         txt += "------------------------------------------------------------------------\n"
         txt += "------------------------------------------------------------------------\n\n\n\n"
-        return LocalizedStringKey(txt)
+        return txt
     }
 }
 

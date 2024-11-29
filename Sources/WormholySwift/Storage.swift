@@ -8,47 +8,38 @@
 
 import Foundation
 
-open class Storage: NSObject, ObservableObject {
+@MainActor
+internal class Storage: NSObject, ObservableObject {
 
-    public static let shared: Storage = Storage()
+    internal static let shared: Storage = Storage()
   
-    public static var limit: NSNumber? = nil
+    internal static var limit: NSNumber? = nil
 
-    public static var defaultFilter: String? = nil
+    internal static var defaultFilter: String? = nil
     
     // The requests array is published to notify SwiftUI views of changes.
-    @Published open private(set) var requests: [RequestModel] = []
+    @Published internal private(set) var requests: [RequestModel] = []
     
-    func saveRequest(request: RequestModel?) {
-        guard let request = request else {
-            return
-        }
+    // Method to save a request
+    internal func saveRequest(_ request: RequestModel?) {
+        guard let request = request else { return }
         
-        var updatedRequests = self.requests
-        
-        if let index = updatedRequests.firstIndex(where: { $0.id == request.id }) {
-            // Update the existing request if it already exists.
-            updatedRequests[index] = request
+        // Check if the request already exists and update it
+        if let index = requests.firstIndex(where: { $0.id == request.id }) {
+            requests[index] = request
         } else {
-            // Insert the new request at the beginning of the array.
-            updatedRequests.insert(request, at: 0)
-        }
-
-        // Enforce a limit on the number of stored requests, if specified.
-        if let limit = Self.limit?.intValue, updatedRequests.count > limit {
-            updatedRequests = Array(updatedRequests.prefix(limit))
-        }
-        
-        // Update the requests array on the main thread.
-        DispatchQueue.main.async {
-            self.requests = updatedRequests
+            // Add the new request
+            requests.insert(request, at: 0)
+            
+            // Enforce the limit if set
+            if let limit = Storage.limit?.intValue, requests.count > limit {
+                requests.removeLast()
+            }
         }
     }
-
-    func clearRequests() {
-        // Clear requests array on the main thread.
-        DispatchQueue.main.async {
-            self.requests.removeAll()
-        }
+    
+    // Method to clear all requests
+    internal func clearRequests() {
+        requests.removeAll()
     }
 }

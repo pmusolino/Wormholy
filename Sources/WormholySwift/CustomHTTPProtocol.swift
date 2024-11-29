@@ -19,7 +19,7 @@ public class CustomHTTPProtocol: URLProtocol {
             ignoredHosts = newValue
         }
     }
-
+    
     struct Constants {
         static let RequestHandledKey = "URLProtocolRequestHandled"
     }
@@ -38,7 +38,7 @@ public class CustomHTTPProtocol: URLProtocol {
     
     override public class func canInit(with request: URLRequest) -> Bool {
         guard CustomHTTPProtocol.shouldHandleRequest(request) else { return false }
-
+        
         if CustomHTTPProtocol.property(forKey: Constants.RequestHandledKey, in: request) != nil {
             return false
         }
@@ -56,7 +56,10 @@ public class CustomHTTPProtocol: URLProtocol {
         sessionTask?.resume()
         
         currentRequest = RequestModel(request: newRequest, session: session)
-        Storage.shared.saveRequest(request: currentRequest)
+        // Use Task to ensure the call to saveRequest is on the main actor
+        Task { @MainActor in
+            Storage.shared.saveRequest(currentRequest)
+        }
     }
     
     override public func stopLoading() {
@@ -65,8 +68,11 @@ public class CustomHTTPProtocol: URLProtocol {
         if let startDate = currentRequest?.date{
             currentRequest?.duration = fabs(startDate.timeIntervalSinceNow) * 1000 //Find elapsed time and convert to milliseconds
         }
-
-        Storage.shared.saveRequest(request: currentRequest)
+        
+        // Use Task to ensure the call to saveRequest is on the main actor
+        Task { @MainActor in
+            Storage.shared.saveRequest(currentRequest)
+        }
         session?.invalidateAndCancel()
     }
     
@@ -76,12 +82,12 @@ public class CustomHTTPProtocol: URLProtocol {
         /// but is lost when a request is archived using the NSCoding protocol.
         return request.httpBody ?? request.httpBodyStream?.readfully()
     }
-
+    
     /// Inspects the request to see if the host has not been blacklisted and can be handled by this URL protocol.
     /// - Parameter request: The request being processed.
     private class func shouldHandleRequest(_ request: URLRequest) -> Bool {
         guard let host = request.url?.host else { return false }
-
+        
         return CustomHTTPProtocol.ignoredHosts.filter({ host.hasSuffix($0) }).isEmpty
     }
     
@@ -147,7 +153,7 @@ final class CustomAuthenticationChallengeSender: NSObject, URLAuthenticationChal
     init(handler: @escaping CustomAuthenticationChallengeHandler) {
         self.handler = handler
     }
-
+    
     func use(_ credential: URLCredential, for challenge: URLAuthenticationChallenge) {
         handler(.useCredential, credential)
     }

@@ -28,16 +28,34 @@ public class Wormholy: NSObject
     /// Limit the logging count
     ///
     @objc public static var limit: NSNumber? {
-        get { Storage.limit }
-        set { Storage.limit = newValue }
-    }
+            get {
+                Task { @MainActor in
+                    return Storage.limit
+                }
+                return nil // Placeholder return, adjust as needed
+            }
+            set {
+                Task { @MainActor in
+                    Storage.limit = newValue
+                }
+            }
+        }
 
     /// Default filter for the search box
     ///
     @objc public static var defaultFilter: String? {
-        get { Storage.defaultFilter }
-        set { Storage.defaultFilter = newValue }
-    }
+            get {
+                Task { @MainActor in
+                    return Storage.defaultFilter
+                }
+                return nil // Placeholder return, adjust as needed
+            }
+            set {
+                Task { @MainActor in
+                    Storage.defaultFilter = newValue
+                }
+            }
+        }
 
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in

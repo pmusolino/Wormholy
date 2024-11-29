@@ -72,9 +72,10 @@ class RequestDetailViewController: WHBaseViewController {
     }
     
     func shareContent(_ sender: UIBarButtonItem, requestExportOption: RequestResponseExportOption = .flat){
-        if let request = request{
-            ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: [request], requestExportOption: requestExportOption)
-        }
+        // TODO: Commented out for SwiftUI refactoring
+//        if let request = request{
+//            ShareUtils.shareRequests(presentingViewController: self, sender: sender, requests: [request], requestExportOption: requestExportOption)
+//        }
     }
     
     // MARK: - Navigation
