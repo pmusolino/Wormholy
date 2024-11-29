@@ -9,7 +9,7 @@
 import Foundation
 
 extension InputStream {
-    func readfully() -> Data {
+    internal func readfully() -> Data {
         var result = Data()
         var buffer = [UInt8](repeating: 0, count: 4096)
         
