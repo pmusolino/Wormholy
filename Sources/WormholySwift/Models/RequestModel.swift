@@ -8,23 +8,23 @@
 import Foundation
 import UIKit
 
-open class RequestModel: Codable, Hashable {
-    public let id: String
-    public let url: String
-    public let host: String?
-    public let port: Int?
-    public let scheme: String?
-    public let date: Date
-    public let method: String
-    public let headers: [String: String]
-    public var credentials: [String : String]
-    public var cookies: String?
-    open var httpBody: Data?
-    open var code: Int
-    open var responseHeaders: [String: String]?
-    open var dataResponse: Data?
-    open var errorClientDescription: String?
-    open var duration: Double?
+internal struct RequestModel: Codable, Hashable {
+    internal let id: String
+    internal let url: String
+    internal let host: String?
+    internal let port: Int?
+    internal let scheme: String?
+    internal let date: Date
+    internal let method: String
+    internal let headers: [String: String]
+    internal var credentials: [String : String]
+    internal var cookies: String?
+    internal var httpBody: Data?
+    internal var code: Int
+    internal var responseHeaders: [String: String]?
+    internal var dataResponse: Data?
+    internal var errorClientDescription: String?
+    internal var duration: Double?
     
     init(request: NSURLRequest, session: URLSession?) {
         id = UUID().uuidString
@@ -38,7 +38,6 @@ open class RequestModel: Codable, Hashable {
         var headers = request.allHTTPHeaderFields ?? [:]
         httpBody = request.httpBody
         code = 0
-        
         
         // collect all HTTP Request headers except the "Cookie" header. Many request representations treat cookies with special parameters or structures. For cookie collection, refer to the bottom part of this method
         session?.configuration.httpAdditionalHeaders?
@@ -119,17 +118,17 @@ open class RequestModel: Codable, Hashable {
         self.duration = duration
     }
     
-    func initResponse(response: URLResponse) {
+    mutating func initResponse(response: URLResponse) {
         guard let responseHttp = response as? HTTPURLResponse else {return}
         code = responseHttp.statusCode
         responseHeaders = responseHttp.allHeaderFields as? [String: String]
     }
     
-    public static func == (lhs: RequestModel, rhs: RequestModel) -> Bool {
+    static func == (lhs: RequestModel, rhs: RequestModel) -> Bool {
         return lhs.id == rhs.id
     }
     
-    public func hash(into hasher: inout Hasher) {
+    func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
     

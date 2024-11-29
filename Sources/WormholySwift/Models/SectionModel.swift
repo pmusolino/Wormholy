@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SectionModel {
+internal struct SectionModel {
     var name: String
     var type: SectionType
     
@@ -18,7 +18,7 @@ struct SectionModel {
     }
 }
 
-enum SectionType {
+internal enum SectionType {
     case overview
     case requestHeader
     case requestBody
