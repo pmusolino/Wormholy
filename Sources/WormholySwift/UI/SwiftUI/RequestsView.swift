@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RequestsView: View {
+internal struct RequestsView: View {
     @State private var searchText = Storage.defaultFilter ?? ""
     @ObservedObject private var storage = Storage.shared
     @State private var filteredRequests: [RequestModel]

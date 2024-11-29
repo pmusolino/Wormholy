@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RequestDetailView: View {
+internal struct RequestDetailView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     var request: RequestModel
