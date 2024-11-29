@@ -20,47 +20,44 @@ internal struct BodyDetailView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             SearchBar(text: $searchText, onTextChanged: {
                 performSearch(text: searchText)
             })
-            .padding(8)
+            .padding([.top, .leading, .trailing], 8)
             
             // Using HighlightedTextView, a UIViewRepresentable wrapper for UITextView, to handle long text efficiently.
             HighlightedTextView(text: dataBody, highlightedRanges: $highlightedRanges, currentPosition: $currentPosition)
-                .padding(8)
+                .padding([.bottom, .leading, .trailing], 8)
                 .background(Color(UIColor.systemBackground))
                 .frame(maxHeight: .infinity)
-                .overlay(
-                    VStack {
-                        Spacer()
-                        HStack {
-                            Button(action: {
-                                gotoPrevious()
-                            }) {
-                                Image(systemName: "chevron.up")
-                            }
-                            .disabled(highlightedRanges.isEmpty)
-                            
-                            Button(action: {
-                                gotoNext()
-                            }) {
-                                Image(systemName: "chevron.down")
-                            }
-                            .disabled(highlightedRanges.isEmpty)
-                            
-                            Spacer()
-                            
-                            if !highlightedRanges.isEmpty {
-                                Text("\(currentPosition + 1) of \(highlightedRanges.count)")
-                                    .font(.body)
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                        .padding()
-                        .background(Color(UIColor.systemBackground).opacity(0.9))
-                    }
-                )
+            
+            // The bar with chevron up and down is now outside the overlay
+            HStack {
+                Button(action: {
+                    gotoPrevious()
+                }) {
+                    Image(systemName: "chevron.up")
+                }
+                .disabled(highlightedRanges.isEmpty)
+                
+                Button(action: {
+                    gotoNext()
+                }) {
+                    Image(systemName: "chevron.down")
+                }
+                .disabled(highlightedRanges.isEmpty)
+                
+                Spacer()
+                
+                if !highlightedRanges.isEmpty {
+                    Text("\(currentPosition + 1) of \(highlightedRanges.count)")
+                        .font(.body)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding()
+            .background(Color(UIColor.systemBackground).opacity(0.9))
         }
         .navigationTitle("Response Body")
         .navigationBarItems(trailing: Button(action: {

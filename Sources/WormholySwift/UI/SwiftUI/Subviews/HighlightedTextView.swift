@@ -46,7 +46,7 @@ internal struct HighlightedTextView: UIViewRepresentable {
                     let rect = uiView.firstRect(for: textRange)
                     let visibleRect = uiView.convert(rect, to: uiView.superview)
                     let keyboardHeight: CGFloat = 300 // Approximate keyboard height
-                    let padding: CGFloat = 16
+                    let padding: CGFloat = 32
                     if visibleRect.maxY > (uiView.frame.height - keyboardHeight - padding) {
                         uiView.setContentOffset(CGPoint(x: 0, y: rect.origin.y - padding), animated: true)
                     }
