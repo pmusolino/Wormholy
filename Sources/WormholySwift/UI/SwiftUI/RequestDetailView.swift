@@ -40,10 +40,6 @@ internal struct RequestDetailView: View {
                         Text("View body")
                             .foregroundColor(.blue)
                     }
-                    .onTapGesture {
-                        // Copy the original request body text to clipboard
-                        copyToClipboard(text: bodyText(httpBody))
-                    }
                 } else {
                     Text("No body available")
                 }
@@ -64,10 +60,6 @@ internal struct RequestDetailView: View {
                     NavigationLink(destination: BodyDetailView(dataBody: dataResponse)) {
                         Text("View body")
                             .foregroundColor(.blue)
-                    }
-                    .onTapGesture {
-                        // Copy the original response body text to clipboard
-                        copyToClipboard(text: bodyText(dataResponse))
                     }
                 } else {
                     Text("No body available")
