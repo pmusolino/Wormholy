@@ -37,7 +37,9 @@ internal struct RequestsView: View {
                             }
                         .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
                     }
+                    
                 }
+                .animation(.bouncy, value: filteredRequests)
                 .listStyle(PlainListStyle())
                 .navigationTitle("Requests")
                 .toolbar {
