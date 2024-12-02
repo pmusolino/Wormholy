@@ -26,7 +26,16 @@ internal class Storage: NSObject, ObservableObject {
         
         // Check if the request already exists and update it
         if let index = requests.firstIndex(where: { $0.id == request.id }) {
-            requests[index] = request
+            requests[index].copy(
+                credentials: request.credentials,
+                cookies: request.cookies,
+                httpBody: request.httpBody,
+                code: request.code,
+                responseHeaders: request.responseHeaders,
+                dataResponse: request.dataResponse,
+                errorClientDescription: request.errorClientDescription,
+                duration: request.duration
+            )
         } else {
             // Add the new request
             requests.insert(request, at: 0)

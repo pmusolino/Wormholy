@@ -10,7 +10,7 @@ import SwiftUI
 internal struct RequestDetailView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
-    var request: RequestModel
+    @ObservedObject var request: RequestModel
     
     var body: some View {
         List {

@@ -64,10 +64,15 @@ public class CustomHTTPProtocol: URLProtocol {
     
     override public func stopLoading() {
         sessionTask?.cancel()
-        currentRequest?.httpBody = body(from: request)
-        if let startDate = currentRequest?.date{
-            currentRequest?.duration = fabs(startDate.timeIntervalSinceNow) * 1000 //Find elapsed time and convert to milliseconds
-        }
+        let updatedHttpBody = body(from: request)
+        let updatedDuration: Double? = {
+            if let startDate = currentRequest?.date {
+                return fabs(startDate.timeIntervalSinceNow) * 1000 // Find elapsed time and convert to milliseconds
+            }
+            return nil
+        }()
+        
+        currentRequest?.copy(httpBody: updatedHttpBody, duration: updatedDuration)
         
         // Use Task to ensure the call to saveRequest is on the main actor
         Task { @MainActor in
@@ -101,12 +106,7 @@ public class CustomHTTPProtocol: URLProtocol {
 extension CustomHTTPProtocol: URLSessionDataDelegate {
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         client?.urlProtocol(self, didLoad: data)
-        if currentRequest?.dataResponse == nil{
-            currentRequest?.dataResponse = data
-        }
-        else{
-            currentRequest?.dataResponse?.append(data)
-        }
+        currentRequest?.copy(dataResponse: data)
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
@@ -118,7 +118,7 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
-            currentRequest?.errorClientDescription = error.localizedDescription
+            currentRequest?.copy(errorClientDescription: error.localizedDescription)
             client?.urlProtocol(self, didFailWithError: error)
         } else {
             client?.urlProtocolDidFinishLoading(self)
@@ -132,7 +132,7 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     
     public func urlSession(_ session: URLSession, didBecomeInvalidWithError error: Error?) {
         guard let error = error else { return }
-        currentRequest?.errorClientDescription = error.localizedDescription
+        currentRequest?.copy(errorClientDescription: error.localizedDescription)
         client?.urlProtocol(self, didFailWithError: error)
     }
     

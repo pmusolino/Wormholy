@@ -78,6 +78,9 @@ internal struct RequestsView: View {
                 }
             }
         }
+        .onAppear {
+                    filterRequests() // Ensure requests are filtered on first load
+        }
         .onReceive(storage.$requests) { _ in
             filterRequests()
         }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 internal struct RequestCellView: View {
-    var request: RequestModel
+    @ObservedObject var request: RequestModel
 
     var body: some View {
         HStack(alignment: .center, spacing: 8) {

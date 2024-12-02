@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-internal struct RequestModel: Codable, Hashable {
+internal class RequestModel: Hashable, Decodable, ObservableObject {
     internal let id: String
     internal let url: String
     internal let host: String?
@@ -17,14 +17,38 @@ internal struct RequestModel: Codable, Hashable {
     internal let date: Date
     internal let method: String
     internal let headers: [String: String]
-    internal var credentials: [String : String]
-    internal var cookies: String?
-    internal var httpBody: Data?
-    internal var code: Int
-    internal var responseHeaders: [String: String]?
-    internal var dataResponse: Data?
-    internal var errorClientDescription: String?
-    internal var duration: Double?
+    @Published internal private(set) var credentials: [String : String]
+    @Published internal private(set) var cookies: String?
+    @Published internal private(set) var httpBody: Data?
+    @Published internal private(set) var code: Int
+    @Published internal private(set) var responseHeaders: [String: String]?
+    @Published internal private(set) var dataResponse: Data?
+    @Published internal private(set) var errorClientDescription: String?
+    @Published internal private(set) var duration: Double?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, url, host, port, scheme, date, method, headers, credentials, cookies, httpBody, code, responseHeaders, dataResponse, errorClientDescription, duration
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        url = try container.decode(String.self, forKey: .url)
+        host = try container.decodeIfPresent(String.self, forKey: .host)
+        port = try container.decodeIfPresent(Int.self, forKey: .port)
+        scheme = try container.decodeIfPresent(String.self, forKey: .scheme)
+        date = try container.decode(Date.self, forKey: .date)
+        method = try container.decode(String.self, forKey: .method)
+        headers = try container.decode([String: String].self, forKey: .headers)
+        credentials = try container.decode([String: String].self, forKey: .credentials)
+        cookies = try container.decodeIfPresent(String.self, forKey: .cookies)
+        httpBody = try container.decodeIfPresent(Data.self, forKey: .httpBody)
+        code = try container.decode(Int.self, forKey: .code)
+        responseHeaders = try container.decodeIfPresent([String: String].self, forKey: .responseHeaders)
+        dataResponse = try container.decodeIfPresent(Data.self, forKey: .dataResponse)
+        errorClientDescription = try container.decodeIfPresent(String.self, forKey: .errorClientDescription)
+        duration = try container.decodeIfPresent(Double.self, forKey: .duration)
+    }
     
     init(request: NSURLRequest, session: URLSession?) {
         id = UUID().uuidString
@@ -78,7 +102,9 @@ internal struct RequestModel: Codable, Hashable {
         if let session = session, let url = request.url, session.configuration.httpShouldSetCookies {
             if let cookieStorage = session.configuration.httpCookieStorage,
                 let cookies = cookieStorage.cookies(for: url), !cookies.isEmpty {
-                self.cookies = cookies.reduce("") { $0 + "\($1.name)=\($1.value);" }
+                DispatchQueue.main.async {
+                    self.cookies = cookies.reduce("") { $0 + "\($1.name)=\($1.value);" }
+                }
             }
         }
     }
@@ -118,10 +144,55 @@ internal struct RequestModel: Codable, Hashable {
         self.duration = duration
     }
     
-    mutating func initResponse(response: URLResponse) {
+    func initResponse(response: URLResponse) {
         guard let responseHttp = response as? HTTPURLResponse else {return}
-        code = responseHttp.statusCode
-        responseHeaders = responseHttp.allHeaderFields as? [String: String]
+        DispatchQueue.main.async {
+            self.code = responseHttp.statusCode
+            self.responseHeaders = responseHttp.allHeaderFields as? [String: String]
+        }
+    }
+    
+    // This method is used to update the properties of the RequestModel instance.
+    // It ensures that changes are published from the main thread, which is necessary
+    // because publishing changes from background threads is not allowed.
+    func copy(credentials: [String: String]? = nil,
+              cookies: String? = nil,
+              httpBody: Data? = nil,
+              code: Int? = nil,
+              responseHeaders: [String: String]? = nil,
+              dataResponse: Data? = nil,
+              errorClientDescription: String? = nil,
+              duration: Double? = nil) {
+        DispatchQueue.main.async {
+            if let credentials = credentials {
+                self.credentials = credentials
+            }
+            if let cookies = cookies {
+                self.cookies = cookies
+            }
+            if let httpBody = httpBody {
+                self.httpBody = httpBody
+            }
+            if let code = code {
+                self.code = code
+            }
+            if let responseHeaders = responseHeaders {
+                self.responseHeaders = responseHeaders
+            }
+            if let dataResponse = dataResponse {
+                if self.dataResponse == nil {
+                    self.dataResponse = dataResponse
+                } else {
+                    self.dataResponse?.append(dataResponse)
+                }
+            }
+            if let errorClientDescription = errorClientDescription {
+                self.errorClientDescription = errorClientDescription
+            }
+            if let duration = duration {
+                self.duration = duration
+            }
+        }
     }
     
     static func == (lhs: RequestModel, rhs: RequestModel) -> Bool {
