@@ -11,7 +11,11 @@ internal struct RequestDetailView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @ObservedObject var request: RequestModel
-    
+    @Environment(\.presentationMode) var presentationMode
+    @State private var isActionSheetPresented = false
+    @State private var isShareSheetPresented = false
+    @State private var selectedExportOption: RequestResponseExportOption = .flat
+
     var body: some View {
         NavigationStack {
             List {
@@ -82,6 +86,33 @@ internal struct RequestDetailView: View {
             .textSelection(.enabled)
             .listStyle(GroupedListStyle())
             .navigationTitle(URL(string: request.url)?.path ?? "Request Detail")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("More") {
+                        isActionSheetPresented = true
+                    }
+                }
+            }
+            .actionSheet(isPresented: $isActionSheetPresented) {
+                ActionSheet(title: Text("Wormholy"), message: Text("Choose an option"), buttons: [
+                    .default(Text("Share")) {
+                        selectedExportOption = .flat
+                        isShareSheetPresented = true
+                    },
+                    .default(Text("Share as cURL")) {
+                        selectedExportOption = .curl
+                        isShareSheetPresented = true
+                    },
+                    .default(Text("Share as Postman Collection")) {
+                        selectedExportOption = .postman
+                        isShareSheetPresented = true
+                    },
+                    .cancel()
+                ])
+            }
+            .sheet(isPresented: $isShareSheetPresented) {
+                ShareUtils.shareRequests(requests: [request], requestExportOption: selectedExportOption)
+            }
             .alert(isPresented: $showAlert) {
                 // Show a non-blocking alert when text is copied
                 Alert(title: Text("Copied"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
