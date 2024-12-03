@@ -24,20 +24,18 @@ internal struct RequestsView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 SearchBar(text: $searchText, onTextChanged: filterRequests)
                 List {
                     ForEach(filteredRequests, id: \.id) { request in
-                            NavigationLink(destination: RequestDetailView(request: request)) {
-                                RequestCellView(request: request)
-                                    .padding(.all, 8)
-                                    .frame(height: 76)
-                                    
-                            }
+                        NavigationLink(destination: RequestDetailView(request: request)) {
+                            RequestCellView(request: request)
+                                .padding(.all, 8)
+                                .frame(height: 76)
+                        }
                         .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
                     }
-                    
                 }
                 .animation(.bouncy, value: filteredRequests)
                 .listStyle(PlainListStyle())
@@ -81,7 +79,7 @@ internal struct RequestsView: View {
             }
         }
         .onAppear {
-                    filterRequests() // Ensure requests are filtered on first load
+            filterRequests() // Ensure requests are filtered on first load
         }
         .onReceive(storage.$requests) { _ in
             filterRequests()

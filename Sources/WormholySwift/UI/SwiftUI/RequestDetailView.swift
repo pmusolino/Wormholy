@@ -13,77 +13,79 @@ internal struct RequestDetailView: View {
     @ObservedObject var request: RequestModel
     
     var body: some View {
-        List {
-            
-            // Overview Section
-            Section(header: Text("Overview")) {
-                Text(RequestModelBeautifier.overview(request: request).0)
-                    .onTapGesture {
-                        // Copy the original overview text to clipboard
-                        copyToClipboard(text: overviewText())
-                    }
-            }
-            
-            // Request Header Section
-            Section(header: Text("Request Header")) {
-                Text(RequestModelBeautifier.header(request.headers).0)
-                    .onTapGesture {
-                        // Copy the original request header text to clipboard
-                        copyToClipboard(text: headerText(request.headers))
-                    }
-            }
-            
-            // Request Body Section
-            Section(header: Text("Request Body")) {
-                if let httpBody = request.httpBody {
-                    NavigationLink(destination: BodyDetailView(dataBody: httpBody)) {
-                        Text("View body")
-                            .foregroundColor(.blue)
-                    }
-                } else {
-                    Text("No body available")
-                }
-            }
-            
-            // Response Header Section
-            Section(header: Text("Response Header")) {
-                Text(RequestModelBeautifier.header(request.responseHeaders).0)
-                    .onTapGesture {
-                        // Copy the original response header text to clipboard
-                        copyToClipboard(text: headerText(request.responseHeaders))
-                    }
-            }
-            
-            // Response Body Section
-            Section(header: Text("Response Body")) {
-                if let dataResponse = request.dataResponse {
-                    NavigationLink(destination: BodyDetailView(dataBody: dataResponse)) {
-                        Text("View body")
-                            .foregroundColor(.blue)
-                    }
-                } else {
-                    Text("No body available")
-                }
-            }
-            
-            // Error Section
-            if let errorDescription = request.errorClientDescription {
-                Section(header: Text("Error")) {
-                    Text("**Error**: \(errorDescription)")
-                        .foregroundColor(.red)
+        NavigationStack {
+            List {
+                
+                // Overview Section
+                Section(header: Text("Overview")) {
+                    Text(RequestModelBeautifier.overview(request: request).0)
                         .onTapGesture {
-                            // Copy the error description to clipboard
-                            copyToClipboard(text: errorDescription)
+                            // Copy the original overview text to clipboard
+                            copyToClipboard(text: overviewText())
                         }
                 }
+                
+                // Request Header Section
+                Section(header: Text("Request Header")) {
+                    Text(RequestModelBeautifier.header(request.headers).0)
+                        .onTapGesture {
+                            // Copy the original request header text to clipboard
+                            copyToClipboard(text: headerText(request.headers))
+                        }
+                }
+                
+                // Request Body Section
+                Section(header: Text("Request Body")) {
+                    if let httpBody = request.httpBody {
+                        NavigationLink(destination: BodyDetailView(dataBody: httpBody)) {
+                            Text("View body")
+                                .foregroundColor(.blue)
+                        }
+                    } else {
+                        Text("No body available")
+                    }
+                }
+                
+                // Response Header Section
+                Section(header: Text("Response Header")) {
+                    Text(RequestModelBeautifier.header(request.responseHeaders).0)
+                        .onTapGesture {
+                            // Copy the original response header text to clipboard
+                            copyToClipboard(text: headerText(request.responseHeaders))
+                        }
+                }
+                
+                // Response Body Section
+                Section(header: Text("Response Body")) {
+                    if let dataResponse = request.dataResponse {
+                        NavigationLink(destination: BodyDetailView(dataBody: dataResponse)) {
+                            Text("View body")
+                                .foregroundColor(.blue)
+                        }
+                    } else {
+                        Text("No body available")
+                    }
+                }
+                
+                // Error Section
+                if let errorDescription = request.errorClientDescription {
+                    Section(header: Text("Error")) {
+                        Text("**Error**: \(errorDescription)")
+                            .foregroundColor(.red)
+                            .onTapGesture {
+                                // Copy the error description to clipboard
+                                copyToClipboard(text: errorDescription)
+                            }
+                    }
+                }
             }
-        }
-        .textSelection(.enabled)
-        .listStyle(GroupedListStyle())
-        .navigationTitle(URL(string: request.url)?.path ?? "Request Detail")
-        .alert(isPresented: $showAlert) {
-            // Show a non-blocking alert when text is copied
-            Alert(title: Text("Copied"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            .textSelection(.enabled)
+            .listStyle(GroupedListStyle())
+            .navigationTitle(URL(string: request.url)?.path ?? "Request Detail")
+            .alert(isPresented: $showAlert) {
+                // Show a non-blocking alert when text is copied
+                Alert(title: Text("Copied"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
     }
     

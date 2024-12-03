@@ -1,10 +1,10 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.7
 
 import PackageDescription
 
 let package = Package(
     name: "Wormholy",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v16)],
     products: [
         .library(
             name: "Wormholy",
