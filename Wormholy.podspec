@@ -19,11 +19,6 @@ Pod::Spec.new do |s|
 
   s.subspec 'WormholySwift' do |ss|
     ss.source_files = 'Sources/WormholySwift/**/*.{swift}'
-    ss.resource_bundles = {
-      'WormholyResources' => [
-        'Sources/**/*.storyboard', 'Sources/**/*.xib'
-      ]
-    }
   end
   
   s.subspec 'WormholyObjC' do |ss|

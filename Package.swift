@@ -18,12 +18,7 @@ let package = Package(
             dependencies: [],
             exclude: ["../../WormholyDemo"],
             resources: [
-                .process("Resources/ActionableTableViewCell.xib"),
-                .process("Resources/Assets.xcassets"),
-                .process("Resources/Flow.storyboard"),
-                .process("Resources/RequestCell.xib"),
-                .process("Resources/RequestTitleSectionView.xib"),
-                .process("Resources/TextTableViewCell.xib"),
+                .process("Resources/Assets.xcassets")
             ]
         ),
         .target(
