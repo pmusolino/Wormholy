@@ -12,12 +12,6 @@ import SwiftUI
 
 public class Wormholy: NSObject
 {
-    @available(*, deprecated, renamed: "ignoredHosts")
-    @objc public static var blacklistedHosts: [String] {
-        get { return CustomHTTPProtocol.ignoredHosts }
-        set { CustomHTTPProtocol.ignoredHosts = newValue }
-    }
-
     /// Hosts that will be ignored from being recorded
     ///
     @objc public static var ignoredHosts: [String] {

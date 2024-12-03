@@ -11,7 +11,6 @@ internal struct RequestDetailView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @ObservedObject var request: RequestModel
-    @Environment(\.presentationMode) var presentationMode
     @State private var isActionSheetPresented = false
     @State private var isShareSheetPresented = false
     @State private var selectedExportOption: RequestResponseExportOption = .flat
@@ -25,7 +24,7 @@ internal struct RequestDetailView: View {
                     Text(RequestModelBeautifier.overview(request: request).0)
                         .onTapGesture {
                             // Copy the original overview text to clipboard
-                            copyToClipboard(text: overviewText())
+                            copyToClipboard(text: RequestModelBeautifier.overview(request: request).1)
                         }
                 }
                 
@@ -34,7 +33,7 @@ internal struct RequestDetailView: View {
                     Text(RequestModelBeautifier.header(request.headers).0)
                         .onTapGesture {
                             // Copy the original request header text to clipboard
-                            copyToClipboard(text: headerText(request.headers))
+                            copyToClipboard(text: RequestModelBeautifier.header(request.headers).1)
                         }
                 }
                 
@@ -55,7 +54,7 @@ internal struct RequestDetailView: View {
                     Text(RequestModelBeautifier.header(request.responseHeaders).0)
                         .onTapGesture {
                             // Copy the original response header text to clipboard
-                            copyToClipboard(text: headerText(request.responseHeaders))
+                            copyToClipboard(text: RequestModelBeautifier.header(request.responseHeaders).1)
                         }
                 }
                 
@@ -126,40 +125,7 @@ internal struct RequestDetailView: View {
         alertMessage = "Text copied to clipboard"
         showAlert = true
     }
-    
-    // Function to get the original overview text
-    private func overviewText() -> String {
-        let url = "URL: \(request.url)\n"
-        let method = "Method: \(request.method)\n"
-        let responseCode = "Response Code: \(request.code != 0 ? "\(request.code)" : "-")\n"
-        let requestStartTime = "Request Start Time: \(request.date.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-")\n"
-        let duration = "Duration: \(request.duration?.formattedMilliseconds() ?? "-")"
-        return [url, method, responseCode, requestStartTime, duration].joined()
-    }
-    
-    // Function to get the original header text
-    private func headerText(_ headers: [String: String]?) -> String {
-        guard let headerDictionary = headers else {
-            return "-"
-        }
-        return headerDictionary.map { "\($0.key): \($0.value)" }.joined(separator: "\n")
-    }
-    
-    // Function to get the original body text
-    private func bodyText(_ body: Data?) -> String {
-        guard let body = body else {
-            return "-"
-        }
-        return String(data: body, encoding: .utf8) ?? "-"
-    }
 }
-
-private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .medium
-    formatter.timeStyle = .short
-    return formatter
-}()
 
 struct RequestDetailView_Previews: PreviewProvider {
     static var previews: some View {

@@ -32,7 +32,7 @@ internal struct BodyDetailView: View {
                 .background(Color(UIColor.systemBackground))
                 .frame(maxHeight: .infinity)
             
-            // The bar with chevron up and down is now outside the overlay
+            // The bar with chevron up and down
             HStack {
                 Button(action: {
                     gotoPrevious()
