@@ -69,7 +69,7 @@ struct RequestCellView_Previews: PreviewProvider {
             host: "example.com",
             port: 443,
             scheme: "https",
-            date: Date(),
+            startDate: Date(),
             method: "GET",
             headers: [
                 "Content-Type": "application/json",

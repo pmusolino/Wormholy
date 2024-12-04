@@ -15,9 +15,24 @@ internal class RequestModelBeautifier {
         let url = "**URL:** \(request.url)\n"
         let method = "**Method:** \(request.method)\n"
         let responseCode = "**Response Code:** \(request.code != 0 ? "\(request.code)" : "-")\n"
-        let requestStartTime = "**Request Start Time:** \(request.date.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-")\n"
-        let duration = "**Duration:** \(request.duration?.formattedMilliseconds() ?? "-")"
-        let combinedString = [url, method, responseCode, requestStartTime, duration].joined()
+        let requestStartTime = "**Request Start Time:** \(request.requestStartDate?.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-")\n"
+        let requestEndTime = "**Request End Time:** \(request.requestEndDate?.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-")\n"
+        let responseStartTime = "**Response Start Time:** \(request.responseStartDate?.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-")\n"
+        let responseEndTime = "**Response End Time:** \(request.responseEndDate?.stringWithFormat(dateFormat: "MMM d yyyy - HH:mm:ss") ?? "-")\n"
+        let duration = "**Duration:** \(request.duration?.formattedMilliseconds() ?? "-")\n"
+        let requestBodyBytesBeforeEncoding = "**Request Body Bytes Before Encoding:** \(request.countOfRequestBodyBytesBeforeEncoding ?? 0)\n"
+        let requestBodyBytesSent = "**Request Body Bytes Sent:** \(request.countOfRequestBodyBytesSent ?? 0)\n"
+        let requestHeaderBytesSent = "**Request Header Bytes Sent:** \(request.countOfRequestHeaderBytesSent ?? 0)\n"
+        let responseBodyBytesAfterDecoding = "**Response Body Bytes After Decoding:** \(request.countOfResponseBodyBytesAfterDecoding ?? 0)\n"
+        let responseBodyBytesReceived = "**Response Body Bytes Received:** \(request.countOfResponseBodyBytesReceived ?? 0)\n"
+        let responseHeaderBytesReceived = "**Response Header Bytes Received:** \(request.countOfResponseHeaderBytesReceived ?? 0)"
+        
+        let combinedString = [
+            url, method, responseCode, requestStartTime, requestEndTime, responseStartTime, responseEndTime, duration,
+            requestBodyBytesBeforeEncoding, requestBodyBytesSent, requestHeaderBytesSent,
+            responseBodyBytesAfterDecoding, responseBodyBytesReceived, responseHeaderBytesReceived
+        ].joined()
+        
         return (LocalizedStringKey(combinedString), combinedString)
     }
     

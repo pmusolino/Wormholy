@@ -14,7 +14,7 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
     internal let host: String?
     internal let port: Int?
     internal let scheme: String?
-    internal let date: Date
+    internal let startDate: Date
     internal let method: String
     internal let headers: [String: String]
     @Published internal private(set) var credentials: [String : String]
@@ -26,8 +26,20 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
     @Published internal private(set) var errorClientDescription: String?
     @Published internal private(set) var duration: Double?
     
+    // Variables for network statistics
+    @Published public private(set) var requestStartDate: Date?
+    @Published public private(set) var requestEndDate: Date?
+    @Published public private(set) var responseStartDate: Date?
+    @Published public private(set) var responseEndDate: Date?
+    @Published public private(set) var countOfRequestBodyBytesBeforeEncoding: Int64?
+    @Published public private(set) var countOfRequestBodyBytesSent: Int64?
+    @Published public private(set) var countOfRequestHeaderBytesSent: Int64?
+    @Published public private(set) var countOfResponseBodyBytesAfterDecoding: Int64?
+    @Published public private(set) var countOfResponseBodyBytesReceived: Int64?
+    @Published public private(set) var countOfResponseHeaderBytesReceived: Int64?
+
     enum CodingKeys: String, CodingKey {
-        case id, url, host, port, scheme, date, method, headers, credentials, cookies, httpBody, code, responseHeaders, dataResponse, errorClientDescription, duration
+        case id, url, host, port, scheme, startDate, method, headers, credentials, cookies, httpBody, code, responseHeaders, dataResponse, errorClientDescription, duration
     }
     
     required init(from decoder: Decoder) throws {
@@ -37,7 +49,7 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
         host = try container.decodeIfPresent(String.self, forKey: .host)
         port = try container.decodeIfPresent(Int.self, forKey: .port)
         scheme = try container.decodeIfPresent(String.self, forKey: .scheme)
-        date = try container.decode(Date.self, forKey: .date)
+        startDate = try container.decode(Date.self, forKey: .startDate)
         method = try container.decode(String.self, forKey: .method)
         headers = try container.decode([String: String].self, forKey: .headers)
         credentials = try container.decode([String: String].self, forKey: .credentials)
@@ -56,7 +68,7 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
         host = request.url?.host
         port = request.url?.port
         scheme = request.url?.scheme
-        date = Date()
+        startDate = Date()
         method = request.httpMethod ?? "GET"
         credentials = [:]
         var headers = request.allHTTPHeaderFields ?? [:]
@@ -115,7 +127,7 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
          host: String? = nil,
          port: Int? = nil,
          scheme: String? = nil,
-         date: Date = Date(),
+         startDate: Date = Date(),
          method: String = "GET",
          headers: [String: String] = [:],
          credentials: [String: String] = [:],
@@ -131,7 +143,7 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
         self.host = host
         self.port = port
         self.scheme = scheme
-        self.date = date
+        self.startDate = startDate
         self.method = method
         self.headers = headers
         self.credentials = credentials
@@ -162,7 +174,17 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
               responseHeaders: [String: String]? = nil,
               dataResponse: Data? = nil,
               errorClientDescription: String? = nil,
-              duration: Double? = nil) {
+              duration: Double? = nil,
+              requestStartDate: Date? = nil,
+              requestEndDate: Date? = nil,
+              responseStartDate: Date? = nil,
+              responseEndDate: Date? = nil,
+              countOfRequestBodyBytesBeforeEncoding: Int64? = nil,
+              countOfRequestBodyBytesSent: Int64? = nil,
+              countOfRequestHeaderBytesSent: Int64? = nil,
+              countOfResponseBodyBytesAfterDecoding: Int64? = nil,
+              countOfResponseBodyBytesReceived: Int64? = nil,
+              countOfResponseHeaderBytesReceived: Int64? = nil) {
         DispatchQueue.main.async {
             if let credentials = credentials {
                 self.credentials = credentials
@@ -191,6 +213,36 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
             }
             if let duration = duration {
                 self.duration = duration
+            }
+            if let requestStartDate = requestStartDate {
+                self.requestStartDate = requestStartDate
+            }
+            if let requestEndDate = requestEndDate {
+                self.requestEndDate = requestEndDate
+            }
+            if let responseStartDate = responseStartDate {
+                self.responseStartDate = responseStartDate
+            }
+            if let responseEndDate = responseEndDate {
+                self.responseEndDate = responseEndDate
+            }
+            if let countOfRequestBodyBytesBeforeEncoding = countOfRequestBodyBytesBeforeEncoding {
+                self.countOfRequestBodyBytesBeforeEncoding = countOfRequestBodyBytesBeforeEncoding
+            }
+            if let countOfRequestBodyBytesSent = countOfRequestBodyBytesSent {
+                self.countOfRequestBodyBytesSent = countOfRequestBodyBytesSent
+            }
+            if let countOfRequestHeaderBytesSent = countOfRequestHeaderBytesSent {
+                self.countOfRequestHeaderBytesSent = countOfRequestHeaderBytesSent
+            }
+            if let countOfResponseBodyBytesAfterDecoding = countOfResponseBodyBytesAfterDecoding {
+                self.countOfResponseBodyBytesAfterDecoding = countOfResponseBodyBytesAfterDecoding
+            }
+            if let countOfResponseBodyBytesReceived = countOfResponseBodyBytesReceived {
+                self.countOfResponseBodyBytesReceived = countOfResponseBodyBytesReceived
+            }
+            if let countOfResponseHeaderBytesReceived = countOfResponseHeaderBytesReceived {
+                self.countOfResponseHeaderBytesReceived = countOfResponseHeaderBytesReceived
             }
         }
     }
@@ -253,7 +305,7 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyyMMdd_HHmmss"
         
-        let name = "\(dateFormatterGet.string(from: date))-\(url)"
+        let name = "\(dateFormatterGet.string(from: startDate))-\(url)"
         
         var headers: [PMHeader] = []
         let method = self.method
