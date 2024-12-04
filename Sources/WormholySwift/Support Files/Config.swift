@@ -10,6 +10,3 @@ import Foundation
 
 //Notifications
 let fireWormholy = NSNotification.Name(rawValue: "wormholy_fire")
-
-//TODO: to be deleted
-let newRequestNotification = NSNotification.Name(rawValue: "wormholy_new_request")

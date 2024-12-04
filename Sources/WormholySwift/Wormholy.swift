@@ -105,22 +105,18 @@ public class Wormholy: NSObject
     
     // MARK: - Navigation
     static func presentWormholyFlow() {
-        if let currentVC = UIViewController.currentViewController() {
-            guard !currentVC.isKind(of: WHBaseViewController.classForCoder()) && !currentVC.isKind(of: WHNavigationController.classForCoder()) else {
-                return
-            }
-            // Present RequestsView as a SwiftUI view
-            let requestsView = RequestsView()
-            let hostingController = UIHostingController(rootView: requestsView)
-            hostingController.modalPresentationStyle = .fullScreen
-            currentVC.present(hostingController, animated: true, completion: nil)
-        } else {
-            // Assuming the current view is a SwiftUI view, present the RequestsView
-            let requestsView = RequestsView()
-            let hostingController = UIHostingController(rootView: requestsView)
-            hostingController.modalPresentationStyle = .fullScreen
-            UIApplication.shared.windows.first?.rootViewController?.present(hostingController, animated: true, completion: nil)
+        // Check if RequestsView is already presented
+        if let rootViewController = UIApplication.shared.windows.first?.rootViewController,
+           let hostingController = rootViewController.presentedViewController as? UIHostingController<RequestsView> {
+            // RequestsView is already presented, do nothing
+            return
         }
+        
+        // Present RequestsView as a SwiftUI view
+        let requestsView = RequestsView()
+        let hostingController = UIHostingController(rootView: requestsView)
+        hostingController.modalPresentationStyle = .fullScreen
+        UIApplication.shared.windows.first?.rootViewController?.present(hostingController, animated: true, completion: nil)
     }
     
     @objc public static var shakeEnabled: Bool = {
