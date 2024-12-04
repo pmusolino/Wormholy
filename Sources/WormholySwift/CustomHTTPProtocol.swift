@@ -27,6 +27,7 @@ public class CustomHTTPProtocol: URLProtocol {
     }
     
     override public class func canInit(with request: URLRequest) -> Bool {
+        guard Wormholy.isEnabled else { return false }
         guard CustomHTTPProtocol.shouldHandleRequest(request) else { return false }
         
         if CustomHTTPProtocol.property(forKey: Constants.RequestHandledKey, in: request) != nil {

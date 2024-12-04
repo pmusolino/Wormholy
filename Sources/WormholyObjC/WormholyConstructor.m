@@ -4,14 +4,14 @@
 /// Calls `applicationDidFinishLaunching` on Wormholy class to initialize Wormholy.
 /// This is an alternative to a +initialize in Objective-C.
 static void __attribute__ ((constructor)) wormholy_constructor(void) {
-    #if SWIFT_PACKAGE
+#if SWIFT_PACKAGE
     Class class = NSClassFromString(@"WormholySwift.Wormholy");
-    #else
+#else
     Class class = NSClassFromString(@"Wormholy.Wormholy");
-    #endif
+#endif
     SEL selector = NSSelectorFromString(@"applicationDidFinishLaunching");
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-
+    
     [center addObserver:class
                selector:selector
                    name:UIApplicationDidFinishLaunchingNotification

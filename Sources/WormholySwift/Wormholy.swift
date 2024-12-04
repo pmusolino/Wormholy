@@ -51,56 +51,56 @@ public class Wormholy: NSObject
         }
     }
     
+    // Flag to determine if Wormholy is enabled
+    internal static var isEnabled: Bool = true
+    
+    /// Method to initialize Wormholy
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()
         }
     }
     
+    /// Method to initialize Wormholy with default settings
     @objc public static func swiftyInitialize() {
-        if self == Wormholy.self{
-            Wormholy.enable(true)
+        if self == Wormholy.self {
+            Wormholy.setEnabled(true)
         }
     }
     
-    static func enable(_ enable: Bool){
-        if enable{
+    /// Toggles the tracking of HTTP requests in Wormholy.
+    /// Note: This function does not affect the shake gesture activation of Wormholy. 
+    /// To control the shake gesture, use the `shakeEnabled` property.
+    @objc public static func setEnabled(_ enable: Bool) {
+        isEnabled = enable
+        if enable {
             URLProtocol.registerClass(CustomHTTPProtocol.self)
-        }
-        else{
+        } else {
             URLProtocol.unregisterClass(CustomHTTPProtocol.self)
         }
     }
     
-    @objc public static func enable(_ enable: Bool, sessionConfiguration: URLSessionConfiguration){
-        
-        // Runtime check to make sure the API is available on this version
-        if sessionConfiguration.responds(to: #selector(getter: URLSessionConfiguration.protocolClasses)) && sessionConfiguration.responds(to: #selector(setter: URLSessionConfiguration.protocolClasses)){
-            var urlProtocolClasses = sessionConfiguration.protocolClasses
-            let protoCls = CustomHTTPProtocol.self
-            
-            guard urlProtocolClasses != nil else{
-                return
-            }
-            
-            let index = urlProtocolClasses?.firstIndex(where: { (obj) -> Bool in
-                if obj == protoCls{
-                    return true
-                }
-                return false
-            })
-            
-            if enable && index == nil{
-                urlProtocolClasses!.insert(protoCls, at: 0)
-            }
-            else if !enable && index != nil{
-                urlProtocolClasses!.remove(at: index!)
-            }
-            sessionConfiguration.protocolClasses = urlProtocolClasses
-        }
-        else{
+    /// Method to enable or disable Wormholy for a specific session configuration
+    @objc public static func setEnabled(_ enable: Bool, sessionConfiguration: URLSessionConfiguration) {
+        guard sessionConfiguration.responds(to: #selector(getter: URLSessionConfiguration.protocolClasses)) &&
+                sessionConfiguration.responds(to: #selector(setter: URLSessionConfiguration.protocolClasses)) else {
             print("[Wormholy] is only available when running on iOS16+")
+            return
         }
+        
+        var urlProtocolClasses = sessionConfiguration.protocolClasses ?? []
+        let protoCls = CustomHTTPProtocol.self
+        
+        if enable {
+            if !urlProtocolClasses.contains(where: { $0 == protoCls }) {
+                urlProtocolClasses.insert(protoCls, at: 0)
+            }
+        } else {
+            if let index = urlProtocolClasses.firstIndex(where: { $0 == protoCls }) {
+                urlProtocolClasses.remove(at: index)
+            }
+        }
+        sessionConfiguration.protocolClasses = urlProtocolClasses
     }
     
     // MARK: - Navigation
@@ -151,4 +151,9 @@ extension Wormholy {
         swiftyLoad()
         swiftyInitialize()
     }()
+    
+    // Method to expose isEnabled to Objective-C, for NSURLSessionConfiguration+Wormholy
+    @objc public static func isWormholyEnabled() -> Bool {
+        return isEnabled
+    }
 }
