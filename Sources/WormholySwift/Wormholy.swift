@@ -99,7 +99,7 @@ public class Wormholy: NSObject
             sessionConfiguration.protocolClasses = urlProtocolClasses
         }
         else{
-            print("[Wormholy] is only available when running on iOS12+")
+            print("[Wormholy] is only available when running on iOS16+")
         }
     }
     

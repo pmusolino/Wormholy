@@ -9,15 +9,6 @@ import Foundation
 
 public class CustomHTTPProtocol: URLProtocol {
     static var ignoredHosts = [String]()
-    @available(*, deprecated, renamed: "ignoredHosts")
-    static var blacklistedHosts: [String] {
-        get {
-            return ignoredHosts
-        }
-        set {
-            ignoredHosts = newValue
-        }
-    }
     
     struct Constants {
         static let RequestHandledKey = "URLProtocolRequestHandled"

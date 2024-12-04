@@ -10,27 +10,25 @@ import UIKit
 import Foundation
 import WormholySwift
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 10.0, *) {
-            let timer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { [weak self] (timer) in
-                
-                DataFetcher.sharedInstance.getPost(id: Utils.random(max: 128), completion: {
-                    print("API: Get random post")
-                }) { (error) in
-                    print("ERROR: api Get post")
-                }
-                
-                if let strongSelf = self {
-                    strongSelf.getPhotosButtonPressed(strongSelf)
-                }
+        let timer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { [weak self] (timer) in
+            
+            DataFetcher.sharedInstance.getPost(id: Utils.random(max: 128), completion: {
+                print("API: Get random post")
+            }) { (error) in
+                print("ERROR: api Get post")
             }
-            timer.fire()
+            
+            if let strongSelf = self {
+                strongSelf.getPhotosButtonPressed(strongSelf)
+            }
         }
+        timer.fire()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -59,7 +57,7 @@ class ViewController: UIViewController {
             print("ERROR: api Wrong URL")
         }
     }
-
+    
     @IBAction func getPhotosButtonPressed(_ sender: Any) {
         DataFetcher.sharedInstance.getPhotosList(completion: {
             print("API: Get photos")
