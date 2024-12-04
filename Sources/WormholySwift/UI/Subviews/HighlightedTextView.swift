@@ -28,9 +28,19 @@ internal struct HighlightedTextView: UIViewRepresentable {
         // Set the font size to 16 for the entire text
         attributedText.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: fullRange)
         
+        // Set the text color based on the current interface style
+        let isDarkMode = uiView.traitCollection.userInterfaceStyle == .dark
+        let textColor: UIColor = isDarkMode ? .white : .black
+        attributedText.addAttribute(.foregroundColor, value: textColor, range: fullRange)
+        
         for (index, match) in highlightedRanges.enumerated() {
-            let color: UIColor = (index == currentPosition) ? .yellow : .gray
-            attributedText.addAttribute(.backgroundColor, value: color, range: match.range)
+            let highlightColor: UIColor
+            if index == currentPosition {
+                highlightColor = isDarkMode ? .blue : .yellow
+            } else {
+                highlightColor = .gray
+            }
+            attributedText.addAttribute(.backgroundColor, value: highlightColor, range: match.range)
         }
         
         uiView.attributedText = attributedText
