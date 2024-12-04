@@ -1,6 +1,5 @@
 //
 //  CustomHTTPProtocol.swift
-//  AgendaDottori
 //
 //  Created by Paolo Musolino on 04/02/18.
 //  Copyright © 2018 Wormholy. All rights reserved.
@@ -42,6 +41,7 @@ public class CustomHTTPProtocol: URLProtocol {
         if CustomHTTPProtocol.property(forKey: Constants.RequestHandledKey, in: request) != nil {
             return false
         }
+        
         return true
     }
     
