@@ -14,6 +14,7 @@ internal struct RequestsView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isActionSheetPresented = false
     @State private var isShareSheetPresented = false
+    @State private var isStatsViewPresented = false
     @State private var selectedExportOption: RequestResponseExportOption = .flat
 
     init(requests: [RequestModel] = []) {
@@ -57,6 +58,9 @@ internal struct RequestsView: View {
                         .default(Text("Clear")) {
                             clearRequests()
                         },
+                        .default(Text("Stats")) {
+                            isStatsViewPresented = true
+                        },
                         .default(Text("Share")) {
                             selectedExportOption = .flat
                             isShareSheetPresented = true
@@ -75,6 +79,9 @@ internal struct RequestsView: View {
                 .sheet(isPresented: $isShareSheetPresented) {
                     // Using ShareUtils to create the ActivityView for sharing content
                     ShareUtils.shareRequests(requests: filteredRequests, requestExportOption: selectedExportOption)
+                }
+                .sheet(isPresented: $isStatsViewPresented) {
+                    StatsView()
                 }
             }
         }
