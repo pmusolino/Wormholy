@@ -18,39 +18,39 @@ public class Wormholy: NSObject
         get { return CustomHTTPProtocol.ignoredHosts }
         set { CustomHTTPProtocol.ignoredHosts = newValue }
     }
-  
+    
     /// Limit the logging count
     ///
     @objc public static var limit: NSNumber? {
-            get {
-                Task { @MainActor in
-                    return Storage.limit
-                }
-                return nil // Placeholder return, adjust as needed
+        get {
+            Task { @MainActor in
+                return Storage.limit
             }
-            set {
-                Task { @MainActor in
-                    Storage.limit = newValue
-                }
+            return nil // Placeholder return, adjust as needed
+        }
+        set {
+            Task { @MainActor in
+                Storage.limit = newValue
             }
         }
-
+    }
+    
     /// Default filter for the search box
     ///
     @objc public static var defaultFilter: String? {
-            get {
-                Task { @MainActor in
-                    return Storage.defaultFilter
-                }
-                return nil // Placeholder return, adjust as needed
+        get {
+            Task { @MainActor in
+                return Storage.defaultFilter
             }
-            set {
-                Task { @MainActor in
-                    Storage.defaultFilter = newValue
-                }
+            return nil // Placeholder return, adjust as needed
+        }
+        set {
+            Task { @MainActor in
+                Storage.defaultFilter = newValue
             }
         }
-
+    }
+    
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()
