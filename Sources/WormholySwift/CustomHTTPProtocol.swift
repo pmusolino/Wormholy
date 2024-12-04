@@ -42,6 +42,10 @@ public class CustomHTTPProtocol: URLProtocol {
             return false
         }
         
+        if request.cachePolicy == .returnCacheDataElseLoad || request.cachePolicy == .returnCacheDataDontLoad {
+            return false
+        }
+        
         return true
     }
     
@@ -104,7 +108,13 @@ extension CustomHTTPProtocol: URLSessionDataDelegate {
     }
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-        let policy = URLCache.StoragePolicy(rawValue: request.cachePolicy.rawValue) ?? .notAllowed
+        let policy: URLCache.StoragePolicy
+        switch request.cachePolicy {
+        case .returnCacheDataElseLoad, .returnCacheDataDontLoad:
+            policy = .allowed
+        default:
+            policy = URLCache.StoragePolicy(rawValue: request.cachePolicy.rawValue) ?? .notAllowed
+        }
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: policy)
         currentRequest?.initResponse(response: response)
         completionHandler(.allow)
