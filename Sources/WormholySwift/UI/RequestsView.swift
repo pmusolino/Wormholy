@@ -16,6 +16,7 @@ internal struct RequestsView: View {
     @State private var isShareSheetPresented = false
     @State private var isStatsViewPresented = false
     @State private var selectedExportOption: RequestResponseExportOption = .flat
+    @State private var selectedStatusCodeRange: ClosedRange<Int>? // Range of status codes for filtering requests
 
     init(requests: [RequestModel] = []) {
         _filteredRequests = State(initialValue: requests)
@@ -28,6 +29,10 @@ internal struct RequestsView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 SearchBar(text: $searchText, onTextChanged: filterRequests)
+                
+                StatusCodeFilterView(selectedStatusCodeRange: $selectedStatusCodeRange, onFilterChange: filterRequests)
+                Divider()
+
                 List {
                     ForEach(filteredRequests, id: \.id) { request in
                         NavigationLink(destination: RequestDetailView(request: request)) {
@@ -94,12 +99,10 @@ internal struct RequestsView: View {
     }
     
     private func filterRequests() {
-        if searchText.isEmpty {
-            filteredRequests = storage.requests
-        } else {
-            filteredRequests = storage.requests.filter { request in
-                request.url.range(of: searchText, options: .caseInsensitive) != nil
-            }
+        filteredRequests = storage.requests.filter { request in
+            let matchesSearchText = searchText.isEmpty || request.url.range(of: searchText, options: .caseInsensitive) != nil
+            let matchesStatusCode = selectedStatusCodeRange == nil || selectedStatusCodeRange!.contains(request.code)
+            return matchesSearchText && matchesStatusCode
         }
     }
 

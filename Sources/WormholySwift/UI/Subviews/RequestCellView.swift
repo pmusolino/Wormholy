@@ -23,8 +23,8 @@ internal struct RequestCellView: View {
                         .bold()
                         .padding(4)
                         .background(RoundedRectangle(cornerRadius: 6)
-                                        .stroke(getCodeColor(code: request.code), lineWidth: 0.5))
-                        .foregroundColor(getCodeColor(code: request.code))
+                                        .stroke(Colors.HTTPCode.getHTTPCodeColor(code: request.code), lineWidth: 0.5))
+                        .foregroundColor(Colors.HTTPCode.getHTTPCodeColor(code: request.code))
                 }
                 
                 if let duration = request.duration {
@@ -41,21 +41,6 @@ internal struct RequestCellView: View {
                 .padding([.leading, .trailing], 8)
             
             Spacer()
-        }
-    }
-    
-    private func getCodeColor(code: Int) -> Color {
-        switch code {
-        case 200..<300:
-            return Color(Colors.HTTPCode.Success)
-        case 300..<400:
-            return Color(Colors.HTTPCode.Redirect)
-        case 400..<500:
-            return Color(Colors.HTTPCode.ClientError)
-        case 500..<600:
-            return Color(Colors.HTTPCode.ServerError)
-        default:
-            return Color(Colors.HTTPCode.Generic)
         }
     }
 }
