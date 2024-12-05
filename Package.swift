@@ -16,7 +16,6 @@ let package = Package(
         .target(
             name: "WormholySwift",
             dependencies: [],
-            exclude: ["../../WormholyDemo"],
             resources: [
                 .process("Resources/Assets.xcassets")
             ]
