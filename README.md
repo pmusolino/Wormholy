@@ -26,7 +26,7 @@ Start debugging iOS network calls like a wizard, without extra code! Wormholy ma
 - [x] View request stats, including HTTP methods breakdown, status code distribution, error types, response size stats, and more.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Screens"/>
+  <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/refs/heads/feat/swift-ui-ios-15-support/screens.webp" alt="Screens"/>
 </p>
 
 ## Requirements
