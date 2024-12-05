@@ -25,5 +25,6 @@ Pod::Spec.new do |s|
     ss.source_files = 'Sources/WormholyObjC/**/*'
     ss.dependency 'Wormholy/WormholySwift'
     ss.public_header_files = 'Sources/WormholyObjC/**/*.h'
+    ss.exclude_files = 'Sources/WormholyObjC/module.modulemap'
   end
 end
