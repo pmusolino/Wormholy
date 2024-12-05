@@ -2,70 +2,70 @@
   <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/logo.png" alt="Icon"/>
 </p>
 
-  [![Language](https://img.shields.io/badge/Swift-5-orange.svg)]()
-  [![Pod version](https://img.shields.io/badge/Cocoapods-Compatible%20-blue)](https://cocoapods.org/pods/Wormholy)
-  [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-yellow.svg)](https://github.com/Carthage/Carthage)
-  
-  Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
-  
-  
-  **What you can do:**
-  
-  - [x] No code to write and no imports.
-  - [x] Record all app traffic that uses `NSURLSession`.
-  - [x] Reveal the content of all requests, responses, and headers simply by shaking your phone!
-  - [x] No headaches with SSL certificates on HTTPS calls.
-  - [x] Find, isolate and fix bugs quickly.
-  - [x] Swift & Objective-C compatibility.
-  - [x] Also works with external libraries like `Alamofire` & `AFNetworking`.
-  - [x] Ability to blacklist hosts from being recorded using the array `ignoredHosts`.
-  - [x] Ability to export API requests as Postman collection
-  - [x] Ability to share cURL rappresentation of API requests
-  
+[![Language](https://img.shields.io/badge/Swift-5-orange.svg)]()
+[![Pod version](https://img.shields.io/badge/Cocoapods-Compatible%20-blue)](https://cocoapods.org/pods/Wormholy)
+[![SPM Compatible](https://img.shields.io/badge/SPM-Compatible-green.svg)](https://swift.org/package-manager/)
+
+Start debugging iOS network calls like a wizard, without extra code! Wormholy makes debugging quick and reliable.
+
+**Features:**
+
+- [x] No code to write and no imports.
+- [x] Record all app traffic that uses `NSURLSession`.
+- [x] Reveal the content of all requests, responses, and headers simply by shaking your phone!
+- [x] No headaches with SSL certificates on HTTPS calls.
+- [x] Find, isolate, and fix bugs quickly.
+- [x] Swift & Objective-C compatibility.
+- [x] Also works with external libraries like `Alamofire` & `AFNetworking`.
+- [x] Ability to blacklist hosts from being recorded using the array `ignoredHosts`.
+- [x] Ability to export API requests as a Postman collection.
+- [x] Ability to share cURL representations of API requests.
+- [x] Programmatically enable or disable Wormholy for specific session configurations.
+- [x] Control the shake gesture activation with the `shakeEnabled` property.
+- [x] Filter responses by status code for precise debugging.
+- [x] View request stats, including HTTP methods breakdown, status code distribution, error types, response size stats, and more.
+
 <p align="center">
-<img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Icon"/>
+  <img src="https://raw.githubusercontent.com/pmusolino/Wormholy/master/screens.png" alt="Screens"/>
 </p>
-  
+
 ## Requirements
-----------------
 
-- iOS 11.0+
-- Xcode 10+
-- Swift 4, 4.1, 4.2 and Swift 5
-
+- iOS 16.0+
+- Xcode 15+
+- Swift 5
 
 ## Usage
-----------------
-Add it to your project, and that's all! **Shake your device** or your simulator and Wormholy will appear! You don't need to import the library into your code, it works magically!
 
-I suggest you install it only in debug mode. The easiest way is with CocoaPods:
+Integrating Wormholy into your project is simple, and it works like magic! **Shake your device** or simulator to access Wormholy. There's no need to import the library into your code.
 
-```
+<u>**It is recommended to install it only in debug mode and not integrate it into production. Please remove it before sending your apps to production.**</u> The easiest way to do this is with CocoaPods:
+
+```shell
 pod 'Wormholy', :configurations => ['Debug']
-``` 
-
-
-If you want to disable the shake, and fire Wormholy from another point inside your app, you need to set the [environment variable](https://medium.com/@derrickho_28266/xcode-custom-environment-variables-681b5b8674ec) `WORMHOLY_SHAKE_ENABLED` = `NO`, and call this local notification:
-
 ```
+
+You can also integrate Wormholy using the **Swift Package Manager**!
+
+### Configuration Options
+
+- **Ignored Hosts**: Specify hosts to be excluded from logging using `Wormholy.ignoredHosts`. This is useful for ignoring traffic to certain domains.
+- **Logging Limit**: Control the number of logs retained with `Wormholy.limit`. This helps manage memory usage by limiting the amount of data stored.
+- **Default Filter**: Set a default filter for the search box with `Wormholy.defaultFilter` to streamline your debugging process.
+- **Enable/Disable**: Use `Wormholy.setEnabled(_:)` to toggle request tracking globally. You can also enable or disable it for specific `URLSessionConfiguration` instances using `Wormholy.setEnabled(_:sessionConfiguration:)`.
+- **Shake Gesture**: Control the activation of Wormholy via shake gesture with `Wormholy.shakeEnabled`.
+
+### Triggering Wormholy
+
+If you prefer not to use the shake gesture, you can disable it using the [environment variable](https://medium.com/@derrickho_28266/xcode-custom-environment-variables-681b5b8674ec) `WORMHOLY_SHAKE_ENABLED` = `NO`.
+
+To trigger Wormholy manually from another point in your app without using the shake gesture, call:
+
+```swift
 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "wormholy_fire"), object: nil)
 ```
 
-You can also programmatically enable/disable the shake gesture at any time. You can do `Wormholy.shakeEnabled = false` to disable (or enable) the shake gesture. 
-
-
-
-## Carthage
-----------------
-
-You can also install Wormholy using [Carthage](https://github.com/Carthage/Carthage).
-
-To integrate Wormholy into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-github "pmusolino/Wormholy"
-```
-Run `carthage update` to build the framework and drag the built `Wormholy.framework` into your Xcode project.
+By following these steps and configurations, you can effectively integrate Wormholy into your development workflow, enhancing your ability to debug network requests efficiently.
 
 ## Contributing
 
@@ -74,20 +74,14 @@ Run `carthage update` to build the framework and drag the built `Wormholy.framew
 - If you **have a feature request**, open an issue.
 - If you **want to contribute**, submit a pull request.
 
-
 ## Acknowledgements
 
 **Made with ❤️ by [Paolo Musolino](https://github.com/pmusolino).**
 
 ***Follow me on:***
-#### 💼 [Linkedin](https://www.linkedin.com/in/paolomusolino/)
-
-#### 🤖 [Twitter](https://twitter.com/pmusolino)
-
-#### 🌇 [Instagram](https://www.instagram.com/pmusolino/)
-
-#### 👨🏼‍🎤 [Facebook](https://www.facebook.com/paolomusolino)
+#### 💼 [LinkedIn](https://www.linkedin.com/in/paolomusolino/)
+#### 🤖 [X](https://x.com/pmusolino)
 
 ## MIT License
-----------------
-Wormholy is available under the MIT license. See the LICENSE file for more info.
+
+Wormholy is available under the MIT license. See the LICENSE file for more information.
