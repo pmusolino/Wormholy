@@ -23,9 +23,7 @@ static NSURLSessionConfiguration* Wormholy_defaultSessionConfiguration(id self, 
 {
     NSURLSessionConfiguration* config = orig_defaultSessionConfiguration(self,_cmd); // call original method
     
-    if ([Wormholy isWormholyEnabled]) {
-        [Wormholy setEnabled:YES sessionConfiguration:config];
-    }
+    [Wormholy setEnabled:YES sessionConfiguration:config];
     return config;
 }
 
@@ -33,9 +31,7 @@ static NSURLSessionConfiguration* Wormholy_ephemeralSessionConfiguration(id self
 {
     NSURLSessionConfiguration* config = orig_ephemeralSessionConfiguration(self,_cmd); // call original method
     
-    if ([Wormholy isWormholyEnabled]) {
-        [Wormholy setEnabled:YES sessionConfiguration:config];
-    }
+    [Wormholy setEnabled:YES sessionConfiguration:config];
     return config;
 }
 

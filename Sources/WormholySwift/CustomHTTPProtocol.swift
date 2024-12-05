@@ -46,6 +46,12 @@ public class CustomHTTPProtocol: URLProtocol {
     }
     
     override public func startLoading() {
+        // If Wormholy is disabled, do not proceed with request handling
+        guard Wormholy.isEnabled else {
+            client?.urlProtocolDidFinishLoading(self)
+            return
+        }
+        
         let newRequest = ((request as NSURLRequest).mutableCopy() as? NSMutableURLRequest)!
         CustomHTTPProtocol.setProperty(true, forKey: Constants.RequestHandledKey, in: newRequest)
         sessionTask = session?.dataTask(with: newRequest as URLRequest)
