@@ -64,7 +64,7 @@ public class Wormholy: NSObject
     /// Method to initialize Wormholy with default settings
     @objc public static func swiftyInitialize() {
         if self == Wormholy.self {
-            Wormholy.setEnabled(true)
+            Wormholy.setEnabled(isEnabled)
         }
     }
     
