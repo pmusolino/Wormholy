@@ -3,7 +3,7 @@
 //  Wormholy
 //
 //  Created by Paolo Musolino.
-//  Copyright © 2018 Wormholy. All rights reserved.
+//  Copyright © 2025 Wormholy. All rights reserved.
 //
 
 import UIKit
