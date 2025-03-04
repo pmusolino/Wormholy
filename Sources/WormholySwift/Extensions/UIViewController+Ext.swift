@@ -40,7 +40,21 @@ extension UIViewController {
 
 extension UIViewController {
 
-    var isHosting: Bool {
-        String(describing: self).contains("UIHostingController")
+var isHosting: Bool {
+    let className = NSStringFromClass(type(of: self))
+    if className.contains("UIHostingController") {
+        return true
     }
+    
+    // Check superclass hierarchy to catch subclasses
+    var currentClass: AnyClass? = type(of: self)
+    while let superclass = currentClass?.superclass() {
+        if NSStringFromClass(superclass).contains("UIHostingController") {
+            return true
+        }
+        currentClass = superclass
+    }
+    
+    return false
+}
 }
