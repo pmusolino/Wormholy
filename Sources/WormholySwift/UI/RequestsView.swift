@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 internal struct RequestsView: View {
     @State private var searchText = Storage.defaultFilter ?? ""
     @ObservedObject private var storage = Storage.shared
@@ -16,7 +18,7 @@ internal struct RequestsView: View {
     @State private var isShareSheetPresented = false
     @State private var isStatsViewPresented = false
     @State private var selectedExportOption: RequestResponseExportOption = .flat
-    @State private var selectedStatusCodeRange: ClosedRange<Int>? // Range of status codes for filtering requests
+    @State private var selectedStatusCodeRange: ClosedRange<Int>? // Диапазон кодов статуса для фильтрации
 
     init(requests: [RequestModel] = []) {
         _filteredRequests = State(initialValue: requests)
@@ -26,18 +28,18 @@ internal struct RequestsView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(spacing: 0) {
                 SearchBar(text: $searchText, onTextChanged: filterRequests)
                 
                 StatusCodeFilterView(selectedStatusCodeRange: $selectedStatusCodeRange, onFilterChange: filterRequests)
                 Divider()
-
+                
                 List {
                     ForEach(filteredRequests, id: \.id) { request in
                         NavigationLink(destination: RequestDetailView(request: request)) {
                             RequestCellView(request: request)
-                                .padding(.all, 8)
+                                .padding(8)
                                 .frame(height: 76)
                         }
                         .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
@@ -45,21 +47,25 @@ internal struct RequestsView: View {
                 }
                 .animation(.bouncy, value: filteredRequests)
                 .listStyle(PlainListStyle())
-                .navigationTitle("Requests")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("More") {
-                            isActionSheetPresented = true
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Done") {
-                            presentationMode.wrappedValue.dismiss()
-                        }
+            }
+            .navigationTitle("Requests")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("More") {
+                        isActionSheetPresented = true
                     }
                 }
-                .actionSheet(isPresented: $isActionSheetPresented) {
-                    ActionSheet(title: Text("Wormholy"), message: Text("Choose an option"), buttons: [
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
+            .actionSheet(isPresented: $isActionSheetPresented) {
+                ActionSheet(
+                    title: Text("Wormholy"),
+                    message: Text("Choose an option"),
+                    buttons: [
                         .default(Text("Clear")) {
                             clearRequests()
                         },
@@ -79,25 +85,25 @@ internal struct RequestsView: View {
                             isShareSheetPresented = true
                         },
                         .cancel()
-                    ])
-                }
-                .sheet(isPresented: $isShareSheetPresented) {
-                    // Using ShareUtils to create the ActivityView for sharing content
-                    ShareUtils.shareRequests(requests: filteredRequests, requestExportOption: selectedExportOption)
-                }
-                .sheet(isPresented: $isStatsViewPresented) {
-                    StatsView()
-                }
+                    ]
+                )
+            }
+            .sheet(isPresented: $isShareSheetPresented) {
+                ShareUtils.shareRequests(requests: filteredRequests, requestExportOption: selectedExportOption)
+            }
+            .sheet(isPresented: $isStatsViewPresented) {
+                StatsView()
             }
         }
         .onAppear {
-            filterRequests() // Ensure requests are filtered on first load
+            filterRequests() // Фильтруем запросы при первом появлении
         }
         .onReceive(storage.$requests) { _ in
             filterRequests()
         }
     }
     
+    // Фильтрация запросов по тексту поиска и диапазону кодов статуса
     private func filterRequests() {
         filteredRequests = storage.requests.filter { request in
             let matchesSearchText = searchText.isEmpty || request.url.range(of: searchText, options: .caseInsensitive) != nil
@@ -105,17 +111,15 @@ internal struct RequestsView: View {
             return matchesSearchText && matchesStatusCode
         }
     }
-
+    
     private func clearRequests() {
-        // Clear the requests from storage.
         storage.clearRequests()
-        filterRequests() // Ensure filteredRequests is updated after clearing
+        filterRequests()
     }
 }
 
 struct RequestsView_Previews: PreviewProvider {
     static var previews: some View {
-        // Create fake data for preview using the mock initializer with all parameters
         let fakeRequests = [
             RequestModel(
                 id: UUID().uuidString,
@@ -137,7 +141,7 @@ struct RequestsView_Previews: PreviewProvider {
             ),
             RequestModel(
                 id: UUID().uuidString,
-                url: "https://example.com/api/v2/resources/items/67890/details?include=summary&expand=none&additional=parameters&to=make&url=longer&for=testing&purposes=only&this=is&a=very&long=url&that=should&be=twice&as=long&as=the&original",
+                url: "https://example.com/api/v2/resources/items/67890/details?include=summary",
                 host: "example.com",
                 port: 443,
                 scheme: "https",
@@ -154,7 +158,6 @@ struct RequestsView_Previews: PreviewProvider {
                 duration: 2.34
             )
         ]
-        // Inject fake data into RequestsView
         return RequestsView(requests: fakeRequests)
     }
 }
