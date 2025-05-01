@@ -202,10 +202,10 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
                 self.responseHeaders = responseHeaders
             }
             if let dataResponse = dataResponse {
-                if self.dataResponse == nil {
-                    self.dataResponse = dataResponse
-                } else {
+                if self.dataResponse != nil {
                     self.dataResponse?.append(dataResponse)
+                } else {
+                    self.dataResponse = dataResponse
                 }
             }
             if let errorClientDescription = errorClientDescription {
