@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/pmusolino/Wormholy"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Paolo Musolino" => "info@codeido.com" }
-  s.social_media_url   = "https://x.com/pmusolino"
+  s.social_media_url   = "https://www.x.com/pmusolino"
   s.ios.deployment_target = "16.0"
   s.source       = { :git => "https://github.com/pmusolino/Wormholy.git", :tag => s.version.to_s }
   s.swift_version = "5.0"
