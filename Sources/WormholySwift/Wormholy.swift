@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import SwiftUI
 
+#if canImport(MCP)
+import MCP
+#endif
+
 public class Wormholy: NSObject
 {
     /// Hosts that will be ignored from being recorded
@@ -53,6 +57,10 @@ public class Wormholy: NSObject
     
     // Flag to determine if Wormholy is enabled
     internal static var isEnabled: Bool = true
+
+#if canImport(MCP)
+    private static var mcpServer: MCPServer?
+#endif
     
     /// Method to initialize Wormholy
     @objc public static func swiftyLoad() {
@@ -65,6 +73,17 @@ public class Wormholy: NSObject
     @objc public static func swiftyInitialize() {
         if self == Wormholy.self {
             Wormholy.setEnabled(isEnabled)
+#if canImport(MCP)
+            // Initialize MCP Server
+            mcpServer = MCPServer()
+            Task {
+                do {
+                    try await mcpServer?.start()
+                } catch {
+                    print("[Wormholy] Failed to start MCP Server: \(error)")
+                }
+            }
+#endif
         }
     }
     

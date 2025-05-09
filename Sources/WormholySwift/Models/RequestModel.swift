@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-internal class RequestModel: Hashable, Decodable, ObservableObject {
+internal class RequestModel: Hashable, Decodable, Encodable, ObservableObject {
     internal let id: String
     internal let url: String
     internal let host: String?
@@ -39,7 +39,7 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
     @Published public private(set) var countOfResponseHeaderBytesReceived: Int64?
 
     enum CodingKeys: String, CodingKey {
-        case id, url, host, port, scheme, startDate, method, headers, credentials, cookies, httpBody, code, responseHeaders, dataResponse, errorClientDescription, duration
+        case id, url, host, port, scheme, startDate, method, headers, credentials, cookies, httpBody, code, responseHeaders, dataResponse, errorClientDescription, duration, requestStartDate, requestEndDate, responseStartDate, responseEndDate, countOfRequestBodyBytesBeforeEncoding, countOfRequestBodyBytesSent, countOfRequestHeaderBytesSent, countOfResponseBodyBytesAfterDecoding, countOfResponseBodyBytesReceived, countOfResponseHeaderBytesReceived
     }
     
     required init(from decoder: Decoder) throws {
@@ -60,6 +60,46 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
         dataResponse = try container.decodeIfPresent(Data.self, forKey: .dataResponse)
         errorClientDescription = try container.decodeIfPresent(String.self, forKey: .errorClientDescription)
         duration = try container.decodeIfPresent(Double.self, forKey: .duration)
+        requestStartDate = try container.decodeIfPresent(Date.self, forKey: .requestStartDate)
+        requestEndDate = try container.decodeIfPresent(Date.self, forKey: .requestEndDate)
+        responseStartDate = try container.decodeIfPresent(Date.self, forKey: .responseStartDate)
+        responseEndDate = try container.decodeIfPresent(Date.self, forKey: .responseEndDate)
+        countOfRequestBodyBytesBeforeEncoding = try container.decodeIfPresent(Int64.self, forKey: .countOfRequestBodyBytesBeforeEncoding)
+        countOfRequestBodyBytesSent = try container.decodeIfPresent(Int64.self, forKey: .countOfRequestBodyBytesSent)
+        countOfRequestHeaderBytesSent = try container.decodeIfPresent(Int64.self, forKey: .countOfRequestHeaderBytesSent)
+        countOfResponseBodyBytesAfterDecoding = try container.decodeIfPresent(Int64.self, forKey: .countOfResponseBodyBytesAfterDecoding)
+        countOfResponseBodyBytesReceived = try container.decodeIfPresent(Int64.self, forKey: .countOfResponseBodyBytesReceived)
+        countOfResponseHeaderBytesReceived = try container.decodeIfPresent(Int64.self, forKey: .countOfResponseHeaderBytesReceived)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(url, forKey: .url)
+        try container.encodeIfPresent(host, forKey: .host)
+        try container.encodeIfPresent(port, forKey: .port)
+        try container.encodeIfPresent(scheme, forKey: .scheme)
+        try container.encode(startDate, forKey: .startDate)
+        try container.encode(method, forKey: .method)
+        try container.encode(headers, forKey: .headers)
+        try container.encode(credentials, forKey: .credentials)
+        try container.encodeIfPresent(cookies, forKey: .cookies)
+        try container.encodeIfPresent(httpBody, forKey: .httpBody)
+        try container.encode(code, forKey: .code)
+        try container.encodeIfPresent(responseHeaders, forKey: .responseHeaders)
+        try container.encodeIfPresent(dataResponse, forKey: .dataResponse)
+        try container.encodeIfPresent(errorClientDescription, forKey: .errorClientDescription)
+        try container.encodeIfPresent(duration, forKey: .duration)
+        try container.encodeIfPresent(requestStartDate, forKey: .requestStartDate)
+        try container.encodeIfPresent(requestEndDate, forKey: .requestEndDate)
+        try container.encodeIfPresent(responseStartDate, forKey: .responseStartDate)
+        try container.encodeIfPresent(responseEndDate, forKey: .responseEndDate)
+        try container.encodeIfPresent(countOfRequestBodyBytesBeforeEncoding, forKey: .countOfRequestBodyBytesBeforeEncoding)
+        try container.encodeIfPresent(countOfRequestBodyBytesSent, forKey: .countOfRequestBodyBytesSent)
+        try container.encodeIfPresent(countOfRequestHeaderBytesSent, forKey: .countOfRequestHeaderBytesSent)
+        try container.encodeIfPresent(countOfResponseBodyBytesAfterDecoding, forKey: .countOfResponseBodyBytesAfterDecoding)
+        try container.encodeIfPresent(countOfResponseBodyBytesReceived, forKey: .countOfResponseBodyBytesReceived)
+        try container.encodeIfPresent(countOfResponseHeaderBytesReceived, forKey: .countOfResponseHeaderBytesReceived)
     }
     
     init(request: NSURLRequest, session: URLSession?) {

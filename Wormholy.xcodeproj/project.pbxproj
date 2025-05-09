@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		40DBE2F528292E0600B89C42 /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 40DBE2F428292E0600B89C42 /* Wormholy */; };
 		4508718C207E59FF00EE2D31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508718B207E59FF00EE2D31 /* AppDelegate.swift */; };
 		4508718E207E59FF00EE2D31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4508718D207E59FF00EE2D31 /* ViewController.swift */; };
 		45087191207E59FF00EE2D31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4508718F207E59FF00EE2D31 /* Main.storyboard */; };
@@ -18,7 +17,7 @@
 		450871A5207E5C7700EE2D31 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A1207E5C7700EE2D31 /* Config.swift */; };
 		450871A6207E5C7700EE2D31 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A2207E5C7700EE2D31 /* Routing.swift */; };
 		450871A7207E5C7700EE2D31 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A3207E5C7700EE2D31 /* DataFetcher.swift */; };
-		45B0BFE52CEE3B6800BC9ADA /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 45B0BFE42CEE3B6800BC9ADA /* Wormholy */; };
+		45159E112DCD0B41009B57F9 /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 45159E102DCD0B41009B57F9 /* Wormholy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40DBE2F528292E0600B89C42 /* Wormholy in Frameworks */,
-				45B0BFE52CEE3B6800BC9ADA /* Wormholy in Frameworks */,
+				45159E112DCD0B41009B57F9 /* Wormholy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +106,7 @@
 			);
 			name = WormholyDemo;
 			packageProductDependencies = (
-				40DBE2F428292E0600B89C42 /* Wormholy */,
-				45B0BFE42CEE3B6800BC9ADA /* Wormholy */,
+				45159E102DCD0B41009B57F9 /* Wormholy */,
 			);
 			productName = WormholyDemo;
 			productReference = 45087189207E59FE00EE2D31 /* WormholyDemo.app */;
@@ -143,7 +140,7 @@
 			);
 			mainGroup = 52D6D9721BEFF229002C0205;
 			packageReferences = (
-				45B0BFE32CEE3B6800BC9ADA /* XCLocalSwiftPackageReference "../Wormholy" */,
+				45159E0F2DCD0B41009B57F9 /* XCLocalSwiftPackageReference "../Wormholy" */,
 			);
 			productRefGroup = 52D6D97D1BEFF229002C0205 /* Products */;
 			projectDirPath = "";
@@ -404,18 +401,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		45B0BFE32CEE3B6800BC9ADA /* XCLocalSwiftPackageReference "../Wormholy" */ = {
+		45159E0F2DCD0B41009B57F9 /* XCLocalSwiftPackageReference "../Wormholy" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Wormholy;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		40DBE2F428292E0600B89C42 /* Wormholy */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Wormholy;
-		};
-		45B0BFE42CEE3B6800BC9ADA /* Wormholy */ = {
+		45159E102DCD0B41009B57F9 /* Wormholy */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Wormholy;
 		};
