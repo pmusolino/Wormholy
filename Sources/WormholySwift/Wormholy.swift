@@ -60,6 +60,7 @@ public class Wormholy: NSObject
 
 #if canImport(MCP)
     private static var mcpServer: MCPServer?
+    private static var serverTask: Task<Void, Never>?
 #endif
     
     /// Method to initialize Wormholy
@@ -76,7 +77,7 @@ public class Wormholy: NSObject
 #if canImport(MCP)
             // Initialize MCP Server
             mcpServer = MCPServer()
-            Task {
+            serverTask = Task { @MainActor in
                 do {
                     try await mcpServer?.start()
                 } catch {
