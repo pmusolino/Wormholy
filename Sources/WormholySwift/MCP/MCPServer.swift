@@ -1,6 +1,7 @@
 #if canImport(MCP)
 import MCP
 import Foundation
+import Network
 
 internal class MCPServer {
     func start() async throws {
@@ -15,12 +16,19 @@ internal class MCPServer {
             )
         )
 
-        // Register tool handlers
+        // 1. Create the transports
+        let transports: [any Transport] = [
+            TCPTransport(port: 12345), // Per client esterni
+            StdioTransport() // Per debug locale
+        ]
+        
+        // 2. Start server with multiple transports
+        for transport in transports {
+            try await server.start(transport: transport)
+        }
+        
+        // 3. Register the handlers
         await registerToolHandlers(on: server)
-
-        // Create transport and start server
-        let transport = StdioTransport()
-        try await server.start(transport: transport)
     }
 
     private func registerToolHandlers(on server: Server) async {
