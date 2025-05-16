@@ -18,8 +18,8 @@ internal class MCPServer {
 
         // 1. Create the transports
         let transports: [any Transport] = [
-            TCPTransport(port: 12345), // Per client esterni
-            StdioTransport() // Per debug locale
+            TCPTransport(port: 12345), // For external clients
+            StdioTransport() // For local debug
         ]
         
         // 2. Start server with multiple transports

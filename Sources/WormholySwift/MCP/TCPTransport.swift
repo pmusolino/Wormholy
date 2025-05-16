@@ -1,3 +1,4 @@
+#if canImport(MCP)
 import Network
 import MCP
 import Foundation
@@ -93,3 +94,4 @@ public actor TCPTransport: Transport {
         messageContinuation.finish()
     }
 }
+#endif
