@@ -1,8 +1,8 @@
 #if canImport(MCP)
 import Network
-import MCP
 import Foundation
 import Logging
+import MCP
 
 public actor TCPTransport: Transport {
     
