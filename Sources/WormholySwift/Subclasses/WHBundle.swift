@@ -18,7 +18,7 @@ class WHBundle: Bundle {
                 return bundle
             }
         }
-        
+
         return Bundle(for: Wormholy.classForCoder())
         #endif
     }

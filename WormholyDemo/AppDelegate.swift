@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WormholySwift
+import Wormholy
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Limit the number of API requests stored
-        Wormholy.limit = 100
+        Wormholy.limit = 10
         
         return true
     }

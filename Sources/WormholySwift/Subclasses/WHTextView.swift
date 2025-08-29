@@ -9,7 +9,7 @@
 import UIKit
 
 class WHTextView: UITextView {
-    
+
 }
 
 extension WHTextView {
@@ -19,7 +19,9 @@ extension WHTextView {
         
         let attributed = NSMutableAttributedString(string: textViewText)
         attributed.addAttribute(.font, value: font, range: NSRange(location: 0, length: self.attributedText.length))
-        attributed.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: self.attributedText.length))
+        if #available(iOS 13.0, *) {
+            attributed.addAttribute(.foregroundColor, value: UIColor.label, range: NSRange(location: 0, length: self.attributedText.length))
+        }
         
         do {
             let regex = try NSRegularExpression(pattern: keywordSearch, options: .caseInsensitive)
@@ -42,7 +44,7 @@ extension WHTextView {
     func convertRange(range: NSRange) -> UITextRange? {
         let beginning = self.beginningOfDocument
         if let start = self.position(from: beginning, offset: range.location),
-           let end = self.position(from: start, offset: range.length) {
+            let end = self.position(from: start, offset: range.length) {
             return self.textRange(from: start, to: end)
         }
         return nil

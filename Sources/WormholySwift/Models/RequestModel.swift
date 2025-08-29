@@ -8,59 +8,23 @@
 import Foundation
 import UIKit
 
-internal class RequestModel: Hashable, Decodable, ObservableObject {
-    internal let id: String
-    internal let url: String
-    internal let host: String?
-    internal let port: Int?
-    internal let scheme: String?
-    internal let startDate: Date
-    internal let method: String
-    internal let headers: [String: String]
-    @Published internal private(set) var credentials: [String : String]
-    @Published internal private(set) var cookies: String?
-    @Published internal private(set) var httpBody: Data?
-    @Published internal private(set) var code: Int
-    @Published internal private(set) var responseHeaders: [String: String]?
-    @Published internal private(set) var dataResponse: Data?
-    @Published internal private(set) var errorClientDescription: String?
-    @Published internal private(set) var duration: Double?
-    
-    // Variables for network statistics
-    @Published public private(set) var requestStartDate: Date?
-    @Published public private(set) var requestEndDate: Date?
-    @Published public private(set) var responseStartDate: Date?
-    @Published public private(set) var responseEndDate: Date?
-    @Published public private(set) var countOfRequestBodyBytesBeforeEncoding: Int64?
-    @Published public private(set) var countOfRequestBodyBytesSent: Int64?
-    @Published public private(set) var countOfRequestHeaderBytesSent: Int64?
-    @Published public private(set) var countOfResponseBodyBytesAfterDecoding: Int64?
-    @Published public private(set) var countOfResponseBodyBytesReceived: Int64?
-    @Published public private(set) var countOfResponseHeaderBytesReceived: Int64?
-
-    enum CodingKeys: String, CodingKey {
-        case id, url, host, port, scheme, startDate, method, headers, credentials, cookies, httpBody, code, responseHeaders, dataResponse, errorClientDescription, duration
-    }
-    
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(String.self, forKey: .id)
-        url = try container.decode(String.self, forKey: .url)
-        host = try container.decodeIfPresent(String.self, forKey: .host)
-        port = try container.decodeIfPresent(Int.self, forKey: .port)
-        scheme = try container.decodeIfPresent(String.self, forKey: .scheme)
-        startDate = try container.decode(Date.self, forKey: .startDate)
-        method = try container.decode(String.self, forKey: .method)
-        headers = try container.decode([String: String].self, forKey: .headers)
-        credentials = try container.decode([String: String].self, forKey: .credentials)
-        cookies = try container.decodeIfPresent(String.self, forKey: .cookies)
-        httpBody = try container.decodeIfPresent(Data.self, forKey: .httpBody)
-        code = try container.decode(Int.self, forKey: .code)
-        responseHeaders = try container.decodeIfPresent([String: String].self, forKey: .responseHeaders)
-        dataResponse = try container.decodeIfPresent(Data.self, forKey: .dataResponse)
-        errorClientDescription = try container.decodeIfPresent(String.self, forKey: .errorClientDescription)
-        duration = try container.decodeIfPresent(Double.self, forKey: .duration)
-    }
+open class RequestModel: Codable {
+    public let id: String
+    public let url: String
+    public let host: String?
+    public let port: Int?
+    public let scheme: String?
+    public let date: Date
+    public let method: String
+    public let headers: [String: String]
+    public var credentials: [String : String]
+    public var cookies: String?
+    open var httpBody: Data?
+    open var code: Int
+    open var responseHeaders: [String: String]?
+    open var dataResponse: Data?
+    open var errorClientDescription: String?
+    open var duration: Double?
     
     init(request: NSURLRequest, session: URLSession?) {
         id = UUID().uuidString
@@ -68,12 +32,13 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
         host = request.url?.host
         port = request.url?.port
         scheme = request.url?.scheme
-        startDate = Date()
+        date = Date()
         method = request.httpMethod ?? "GET"
         credentials = [:]
         var headers = request.allHTTPHeaderFields ?? [:]
         httpBody = request.httpBody
         code = 0
+        
         
         // collect all HTTP Request headers except the "Cookie" header. Many request representations treat cookies with special parameters or structures. For cookie collection, refer to the bottom part of this method
         session?.configuration.httpAdditionalHeaders?
@@ -114,146 +79,17 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
         if let session = session, let url = request.url, session.configuration.httpShouldSetCookies {
             if let cookieStorage = session.configuration.httpCookieStorage,
                 let cookies = cookieStorage.cookies(for: url), !cookies.isEmpty {
-                DispatchQueue.main.async {
-                    self.cookies = cookies.reduce("") { $0 + "\($1.name)=\($1.value);" }
-                }
+                self.cookies = cookies.reduce("") { $0 + "\($1.name)=\($1.value);" }
             }
         }
-    }
-    
-    // Initializer for mocking purposes
-    init(id: String = UUID().uuidString,
-         url: String,
-         host: String? = nil,
-         port: Int? = nil,
-         scheme: String? = nil,
-         startDate: Date = Date(),
-         method: String = "GET",
-         headers: [String: String] = [:],
-         credentials: [String: String] = [:],
-         cookies: String? = nil,
-         httpBody: Data? = nil,
-         code: Int = 0,
-         responseHeaders: [String: String]? = nil,
-         dataResponse: Data? = nil,
-         errorClientDescription: String? = nil,
-         duration: Double? = nil) {
-        self.id = id
-        self.url = url
-        self.host = host
-        self.port = port
-        self.scheme = scheme
-        self.startDate = startDate
-        self.method = method
-        self.headers = headers
-        self.credentials = credentials
-        self.cookies = cookies
-        self.httpBody = httpBody
-        self.code = code
-        self.responseHeaders = responseHeaders
-        self.dataResponse = dataResponse
-        self.errorClientDescription = errorClientDescription
-        self.duration = duration
     }
     
     func initResponse(response: URLResponse) {
         guard let responseHttp = response as? HTTPURLResponse else {return}
-        DispatchQueue.main.async {
-            self.code = responseHttp.statusCode
-            self.responseHeaders = responseHttp.allHeaderFields as? [String: String]
-        }
+        code = responseHttp.statusCode
+        responseHeaders = responseHttp.allHeaderFields as? [String: String]
     }
     
-    // This method is used to update the properties of the RequestModel instance.
-    // It ensures that changes are published from the main thread, which is necessary
-    // because publishing changes from background threads is not allowed.
-    func copy(credentials: [String: String]? = nil,
-              cookies: String? = nil,
-              httpBody: Data? = nil,
-              code: Int? = nil,
-              responseHeaders: [String: String]? = nil,
-              dataResponse: Data? = nil,
-              errorClientDescription: String? = nil,
-              duration: Double? = nil,
-              requestStartDate: Date? = nil,
-              requestEndDate: Date? = nil,
-              responseStartDate: Date? = nil,
-              responseEndDate: Date? = nil,
-              countOfRequestBodyBytesBeforeEncoding: Int64? = nil,
-              countOfRequestBodyBytesSent: Int64? = nil,
-              countOfRequestHeaderBytesSent: Int64? = nil,
-              countOfResponseBodyBytesAfterDecoding: Int64? = nil,
-              countOfResponseBodyBytesReceived: Int64? = nil,
-              countOfResponseHeaderBytesReceived: Int64? = nil) {
-        DispatchQueue.main.async {
-            if let credentials = credentials {
-                self.credentials = credentials
-            }
-            if let cookies = cookies {
-                self.cookies = cookies
-            }
-            if let httpBody = httpBody {
-                self.httpBody = httpBody
-            }
-            if let code = code {
-                self.code = code
-            }
-            if let responseHeaders = responseHeaders {
-                self.responseHeaders = responseHeaders
-            }
-            if let dataResponse = dataResponse {
-                if self.dataResponse != nil {
-                    self.dataResponse?.append(dataResponse)
-                } else {
-                    self.dataResponse = dataResponse
-                }
-            }
-            if let errorClientDescription = errorClientDescription {
-                self.errorClientDescription = errorClientDescription
-            }
-            if let duration = duration {
-                self.duration = duration
-            }
-            if let requestStartDate = requestStartDate {
-                self.requestStartDate = requestStartDate
-            }
-            if let requestEndDate = requestEndDate {
-                self.requestEndDate = requestEndDate
-            }
-            if let responseStartDate = responseStartDate {
-                self.responseStartDate = responseStartDate
-            }
-            if let responseEndDate = responseEndDate {
-                self.responseEndDate = responseEndDate
-            }
-            if let countOfRequestBodyBytesBeforeEncoding = countOfRequestBodyBytesBeforeEncoding {
-                self.countOfRequestBodyBytesBeforeEncoding = countOfRequestBodyBytesBeforeEncoding
-            }
-            if let countOfRequestBodyBytesSent = countOfRequestBodyBytesSent {
-                self.countOfRequestBodyBytesSent = countOfRequestBodyBytesSent
-            }
-            if let countOfRequestHeaderBytesSent = countOfRequestHeaderBytesSent {
-                self.countOfRequestHeaderBytesSent = countOfRequestHeaderBytesSent
-            }
-            if let countOfResponseBodyBytesAfterDecoding = countOfResponseBodyBytesAfterDecoding {
-                self.countOfResponseBodyBytesAfterDecoding = countOfResponseBodyBytesAfterDecoding
-            }
-            if let countOfResponseBodyBytesReceived = countOfResponseBodyBytesReceived {
-                self.countOfResponseBodyBytesReceived = countOfResponseBodyBytesReceived
-            }
-            if let countOfResponseHeaderBytesReceived = countOfResponseHeaderBytesReceived {
-                self.countOfResponseHeaderBytesReceived = countOfResponseHeaderBytesReceived
-            }
-        }
-    }
-    
-    static func == (lhs: RequestModel, rhs: RequestModel) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
     
     var curlRequest: String {
         var components = ["$ curl -v"]
@@ -305,7 +141,7 @@ internal class RequestModel: Hashable, Decodable, ObservableObject {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyyMMdd_HHmmss"
         
-        let name = "\(dateFormatterGet.string(from: startDate))-\(url)"
+        let name = "\(dateFormatterGet.string(from: date))-\(url)"
         
         var headers: [PMHeader] = []
         let method = self.method

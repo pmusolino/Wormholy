@@ -8,7 +8,11 @@
 
 #import "NSURLSessionConfiguration+Wormholy.h"
 #import "WormholyMethodSwizzling.h"
-
+//#if __has_include(<Wormholy/Wormholy-Swift.h>)
+//#import <Wormholy/Wormholy-Swift.h>
+//#else
+//#import "WormholyBridge.h"
+//#endif
 #if SWIFT_PACKAGE
 @import WormholySwift;
 #else
@@ -47,3 +51,4 @@ __attribute__((constructor)) static void sessionConfigurationInjectEntry(void) {
                                                                                          [NSURLSessionConfiguration class],
                                                                                          YES);
 }
+

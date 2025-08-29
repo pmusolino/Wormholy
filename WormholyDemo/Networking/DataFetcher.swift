@@ -34,6 +34,7 @@ class DataFetcher: NSObject {
         self.session = URLSession(configuration: sessionConfiguration)
     }
     
+    
     //MARK: API Track
     func getPost(id: Int, completion: @escaping () -> Void, failure:@escaping (Error) -> Void){
         var urlRequest = Routing.Post(id).urlRequest
@@ -75,7 +76,7 @@ class DataFetcher: NSObject {
         task?.resume()
     }
     
-    func getWrongURL(completion: @escaping () -> Void, failure: @escaping (Error) -> Void){
+    func getWrongURL(completion: @escaping () -> Void, failure:@escaping (Error) -> Void){
         var urlRequest = Routing.WrongURL(()).urlRequest
         urlRequest.httpMethod = "GET"
         
@@ -95,7 +96,7 @@ class DataFetcher: NSObject {
         task?.resume()
     }
     
-    func getPhotosList(completion: @escaping () -> Void, failure: @escaping (Error) -> Void){
+    func getPhotosList(completion: @escaping () -> Void, failure:@escaping (Error) -> Void){
         var urlRequest = Routing.Photos(()).urlRequest
         urlRequest.httpMethod = "GET"
         
@@ -115,3 +116,4 @@ class DataFetcher: NSObject {
         task?.resume()
     }
 }
+

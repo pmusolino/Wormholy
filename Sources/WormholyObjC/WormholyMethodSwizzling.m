@@ -11,9 +11,9 @@
 #pragma mark - Method Swizzling Helpers
 
 IMP WormholyReplaceMethod(SEL selector,
-                          IMP newImpl,
-                          Class affectedClass,
-                          BOOL isClassMethod)
+                             IMP newImpl,
+                             Class affectedClass,
+                             BOOL isClassMethod)
 {
     Method origMethod = isClassMethod ? class_getClassMethod(affectedClass, selector) : class_getInstanceMethod(affectedClass, selector);
     IMP origImpl = method_getImplementation(origMethod);

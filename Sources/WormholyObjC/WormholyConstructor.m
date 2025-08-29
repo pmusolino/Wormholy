@@ -11,9 +11,10 @@ static void __attribute__ ((constructor)) wormholy_constructor(void) {
 #endif
     SEL selector = NSSelectorFromString(@"applicationDidFinishLaunching");
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    
+
     [center addObserver:class
                selector:selector
                    name:UIApplicationDidFinishLaunchingNotification
                  object:nil];
 }
+

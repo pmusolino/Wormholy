@@ -8,38 +8,36 @@
 
 import Foundation
 
-@MainActor
-internal class Storage: NSObject, ObservableObject {
+open class Storage: NSObject {
 
-    internal static let shared: Storage = Storage()
+    public static let shared: Storage = Storage()
   
-    internal static var limit: NSNumber? = nil
+    public static var limit: NSNumber? = nil
 
-    internal static var defaultFilter: String? = nil
+    public static var defaultFilter: String? = nil
     
-    // The requests array is published to notify SwiftUI views of changes.
-    @Published internal private(set) var requests: [RequestModel] = []
+    open var requests: [RequestModel] = []
     
-    // Method to save a request
-    internal func saveRequest(_ request: RequestModel?) {
-        guard let request = request else { return }
-        
-        // Check if the request already exists and update it
-        if let index = requests.firstIndex(where: { $0.id == request.id }) {
-            requests[index] = request
-        } else {
-            // Add the new request
-            requests.insert(request, at: 0)
-            
-            // Enforce the limit if set
-            if let limit = Storage.limit?.intValue, requests.count > limit {
-                requests.removeLast()
-            }
+    func saveRequest(request: RequestModel?){
+        guard request != nil else {
+            return
         }
+        
+        if let index = requests.firstIndex(where: { (req) -> Bool in
+            return request?.id == req.id ? true : false
+        }){
+            requests[index] = request!
+        }else{
+            requests.insert(request!, at: 0)
+        }
+
+        if let limit = Self.limit?.intValue {
+            requests = Array(requests.prefix(limit))
+        }
+        NotificationCenter.default.post(name: newRequestNotification, object: nil)
     }
-    
-    // Method to clear all requests
-    internal func clearRequests() {
+
+    func clearRequests() {
         requests.removeAll()
     }
 }

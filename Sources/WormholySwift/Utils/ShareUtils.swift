@@ -1,30 +1,31 @@
 //
 //  ShareUtils.swift
-//  Wormholy
+//  Wormholy-iOS
 //
-//  Created by Paolo Musolino on 29/11/24.
+//  Created by Daniele Saitta on 15/02/2020.
+//  Copyright © 2020 Wormholy. All rights reserved.
 //
 
 import Foundation
-import SwiftUI
+import UIKit
 
-internal final class ShareUtils {
+final class ShareUtils {
 
-    internal static func shareRequests(requests: [RequestModel], requestExportOption: RequestResponseExportOption = .flat) -> ActivityView {
-        var text: String
-        switch requestExportOption {
-        case .flat:
-            text = getTxtText(requests: requests)
-        case .curl:
-            text = getCurlText(requests: requests)
-        case .postman:
+    static func shareRequests(presentingViewController: UIViewController, sender: UIBarButtonItem, requests: [RequestModel], requestExportOption: RequestResponseExportOption = .flat){
+         var text = ""
+         switch requestExportOption {
+         case .flat:
+             text = getTxtText(requests: requests)
+         case .curl:
+             text = getCurlText(requests: requests)
+         case .postman:
             text = getPostmanCollection(requests: requests) ?? "{}"
             text = text.replacingOccurrences(of: "\\/", with: "/")
         }
-        
+         
         let textShare = [text]
         let customItem = CustomActivity(title: "Save to the desktop", image: UIImage(named: "activity_icon", in: WHBundle.getBundle(), compatibleWith: nil)) { (sharedItems) in
-            guard let sharedStrings = sharedItems as? [String] else { return }
+             guard let sharedStrings = sharedItems as? [String] else { return }
             
             let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
             
@@ -33,36 +34,37 @@ internal final class ShareUtils {
             
             let suffix: String
             switch requestExportOption {
-            case .flat:
-                suffix = "-wormholy.txt"
-            case .curl:
-                suffix = "-wormholy.txt"
-            case .postman:
-                suffix = "-postman_collection.json"
+                case .flat:
+                    suffix = "-wormholy.txt"
+                case .curl:
+                    suffix = "-wormholy.txt"
+                case .postman:
+                   suffix = "-postman_collection.json"
             }
             
             let filename = "\(appName)_\(dateFormatterGet.string(from: Date()))\(suffix)"
-            
-            for string in sharedStrings {
-                FileHandler.writeTxtFileOnDesktop(text: string, fileName: filename)
-            }
-        }
+             
+             for string in sharedStrings {
+                 FileHandler.writeTxtFileOnDesktop(text: string, fileName: filename)
+             }
+         }
+         let activityViewController = UIActivityViewController(activityItems: textShare, applicationActivities: [customItem])
+         activityViewController.popoverPresentationController?.barButtonItem = sender
+         presentingViewController.present(activityViewController, animated: true, completion: nil)
+     }
         
-        return ActivityView(activityItems: textShare, applicationActivities: [customItem])
-    }
-    
     private static func getTxtText(requests: [RequestModel]) -> String {
         var text: String = ""
-        for request in requests {
-            text += RequestModelBeautifier.txtExport(request: request)
+        for request in requests{
+            text = text + RequestModelBeautifier.txtExport(request: request)
         }
         return text
     }
     
     private static func getCurlText(requests: [RequestModel]) -> String {
         var text: String = ""
-        for request in requests {
-            text += RequestModelBeautifier.curlExport(request: request)
+        for request in requests{
+            text = text + RequestModelBeautifier.curlExport(request: request)
         }
         return text
     }
@@ -81,7 +83,7 @@ internal final class ShareUtils {
         let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
         
         let collectionName = "\(appName) \(dateFormatterGet.string(from: Date()))"
-        
+
         let info = PMInfo(postmanID: collectionName, name: collectionName, schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json")
         
         let postmanCollectionItem = PMItem(name: collectionName, item: items, request: nil, response: nil)
@@ -92,7 +94,8 @@ internal final class ShareUtils {
         
         if let data = try? encoder.encode(postmanCollection), let string = String(data: data, encoding: .utf8) {
             return string
-        } else {
+        }
+        else {
             return nil
         }
     }

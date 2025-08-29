@@ -28,6 +28,6 @@
  */
 
 __attribute__((warn_unused_result)) IMP WormholyReplaceMethod(SEL selector,
-                                                              IMP newImpl,
-                                                              Class affectedClass,
-                                                              BOOL isClassMethod);
+                                                                 IMP newImpl,
+                                                                 Class affectedClass,
+                                                                 BOOL isClassMethod);

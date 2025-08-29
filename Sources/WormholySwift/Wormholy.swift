@@ -2,75 +2,57 @@
 //  Wormholy.swift
 //  Wormholy
 //
-//  Created by Paolo Musolino.
+//  Created by Paolo Musolino on {TODAY}.
 //  Copyright © 2018 Wormholy. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import SwiftUI
 
 public class Wormholy: NSObject
 {
+    @available(*, deprecated, renamed: "ignoredHosts")
+    @objc public static var blacklistedHosts: [String] {
+        get { return CustomHTTPProtocol.ignoredHosts }
+        set { CustomHTTPProtocol.ignoredHosts = newValue }
+    }
+
     /// Hosts that will be ignored from being recorded
     ///
     @objc public static var ignoredHosts: [String] {
         get { return CustomHTTPProtocol.ignoredHosts }
         set { CustomHTTPProtocol.ignoredHosts = newValue }
     }
-    
+  
     /// Limit the logging count
     ///
     @objc public static var limit: NSNumber? {
-        get {
-            Task { @MainActor in
-                return Storage.limit
-            }
-            return nil // Placeholder return, adjust as needed
-        }
-        set {
-            Task { @MainActor in
-                Storage.limit = newValue
-            }
-        }
+        get { Storage.limit }
+        set { Storage.limit = newValue }
     }
-    
+
     /// Default filter for the search box
     ///
     @objc public static var defaultFilter: String? {
-        get {
-            Task { @MainActor in
-                return Storage.defaultFilter
-            }
-            return nil // Placeholder return, adjust as needed
-        }
-        set {
-            Task { @MainActor in
-                Storage.defaultFilter = newValue
-            }
-        }
+        get { Storage.defaultFilter }
+        set { Storage.defaultFilter = newValue }
     }
-    
-    // Flag to determine if Wormholy is enabled
-    internal static var isEnabled: Bool = true
-    
-    /// Method to initialize Wormholy
+
     @objc public static func swiftyLoad() {
         NotificationCenter.default.addObserver(forName: fireWormholy, object: nil, queue: nil) { (notification) in
             Wormholy.presentWormholyFlow()
         }
     }
     
-    /// Method to initialize Wormholy with default settings
     @objc public static func swiftyInitialize() {
-        if self == Wormholy.self {
-            Wormholy.setEnabled(isEnabled)
+        if self == Wormholy.self{
+            Wormholy.setEnabled(true)
         }
     }
-    
-    /// Toggles the tracking of HTTP requests in Wormholy.
-    /// Note: This function does not affect the shake gesture activation of Wormholy. 
-    /// To control the shake gesture, use the `shakeEnabled` property.
+
+    // Flag to determine if Wormholy is enabled
+    internal static var isEnabled: Bool = true
+
     @objc public static func setEnabled(_ enable: Bool) {
         isEnabled = enable
         if enable {
@@ -79,7 +61,7 @@ public class Wormholy: NSObject
             URLProtocol.unregisterClass(CustomHTTPProtocol.self)
         }
     }
-    
+
     /// Method to enable or disable Wormholy for a specific session configuration
     @objc public static func setEnabled(_ enable: Bool, sessionConfiguration: URLSessionConfiguration) {
         guard sessionConfiguration.responds(to: #selector(getter: URLSessionConfiguration.protocolClasses)) &&
@@ -87,10 +69,10 @@ public class Wormholy: NSObject
             print("[Wormholy] is only available when running on iOS16+")
             return
         }
-        
+
         var urlProtocolClasses = sessionConfiguration.protocolClasses ?? []
         let protoCls = CustomHTTPProtocol.self
-        
+
         if enable {
             if !urlProtocolClasses.contains(where: { $0 == protoCls }) {
                 urlProtocolClasses.insert(protoCls, at: 0)
@@ -102,21 +84,22 @@ public class Wormholy: NSObject
         }
         sessionConfiguration.protocolClasses = urlProtocolClasses
     }
-    
+
     // MARK: - Navigation
-    static func presentWormholyFlow() {
-        // Check if RequestsView is already presented
-        if let currentViewController = UIViewController.currentViewController(),
-           currentViewController is UIHostingController<RequestsView> {
-            // RequestsView is already presented, do nothing
+    static func presentWormholyFlow(){
+        guard UIViewController.currentViewController()?.isKind(of: WHBaseViewController.classForCoder()) == false && UIViewController.currentViewController()?.isKind(of: WHNavigationController.classForCoder()) == false else {
             return
         }
-
-        // Present RequestsView as a SwiftUI view
-        let requestsView = RequestsView()
-        let hostingController = UIHostingController(rootView: requestsView)
-        hostingController.modalPresentationStyle = .fullScreen
-        UIViewController.currentViewController()?.present(hostingController, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        if let initialVC = storyboard.instantiateInitialViewController(){
+            initialVC.modalPresentationStyle = .fullScreen
+            UIViewController.currentViewController()?.present(initialVC, animated: true, completion: nil)
+        }
+    }
+    
+    @objc public static var wormholyFlow: UIViewController? {
+        let storyboard = UIStoryboard(name: "Flow", bundle: WHBundle.getBundle())
+        return storyboard.instantiateInitialViewController()
     }
     
     @objc public static var shakeEnabled: Bool = {
@@ -151,9 +134,5 @@ extension Wormholy {
         swiftyLoad()
         swiftyInitialize()
     }()
-    
-    // Method to expose isEnabled to Objective-C, for NSURLSessionConfiguration+Wormholy
-    @objc public static func isWormholyEnabled() -> Bool {
-        return isEnabled
-    }
+
 }

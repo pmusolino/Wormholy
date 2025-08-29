@@ -1,46 +1,46 @@
 import Foundation
 
-internal struct PostmanCollection: Codable {
-    internal let info: PMInfo
-    internal let item: [PMItem]
+struct PostmanCollection: Codable {
+    let info: PMInfo
+    let item: [PMItem]
 }
 
-internal struct PMInfo: Codable {
-    internal let postmanID, name: String
-    internal let schema: String
+struct PMInfo: Codable {
+    let postmanID, name: String
+    let schema: String
 }
 
-internal struct PMItem: Codable {
-    internal let name: String
-    internal let item: [PMItem]?
-    internal let request: PMRequest?
-    internal let response: [PMResponse]?
+struct PMItem: Codable {
+    let name: String
+    let item: [PMItem]?
+    let request: PMRequest?
+    let response: [PMResponse]?
 }
 
-internal struct PMRequest: Codable {
-    internal let method: String
-    internal let header: [PMHeader]
-    internal let body: PMBody
-    internal let url: PMURL
-    internal let description: String?
+struct PMRequest: Codable {
+    let method: String
+    let header: [PMHeader]
+    let body: PMBody
+    let url: PMURL
+    let description: String?
 }
 
-internal struct PMBody: Codable {
-    internal let mode: String
-    internal let raw: String
+struct PMBody: Codable {
+    let mode: String
+    let raw: String
 }
 
-internal struct PMHeader: Codable {
-    internal let key: String
-    internal let value: String
+struct PMHeader: Codable {
+    let key: String
+    let value: String
 }
 
-internal struct PMURL: Codable {
-    internal let raw: String
-    internal let urlProtocol: String
-    internal let host: [String]
-    internal let path: [String]
-    internal let query: [PMQuery]?
+struct PMURL: Codable {
+    let raw: String
+    let urlProtocol: String
+    let host: [String]
+    let path: [String]
+    let query: [PMQuery]?
     
     enum CodingKeys: String, CodingKey {
         case raw, host, path, query
@@ -48,20 +48,20 @@ internal struct PMURL: Codable {
     }
 }
 
-internal struct PMQuery: Codable {
-    internal let key: String
-    internal let value: String
+struct PMQuery: Codable {
+    let key: String
+    let value: String
 }
 
-internal struct PMResponse: Codable {
-    internal let name: String
-    internal let originalRequest: PMRequest
-    internal let status: String
-    internal let code: Int
-    internal let postmanPreviewlanguage: String
-    internal let header: [PMHeader]
-    internal let cookie: [String]
-    internal let body: String
+struct PMResponse: Codable {
+    let name: String
+    let originalRequest: PMRequest
+    let status: String
+    let code: Int
+    let postmanPreviewlanguage: String
+    let header: [PMHeader]
+    let cookie: [String]
+    let body: String
     
     enum CodingKeys: String, CodingKey {
         case name, originalRequest, status, code, header, cookie, body

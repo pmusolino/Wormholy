@@ -9,10 +9,7 @@
 import Foundation
 
 extension InputStream {
-    /// Reads all available data from the InputStream and returns it as a Data object.
-    /// This method is utilized in CustomHTTPProtocol.swift to extract the HTTP body
-    /// from a request when the body is provided as a stream rather than direct data.
-    internal func readfully() -> Data {
+    func readfully() -> Data {
         var result = Data()
         var buffer = [UInt8](repeating: 0, count: 4096)
         
