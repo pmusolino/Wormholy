@@ -31,7 +31,7 @@ Start debugging iOS network calls like a wizard, without extra code! Wormholy ma
 
 ## Requirements
 
-- iOS 16.0+
+- iOS 16.0+ (Need an older version? [Please use version 1.7.x](https://github.com/pmusolino/Wormholy/releases/tag/1.7.0))
 - Xcode 15+
 - Swift 5
 
