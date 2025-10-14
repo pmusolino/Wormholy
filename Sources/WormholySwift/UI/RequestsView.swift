@@ -11,12 +11,13 @@ internal struct RequestsView: View {
     @State private var searchText = Storage.defaultFilter ?? ""
     @ObservedObject private var storage = Storage.shared
     @State private var filteredRequests: [RequestModel] = []
-    @Environment(\.presentationMode) var presentationMode
-    @State private var isActionSheetPresented = false
-    @State private var isShareSheetPresented = false
-    @State private var isStatsViewPresented = false
+    @State private var showShareSheet = false
+    @State private var showStatsSheet = false
+    @State private var showClearConfirmation = false
     @State private var selectedExportOption: RequestResponseExportOption = .flat
-    @State private var selectedStatusCodeRange: ClosedRange<Int>? // Range of status codes for filtering requests
+    @State private var selectedStatusCodeRange: ClosedRange<Int>?
+    @State private var shareSourceRequests: [RequestModel] = []
+    @Environment(\.dismiss) private var dismiss
 
     init(requests: [RequestModel] = []) {
         _filteredRequests = State(initialValue: requests)
@@ -24,98 +25,119 @@ internal struct RequestsView: View {
             _searchText = State(initialValue: defaultFilter)
         }
     }
-    
+
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                SearchBar(text: $searchText, onTextChanged: filterRequests)
-                
-                StatusCodeFilterView(selectedStatusCodeRange: $selectedStatusCodeRange, onFilterChange: filterRequests)
-                Divider()
-
-                List {
-                    ForEach(filteredRequests, id: \.id) { request in
-                        NavigationLink(destination: RequestDetailView(request: request)) {
-                            RequestCellView(request: request)
-                                .padding(.all, 8)
-                                .frame(height: 76)
-                        }
-                        .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
-                    }
-                }
-                .animation(.bouncy, value: filteredRequests)
-                .listStyle(PlainListStyle())
+            listContent
                 .navigationTitle("Requests")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button("More") {
-                            isActionSheetPresented = true
-                        }
+                .navigationBarTitleDisplayMode(.large)
+                .searchable(text: $searchText, prompt: Text("Filter by URL"))
+                .toolbar { toolbarContent }
+        }
+        .sheet(isPresented: $showShareSheet) {
+            ShareUtils.shareRequests(requests: shareSourceRequests, requestExportOption: selectedExportOption)
+        }
+        .sheet(isPresented: $showStatsSheet) {
+            StatsView()
+        }
+        .confirmationDialog("Clear captured requests?", isPresented: $showClearConfirmation, titleVisibility: .visible) {
+            Button("Clear All", role: .destructive) { clearRequests() }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("This removes the currently stored network calls from Wormholy.")
+        }
+        .onAppear(perform: applyFilters)
+        .onChange(of: storage.requests) { _ in applyFilters() }
+        .onChange(of: searchText) { _ in applyFilters() }
+        .onChange(of: selectedStatusCodeRange) { _ in applyFilters() }
+    }
+
+    @ViewBuilder
+    private var listContent: some View {
+        List {
+            if !storage.requests.isEmpty {
+                Section {
+                    StatusCodeFilterView(selectedStatusCodeRange: $selectedStatusCodeRange)
+                        .listRowInsets(EdgeInsets(top: 8, leading: 8, bottom: 4, trailing: 8))
+                        .listRowBackground(Color.clear)
+                }
+            }
+
+            Section {
+                ForEach(filteredRequests, id: \.id) { request in
+                    NavigationLink(destination: RequestDetailView(request: request)) {
+                        RequestCellView(request: request)
+                            .padding(.vertical, 8)
+                            .frame(height: 76)
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Done") {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
-                .actionSheet(isPresented: $isActionSheetPresented) {
-                    ActionSheet(title: Text("Wormholy"), message: Text("Choose an option"), buttons: [
-                        .default(Text("Clear")) {
-                            clearRequests()
-                        },
-                        .default(Text("Stats")) {
-                            isStatsViewPresented = true
-                        },
-                        .default(Text("Share")) {
-                            selectedExportOption = .flat
-                            isShareSheetPresented = true
-                        },
-                        .default(Text("Share as cURL")) {
-                            selectedExportOption = .curl
-                            isShareSheetPresented = true
-                        },
-                        .default(Text("Share as Postman Collection")) {
-                            selectedExportOption = .postman
-                            isShareSheetPresented = true
-                        },
-                        .cancel()
-                    ])
-                }
-                .sheet(isPresented: $isShareSheetPresented) {
-                    // Using ShareUtils to create the ActivityView for sharing content
-                    ShareUtils.shareRequests(requests: filteredRequests, requestExportOption: selectedExportOption)
-                }
-                .sheet(isPresented: $isStatsViewPresented) {
-                    StatsView()
                 }
             }
         }
-        .onAppear {
-            filterRequests() // Ensure requests are filtered on first load
+        .listStyle(.insetGrouped)
+        .scrollContentBackground(.visible)
+    }
+
+    @ToolbarContentBuilder
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Button("Done") { dismiss() }
         }
-        .onReceive(storage.$requests) { _ in
-            filterRequests()
+        ToolbarItem(placement: .primaryAction) {
+            Menu {
+                Button("Stats", systemImage: "chart.bar") { showStatsSheet = true }
+                Divider()
+                Button("Share filtered", systemImage: "square.and.arrow.up") {
+                    selectedExportOption = .flat
+                    shareSourceRequests = filteredRequests
+                    showShareSheet = true
+                }
+                .disabled(filteredRequests.isEmpty)
+                Button("Share filtered as cURL", systemImage: "terminal") {
+                    selectedExportOption = .curl
+                    shareSourceRequests = filteredRequests
+                    showShareSheet = true
+                }
+                .disabled(filteredRequests.isEmpty)
+                Button("Share filtered as Postman", systemImage: "shippingbox") {
+                    selectedExportOption = .postman
+                    shareSourceRequests = filteredRequests
+                    showShareSheet = true
+                }
+                .disabled(filteredRequests.isEmpty)
+                Divider()
+                Button(role: .destructive) {
+                    showClearConfirmation = true
+                } label: {
+                    Label("Clear requests", systemImage: "trash")
+                }
+            } label: {
+                Label("More", systemImage: "ellipsis.circle")
+            }
         }
     }
-    
-    private func filterRequests() {
+
+    private func applyFilters() {
         filteredRequests = storage.requests.filter { request in
             let matchesSearchText = searchText.isEmpty || request.url.range(of: searchText, options: .caseInsensitive) != nil
-            let matchesStatusCode = selectedStatusCodeRange == nil || selectedStatusCodeRange!.contains(request.code)
+            let matchesStatusCode = selectedStatusCodeRange.map { $0.contains(request.code) } ?? true
             return matchesSearchText && matchesStatusCode
         }
     }
 
     private func clearRequests() {
-        // Clear the requests from storage.
         storage.clearRequests()
-        filterRequests() // Ensure filteredRequests is updated after clearing
+        applyFilters()
+    }
+
+    private func shareSingleRequest(_ option: RequestResponseExportOption, _ request: RequestModel) {
+        selectedExportOption = option
+        shareSourceRequests = [request]
+        showShareSheet = true
     }
 }
 
 struct RequestsView_Previews: PreviewProvider {
     static var previews: some View {
-        // Create fake data for preview using the mock initializer with all parameters
         let fakeRequests = [
             RequestModel(
                 id: UUID().uuidString,
@@ -154,7 +176,8 @@ struct RequestsView_Previews: PreviewProvider {
                 duration: 2.34
             )
         ]
-        // Inject fake data into RequestsView
+
         return RequestsView(requests: fakeRequests)
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }

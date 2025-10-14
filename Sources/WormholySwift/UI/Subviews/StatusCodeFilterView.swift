@@ -9,62 +9,44 @@ import SwiftUI
 
 internal struct StatusCodeFilterView: View {
     @Binding var selectedStatusCodeRange: ClosedRange<Int>?
-    var onFilterChange: () -> Void
 
     var body: some View {
-        HStack {
+        HStack(spacing: 8) {
             Text("Filter")
                 .font(.subheadline)
                 .foregroundColor(.gray)
-                .padding(.trailing, 8)
+                .padding(.trailing, 4)
             
-            Button(action: { toggleStatusCodeRange(100...199) }) {
-                Text("1xx")
-                    .foregroundColor(selectedStatusCodeRange == 100...199 ? .white : Colors.HTTPCode.Generic)
-                    .padding(4)
-                    .background(RoundedRectangle(cornerRadius: 6)
-                    .fill(selectedStatusCodeRange == 100...199 ? Colors.HTTPCode.Generic : .clear))
-                    .overlay(RoundedRectangle(cornerRadius: 6)
-                    .stroke(Colors.HTTPCode.Generic, lineWidth: 1))
-            }
-            Button(action: { toggleStatusCodeRange(200...299) }) {
-                Text("2xx")
-                    .foregroundColor(selectedStatusCodeRange == 200...299 ? .white : Colors.HTTPCode.Success)
-                    .padding(4)
-                    .background(RoundedRectangle(cornerRadius: 6)
-                    .fill(selectedStatusCodeRange == 200...299 ? Colors.HTTPCode.Success : .clear))
-                    .overlay(RoundedRectangle(cornerRadius: 6)
-                    .stroke(Colors.HTTPCode.Success, lineWidth: 1))
-            }
-            Button(action: { toggleStatusCodeRange(300...399) }) {
-                Text("3xx")
-                    .foregroundColor(selectedStatusCodeRange == 300...399 ? .white : Colors.HTTPCode.Redirect)
-                    .padding(4)
-                    .background(RoundedRectangle(cornerRadius: 6)
-                    .fill(selectedStatusCodeRange == 300...399 ? Colors.HTTPCode.Redirect : .clear))
-                    .overlay(RoundedRectangle(cornerRadius: 6)
-                    .stroke(Colors.HTTPCode.Redirect, lineWidth: 1))
-            }
-            Button(action: { toggleStatusCodeRange(400...499) }) {
-                Text("4xx")
-                    .foregroundColor(selectedStatusCodeRange == 400...499 ? .white : Colors.HTTPCode.ClientError)
-                    .padding(4)
-                    .background(RoundedRectangle(cornerRadius: 6)
-                    .fill(selectedStatusCodeRange == 400...499 ? Colors.HTTPCode.ClientError : .clear))
-                    .overlay(RoundedRectangle(cornerRadius: 6)
-                    .stroke(Colors.HTTPCode.ClientError, lineWidth: 1))
-            }
-            Button(action: { toggleStatusCodeRange(500...599) }) {
-                Text("5xx")
-                    .foregroundColor(selectedStatusCodeRange == 500...599 ? .white : Colors.HTTPCode.ServerError)
-                    .padding(4)
-                    .background(RoundedRectangle(cornerRadius: 6)
-                    .fill(selectedStatusCodeRange == 500...599 ? Colors.HTTPCode.ServerError : .clear))
-                    .overlay(RoundedRectangle(cornerRadius: 6)
-                    .stroke(Colors.HTTPCode.ServerError, lineWidth: 1))
-            }
+            filterButton(for: 100...199, label: "1xx", color: Colors.HTTPCode.Generic)
+            filterButton(for: 200...299, label: "2xx", color: Colors.HTTPCode.Success)
+            filterButton(for: 300...399, label: "3xx", color: Colors.HTTPCode.Redirect)
+            filterButton(for: 400...499, label: "4xx", color: Colors.HTTPCode.ClientError)
+            filterButton(for: 500...599, label: "5xx", color: Colors.HTTPCode.ServerError)
         }
         .padding()
+    }
+    
+    private func filterButton(for range: ClosedRange<Int>, label: String, color: Color) -> some View {
+        let isSelected = selectedStatusCodeRange == range
+        
+        return Button(action: {
+            toggleStatusCodeRange(range)
+        }) {
+            Text(label)
+                .font(.subheadline)
+                .foregroundColor(isSelected ? .white : color)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(isSelected ? color : .clear)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(color, lineWidth: 1)
+                )
+        }
+        .buttonStyle(.plain)
     }
     
     private func toggleStatusCodeRange(_ range: ClosedRange<Int>) {
@@ -73,6 +55,5 @@ internal struct StatusCodeFilterView: View {
         } else {
             selectedStatusCodeRange = range
         }
-        onFilterChange()
     }
 }

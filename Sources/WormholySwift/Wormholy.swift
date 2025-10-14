@@ -115,7 +115,11 @@ public class Wormholy: NSObject
         // Present RequestsView as a SwiftUI view
         let requestsView = RequestsView()
         let hostingController = UIHostingController(rootView: requestsView)
-        hostingController.modalPresentationStyle = .fullScreen
+        hostingController.modalPresentationStyle = .pageSheet
+        if let sheet = hostingController.sheetPresentationController {
+            sheet.prefersGrabberVisible = true
+            sheet.detents = [.large()]
+        }
         UIViewController.currentViewController()?.present(hostingController, animated: true, completion: nil)
     }
     
