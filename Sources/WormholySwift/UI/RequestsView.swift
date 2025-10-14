@@ -47,9 +47,9 @@ internal struct RequestsView: View {
             Text("This removes the currently stored network calls from Wormholy.")
         }
         .onAppear(perform: applyFilters)
-        .onChange(of: storage.requests) { _ in applyFilters() }
-        .onChange(of: searchText) { _ in applyFilters() }
-        .onChange(of: selectedStatusCodeRange) { _ in applyFilters() }
+        .onChange(of: storage.requests, perform: { _ in applyFilters() })
+        .onChange(of: searchText, perform: { _ in applyFilters() })
+        .onChange(of: selectedStatusCodeRange, perform: { _ in applyFilters() })
     }
 
     @ViewBuilder
