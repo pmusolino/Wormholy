@@ -96,7 +96,7 @@ extension String {
     var prettyPrintedJSON: String? {
         guard let stringData = self.data(using: .utf8),
               let object = try? JSONSerialization.jsonObject(with: stringData, options: []),
-              let jsonData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+              let jsonData = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted,.sortedKeys]),
               let formattedJSON = String(data: jsonData, encoding: .utf8) else { return nil }
 
         return formattedJSON.replacingOccurrences(of: "\\/", with: "/")

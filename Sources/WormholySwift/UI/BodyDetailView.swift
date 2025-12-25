@@ -16,7 +16,7 @@ internal struct BodyDetailView: View {
     private let dataBody: String
     
     init(dataBody: Data) {
-        self.dataBody = String(data: dataBody, encoding: .utf8) ?? "No body available"
+        self.dataBody = String(data: dataBody, encoding: .utf8)?.prettyPrintedJSON ?? "No body available"
     }
     
     var body: some View {
