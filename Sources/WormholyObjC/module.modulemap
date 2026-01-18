@@ -1,0 +1,6 @@
+framework module Wormholy {
+    umbrella "."
+    
+    export *
+    module * { export * }
+}
