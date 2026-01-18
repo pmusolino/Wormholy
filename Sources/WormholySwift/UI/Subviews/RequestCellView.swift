@@ -36,7 +36,7 @@ internal struct RequestCellView: View {
             
             Text(request.url)
                 .font(.subheadline)
-                .lineLimit(nil)
+                .lineLimit(5)
                 .multilineTextAlignment(.leading)
                 .padding([.leading, .trailing], 8)
             

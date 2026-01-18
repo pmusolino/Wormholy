@@ -68,7 +68,6 @@ internal struct RequestsView: View {
                     NavigationLink(destination: RequestDetailView(request: request)) {
                         RequestCellView(request: request)
                             .padding(.vertical, 8)
-                            .frame(height: 76)
                     }
                 }
             }
