@@ -37,16 +37,16 @@ public class CustomHTTPProtocol: URLProtocol {
     }
     
     override public class func canInit(with request: URLRequest) -> Bool {
+        guard let scheme = request.url?.scheme?.lowercased(), scheme == "http" || scheme == "https" else {
+            return false
+        }
+
         guard CustomHTTPProtocol.shouldHandleRequest(request) else { return false }
 
         if CustomHTTPProtocol.property(forKey: Constants.RequestHandledKey, in: request) != nil {
             return false
         }
-        
-        if request.url?.scheme == "wss" || request.url?.scheme == "ws" {
-            return false
-        }
-        
+
         return true
     }
     
