@@ -54,12 +54,61 @@ You can also integrate Wormholy using the **Swift Package Manager**!
 - **Default Filter**: Set a default filter for the search box with `Wormholy.defaultFilter` to streamline your debugging process.
 - **Enable/Disable**: Use `Wormholy.setEnabled(_:)` to toggle request tracking globally. You can also enable or disable it for specific `URLSessionConfiguration` instances using `Wormholy.setEnabled(_:sessionConfiguration:)`.
 - **Shake Gesture**: Control the activation of Wormholy via shake gesture with `Wormholy.shakeEnabled`.
+- **Status Check**: Use `Wormholy.isWormholyEnabled()` to inspect whether global Wormholy tracking is currently enabled.
+
+### Example Configuration
+
+```swift
+func configureWormholy() {
+  Wormholy.ignoredHosts = ["example.com", "analytics.internal"]
+  Wormholy.limit = 200
+  Wormholy.defaultFilter = "status:500"
+  Wormholy.shakeEnabled = true
+
+  // Global tracking for URLSession traffic.
+  Wormholy.setEnabled(true)
+
+  // Use the session-specific API when you want to override behavior
+  // for a particular configuration instance.
+  let configuration = URLSessionConfiguration.default
+  Wormholy.setEnabled(false, sessionConfiguration: configuration)
+
+  let session = URLSession(configuration: configuration)
+  _ = session
+}
+```
+
+### Notes on Session Configurations
+
+Wormholy automatically hooks `URLSessionConfiguration.default` and `URLSessionConfiguration.ephemeral`.
+
+Use `Wormholy.setEnabled(_:sessionConfiguration:)` when you want to explicitly enable or disable Wormholy for a specific configuration instance before creating the `URLSession`:
+
+```swift
+let configuration = URLSessionConfiguration.ephemeral
+Wormholy.setEnabled(false, sessionConfiguration: configuration)
+let session = URLSession(configuration: configuration)
+```
+
+Background sessions are a separate case: Apple does not support custom `URLProtocol` classes with background `URLSessionConfiguration`, so Wormholy cannot be injected there via `protocolClasses`.
+
+### Notes on Ignored Hosts
+
+`Wormholy.ignoredHosts` uses suffix matching on the request host.
+
+For example, if you set:
+
+```swift
+Wormholy.ignoredHosts = ["example.com"]
+```
+
+Wormholy will ignore requests to both `example.com` and subdomains such as `api.example.com`.
 
 ### Triggering Wormholy
 
 If you prefer not to use the shake gesture, you can disable it using the [environment variable](https://medium.com/@derrickho_28266/xcode-custom-environment-variables-681b5b8674ec) `WORMHOLY_SHAKE_ENABLED` = `NO`.
 
-To trigger Wormholy manually from another point in your app without using the shake gesture, call:
+To trigger Wormholy manually from another point in your app without using the shake gesture, post the `wormholy_fire` notification:
 
 ```swift
 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "wormholy_fire"), object: nil)
