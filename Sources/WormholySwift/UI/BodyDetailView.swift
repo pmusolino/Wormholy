@@ -14,9 +14,11 @@ internal struct BodyDetailView: View {
     @State private var currentPosition: Int = 0
     @State private var isShareSheetPresented: Bool = false
     private let dataBody: String
-    
-    init(dataBody: Data) {
+    private let title: String
+
+    init(dataBody: Data, title: String) {
         self.dataBody = String(data: dataBody, encoding: .utf8)?.prettyPrintedJSON ?? "No body available"
+        self.title = title
     }
     
     var body: some View {
@@ -59,7 +61,7 @@ internal struct BodyDetailView: View {
             .padding()
             .background(Color(UIColor.systemBackground).opacity(0.9))
         }
-        .navigationTitle("Response Body")
+        .navigationTitle(title)
         .navigationBarItems(trailing: Button(action: {
             isShareSheetPresented = true
         }) {
@@ -104,7 +106,7 @@ struct BodyDetailView_Previews: PreviewProvider {
         }
         """.data(using: .utf8)
         
-        return BodyDetailView(dataBody: sampleData!)
+        return BodyDetailView(dataBody: sampleData!, title: "Response Body")
             .previewDisplayName("Body Detail View")
     }
 }
