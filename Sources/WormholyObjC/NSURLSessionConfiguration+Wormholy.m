@@ -8,10 +8,11 @@
 
 #import "NSURLSessionConfiguration+Wormholy.h"
 #import "WormholyMethodSwizzling.h"
-#if __has_include(<Wormholy/Wormholy-Swift.h>)
-#import <Wormholy/Wormholy-Swift.h>
+
+#if SWIFT_PACKAGE
+@import WormholySwift;
 #else
-#import "Wormholy-Swift.h"
+#import <Wormholy/Wormholy-Swift.h>
 #endif
 
 typedef NSURLSessionConfiguration*(*SessionConfigConstructor)(id,SEL);

@@ -8,7 +8,6 @@
 
 import Foundation
 import XCTest
-import Wormholy
 
 class WormholyTests: XCTestCase {
     func testExample() {
