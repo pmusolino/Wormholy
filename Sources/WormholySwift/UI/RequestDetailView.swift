@@ -32,7 +32,7 @@ internal struct RequestDetailView: View {
             Section("Request Body") {
                 if let httpBody = request.httpBody {
                     NavigationLink("View body") {
-                        BodyDetailView(dataBody: httpBody, title: "Request Body")
+                        BodyDetailView(dataBody: httpBody, kind: .request)
                     }
                 } else {
                     Text("No body available")
@@ -50,7 +50,7 @@ internal struct RequestDetailView: View {
             Section("Response Body") {
                 if let dataResponse = request.dataResponse {
                     NavigationLink("View body") {
-                        BodyDetailView(dataBody: dataResponse, title: "Response Body")
+                        BodyDetailView(dataBody: dataResponse, kind: .response)
                     }
                 } else {
                     Text("No body available")

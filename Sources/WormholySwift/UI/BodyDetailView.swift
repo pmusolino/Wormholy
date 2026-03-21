@@ -9,16 +9,30 @@ import SwiftUI
 import UIKit
 
 internal struct BodyDetailView: View {
+    internal enum Kind {
+        case request
+        case response
+
+        var title: String {
+            switch self {
+            case .request:
+                return "Request Body"
+            case .response:
+                return "Response Body"
+            }
+        }
+    }
+
     @State private var searchText: String = ""
     @State private var highlightedRanges: [NSTextCheckingResult] = []
     @State private var currentPosition: Int = 0
     @State private var isShareSheetPresented: Bool = false
     private let dataBody: String
-    private let title: String
+    private let kind: Kind
 
-    init(dataBody: Data, title: String) {
+    init(dataBody: Data, kind: Kind) {
         self.dataBody = String(data: dataBody, encoding: .utf8)?.prettyPrintedJSON ?? "No body available"
-        self.title = title
+        self.kind = kind
     }
     
     var body: some View {
@@ -61,7 +75,7 @@ internal struct BodyDetailView: View {
             .padding()
             .background(Color(UIColor.systemBackground).opacity(0.9))
         }
-        .navigationTitle(title)
+        .navigationTitle(kind.title)
         .navigationBarItems(trailing: Button(action: {
             isShareSheetPresented = true
         }) {
@@ -106,7 +120,7 @@ struct BodyDetailView_Previews: PreviewProvider {
         }
         """.data(using: .utf8)
         
-        return BodyDetailView(dataBody: sampleData!, title: "Response Body")
+        return BodyDetailView(dataBody: sampleData!, kind: .response)
             .previewDisplayName("Body Detail View")
     }
 }
