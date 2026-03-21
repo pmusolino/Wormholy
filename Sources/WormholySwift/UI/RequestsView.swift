@@ -11,12 +11,10 @@ internal struct RequestsView: View {
     @State private var searchText = Storage.defaultFilter ?? ""
     @ObservedObject private var storage = Storage.shared
     @State private var filteredRequests: [RequestModel] = []
-    @State private var showShareSheet = false
+    @State private var shareSheetPayload: ShareSheetPayload?
     @State private var showStatsSheet = false
     @State private var showClearConfirmation = false
-    @State private var selectedExportOption: RequestResponseExportOption = .flat
     @State private var selectedStatusCodeRange: ClosedRange<Int>?
-    @State private var shareSourceRequests: [RequestModel] = []
     @Environment(\.dismiss) private var dismiss
 
     init(requests: [RequestModel] = []) {
@@ -34,8 +32,8 @@ internal struct RequestsView: View {
                 .searchable(text: $searchText, prompt: Text("Filter by URL"))
                 .toolbar { toolbarContent }
         }
-        .sheet(isPresented: $showShareSheet) {
-            ShareUtils.shareRequests(requests: shareSourceRequests, requestExportOption: selectedExportOption)
+        .sheet(item: $shareSheetPayload) { payload in
+            ShareUtils.shareRequests(requests: payload.requests, requestExportOption: payload.exportOption)
         }
         .sheet(isPresented: $showStatsSheet) {
             StatsView()
@@ -86,21 +84,15 @@ internal struct RequestsView: View {
                 Button("Stats", systemImage: "chart.bar") { showStatsSheet = true }
                 Divider()
                 Button("Share filtered", systemImage: "square.and.arrow.up") {
-                    selectedExportOption = .flat
-                    shareSourceRequests = filteredRequests
-                    showShareSheet = true
+                    presentShareSheet(with: .flat, requests: filteredRequests)
                 }
                 .disabled(filteredRequests.isEmpty)
                 Button("Share filtered as cURL", systemImage: "terminal") {
-                    selectedExportOption = .curl
-                    shareSourceRequests = filteredRequests
-                    showShareSheet = true
+                    presentShareSheet(with: .curl, requests: filteredRequests)
                 }
                 .disabled(filteredRequests.isEmpty)
                 Button("Share filtered as Postman", systemImage: "shippingbox") {
-                    selectedExportOption = .postman
-                    shareSourceRequests = filteredRequests
-                    showShareSheet = true
+                    presentShareSheet(with: .postman, requests: filteredRequests)
                 }
                 .disabled(filteredRequests.isEmpty)
                 Divider()
@@ -128,11 +120,19 @@ internal struct RequestsView: View {
         applyFilters()
     }
 
-    private func shareSingleRequest(_ option: RequestResponseExportOption, _ request: RequestModel) {
-        selectedExportOption = option
-        shareSourceRequests = [request]
-        showShareSheet = true
+    private func presentShareSheet(with option: RequestResponseExportOption, requests: [RequestModel]) {
+        shareSheetPayload = ShareSheetPayload(requests: requests, exportOption: option)
     }
+
+    private func shareSingleRequest(_ option: RequestResponseExportOption, _ request: RequestModel) {
+        presentShareSheet(with: option, requests: [request])
+    }
+}
+
+private struct ShareSheetPayload: Identifiable {
+    let id = UUID()
+    let requests: [RequestModel]
+    let exportOption: RequestResponseExportOption
 }
 
 struct RequestsView_Previews: PreviewProvider {

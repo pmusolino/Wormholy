@@ -36,7 +36,7 @@ internal final class ShareUtils {
             case .flat:
                 suffix = "-wormholy.txt"
             case .curl:
-                suffix = "-wormholy.txt"
+                suffix = "-wormholy.sh"
             case .postman:
                 suffix = "-postman_collection.json"
             }
@@ -60,11 +60,9 @@ internal final class ShareUtils {
     }
     
     private static func getCurlText(requests: [RequestModel]) -> String {
-        var text: String = ""
-        for request in requests {
-            text += RequestModelBeautifier.curlExport(request: request)
-        }
-        return text
+        requests
+            .map(RequestModelBeautifier.curlExport)
+            .joined(separator: "\n\n")
     }
     
     private static func getPostmanCollection(requests: [RequestModel]) -> String? {

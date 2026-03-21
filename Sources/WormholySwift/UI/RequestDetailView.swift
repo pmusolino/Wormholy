@@ -11,8 +11,7 @@ internal struct RequestDetailView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @ObservedObject var request: RequestModel
-    @State private var isShareSheetPresented = false
-    @State private var selectedExportOption: RequestResponseExportOption = .flat
+    @State private var shareSheetPayload: ShareSheetPayload?
 
     var body: some View {
         List {
@@ -92,8 +91,8 @@ internal struct RequestDetailView: View {
                 }
             }
         }
-        .sheet(isPresented: $isShareSheetPresented) {
-            ShareUtils.shareRequests(requests: [request], requestExportOption: selectedExportOption)
+        .sheet(item: $shareSheetPayload) { payload in
+            ShareUtils.shareRequests(requests: payload.requests, requestExportOption: payload.exportOption)
         }
         .alert(alertMessage, isPresented: $showAlert) {
             Button("OK", role: .cancel) { }
@@ -101,8 +100,7 @@ internal struct RequestDetailView: View {
     }
 
     private func presentShareSheet(with option: RequestResponseExportOption) {
-        selectedExportOption = option
-        isShareSheetPresented = true
+        shareSheetPayload = ShareSheetPayload(requests: [request], exportOption: option)
     }
     
     private func copyToClipboard(text: String) {
@@ -110,6 +108,12 @@ internal struct RequestDetailView: View {
         alertMessage = "Copied to clipboard"
         showAlert = true
     }
+}
+
+private struct ShareSheetPayload: Identifiable {
+    let id = UUID()
+    let requests: [RequestModel]
+    let exportOption: RequestResponseExportOption
 }
 
 private struct InlineToolbarTitle: ViewModifier {

@@ -76,19 +76,7 @@ internal class RequestModelBeautifier {
     }
     
     static func curlExport(request: RequestModel) -> String {
-        var txt: String = ""
-        txt += "*** Overview *** \n"
-        txt += "\(String(describing: overview(request: request).1))\n\n"
-        txt += "*** curl Request *** \n"
-        txt += "\(request.curlRequest)\n\n"
-        txt += "*** Response Header *** \n"
-        txt += "\(String(describing: header(request.responseHeaders).1))\n\n"
-        txt += "*** Response Body *** \n"
-        txt += "\(String(describing: body(request.dataResponse).1))\n\n"
-        txt += "------------------------------------------------------------------------\n"
-        txt += "------------------------------------------------------------------------\n"
-        txt += "------------------------------------------------------------------------\n\n\n\n"
-        return txt
+        request.curlRequest
     }
 }
 
