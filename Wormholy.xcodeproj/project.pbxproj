@@ -17,8 +17,20 @@
 		450871A5207E5C7700EE2D31 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A1207E5C7700EE2D31 /* Config.swift */; };
 		450871A6207E5C7700EE2D31 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A2207E5C7700EE2D31 /* Routing.swift */; };
 		450871A7207E5C7700EE2D31 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A3207E5C7700EE2D31 /* DataFetcher.swift */; };
+		455B5A0A2FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A082FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift */; };
 		453FADDB2E28FE1F001A198E /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 453FADDA2E28FE1F001A198E /* Wormholy */; };
+		455B5A0B2FBF400100A1B2C3 /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 453FADDA2E28FE1F001A198E /* Wormholy */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		455B5A0D2FBF400100A1B2C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45087188207E59FE00EE2D31;
+			remoteInfo = WormholyDemo;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		45087189207E59FE00EE2D31 /* WormholyDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WormholyDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,6 +45,8 @@
 		450871A1207E5C7700EE2D31 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		450871A2207E5C7700EE2D31 /* Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
 		450871A3207E5C7700EE2D31 /* DataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
+		455B5A082FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensionTests.swift; sourceTree = "<group>"; };
+		455B5A0C2FBF400100A1B2C3 /* WormholyDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WormholyDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +55,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				453FADDB2E28FE1F001A198E /* Wormholy in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		455B5A052FBF400100A1B2C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				455B5A0B2FBF400100A1B2C3 /* Wormholy in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,10 +95,19 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		455B5A072FBF400100A1B2C3 /* WormholyDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				455B5A082FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift */,
+			);
+			path = Tests/WormholyTests;
+			sourceTree = SOURCE_ROOT;
+		};
 		52D6D9721BEFF229002C0205 = {
 			isa = PBXGroup;
 			children = (
 				4508718A207E59FF00EE2D31 /* WormholyDemo */,
+				455B5A072FBF400100A1B2C3 /* WormholyDemoTests */,
 				52D6D97D1BEFF229002C0205 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				45087189207E59FE00EE2D31 /* WormholyDemo.app */,
+				455B5A0C2FBF400100A1B2C3 /* WormholyDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +144,26 @@
 			productReference = 45087189207E59FE00EE2D31 /* WormholyDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		455B5A062FBF400100A1B2C3 /* WormholyDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 455B5A122FBF400100A1B2C3 /* Build configuration list for PBXNativeTarget "WormholyDemoTests" */;
+			buildPhases = (
+				455B5A042FBF400100A1B2C3 /* Sources */,
+				455B5A052FBF400100A1B2C3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				455B5A0E2FBF400100A1B2C3 /* PBXTargetDependency */,
+			);
+			name = WormholyDemoTests;
+			packageProductDependencies = (
+				453FADDA2E28FE1F001A198E /* Wormholy */,
+			);
+			productName = WormholyDemoTests;
+			productReference = 455B5A0C2FBF400100A1B2C3 /* WormholyDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -126,6 +178,10 @@
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
+					};
+					455B5A062FBF400100A1B2C3 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 45087188207E59FE00EE2D31;
 					};
 				};
 			};
@@ -147,6 +203,7 @@
 			projectRoot = "";
 			targets = (
 				45087188207E59FE00EE2D31 /* WormholyDemo */,
+				455B5A062FBF400100A1B2C3 /* WormholyDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -179,7 +236,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		455B5A042FBF400100A1B2C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				455B5A0A2FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		455B5A0E2FBF400100A1B2C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45087188207E59FE00EE2D31 /* WormholyDemo */;
+			targetProxy = 455B5A0D2FBF400100A1B2C3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4508718F207E59FF00EE2D31 /* Main.storyboard */ = {
@@ -261,6 +334,59 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		455B5A102FBF400100A1B2C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeido.Wormholy.WormholyDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WormholyDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WormholyDemo";
+			};
+			name = Debug;
+		};
+		455B5A112FBF400100A1B2C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codeido.Wormholy.WormholyDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WormholyDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WormholyDemo";
 			};
 			name = Release;
 		};
@@ -385,6 +511,15 @@
 			buildConfigurations = (
 				45087198207E5A0100EE2D31 /* Debug */,
 				45087199207E5A0100EE2D31 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		455B5A122FBF400100A1B2C3 /* Build configuration list for PBXNativeTarget "WormholyDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				455B5A102FBF400100A1B2C3 /* Debug */,
+				455B5A112FBF400100A1B2C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

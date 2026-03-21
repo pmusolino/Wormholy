@@ -1,0 +1,57 @@
+name: iOS Tests
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select available iPhone simulator
+        id: simulator
+        run: |
+          SIMULATOR_JSON="$(xcrun simctl list devices available -j)"
+          SIMULATOR_ID="$(SIMULATOR_JSON="$SIMULATOR_JSON" python3 - <<'PY'
+import json
+import os
+
+devices = json.loads(os.environ["SIMULATOR_JSON"])["devices"]
+candidates = []
+
+for runtime, runtime_devices in devices.items():
+    if "iOS" not in runtime:
+        continue
+    for device in runtime_devices:
+        if not device.get("isAvailable"):
+            continue
+        if not device["name"].startswith("iPhone"):
+            continue
+        runtime_version = runtime.split("iOS-")[-1].replace("-", ".")
+        version_key = tuple(int(part) for part in runtime_version.split("."))
+        candidates.append((version_key, device["name"], device["udid"]))
+
+if not candidates:
+    raise SystemExit("No available iPhone simulator found")
+
+candidates.sort()
+print(candidates[-1][2], end="")
+PY
+          )"
+
+          echo "id=$SIMULATOR_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Run WormholyDemo tests
+        run: |
+          xcodebuild test \
+            -project Wormholy.xcodeproj \
+            -scheme WormholyDemo \
+            -destination "id=${{ steps.simulator.outputs.id }}" \
+            CODE_SIGNING_ALLOWED=NO

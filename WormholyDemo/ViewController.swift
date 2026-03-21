@@ -10,9 +10,15 @@ import UIKit
 import Foundation
 import WormholySwift
 class ViewController: UIViewController {
+
+    private var isRunningTests: Bool {
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard !isRunningTests else { return }
         
         let timer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { [weak self] (timer) in
             
