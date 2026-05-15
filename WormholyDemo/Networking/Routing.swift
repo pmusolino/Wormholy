@@ -16,7 +16,7 @@ enum Routing{
     case Photos(())
     
     var urlRequest: URLRequest{
-        let touple : (path: String, parameters: [String: Any]?) = {
+        let tuple : (path: String, parameters: [String: Any]?) = {
             switch self{
                 
             case .Post(let param):
@@ -32,8 +32,8 @@ enum Routing{
         
         let url:URL = URL(string: API_BASE_URL)!
         
-        var urlRequest = URLRequest(url: url.appendingPathComponent(touple.path))
-        urlRequest.httpBody = Routing.createDataFromJSONDictionary(dataToSend: touple.parameters)
+        var urlRequest = URLRequest(url: url.appendingPathComponent(tuple.path))
+        urlRequest.httpBody = Routing.createDataFromJSONDictionary(dataToSend: tuple.parameters)
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
         
