@@ -14,9 +14,9 @@ class Utils: NSObject {
         return Int(arc4random_uniform(UInt32(maxNumber)))
     }
     
-    static func random(_ maxLenght: Int) -> String{
+    static func random(_ maxLength: Int) -> String{
         let pswdChars = Array("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ")
-        let rndPswd = String((0..<maxLenght).map{ _ in pswdChars[Int(arc4random_uniform(UInt32(pswdChars.count)))]})
+        let rndPswd = String((0..<maxLength).map{ _ in pswdChars[Int(arc4random_uniform(UInt32(pswdChars.count)))]})
         return rndPswd
     }
 }
