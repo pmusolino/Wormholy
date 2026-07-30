@@ -12,15 +12,18 @@ import SwiftUI
 
 public class Wormholy: NSObject
 {
-    /// Hosts that will be ignored from being recorded
+    /// Hosts that will be ignored from being recorded.
     ///
+    /// Uses suffix matching on the request host, and applies to both HTTP requests
+    /// and WebSocket connections.
     @objc public static var ignoredHosts: [String] {
         get { return CustomHTTPProtocol.ignoredHosts }
         set { CustomHTTPProtocol.ignoredHosts = newValue }
     }
     
-    /// Limit the logging count
+    /// Limit the logging count.
     ///
+    /// The configured value is applied separately to HTTP requests and WebSocket connections.
     @objc public static var limit: NSNumber? {
         get {
             Task { @MainActor in
@@ -32,6 +35,37 @@ public class Wormholy: NSObject
             Task { @MainActor in
                 Storage.limit = newValue
             }
+        }
+    }
+
+    /// Limit the number of messages retained for each WebSocket connection.
+    ///
+    /// When the limit is reached, Wormholy removes the oldest messages and keeps
+    /// the most recent ones. Set this to `0` to retain no messages. Negative and
+    /// non-finite values are treated as `nil`; fractional values are
+    /// truncated toward zero and positive values beyond `Int.max` are clamped.
+    ///
+    /// Defaults to `nil`, which keeps the complete message history for each captured connection.
+    @objc public static var webSocketMessageLimit: NSNumber? {
+        get { WebSocketConfiguration.messageLimit }
+        set {
+            guard let newValue,
+                  newValue.doubleValue.isFinite,
+                  newValue.doubleValue >= 0 else {
+                WebSocketConfiguration.messageLimit = nil
+                return
+            }
+
+            var value = newValue.decimalValue
+            let maximumLimit = Decimal(Int.max)
+            if value.isNaN || value >= maximumLimit {
+                WebSocketConfiguration.messageLimit = NSNumber(value: Int.max)
+                return
+            }
+
+            var truncated = Decimal()
+            NSDecimalRound(&truncated, &value, 0, .down)
+            WebSocketConfiguration.messageLimit = NSNumber(value: NSDecimalNumber(decimal: truncated).int64Value)
         }
     }
     
@@ -102,7 +136,22 @@ public class Wormholy: NSObject
         }
         sessionConfiguration.protocolClasses = urlProtocolClasses
     }
-    
+
+    /// Toggles the tracking of native `URLSessionWebSocketTask` traffic in Wormholy.
+    /// Independent from `setEnabled`, since WebSocket swizzling intercepts every
+    /// `send`/`receive` call and some apps may want to opt out of that overhead
+    /// even while HTTP tracking stays on.
+    ///
+    /// To capture delegate open/close events, enable tracking before creating a
+    /// delegate-backed session. Sessions created while tracking is disabled are not proxied.
+    @objc public static func setWebSocketEnabled(_ enable: Bool) {
+        if enable {
+            WebSocketInterceptor.install()
+            WebSocketInterceptor.installSessionDelegateProxy()
+        }
+        WebSocketInterceptor.isEnabled = enable
+    }
+
     // MARK: - Navigation
     static func presentWormholyFlow() {
         // Check if RequestsView is already presented

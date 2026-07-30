@@ -17,7 +17,17 @@
 		450871A5207E5C7700EE2D31 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A1207E5C7700EE2D31 /* Config.swift */; };
 		450871A6207E5C7700EE2D31 /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A2207E5C7700EE2D31 /* Routing.swift */; };
 		450871A7207E5C7700EE2D31 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450871A3207E5C7700EE2D31 /* DataFetcher.swift */; };
+		455B5A272FBF400100A1B2C3 /* WebSocketEchoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A262FBF400100A1B2C3 /* WebSocketEchoClient.swift */; };
 		455B5A0A2FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A082FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift */; };
+		455B5A292FBF400100A1B2C3 /* CustomHTTPProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A282FBF400100A1B2C3 /* CustomHTTPProtocolTests.swift */; };
+		455B5A212FBF400100A1B2C3 /* WebSocketModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A202FBF400100A1B2C3 /* WebSocketModelTests.swift */; };
+		455B5A232FBF400100A1B2C3 /* StorageWebSocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A222FBF400100A1B2C3 /* StorageWebSocketTests.swift */; };
+		455B5A252FBF400100A1B2C3 /* WebSocketInterceptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A242FBF400100A1B2C3 /* WebSocketInterceptorTests.swift */; };
+		455B5A2B2FBF400100A1B2C3 /* WebSocketRealTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A2A2FBF400100A1B2C3 /* WebSocketRealTaskTests.swift */; };
+		455B5A2C2FBF400100A1B2C3 /* WebSocketTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A2D2FBF400100A1B2C3 /* WebSocketTestCase.swift */; };
+		455B5A2F2FBF400100A1B2C3 /* WebSocketSwizzlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A2E2FBF400100A1B2C3 /* WebSocketSwizzlingTests.swift */; };
+		455B5A312FBF400100A1B2C3 /* WebSocketMessageRingBufferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A302FBF400100A1B2C3 /* WebSocketMessageRingBufferTests.swift */; };
+		455B5A332FBF400100A1B2C3 /* WebSocketSessionProxyInstallationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 455B5A322FBF400100A1B2C3 /* WebSocketSessionProxyInstallationTests.m */; };
 		453FADDB2E28FE1F001A198E /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 453FADDA2E28FE1F001A198E /* Wormholy */; };
 		455B5A0B2FBF400100A1B2C3 /* Wormholy in Frameworks */ = {isa = PBXBuildFile; productRef = 453FADDA2E28FE1F001A198E /* Wormholy */; };
 /* End PBXBuildFile section */
@@ -45,7 +55,17 @@
 		450871A1207E5C7700EE2D31 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		450871A2207E5C7700EE2D31 /* Routing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routing.swift; sourceTree = "<group>"; };
 		450871A3207E5C7700EE2D31 /* DataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
+		455B5A262FBF400100A1B2C3 /* WebSocketEchoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketEchoClient.swift; sourceTree = "<group>"; };
 		455B5A082FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensionTests.swift; sourceTree = "<group>"; };
+		455B5A282FBF400100A1B2C3 /* CustomHTTPProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHTTPProtocolTests.swift; sourceTree = "<group>"; };
+		455B5A202FBF400100A1B2C3 /* WebSocketModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketModelTests.swift; sourceTree = "<group>"; };
+		455B5A222FBF400100A1B2C3 /* StorageWebSocketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageWebSocketTests.swift; sourceTree = "<group>"; };
+		455B5A242FBF400100A1B2C3 /* WebSocketInterceptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketInterceptorTests.swift; sourceTree = "<group>"; };
+		455B5A2A2FBF400100A1B2C3 /* WebSocketRealTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketRealTaskTests.swift; sourceTree = "<group>"; };
+		455B5A2D2FBF400100A1B2C3 /* WebSocketTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketTestCase.swift; sourceTree = "<group>"; };
+		455B5A2E2FBF400100A1B2C3 /* WebSocketSwizzlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketSwizzlingTests.swift; sourceTree = "<group>"; };
+		455B5A302FBF400100A1B2C3 /* WebSocketMessageRingBufferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketMessageRingBufferTests.swift; sourceTree = "<group>"; };
+		455B5A322FBF400100A1B2C3 /* WebSocketSessionProxyInstallationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebSocketSessionProxyInstallationTests.m; sourceTree = "<group>"; };
 		455B5A0C2FBF400100A1B2C3 /* WormholyDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WormholyDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -89,6 +109,7 @@
 			children = (
 				450871A1207E5C7700EE2D31 /* Config.swift */,
 				450871A3207E5C7700EE2D31 /* DataFetcher.swift */,
+				455B5A262FBF400100A1B2C3 /* WebSocketEchoClient.swift */,
 				450871A0207E5C7700EE2D31 /* HTTPValidation.swift */,
 				450871A2207E5C7700EE2D31 /* Routing.swift */,
 			);
@@ -99,6 +120,15 @@
 			isa = PBXGroup;
 			children = (
 				455B5A082FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift */,
+				455B5A282FBF400100A1B2C3 /* CustomHTTPProtocolTests.swift */,
+				455B5A202FBF400100A1B2C3 /* WebSocketModelTests.swift */,
+				455B5A222FBF400100A1B2C3 /* StorageWebSocketTests.swift */,
+				455B5A242FBF400100A1B2C3 /* WebSocketInterceptorTests.swift */,
+				455B5A2A2FBF400100A1B2C3 /* WebSocketRealTaskTests.swift */,
+				455B5A2D2FBF400100A1B2C3 /* WebSocketTestCase.swift */,
+				455B5A2E2FBF400100A1B2C3 /* WebSocketSwizzlingTests.swift */,
+				455B5A302FBF400100A1B2C3 /* WebSocketMessageRingBufferTests.swift */,
+				455B5A322FBF400100A1B2C3 /* WebSocketSessionProxyInstallationTests.m */,
 			);
 			path = Tests/WormholyTests;
 			sourceTree = SOURCE_ROOT;
@@ -228,6 +258,7 @@
 			files = (
 				4508718E207E59FF00EE2D31 /* ViewController.swift in Sources */,
 				450871A7207E5C7700EE2D31 /* DataFetcher.swift in Sources */,
+				455B5A272FBF400100A1B2C3 /* WebSocketEchoClient.swift in Sources */,
 				4508718C207E59FF00EE2D31 /* AppDelegate.swift in Sources */,
 				450871A6207E5C7700EE2D31 /* Routing.swift in Sources */,
 				450871A5207E5C7700EE2D31 /* Config.swift in Sources */,
@@ -241,6 +272,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				455B5A0A2FBF400100A1B2C3 /* UIViewControllerExtensionTests.swift in Sources */,
+				455B5A292FBF400100A1B2C3 /* CustomHTTPProtocolTests.swift in Sources */,
+				455B5A212FBF400100A1B2C3 /* WebSocketModelTests.swift in Sources */,
+				455B5A232FBF400100A1B2C3 /* StorageWebSocketTests.swift in Sources */,
+				455B5A252FBF400100A1B2C3 /* WebSocketInterceptorTests.swift in Sources */,
+				455B5A2B2FBF400100A1B2C3 /* WebSocketRealTaskTests.swift in Sources */,
+				455B5A2C2FBF400100A1B2C3 /* WebSocketTestCase.swift in Sources */,
+				455B5A2F2FBF400100A1B2C3 /* WebSocketSwizzlingTests.swift in Sources */,
+				455B5A312FBF400100A1B2C3 /* WebSocketMessageRingBufferTests.swift in Sources */,
+				455B5A332FBF400100A1B2C3 /* WebSocketSessionProxyInstallationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

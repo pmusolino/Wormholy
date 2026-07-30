@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,8 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3d-8c-t1q">
-                                <rect key="frame" x="16" y="32" width="343" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HTTP Requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="http-lb-001">
+                                <rect key="frame" x="16" y="44" width="343" height="16"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x3d-8c-t1q">
+                                <rect key="frame" x="16" y="66" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="B6n-zr-tux"/>
                                 </constraints>
@@ -26,8 +33,8 @@
                                     <action selector="getPostsButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yoQ-6v-euE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dq6-cR-cky">
-                                <rect key="frame" x="16" y="70" width="343" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dq6-cR-cky">
+                                <rect key="frame" x="16" y="104" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ohm-4s-EPu"/>
                                 </constraints>
@@ -36,8 +43,8 @@
                                     <action selector="newRandomPostButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oOf-cr-pcw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7u-JC-CIF">
-                                <rect key="frame" x="16" y="108" width="343" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7u-JC-CIF">
+                                <rect key="frame" x="16" y="142" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Hvj-wC-HHX"/>
                                 </constraints>
@@ -46,8 +53,8 @@
                                     <action selector="getWrongURLButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0j5-Ln-Xf0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNq-42-89N">
-                                <rect key="frame" x="16" y="146" width="343" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LNq-42-89N">
+                                <rect key="frame" x="16" y="180" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OLC-Jm-OFn"/>
                                 </constraints>
@@ -56,10 +63,100 @@
                                     <action selector="getPhotosButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TMK-jk-GCw"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WebSocket" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsT-lb-001">
+                                <rect key="frame" x="16" y="226" width="343" height="16"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="wss://ws.postman-echo.com/raw" borderStyle="roundedRect" placeholder="WebSocket URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wsU-rl-001">
+                                <rect key="frame" x="16" y="248" width="343" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="wsU-rl-hgt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" textContentType="URL"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wsM-sg-001">
+                                <rect key="frame" x="16" y="290" width="343" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="wsM-sg-hgt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="webSocketMessageFieldEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="wsM-sg-edt"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test headers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsH-lb-001">
+                                <rect key="frame" x="16" y="332" width="83.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wsH-sw-001">
+                                <rect key="frame" x="298" y="326.5" width="63" height="28"/>
+                                <connections>
+                                    <action selector="webSocketHeadersSwitchChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="wsH-sw-act"/>
+                                </connections>
+                            </switch>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wsC-tr-001">
+                                <rect key="frame" x="16" y="357" width="343" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsC-on-001">
+                                        <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
+                                        <state key="normal" title="Connect"/>
+                                        <connections>
+                                            <action selector="connectWebSocketButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wsC-on-act"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsN-ew-001">
+                                        <rect key="frame" x="70" y="0.0" width="62.5" height="30"/>
+                                        <state key="normal" title="New"/>
+                                        <connections>
+                                            <action selector="newWebSocketButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wsN-ew-act"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsS-en-001">
+                                        <rect key="frame" x="140.5" y="0.0" width="62" height="30"/>
+                                        <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="sendWebSocketButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wsS-en-act"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsJ-sn-001">
+                                        <rect key="frame" x="210.5" y="0.0" width="62.5" height="30"/>
+                                        <state key="normal" title="JSON"/>
+                                        <connections>
+                                            <action selector="sendJSONWebSocketButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wsJ-sn-act"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsC-lo-001">
+                                        <rect key="frame" x="281" y="0.0" width="62" height="30"/>
+                                        <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="closeWebSocketButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wsC-lo-act"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="wsC-tr-hgt"/>
+                                </constraints>
+                            </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="WebSocket console log" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wsL-og-001">
+                                <rect key="frame" x="16" y="395" width="343" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="180" id="wsL-og-hgt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="x3d-8c-t1q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="0QG-vl-7gR"/>
+                            <constraint firstItem="x3d-8c-t1q" firstAttribute="top" secondItem="http-lb-001" secondAttribute="bottom" constant="6" id="0QG-vl-7gR"/>
+                            <constraint firstItem="wsH-sw-001" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wsH-lb-001" secondAttribute="trailing" constant="16" id="6Ld-io-n3V"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dq6-cR-cky" secondAttribute="trailing" constant="16" id="9V6-oL-HHJ"/>
                             <constraint firstItem="a7u-JC-CIF" firstAttribute="top" secondItem="Dq6-cR-cky" secondAttribute="bottom" constant="8" id="DgW-rO-ODC"/>
                             <constraint firstItem="x3d-8c-t1q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="EJ6-24-CKx"/>
@@ -67,17 +164,54 @@
                             <constraint firstItem="a7u-JC-CIF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="OT0-Ib-4Mm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="x3d-8c-t1q" secondAttribute="trailing" constant="16" id="cNr-Ui-wwm"/>
                             <constraint firstItem="LNq-42-89N" firstAttribute="top" secondItem="a7u-JC-CIF" secondAttribute="bottom" constant="8" id="cOH-oq-5I8"/>
+                            <constraint firstItem="http-lb-001" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="http-lb-lea"/>
+                            <constraint firstItem="http-lb-001" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="http-lb-top"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="http-lb-001" secondAttribute="trailing" constant="16" id="http-lb-tra"/>
                             <constraint firstItem="LNq-42-89N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="pix-vb-Vig"/>
                             <constraint firstItem="Dq6-cR-cky" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="psN-Qo-xOy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a7u-JC-CIF" secondAttribute="trailing" constant="16" id="vwJ-wy-0Nm"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LNq-42-89N" secondAttribute="trailing" constant="16" id="wFm-4R-YSc"/>
+                            <constraint firstItem="wsC-tr-001" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wsC-tr-lea"/>
+                            <constraint firstItem="wsC-tr-001" firstAttribute="top" secondItem="wsH-lb-001" secondAttribute="bottom" constant="8" id="wsC-tr-top"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wsC-tr-001" secondAttribute="trailing" constant="16" id="wsC-tr-tra"/>
+                            <constraint firstItem="wsH-lb-001" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wsH-lb-lea"/>
+                            <constraint firstItem="wsH-lb-001" firstAttribute="top" secondItem="wsM-sg-001" secondAttribute="bottom" constant="8" id="wsH-lb-top"/>
+                            <constraint firstItem="wsH-sw-001" firstAttribute="centerY" secondItem="wsH-lb-001" secondAttribute="centerY" id="wsH-sw-cy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wsH-sw-001" secondAttribute="trailing" constant="16" id="wsH-sw-tra"/>
+                            <constraint firstItem="wsL-og-001" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wsL-og-lea"/>
+                            <constraint firstItem="wsL-og-001" firstAttribute="top" secondItem="wsC-tr-001" secondAttribute="bottom" constant="8" id="wsL-og-top"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wsL-og-001" secondAttribute="trailing" constant="16" id="wsL-og-tra"/>
+                            <constraint firstItem="wsM-sg-001" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wsM-sg-lea"/>
+                            <constraint firstItem="wsM-sg-001" firstAttribute="top" secondItem="wsU-rl-001" secondAttribute="bottom" constant="8" id="wsM-sg-top"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wsM-sg-001" secondAttribute="trailing" constant="16" id="wsM-sg-tra"/>
+                            <constraint firstItem="wsT-lb-001" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wsT-lb-lea"/>
+                            <constraint firstItem="wsT-lb-001" firstAttribute="top" secondItem="LNq-42-89N" secondAttribute="bottom" constant="16" id="wsT-lb-top"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wsT-lb-001" secondAttribute="trailing" constant="16" id="wsT-lb-tra"/>
+                            <constraint firstItem="wsU-rl-001" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="wsU-rl-lea"/>
+                            <constraint firstItem="wsU-rl-001" firstAttribute="top" secondItem="wsT-lb-001" secondAttribute="bottom" constant="6" id="wsU-rl-top"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wsU-rl-001" secondAttribute="trailing" constant="16" id="wsU-rl-tra"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="closeWebSocketButton" destination="wsC-lo-001" id="wsO-ut-close"/>
+                        <outlet property="connectWebSocketButton" destination="wsC-on-001" id="wsO-ut-connect"/>
+                        <outlet property="newWebSocketButton" destination="wsN-ew-001" id="wsO-ut-new"/>
+                        <outlet property="sendJSONWebSocketButton" destination="wsJ-sn-001" id="wsO-ut-json"/>
+                        <outlet property="sendWebSocketButton" destination="wsS-en-001" id="wsO-ut-send"/>
+                        <outlet property="webSocketHeadersSwitch" destination="wsH-sw-001" id="wsO-ut-header"/>
+                        <outlet property="webSocketLogView" destination="wsL-og-001" id="wsO-ut-log"/>
+                        <outlet property="webSocketMessageField" destination="wsM-sg-001" id="wsO-ut-message"/>
+                        <outlet property="webSocketURLField" destination="wsU-rl-001" id="wsO-ut-url"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="138" y="88"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

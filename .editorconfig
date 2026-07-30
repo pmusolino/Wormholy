@@ -1,0 +1,23 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+
+[*.{swift,h,m,mm,c,cpp,podspec}]
+indent_style = space
+
+[*.{json,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.webp]
+charset = unset
+end_of_line = unset
+
+[.DS_Store]
+charset = unset
+end_of_line = unset

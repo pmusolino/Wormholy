@@ -33,6 +33,11 @@ public class CustomHTTPProtocol: URLProtocol {
             return false
         }
 
+        // URLProtocol must not proxy WebSocket upgrade requests as data tasks.
+        if request.value(forHTTPHeaderField: "Upgrade")?.caseInsensitiveCompare("websocket") == .orderedSame {
+            return false
+        }
+
         guard CustomHTTPProtocol.shouldHandleRequest(request) else { return false }
         
         if CustomHTTPProtocol.property(forKey: Constants.RequestHandledKey, in: request) != nil {

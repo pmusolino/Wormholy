@@ -23,7 +23,8 @@ internal struct StatusCodeFilterView: View {
             filterButton(for: 400...499, label: "4xx", color: Colors.HTTPCode.ClientError)
             filterButton(for: 500...599, label: "5xx", color: Colors.HTTPCode.ServerError)
         }
-        .padding()
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
     }
     
     private func filterButton(for range: ClosedRange<Int>, label: String, color: Color) -> some View {

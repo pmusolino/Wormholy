@@ -19,6 +19,7 @@
 
 
 #import "NSURLSessionConfiguration+Wormholy.h"
+#import "URLSessionWebSocketTask+Wormholy.h"
 #import "WormholyMethodSwizzling.h"
 
 

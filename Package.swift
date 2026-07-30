@@ -30,6 +30,10 @@ let package = Package(
             dependencies: [
                 "WormholySwift",
                 "WormholyObjC"
+            ],
+            exclude: [
+                "RedirectTest.swift",
+                "WebSocketSessionProxyInstallationTests.m"
             ]),
     ]
 )

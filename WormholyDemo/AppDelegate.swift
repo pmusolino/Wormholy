@@ -19,7 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Limit the number of API requests stored
         Wormholy.limit = 100
-        
+
+        // Enable native WebSocket tracking (off by default, unlike HTTP tracking).
+        Wormholy.setWebSocketEnabled(true)
+
         return true
     }
 

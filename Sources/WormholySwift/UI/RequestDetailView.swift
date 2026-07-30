@@ -71,9 +71,7 @@ internal struct RequestDetailView: View {
         .textSelection(.enabled)
         .listStyle(.insetGrouped)
         .navigationTitle(URL(string: request.url)?.path ?? "Request Detail")
-        .inlineToolbarTitle()
-        .toolbarBackground(.thinMaterial, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Menu {
@@ -114,22 +112,6 @@ private struct ShareSheetPayload: Identifiable {
     let id = UUID()
     let requests: [RequestModel]
     let exportOption: RequestResponseExportOption
-}
-
-private struct InlineToolbarTitle: ViewModifier {
-    func body(content: Content) -> some View {
-        if #available(iOS 17, *) {
-            content.toolbarTitleDisplayMode(.inline)
-        } else {
-            content
-        }
-    }
-}
-
-private extension View {
-    func inlineToolbarTitle() -> some View {
-        modifier(InlineToolbarTitle())
-    }
 }
 
 struct RequestDetailView_Previews: PreviewProvider {

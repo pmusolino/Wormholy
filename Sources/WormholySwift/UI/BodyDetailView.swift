@@ -12,6 +12,7 @@ internal struct BodyDetailView: View {
     internal enum Kind {
         case request
         case response
+        case webSocketMessage
 
         var title: String {
             switch self {
@@ -19,6 +20,8 @@ internal struct BodyDetailView: View {
                 return "Request Body"
             case .response:
                 return "Response Body"
+            case .webSocketMessage:
+                return "Message Body"
             }
         }
     }
@@ -31,8 +34,17 @@ internal struct BodyDetailView: View {
     private let kind: Kind
 
     init(dataBody: Data, kind: Kind) {
-        self.dataBody = String(data: dataBody, encoding: .utf8)?.prettyPrintedJSON ?? "No body available"
+        if let body = String(data: dataBody, encoding: .utf8), !body.isEmpty {
+            self.dataBody = body.prettyPrintedJSON ?? body
+        } else {
+            self.dataBody = "No body available"
+        }
         self.kind = kind
+    }
+
+    init(webSocketMessage: WebSocketMessage) {
+        self.dataBody = WebSocketModelBeautifier.bodyText(webSocketMessage)
+        self.kind = .webSocketMessage
     }
     
     var body: some View {
