@@ -103,6 +103,13 @@ public class Wormholy: NSObject
         sessionConfiguration.protocolClasses = urlProtocolClasses
     }
     
+    /// Clears all captured network requests from Wormholy's storage.
+    @objc public static func clearRequests() {
+        Task { @MainActor in
+            Storage.shared.clearRequests()
+        }
+    }
+    
     // MARK: - Navigation
     static func presentWormholyFlow() {
         // Check if RequestsView is already presented
