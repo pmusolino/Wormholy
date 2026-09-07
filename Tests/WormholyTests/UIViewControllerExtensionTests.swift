@@ -44,6 +44,22 @@ final class UIViewControllerExtensionTests: XCTestCase {
 
         XCTAssert(current === child)
     }
+
+    func testClearRequests() async {
+        await MainActor.run {
+            let request = RequestModel(url: "https://example.com")
+            Storage.shared.saveRequest(request)
+        }
+
+        await withCheckedContinuation { continuation in
+            Wormholy.clearRequests {
+                continuation.resume()
+            }
+        }
+
+        let isEmpty = await MainActor.run { Storage.shared.requests.isEmpty }
+        XCTAssertTrue(isEmpty)
+    }
 }
 
 private final class PresentedStubViewController: UIViewController {

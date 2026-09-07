@@ -104,9 +104,11 @@ public class Wormholy: NSObject
     }
     
     /// Clears all captured network requests from Wormholy's storage.
-    @objc public static func clearRequests() {
+    /// The completion handler is called on the main actor after the requests are removed.
+    @objc public static func clearRequests(completion: @escaping () -> Void) {
         Task { @MainActor in
             Storage.shared.clearRequests()
+            completion()
         }
     }
     

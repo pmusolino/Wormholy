@@ -17,13 +17,7 @@ class WormholyTests: XCTestCase {
         //// XCTAssertEqual(Wormholy().text, "Hello, World!")
     }
     
-    func testClearRequests() {
-        // Smoke test that the public clear API is reachable and does not crash.
-        Wormholy.clearRequests()
-    }
-    
     static var allTests = [
         ("testExample", testExample),
-        ("testClearRequests", testClearRequests),
     ]
 }
