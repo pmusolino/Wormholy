@@ -55,6 +55,7 @@ You can also integrate Wormholy using the **Swift Package Manager**!
 - **Enable/Disable**: Use `Wormholy.setEnabled(_:)` to toggle request tracking globally. You can also enable or disable it for specific `URLSessionConfiguration` instances using `Wormholy.setEnabled(_:sessionConfiguration:)`.
 - **Shake Gesture**: Control the activation of Wormholy via shake gesture with `Wormholy.shakeEnabled`.
 - **Status Check**: Use `Wormholy.isWormholyEnabled()` to inspect whether global Wormholy tracking is currently enabled.
+- **Clear Requests**: Use `Wormholy.clearRequests { }` to remove all captured network requests from Wormholy's storage. The completion handler is called on the main actor when the clear is done. Objective-C: `clearRequestsWithCompletion:`.
 
 ### Example Configuration
 
@@ -74,6 +75,9 @@ func configureWormholy() {
   Wormholy.setEnabled(false, sessionConfiguration: configuration)
 
   let session = URLSession(configuration: configuration)
+  // Wormholy.clearRequests { // Remove all captured requests at any time
+  //   // requests are now cleared
+  // }
   _ = session
 }
 ```
